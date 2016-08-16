@@ -21,8 +21,18 @@ namespace ControlePontos.Exportacao
             var datas = new DataFileScanner(diretorioData).FindAll().OrderBy(s => s.Ano).ThenBy(s => s.Mes);
 
             using (var zip = ZipFile.Open(caminhoZip, ZipArchiveMode.Create))
+            {
+                var configBackup = Path.Combine(diretorioData, "config-backup.json");
+                if (File.Exists(configBackup))
+                    zip.CreateEntryFromFile(configBackup, "config-backcup.json", CompressionLevel.Optimal);
+
+                var configFeriados = Path.Combine(diretorioData, "config-feriados.json");
+                if (File.Exists(configFeriados))
+                    zip.CreateEntryFromFile(configFeriados, "config-feriados.json", CompressionLevel.Optimal);
+
                 foreach (var data in datas)
                     zip.CreateEntryFromFile(Path.Combine(data.Diretorio, data.Nome), data.Nome, CompressionLevel.Optimal);
+            }
 
             if (datas.Count() > 0)
             {
