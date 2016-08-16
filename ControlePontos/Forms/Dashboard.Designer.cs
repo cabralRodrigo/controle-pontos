@@ -44,7 +44,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnMesAno = new System.Windows.Forms.Button();
-            this.lblCoeficiente = new System.Windows.Forms.Label();
+            this.gridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
+              this.lblCoeficiente = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
             this.lblMediaEntrada = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -76,23 +77,11 @@
             this.status = new System.Windows.Forms.StatusStrip();
             this.lblVersao = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.gridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menu_dados_realizarBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).BeginInit();
             this.menu.SuspendLayout();
             this.status.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl1
@@ -437,7 +426,8 @@
             this.menu_dados.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_dados_importar,
             this.menu_dados_exportar,
-            this.menu_dados_importarCoeficiente});
+            this.menu_dados_importarCoeficiente,
+            this.menu_dados_realizarBackup});
             this.menu_dados.Name = "menu_dados";
             this.menu_dados.Size = new System.Drawing.Size(52, 20);
             this.menu_dados.Text = "Dados";
@@ -523,124 +513,12 @@
             this.timer.Interval = 5000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // gridDias
+            // menu_dados_realizarBackup
             // 
-            this.gridDias.AllowUserToAddRows = false;
-            this.gridDias.AllowUserToDeleteRows = false;
-            this.gridDias.AllowUserToResizeRows = false;
-            this.gridDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridDias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11});
-            this.gridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.gridDias.Location = new System.Drawing.Point(3, 3);
-            this.gridDias.MultiSelect = false;
-            this.gridDias.Name = "gridDias";
-            this.gridDias.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.gridDias, 40);
-            this.gridDias.Size = new System.Drawing.Size(1208, 723);
-            this.gridDias.TabIndex = 16;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Data";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Dia da Semana";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.FillWeight = 162.4473F;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Falta";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewCellStyle2.Format = "hh\\:mm";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn3.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Entrada";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle3.Format = "hh\\:mm";
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewTextBoxColumn4.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Almoço - Saída";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewCellStyle4.Format = "hh\\:mm";
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn5.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Almoço - Retorno";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewCellStyle5.Format = "hh\\:mm";
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn6.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Saída";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle6.Format = "c";
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewTextBoxColumn7.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Valor Almoço";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Tempo Almoço";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Coeficiente";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.FillWeight = 92.19409F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "Total de Horas";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Visible = false;
+            this.menu_dados_realizarBackup.Name = "menu_dados_realizarBackup";
+            this.menu_dados_realizarBackup.Size = new System.Drawing.Size(183, 22);
+            this.menu_dados_realizarBackup.Text = "Realizar Backup";
+            this.menu_dados_realizarBackup.Click += new System.EventHandler(this.menu_dados_realizarBackup_Click);
             // 
             // Dashboard
             // 
@@ -660,11 +538,11 @@
             this.Shown += new System.EventHandler(this.Dashboard_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).EndInit();
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.status.ResumeLayout(false);
             this.status.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -713,17 +591,6 @@
         private System.Windows.Forms.Label lblCoeficientePorDia;
         private System.Windows.Forms.ToolStripStatusLabel lblVersao;
         private System.Windows.Forms.ToolStripMenuItem menu_configuracoes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.ToolStripMenuItem menu_dados_realizarBackup;
     }
 }

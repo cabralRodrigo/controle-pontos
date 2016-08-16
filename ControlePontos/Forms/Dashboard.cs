@@ -123,14 +123,18 @@ namespace ControlePontos.Forms
             }
         }
 
-        private void RealizerBackupDiario()
+        private bool RealizarBackupDiario(bool forcar = false)
         {
             var config = ConfigBackup.Carregar();
+            var resultados = new List<bool>();
+
             foreach (var diretorio in config.Diretorios)
-                Backup(diretorio);
+                resultados.Add(Backup(diretorio, forcar));
+
+            return resultados.Where(w => w).Any();
         }
 
-        private void Backup(string diretorio)
+        private bool Backup(string diretorio, bool forcarBackup)
         {
             try
             {
@@ -150,14 +154,14 @@ namespace ControlePontos.Forms
                         datas = JsonConvert.DeserializeObject<DateTime[]>(json);
                 }
 
-                if (!datas.Any(w => w.Date == DateTime.Now.Date))
+                if (forcarBackup || !datas.Any(w => w.Date == DateTime.Now.Date))
                 {
                     var resultado = new ExportacaoZip().RealizarBackup(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, Path.Combine(diretorio, DateTime.Now.ToString("yyyy.MM.dd hh.mm.ss") + ".zip"));
 
                     if (resultado.QuantidadeArquivos == 0)
                     {
                         MessageBox.Show("Não foi possivel encontrar nenhum arquivo para fazer o backup diario. Look into that please...");
-                        return;
+                        return false;
                     }
 
                     var novasDatas = datas.ToList();
@@ -165,6 +169,8 @@ namespace ControlePontos.Forms
 
                     File.WriteAllText(jsonbackup, JsonConvert.SerializeObject(novasDatas));
                 }
+
+                return true;
             }
             catch (DirectoryNotFoundException)
             {
@@ -175,15 +181,21 @@ namespace ControlePontos.Forms
                     var msg = "Ocorre um erro no processo de backup.\nO seguinte drive não esta diponível: " + drive + "\nDeseja tentar novamente?";
 
                     if (MessageBox.Show(msg, "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        Backup(diretorio);
+                        return Backup(diretorio, forcarBackup);
+                    else
+                        return false;
                 }
                 else
+                {
                     MessageBox.Show("Ocorreu um erro desconhecido no processo de backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro no processo de backup.");
                 MessageBox.Show(ex.ToString());
+                return false;
             }
         }
 
@@ -256,7 +268,7 @@ namespace ControlePontos.Forms
         private void Dashboard_Load(object sender, EventArgs e)
         {
             this.CarregarMenuRelatorios();
-            this.RealizerBackupDiario();
+            this.RealizarBackupDiario();
         }
 
         #region Menu
@@ -348,5 +360,14 @@ namespace ControlePontos.Forms
         }
 
         #endregion Eventos
+
+        private void menu_dados_realizarBackup_Click(object sender, EventArgs e)
+        {
+            var resultado = this.RealizarBackupDiario(true);
+            if (resultado)
+                MessageBox.Show("Backup realizado com sucesso.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Backup não foi realizado com sucesso.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }
