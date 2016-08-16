@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Calculator.cs" />
     <Compile Include="Configuracao\ConfigBackup.cs" />
+    <Compile Include="Configuracao\ConfigFeriados.cs" />
     <Compile Include="Control\DiaTrabalhoDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -199,6 +200,7 @@
     <Content Include="app.ico" />
     <Content Include="Assets\add.png" />
     <Content Include="Assets\delete.png" />
+    <Content Include="changelog.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

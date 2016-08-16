@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Configuracao;
+using ControlePontos.Model;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Section;
 using System;
@@ -77,7 +78,7 @@ namespace ControlePontos.Report.Reports
             }
         }
 
-        public virtual IReportExecutionResult Execute(ConfiguracaoDias config, int ano, int mes, MesTrabalho mesTrabalho)
+        public virtual IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 

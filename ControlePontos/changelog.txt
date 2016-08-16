@@ -1,0 +1,8 @@
+﻿16/08/2016 1.2.0: 
+	* Adicionada tela de configuração de feriados.
+
+16/08/2016 1.1.0:
+	* Adicionada tela de configuração de diretórios de backup.
+
+16/08/2016 1.0.0: 
+	* Versão Inicial
