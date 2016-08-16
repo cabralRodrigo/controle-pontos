@@ -2,8 +2,6 @@
 using ControlePontos.Exportacao;
 using ControlePontos.Model;
 using ControlePontos.Report;
-using Microsoft.WindowsAPICodePack.Shell;
-using Microsoft.WindowsAPICodePack.Taskbar;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,8 +22,8 @@ namespace ControlePontos.Forms
             HoraInicio = new TimeSpan(9, 0, 0),
             HoraFim = new TimeSpan(18, 0, 0),
             DiasTrabalho = new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday },
-            Feriados = new DateTime[] 
-            { 
+            Feriados = new DateTime[]
+            {
                 new DateTime(2016, 4, 21),
                 new DateTime(2016, 5, 26),
 
@@ -40,14 +38,14 @@ namespace ControlePontos.Forms
                 new DateTime(2016, 11, 15),
                 new DateTime(2016, 12, 25)
             },
-            Ferias = new DateTime[] 
-            { 
-                new DateTime(2016, 4, 1), 
-                new DateTime(2016, 4, 4), 
-                new DateTime(2016, 4, 5), 
-                new DateTime(2016, 4, 6), 
-                new DateTime(2016, 4, 7), 
-                new DateTime(2016, 4, 8) 
+            Ferias = new DateTime[]
+            {
+                new DateTime(2016, 4, 1),
+                new DateTime(2016, 4, 4),
+                new DateTime(2016, 4, 5),
+                new DateTime(2016, 4, 6),
+                new DateTime(2016, 4, 7),
+                new DateTime(2016, 4, 8)
             }
         };
 
@@ -129,7 +127,6 @@ namespace ControlePontos.Forms
             var relatorios = (from type in AppDomain.CurrentDomain.GetAssemblies().Select(w => w.GetTypes()).SelectMany(s => s).Distinct().ToList()
                               where tipo.IsAssignableFrom(type) && tipo != type
                               select Activator.CreateInstance(type) as IReport).ToList();
-
 
             foreach (var relatorio in relatorios)
             {
@@ -293,7 +290,7 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Exportação
 
         private void menu_dados_importarCoeficiente_Click(object sender, EventArgs e)
         {
@@ -324,15 +321,14 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Dados
 
         private void Dashboard_Shown(object sender, EventArgs e)
         {
-
         }
 
-        #endregion
+        #endregion Menu
 
-        #endregion
+        #endregion Eventos
     }
 }

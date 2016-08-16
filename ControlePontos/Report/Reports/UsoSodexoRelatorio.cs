@@ -3,7 +3,6 @@ using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section.Chart;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -46,13 +45,13 @@ namespace ControlePontos.Report.Reports
                     scales = new
                     {
                         xAxes = new dynamic[]
-                        { 
+                        {
                             new
-                            { 
-                                time = new 
-                                { 
-                                    parser = "dd/MM/yyyy" 
-                                } 
+                            {
+                                time = new
+                                {
+                                    parser = "dd/MM/yyyy"
+                                }
                             }
                         }
                     }

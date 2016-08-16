@@ -7,7 +7,9 @@ namespace ControlePontos.Report.Reports.Template.Html.Section
     {
         string Name { get; }
         bool ShouldRenderInsideContent { get; }
+
         IEnumerable<Script> GetDependencies();
+
         string Render();
     }
 }

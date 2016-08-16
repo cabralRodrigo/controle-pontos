@@ -114,15 +114,19 @@ namespace ControlePontos.Control
                     case Nomes.ENTRADA:
                         acao = (dia, span) => dia.Empresa.Entrada = span;
                         break;
+
                     case Nomes.ALMOCO_SAIDA:
                         acao = (dia, span) => dia.Almoco.Entrada = span;
                         break;
+
                     case Nomes.ALMOCO_RETORNO:
                         acao = (dia, span) => dia.Almoco.Saida = span;
                         break;
+
                     case Nomes.SAIDA:
                         acao = (dia, span) => dia.Empresa.Saida = span;
                         break;
+
                     case Nomes.ALMOCO_VALOR:
                         this.UpdateValor(e.RowIndex);
                         goto evento;
@@ -213,7 +217,6 @@ namespace ControlePontos.Control
                     }
                     cell.Style.BackColor = Color.White;
                 }
-
         }
 
         private void UpdateTimeSpan(int columnIndex, int rowIndex, object valor, Action<DiaTrabalho, TimeSpan?> updater)
@@ -251,7 +254,6 @@ namespace ControlePontos.Control
 
             this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS].Value = coeficiente.HasValue ? coeficiente.Value.Negate().Descricao() : null;
             this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS].Style.ForeColor = coeficiente.HasValue ? (coeficiente.Value < new TimeSpan(8, 0, 0) ? Color.Blue : Color.Red) : Color.Black;
-
 
             this.Rows[rowIndex].Cells[Nomes.CALCULO_TEMPO_ALMOCO].Value = dia.Almoco.TempoTotal().Descricao();
             this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS_TRABALHADAS].Value = Calculator.TotalHorasTrabalhadas(dia);
@@ -313,9 +315,7 @@ namespace ControlePontos.Control
             if (time.HasValue)
                 cellStyle.ForeColor = time.Value < tempo ? Color.Red : Color.Blue;
 
-
             base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-
         }
     }
 }

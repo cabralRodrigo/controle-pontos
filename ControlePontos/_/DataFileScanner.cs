@@ -58,7 +58,7 @@ namespace ControlePontos.Exportacao
             if (mes <= 0 || mes >= 13)
                 return false;
 
-            data =  new DataFile(info.Directory.FullName, info.Name, ano, mes);
+            data = new DataFile(info.Directory.FullName, info.Name, ano, mes);
             return true;
         }
     }
