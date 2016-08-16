@@ -73,13 +73,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="Configuracao\ConfigBackup.cs" />
     <Compile Include="Control\DiaTrabalhoDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Control\DiaTrabalhoDataGridView.Designer.cs">
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ConfiguracaoApp.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Report\IReport.cs" />
     <Compile Include="Report\OpenFileReportExecutionResult.cs" />
     <Compile Include="Report\Reports\Template\Html\Section\ILinkable.cs" />
@@ -137,11 +142,18 @@
     <Compile Include="App.cs" />
     <Compile Include="Model\MesTrabalho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Configuracao.resx">
+      <DependentUpon>Configuracao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MonthPicker.resx">
       <DependentUpon>MonthPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Reports\Template\Html\Misc\HtmlResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -185,6 +197,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <Content Include="Assets\add.png" />
+    <Content Include="Assets\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

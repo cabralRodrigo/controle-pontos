@@ -1,4 +1,5 @@
-﻿using ControlePontos.Dialog;
+﻿using ControlePontos.Configuracao;
+using ControlePontos.Dialog;
 using ControlePontos.Exportacao;
 using ControlePontos.Model;
 using ControlePontos.Report;
@@ -47,11 +48,6 @@ namespace ControlePontos.Forms
                 new DateTime(2016, 4, 7),
                 new DateTime(2016, 4, 8)
             }
-        };
-
-        public ConfiguracaoApp configApp = new ConfiguracaoApp
-        {
-            DiretorioBackup = @"C:\controle-pontos-backup",
         };
 
         private MesTrabalho mesTrabalho;
@@ -143,36 +139,65 @@ namespace ControlePontos.Forms
 
         private void RealizerBackupDiario()
         {
-            if (!Directory.Exists(this.configApp.DiretorioBackup))
-                Directory.CreateDirectory(this.configApp.DiretorioBackup);
+            var config = ConfigBackup.Carregar();
+            foreach (var diretorio in config.Diretorios)
+                Backup(diretorio);
+        }
 
-            var jsonbackup = Path.Combine(this.configApp.DiretorioBackup, "backup.json");
-
-            IEnumerable<DateTime> datas;
-            using (var file = new StreamReader(File.Open(jsonbackup, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)))
+        private void Backup(string diretorio)
+        {
+            try
             {
-                var json = file.ReadToEnd();
+                if (!Directory.Exists(diretorio))
+                    Directory.CreateDirectory(diretorio);
 
-                if (string.IsNullOrEmpty(json))
-                    datas = new List<DateTime>();
-                else
-                    datas = JsonConvert.DeserializeObject<DateTime[]>(json);
-            }
+                var jsonbackup = Path.Combine(diretorio, "backup.json");
 
-            if (!datas.Any(w => w.Date == DateTime.Now.Date))
-            {
-                var resultado = new ExportacaoZip().RealizarBackup(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, Path.Combine(this.configApp.DiretorioBackup, DateTime.Now.ToString("yyyy.MM.dd hh.mm.ss") + ".zip"));
-
-                if (resultado.QuantidadeArquivos == 0)
+                IEnumerable<DateTime> datas;
+                using (var file = new StreamReader(File.Open(jsonbackup, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)))
                 {
-                    MessageBox.Show("Não foi possivel encontrar nenhum arquivo para fazer o backup diario. Look into that please...");
-                    return;
+                    var json = file.ReadToEnd();
+
+                    if (string.IsNullOrEmpty(json))
+                        datas = new List<DateTime>();
+                    else
+                        datas = JsonConvert.DeserializeObject<DateTime[]>(json);
                 }
 
-                var novasDatas = datas.ToList();
-                novasDatas.Add(DateTime.Now);
+                if (!datas.Any(w => w.Date == DateTime.Now.Date))
+                {
+                    var resultado = new ExportacaoZip().RealizarBackup(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, Path.Combine(diretorio, DateTime.Now.ToString("yyyy.MM.dd hh.mm.ss") + ".zip"));
 
-                File.WriteAllText(jsonbackup, JsonConvert.SerializeObject(novasDatas));
+                    if (resultado.QuantidadeArquivos == 0)
+                    {
+                        MessageBox.Show("Não foi possivel encontrar nenhum arquivo para fazer o backup diario. Look into that please...");
+                        return;
+                    }
+
+                    var novasDatas = datas.ToList();
+                    novasDatas.Add(DateTime.Now);
+
+                    File.WriteAllText(jsonbackup, JsonConvert.SerializeObject(novasDatas));
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                var drive = Path.GetPathRoot(diretorio);
+
+                if (!new DriveInfo(drive).IsReady)
+                {
+                    var msg = "Ocorre um erro no processo de backup.\nO seguinte drive não esta diponível: " + drive + "\nDeseja tentar novamente?";
+
+                    if (MessageBox.Show(msg, "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        Backup(diretorio);
+                }
+                else
+                    MessageBox.Show("Ocorreu um erro desconhecido no processo de backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro no processo de backup.");
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -328,6 +353,12 @@ namespace ControlePontos.Forms
         }
 
         #endregion Menu
+
+        private void menu_configuracoes_Click(object sender, EventArgs e)
+        {
+            using (var config = new Configuracao())
+                config.ShowDialog();
+        }
 
         #endregion Eventos
     }
