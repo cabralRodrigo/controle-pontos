@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Configuracao;
+using ControlePontos.Model;
 using System;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace ControlePontos.Report.Reports
             }
         }
 
-        public override IReportExecutionResult Execute(ConfiguracaoDias config, int ano, int mes, MesTrabalho mesTrabalho)
+        public override IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var rand = new Random();
             var faltas = mesTrabalho.Dias.Where(w => w.Falta).Select(s => s.Data);
@@ -37,14 +38,14 @@ namespace ControlePontos.Report.Reports
 
             dias.ForEach(w =>
             {
-                if (w.Data.DayOfWeek == DayOfWeek.Saturday || w.Data.DayOfWeek == DayOfWeek.Sunday || faltas.Contains(w.Data) || config.Feriados.Contains(w.Data.Date) || config.Ferias.Contains(w.Data.Date))
+                if (w.Data.DayOfWeek == DayOfWeek.Saturday || w.Data.DayOfWeek == DayOfWeek.Sunday || faltas.Contains(w.Data) || feriados.Feriados.Contains(w.Data.Date) || config.Ferias.Contains(w.Data.Date))
                 {
                     w.Almoco = new EntradaSaida();
                     w.Empresa = new EntradaSaida();
                 }
             });
 
-            return base.Execute(config, ano, mes, new MesTrabalho { CoficienteOffset = mesTrabalho.CoficienteOffset, ValorSodexo = mesTrabalho.ValorSodexo, Dias = dias });
+            return base.Execute(config, feriados, ano, mes, new MesTrabalho { CoficienteOffset = mesTrabalho.CoficienteOffset, ValorSodexo = mesTrabalho.ValorSodexo, Dias = dias });
         }
 
         private static TimeSpan Random(Random rand, int minH, int minM, int minS, int maxH, int maxM, int maxS)

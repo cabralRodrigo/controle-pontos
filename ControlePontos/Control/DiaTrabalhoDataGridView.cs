@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Configuracao;
+using ControlePontos.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,6 +28,7 @@ namespace ControlePontos.Control
         }
 
         private ConfiguracaoDias config;
+        private ConfigFeriados feriados;
 
         public DiaTrabalhoDataGridView()
         {
@@ -39,12 +41,13 @@ namespace ControlePontos.Control
             this.Columns.Clear();
 
             InitializeComponent();
-            this.BindDias(null, new List<DiaTrabalho>());
+            this.BindDias(null, null, new List<DiaTrabalho>());
         }
 
-        public void BindDias(ConfiguracaoDias config, IEnumerable<DiaTrabalho> dias)
+        public void BindDias(ConfiguracaoDias config, ConfigFeriados feriados, IEnumerable<DiaTrabalho> dias)
         {
             this.config = config;
+            this.feriados = feriados;
             this.Columns.Clear();
 
             this.Columns.Add(Nomes.DATA, "Data");
@@ -167,7 +170,7 @@ namespace ControlePontos.Control
                 color = Color.FromArgb(212, 144, 147);
                 readOnly = true;
             }
-            else if (this.config.Feriados.Contains(dia.Data.Date))
+            else if (this.feriados.Feriados.Contains(dia.Data.Date))
             {
                 color = Color.FromArgb(175, 144, 212);
                 readOnly = true;

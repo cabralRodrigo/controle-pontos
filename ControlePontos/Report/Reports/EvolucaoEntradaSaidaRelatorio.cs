@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Configuracao;
+using ControlePontos.Model;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section;
@@ -19,7 +20,7 @@ namespace ControlePontos.Report.Reports
             get { return "Evolução do Coeficiente"; }
         }
 
-        public IReportExecutionResult Execute(ConfiguracaoDias config, int ano, int mes, MesTrabalho mesTrabalho)
+        public IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 

@@ -7,7 +7,7 @@ namespace ControlePontos.Model
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFim { get; set; }
         public DayOfWeek[] DiasTrabalho { get; set; }
-        public DateTime[] Feriados { get; set; }
+       // public DateTime[] Feriados { get; set; }
         public DateTime[] Ferias { get; set; }
     }
 }

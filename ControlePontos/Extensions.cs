@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ControlePontos
 {
@@ -72,6 +73,20 @@ namespace ControlePontos
         public static string ToStringOr(this decimal? timeSpan, string @else, string format = null)
         {
             return timeSpan.HasValue ? (format == null ? timeSpan.Value.ToString() : timeSpan.Value.ToString(format)) : @else;
+        }
+
+        public static IEnumerable<DateTime> AllInRange(this SelectionRange range)
+        {
+            for (var date = range.Start; date <= range.End; date = date.AddDays(1))
+                yield return date;
+        }
+
+        public static void SortBy<T, R>(this ListBox list, Func<T, R> func)
+        {
+            var items = list.Items.Cast<T>().OrderBy(func).ToList();
+
+            list.Items.Clear();
+            list.Items.AddRange(items.Cast<object>().ToArray());
         }
     }
 }

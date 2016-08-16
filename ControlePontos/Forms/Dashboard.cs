@@ -23,22 +23,6 @@ namespace ControlePontos.Forms
             HoraInicio = new TimeSpan(9, 0, 0),
             HoraFim = new TimeSpan(18, 0, 0),
             DiasTrabalho = new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday },
-            Feriados = new DateTime[]
-            {
-                new DateTime(2016, 4, 21),
-                new DateTime(2016, 5, 26),
-
-                new DateTime(2016, 8, 4),
-                new DateTime(2016, 8, 5),
-                new DateTime(2016, 8, 18),
-                new DateTime(2016, 8, 22),
-
-                new DateTime(2016, 9, 7),
-                new DateTime(2016, 10, 12),
-                new DateTime(2016, 11, 2),
-                new DateTime(2016, 11, 15),
-                new DateTime(2016, 12, 25)
-            },
             Ferias = new DateTime[]
             {
                 new DateTime(2016, 4, 1),
@@ -50,6 +34,7 @@ namespace ControlePontos.Forms
             }
         };
 
+        private ConfigFeriados feriados;
         private MesTrabalho mesTrabalho;
         private int ano, mes;
 
@@ -69,9 +54,10 @@ namespace ControlePontos.Forms
         {
             this.ano = ano;
             this.mes = mes;
+            this.feriados = ConfigFeriados.Carregar();
 
             this.mesTrabalho = Dias(this.ano, this.mes);
-            this.gridDias.BindDias(this.config, this.mesTrabalho.Dias);
+            this.gridDias.BindDias(this.config, this.feriados, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
         }
@@ -95,17 +81,17 @@ namespace ControlePontos.Forms
             var data = new DateTime(this.ano, this.mes, 1);
             this.btnMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
 
-            this.lblCoeficiente.Text = Calculator.Coeficiente(this.config, this.mesTrabalho).Descricao();
-            this.lblCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
-            this.lblMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblCoeficiente.Text = Calculator.Coeficiente(this.config, this.feriados, this.mesTrabalho).Descricao();
+            this.lblCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.feriados, this.mesTrabalho).Descricao();
+            this.lblMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
 
-            this.lblMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorTotalTR.Text = Calculator.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
+            this.lblMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", "c");
+            this.lblValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", "c");
+            this.lblValorTotalTR.Text = Calculator.ValorAtualTr(this.config, this.feriados, this.mesTrabalho).ToString("c");
 
             this.txtSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
             this.txtOffset.Text = this.mesTrabalho.CoficienteOffset.ToString();
@@ -129,7 +115,7 @@ namespace ControlePontos.Forms
                 var item = new ToolStripMenuItem { Size = new Size(185, 22), Text = relatorio.Name };
                 item.Click += (sender2, e2) =>
                 {
-                    var rel = relatorio.Execute(config, ano, mes, this.mesTrabalho);
+                    var rel = relatorio.Execute(config, this.feriados, ano, mes, this.mesTrabalho);
                     rel.Execute();
                 };
 
@@ -337,7 +323,7 @@ namespace ControlePontos.Forms
                         offset = 0;
 
                     var mes = JsonConvert.DeserializeObject<MesTrabalho>(File.ReadAllText(Path.Combine(data.Diretorio, data.Nome)));
-                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
+                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, this.feriados, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
 
                     this.txtOffset.Text = coeficiente.ToString();
                     this.mesTrabalho.CoficienteOffset = coeficiente;
@@ -357,7 +343,8 @@ namespace ControlePontos.Forms
         private void menu_configuracoes_Click(object sender, EventArgs e)
         {
             using (var config = new Configuracao())
-                config.ShowDialog();
+                if (config.ShowDialog() == DialogResult.OK)
+                    this.InitDashboard(this.ano, this.mes);
         }
 
         #endregion Eventos
