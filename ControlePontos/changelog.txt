@@ -1,4 +1,7 @@
-﻿16/08/2016 1.2.1:
+﻿16/08/2016 1.2.2:
+	* Adicionada opção de realizar um backup manualmente.
+
+16/08/2016 1.2.1:
 	* Corrigido bug onde os feriados não apareciam na tela de configuração ao ser carregada pela primeira vez.
 	* Corrigido bug que fazia com que os backups não incluisem os arquivos de configuração da aplicação.
 
