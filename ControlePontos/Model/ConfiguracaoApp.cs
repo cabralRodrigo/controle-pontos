@@ -1,6 +1,6 @@
 ﻿namespace ControlePontos.Model
 {
-    class ConfiguracaoApp
+    internal class ConfiguracaoApp
     {
         public string DiretorioBackup { get; set; }
     }

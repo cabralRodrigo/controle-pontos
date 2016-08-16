@@ -34,7 +34,6 @@ namespace ControlePontos.Report.Reports
                 }
             }
 
-
             var ups = [87/*W*/, 38/*Up Arrow*/, 33/*Page Up*/];
             var downs = [83/*S*/, 40/*Down Arrow*/, 34/*Page Down*/]
             var tabela = document.getElementById('tabela-horarios');

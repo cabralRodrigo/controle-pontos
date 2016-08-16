@@ -59,7 +59,7 @@ namespace ControlePontos.Report.Reports
                         {
                             Label = "Horário de Saída",
                             Data = data.Values.Select(w => w.Item2).Cast<object>().ToArray(),
-                            BackgroundColor = "rgba(196, 72, 59, 0.5)"    
+                            BackgroundColor = "rgba(196, 72, 59, 0.5)"
                         }
                     }
                 },
@@ -76,7 +76,7 @@ namespace ControlePontos.Report.Reports
                             }
                         }]
                     },
-                    tooltips: { 
+                    tooltips: {
                         mode: 'label',
                         callbacks: {
                             label: function(props, data) {
@@ -105,7 +105,6 @@ namespace ControlePontos.Report.Reports
                 if (!(i <= 0))
                     dataEvolucao[i] = new KeyValuePair<string, double>(dataEvolucao[i].Key, dataEvolucao[i].Value + dataEvolucao[i - 1].Value);
             }
-
 
             return new ChartHtmlSection("Relação/Evolução do Coeficiente", "evo-coef", new Chart
             {
@@ -142,7 +141,7 @@ namespace ControlePontos.Report.Reports
                             }
                         }]
                     },
-                    tooltips: { 
+                    tooltips: {
                         mode: 'label',
                         callbacks: {
                             label: function(props, data) {

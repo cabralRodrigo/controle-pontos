@@ -36,6 +36,6 @@ namespace ControlePontos.Report.Reports.Template.Html.Section
                 </script>";
 
             return string.Format(tag, this.body, json);
-        }        
+        }
     }
 }
