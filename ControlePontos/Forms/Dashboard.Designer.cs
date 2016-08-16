@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.lbl1 = new System.Windows.Forms.Label();
             this.lblAlmocoSaida = new System.Windows.Forms.Label();
@@ -38,7 +44,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnMesAno = new System.Windows.Forms.Button();
-            this.gridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
             this.lblCoeficiente = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
             this.lblMediaEntrada = new System.Windows.Forms.Label();
@@ -67,20 +72,33 @@
             this.menu_dados_exportar_zip = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_dados_exportar_drive = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_dados_importarCoeficiente = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_configuracoes = new System.Windows.Forms.ToolStripMenuItem();
             this.status = new System.Windows.Forms.StatusStrip();
             this.lblVersao = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.menu_configuracoes = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).BeginInit();
             this.menu.SuspendLayout();
             this.status.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl1
             // 
             this.lbl1.AutoSize = true;
-            this.lbl1.Location = new System.Drawing.Point(1143, 20);
+            this.lbl1.Location = new System.Drawing.Point(1217, 20);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(87, 13);
             this.lbl1.TabIndex = 3;
@@ -89,7 +107,7 @@
             // lblAlmocoSaida
             // 
             this.lblAlmocoSaida.AutoSize = true;
-            this.lblAlmocoSaida.Location = new System.Drawing.Point(1143, 217);
+            this.lblAlmocoSaida.Location = new System.Drawing.Point(1217, 217);
             this.lblAlmocoSaida.Name = "lblAlmocoSaida";
             this.lblAlmocoSaida.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblAlmocoSaida.Size = new System.Drawing.Size(79, 13);
@@ -99,7 +117,7 @@
             // lblAlmocoRetorno
             // 
             this.lblAlmocoRetorno.AutoSize = true;
-            this.lblAlmocoRetorno.Location = new System.Drawing.Point(1143, 263);
+            this.lblAlmocoRetorno.Location = new System.Drawing.Point(1217, 263);
             this.lblAlmocoRetorno.Name = "lblAlmocoRetorno";
             this.lblAlmocoRetorno.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblAlmocoRetorno.Size = new System.Drawing.Size(90, 13);
@@ -109,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1143, 250);
+            this.label6.Location = new System.Drawing.Point(1217, 250);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label6.Size = new System.Drawing.Size(115, 13);
@@ -119,7 +137,7 @@
             // lblMediaTempoAlmoco
             // 
             this.lblMediaTempoAlmoco.AutoSize = true;
-            this.lblMediaTempoAlmoco.Location = new System.Drawing.Point(1143, 309);
+            this.lblMediaTempoAlmoco.Location = new System.Drawing.Point(1217, 309);
             this.lblMediaTempoAlmoco.Name = "lblMediaTempoAlmoco";
             this.lblMediaTempoAlmoco.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMediaTempoAlmoco.Size = new System.Drawing.Size(114, 13);
@@ -129,7 +147,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1143, 296);
+            this.label8.Location = new System.Drawing.Point(1217, 296);
             this.label8.Name = "label8";
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label8.Size = new System.Drawing.Size(110, 13);
@@ -139,8 +157,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.95413F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.04587F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.Controls.Add(this.btnMesAno, 0, 38);
             this.tableLayoutPanel1.Controls.Add(this.gridDias, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lbl1, 1, 1);
@@ -211,45 +229,25 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1342, 701);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1354, 729);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // btnMesAno
             // 
             this.btnMesAno.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMesAno.Location = new System.Drawing.Point(1143, 655);
+            this.btnMesAno.Location = new System.Drawing.Point(1217, 683);
             this.btnMesAno.Name = "btnMesAno";
-            this.btnMesAno.Size = new System.Drawing.Size(196, 23);
+            this.btnMesAno.Size = new System.Drawing.Size(134, 23);
             this.btnMesAno.TabIndex = 28;
             this.btnMesAno.Text = "Novembro de 2016";
             this.btnMesAno.UseVisualStyleBackColor = true;
             this.btnMesAno.Click += new System.EventHandler(this.btnMesAno_Click);
             // 
-            // gridDias
-            // 
-            this.gridDias.AllowUserToAddRows = false;
-            this.gridDias.AllowUserToDeleteRows = false;
-            this.gridDias.AllowUserToResizeRows = false;
-            this.gridDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.gridDias.Location = new System.Drawing.Point(3, 3);
-            this.gridDias.MultiSelect = false;
-            this.gridDias.Name = "gridDias";
-            this.gridDias.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.gridDias, 40);
-            this.gridDias.Size = new System.Drawing.Size(1134, 695);
-            this.gridDias.TabIndex = 16;
-         
-            // 
             // lblCoeficiente
             // 
             this.lblCoeficiente.AutoSize = true;
-            this.lblCoeficiente.Location = new System.Drawing.Point(1143, 33);
+            this.lblCoeficiente.Location = new System.Drawing.Point(1217, 33);
             this.lblCoeficiente.Name = "lblCoeficiente";
             this.lblCoeficiente.Size = new System.Drawing.Size(70, 13);
             this.lblCoeficiente.TabIndex = 4;
@@ -258,7 +256,7 @@
             // lbl2
             // 
             this.lbl2.AutoSize = true;
-            this.lbl2.Location = new System.Drawing.Point(1143, 112);
+            this.lbl2.Location = new System.Drawing.Point(1217, 112);
             this.lbl2.Name = "lbl2";
             this.lbl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbl2.Size = new System.Drawing.Size(76, 13);
@@ -268,7 +266,7 @@
             // lblMediaEntrada
             // 
             this.lblMediaEntrada.AutoSize = true;
-            this.lblMediaEntrada.Location = new System.Drawing.Point(1143, 125);
+            this.lblMediaEntrada.Location = new System.Drawing.Point(1217, 125);
             this.lblMediaEntrada.Name = "lblMediaEntrada";
             this.lblMediaEntrada.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMediaEntrada.Size = new System.Drawing.Size(83, 13);
@@ -278,7 +276,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1143, 158);
+            this.label2.Location = new System.Drawing.Point(1217, 158);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label2.Size = new System.Drawing.Size(66, 13);
@@ -288,7 +286,7 @@
             // lblMediaSaida
             // 
             this.lblMediaSaida.AutoSize = true;
-            this.lblMediaSaida.Location = new System.Drawing.Point(1143, 171);
+            this.lblMediaSaida.Location = new System.Drawing.Point(1217, 171);
             this.lblMediaSaida.Name = "lblMediaSaida";
             this.lblMediaSaida.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMediaSaida.Size = new System.Drawing.Size(73, 13);
@@ -298,7 +296,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1143, 204);
+            this.label4.Location = new System.Drawing.Point(1217, 204);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label4.Size = new System.Drawing.Size(104, 13);
@@ -308,7 +306,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1143, 342);
+            this.label1.Location = new System.Drawing.Point(1217, 342);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 13);
             this.label1.TabIndex = 17;
@@ -317,7 +315,7 @@
             // lblMediaValorAlmoco
             // 
             this.lblMediaValorAlmoco.AutoSize = true;
-            this.lblMediaValorAlmoco.Location = new System.Drawing.Point(1143, 355);
+            this.lblMediaValorAlmoco.Location = new System.Drawing.Point(1217, 355);
             this.lblMediaValorAlmoco.Name = "lblMediaValorAlmoco";
             this.lblMediaValorAlmoco.Size = new System.Drawing.Size(105, 13);
             this.lblMediaValorAlmoco.TabIndex = 18;
@@ -326,7 +324,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1143, 388);
+            this.label3.Location = new System.Drawing.Point(1217, 388);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 19;
@@ -335,7 +333,7 @@
             // lblValorTotalTR
             // 
             this.lblValorTotalTR.AutoSize = true;
-            this.lblValorTotalTR.Location = new System.Drawing.Point(1143, 401);
+            this.lblValorTotalTR.Location = new System.Drawing.Point(1217, 401);
             this.lblValorTotalTR.Name = "lblValorTotalTR";
             this.lblValorTotalTR.Size = new System.Drawing.Size(80, 13);
             this.lblValorTotalTR.TabIndex = 20;
@@ -344,7 +342,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1143, 434);
+            this.label5.Location = new System.Drawing.Point(1217, 434);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 21;
@@ -353,7 +351,7 @@
             // lblValorIdealDiario
             // 
             this.lblValorIdealDiario.AutoSize = true;
-            this.lblValorIdealDiario.Location = new System.Drawing.Point(1143, 447);
+            this.lblValorIdealDiario.Location = new System.Drawing.Point(1217, 447);
             this.lblValorIdealDiario.Name = "lblValorIdealDiario";
             this.lblValorIdealDiario.Size = new System.Drawing.Size(91, 13);
             this.lblValorIdealDiario.TabIndex = 22;
@@ -362,7 +360,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1143, 480);
+            this.label7.Location = new System.Drawing.Point(1217, 480);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(116, 13);
             this.label7.TabIndex = 23;
@@ -371,7 +369,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1143, 539);
+            this.label9.Location = new System.Drawing.Point(1217, 539);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(116, 13);
             this.label9.TabIndex = 24;
@@ -380,9 +378,9 @@
             // txtOffset
             // 
             this.txtOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOffset.Location = new System.Drawing.Point(1143, 496);
+            this.txtOffset.Location = new System.Drawing.Point(1217, 496);
             this.txtOffset.Name = "txtOffset";
-            this.txtOffset.Size = new System.Drawing.Size(196, 20);
+            this.txtOffset.Size = new System.Drawing.Size(134, 20);
             this.txtOffset.TabIndex = 25;
             this.txtOffset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtOffset_KeyDown);
             this.txtOffset.Leave += new System.EventHandler(this.txtOffset_Leave);
@@ -391,9 +389,9 @@
             // 
             this.txtSodexo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSodexo.Location = new System.Drawing.Point(1143, 555);
+            this.txtSodexo.Location = new System.Drawing.Point(1217, 555);
             this.txtSodexo.Name = "txtSodexo";
-            this.txtSodexo.Size = new System.Drawing.Size(196, 20);
+            this.txtSodexo.Size = new System.Drawing.Size(134, 20);
             this.txtSodexo.TabIndex = 26;
             this.txtSodexo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSodexo_KeyDown);
             this.txtSodexo.Leave += new System.EventHandler(this.txtSodexo_Leave);
@@ -401,7 +399,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1143, 66);
+            this.label10.Location = new System.Drawing.Point(1217, 66);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(81, 13);
             this.label10.TabIndex = 29;
@@ -410,7 +408,7 @@
             // lblCoeficientePorDia
             // 
             this.lblCoeficientePorDia.AutoSize = true;
-            this.lblCoeficientePorDia.Location = new System.Drawing.Point(1143, 79);
+            this.lblCoeficientePorDia.Location = new System.Drawing.Point(1217, 79);
             this.lblCoeficientePorDia.Name = "lblCoeficientePorDia";
             this.lblCoeficientePorDia.Size = new System.Drawing.Size(102, 13);
             this.lblCoeficientePorDia.TabIndex = 30;
@@ -424,7 +422,7 @@
             this.menu_configuracoes});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(1342, 24);
+            this.menu.Size = new System.Drawing.Size(1354, 24);
             this.menu.TabIndex = 15;
             this.menu.Text = "menuStrip1";
             // 
@@ -494,13 +492,20 @@
             this.menu_dados_importarCoeficiente.Text = "Importar Coeficiente";
             this.menu_dados_importarCoeficiente.Click += new System.EventHandler(this.menu_dados_importarCoeficiente_Click);
             // 
+            // menu_configuracoes
+            // 
+            this.menu_configuracoes.Name = "menu_configuracoes";
+            this.menu_configuracoes.Size = new System.Drawing.Size(96, 20);
+            this.menu_configuracoes.Text = "Configurações";
+            this.menu_configuracoes.Click += new System.EventHandler(this.menu_configuracoes_Click);
+            // 
             // status
             // 
             this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblVersao});
-            this.status.Location = new System.Drawing.Point(0, 703);
+            this.status.Location = new System.Drawing.Point(0, 731);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(1342, 22);
+            this.status.Size = new System.Drawing.Size(1354, 22);
             this.status.TabIndex = 16;
             this.status.Text = "statusStrip1";
             // 
@@ -518,18 +523,130 @@
             this.timer.Interval = 5000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // menu_configuracoes
+            // gridDias
             // 
-            this.menu_configuracoes.Name = "menu_configuracoes";
-            this.menu_configuracoes.Size = new System.Drawing.Size(96, 20);
-            this.menu_configuracoes.Text = "Configurações";
-            this.menu_configuracoes.Click += new System.EventHandler(this.menu_configuracoes_Click);
+            this.gridDias.AllowUserToAddRows = false;
+            this.gridDias.AllowUserToDeleteRows = false;
+            this.gridDias.AllowUserToResizeRows = false;
+            this.gridDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridDias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11});
+            this.gridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.gridDias.Location = new System.Drawing.Point(3, 3);
+            this.gridDias.MultiSelect = false;
+            this.gridDias.Name = "gridDias";
+            this.gridDias.RowHeadersVisible = false;
+            this.tableLayoutPanel1.SetRowSpan(this.gridDias, 40);
+            this.gridDias.Size = new System.Drawing.Size(1208, 723);
+            this.gridDias.TabIndex = 16;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Data";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Dia da Semana";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.FillWeight = 162.4473F;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Falta";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewCellStyle2.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn3.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Entrada";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle3.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewTextBoxColumn4.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Almoço - Saída";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewCellStyle4.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn5.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Almoço - Retorno";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewCellStyle5.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn6.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Saída";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewCellStyle6.Format = "c";
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewTextBoxColumn7.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Valor Almoço";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Tempo Almoço";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Coeficiente";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "Total de Horas";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Visible = false;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1342, 725);
+            this.ClientSize = new System.Drawing.Size(1354, 753);
             this.Controls.Add(this.status);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menu);
@@ -543,11 +660,11 @@
             this.Shown += new System.EventHandler(this.Dashboard_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).EndInit();
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.status.ResumeLayout(false);
             this.status.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -596,5 +713,17 @@
         private System.Windows.Forms.Label lblCoeficientePorDia;
         private System.Windows.Forms.ToolStripStatusLabel lblVersao;
         private System.Windows.Forms.ToolStripMenuItem menu_configuracoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
     }
 }
