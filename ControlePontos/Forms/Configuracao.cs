@@ -23,6 +23,7 @@ namespace ControlePontos.Forms
                 this.tab_feriados_lstFeriados.Items.Add(data);
             }
             this.tab_feriados_lstFeriados.SortBy<DateTime, DateTime>(w => w);
+            this.tab_feriados_calendar.UpdateBoldedDates();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
