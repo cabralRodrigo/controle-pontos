@@ -1,4 +1,7 @@
-﻿16/08/2016 1.2.2:
+﻿16/08/2016 1.2.3:
+	* Corrigido bug de redimensionamento do grid do dashboard.
+
+16/08/2016 1.2.2:
 	* Adicionada opção de realizar um backup manualmente.
 
 16/08/2016 1.2.1:
