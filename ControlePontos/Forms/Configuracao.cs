@@ -20,25 +20,18 @@ namespace ControlePontos.Forms
         {
             var config = this.configuracaoServico.ObterConfiguracao();
 
-            this.tab_backup_lstDiretorioBackup.Items.AddRange(config.Backup.Diretorios.ToArray());
-
-            var datas = config.Feriados.Feriados;
-            foreach (var data in datas.OrderBy(w => w))
-            {
-                this.tab_feriados_calendar.AddBoldedDate(data);
-                this.tab_feriados_lstFeriados.Items.Add(data);
-            }
-            this.tab_feriados_lstFeriados.SortBy<DateTime, DateTime>(w => w);
-            this.tab_feriados_calendar.UpdateBoldedDates();
+            this.Backup_Load(config);
+            this.Feriados_Load(config);
+            this.Ferias_Load(config);
         }
 
-        private void btnSalvar_Click(object sender, EventArgs e)
+        private void ButtonSalvar_Click(object sender, EventArgs e)
         {
-            var config = new ConfigApp
-            {
-                Backup = new ConfigBackup(this.tab_backup_lstDiretorioBackup.Items.Cast<string>().ToArray()),
-                Feriados = new ConfigFeriados(this.tab_feriados_lstFeriados.Items.Cast<DateTime>().ToArray())
-            };
+            var config = new ConfigApp();
+
+            this.Backup_Save(config);
+            this.Feriados_Save(config);
+            this.Ferias_Save(config);
 
             this.configuracaoServico.SalvarConfiguracao(config);
 
@@ -48,88 +41,185 @@ namespace ControlePontos.Forms
 
         #region Backup
 
-        private void tab_backup_btnAdd_Click(object sender, EventArgs e)
+        private void Backup_Load(ConfigApp config)
+        {
+            this.Backup_ListBoxDiretorios.Items.AddRange(config.Backup.Diretorios.ToArray());
+        }
+
+        private void Backup_Save(ConfigApp config)
+        {
+            config.Backup = new ConfigBackup(this.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
+        }
+
+        private void Backup_ButtonAdd_Click(object sender, EventArgs e)
         {
             using (var folderDiaglog = new FolderBrowserDialog())
             {
                 if (folderDiaglog.ShowDialog() == DialogResult.OK)
-                    this.tab_backup_lstDiretorioBackup.Items.Add(folderDiaglog.SelectedPath);
+                    this.Backup_ListBoxDiretorios.Items.Add(folderDiaglog.SelectedPath);
             }
         }
 
-        private void tab_backup_btnRemove_Click(object sender, EventArgs e)
+        private void Backup_ButtonRemove_Click(object sender, EventArgs e)
         {
-            var index = this.tab_backup_lstDiretorioBackup.SelectedIndex;
+            var index = this.Backup_ListBoxDiretorios.SelectedIndex;
             if (index > -1)
             {
-                this.tab_backup_lstDiretorioBackup.Items.RemoveAt(index--);
+                this.Backup_ListBoxDiretorios.Items.RemoveAt(index--);
                 if (index > -1)
-                    this.tab_backup_lstDiretorioBackup.SelectedIndex = index;
+                    this.Backup_ListBoxDiretorios.SelectedIndex = index;
             }
         }
 
         #endregion
 
+        #region Feriados & Férias
+
         #region Feriados
 
-        private void tab_feriados_btnAdd_Click(object sender, EventArgs e)
+        private void Feriados_Load(ConfigApp config)
         {
-            var novas = this.tab_feriados_calendar.SelectionRange.AllInRange().ToList();
-            var antigas = this.tab_feriados_lstFeriados.Items.Cast<DateTime>().ToList();
+            Configuracao.FeriadosFerias_Load(this.Feriados_ListBoxFeriados, this.Feriados_Calendar, config.Feriados.Feriados.ToArray());
+        }
+
+        private void Feriados_Save(ConfigApp config)
+        {
+            config.Feriados = new ConfigFeriados(this.Feriados_ListBoxFeriados.Items.Cast<DateTime>().ToArray());
+        }
+
+        private void Feriados_ButtonAdd_Click(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_BtnAdd_Click(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
+        }
+
+        private void Feriados_ButtonRemove_Click(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_BtnRemove_Click(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
+        }
+
+        private void Feriados_ListBoxFeriados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_Lista_SelectedIndexChanged(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
+        }
+
+        private void Feriados_Calendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            Configuracao.FeriadosFerias_Calendario_DateSelected(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
+        }
+
+        #endregion
+
+        #region Férias
+
+        private void Ferias_Load(ConfigApp config)
+        {
+            Configuracao.FeriadosFerias_Load(this.Ferias_ListBoxFerias, this.Ferias_Calendar, config.Ferias);
+        }
+
+        private void Ferias_Save(ConfigApp config)
+        {
+            config.Ferias = this.Ferias_ListBoxFerias.Items.Cast<DateTime>().ToArray();
+        }
+
+        private void Ferias_ButtonAdd_Click(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_BtnAdd_Click(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
+        }
+
+        private void Ferias_ButtonRemove_Click(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_BtnRemove_Click(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
+        }
+
+        private void Ferias_ListBoxFerias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Configuracao.FeriadosFerias_Lista_SelectedIndexChanged(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
+        }
+
+        private void Ferias_Calendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            Configuracao.FeriadosFerias_Calendario_DateSelected(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
+        }
+
+        #endregion
+
+        #region Lógica
+
+        private static void FeriadosFerias_Load(ListBox lista, MonthCalendar calendario, DateTime[] datas)
+        {
+            foreach (var data in datas.OrderBy(w => w))
+            {
+                calendario.AddBoldedDate(data);
+                lista.Items.Add(data);
+            }
+            lista.SortBy<DateTime, DateTime>(w => w);
+            calendario.UpdateBoldedDates();
+        }
+
+        private static void FeriadosFerias_BtnAdd_Click(ListBox lista, MonthCalendar calendario)
+        {
+            var novas = calendario.SelectionRange.AllInRange().ToList();
+            var antigas = lista.Items.Cast<DateTime>().ToList();
 
             var datas = novas.Where(w => !antigas.Contains(w));
 
             foreach (var data in datas)
             {
-                this.tab_feriados_lstFeriados.Items.Add(data);
-                this.tab_feriados_calendar.AddBoldedDate(data);
+                lista.Items.Add(data);
+                calendario.AddBoldedDate(data);
             }
 
             if (datas.Any())
             {
-                this.tab_feriados_calendar.UpdateBoldedDates();
-                this.tab_feriados_lstFeriados.SortBy<DateTime, DateTime>(w => w);
+                calendario.UpdateBoldedDates();
+                lista.SortBy<DateTime, DateTime>(w => w);
+
+                if (datas.Count() == 1)
+                    lista.SelectedIndex = lista.Items.IndexOf(datas.Single());
             }
         }
 
-        private void tab_feriados_btnRemove_Click(object sender, EventArgs e)
+        private static void FeriadosFerias_BtnRemove_Click(ListBox lista, MonthCalendar calendario)
         {
-            var index = this.tab_feriados_lstFeriados.SelectedIndex;
+            var index = lista.SelectedIndex;
             if (index > -1)
             {
-                var data = (DateTime)this.tab_feriados_lstFeriados.SelectedItem;
+                var data = (DateTime)lista.SelectedItem;
 
-                this.tab_feriados_lstFeriados.Items.RemoveAt(index--);
+                lista.Items.RemoveAt(index--);
                 if (index > -1)
-                    this.tab_feriados_lstFeriados.SelectedIndex = index;
-                else if (this.tab_feriados_lstFeriados.Items.Count > 0)
-                    this.tab_feriados_lstFeriados.SelectedIndex = 0;
+                    lista.SelectedIndex = index;
+                else if (lista.Items.Count > 0)
+                    lista.SelectedIndex = 0;
 
-                this.tab_feriados_calendar.RemoveBoldedDate(data);
+                calendario.RemoveBoldedDate(data);
+                calendario.UpdateBoldedDates();
             }
         }
 
-        private void tab_feriados_lstFeriados_SelectedIndexChanged(object sender, EventArgs e)
+        private static void FeriadosFerias_Lista_SelectedIndexChanged(ListBox lista, MonthCalendar calendario)
         {
-            var index = this.tab_feriados_lstFeriados.SelectedIndex;
+            var index = lista.SelectedIndex;
             if (index > -1)
             {
-                var data = (DateTime)this.tab_feriados_lstFeriados.SelectedItem;
-                this.tab_feriados_calendar.SelectionStart = data;
-                this.tab_feriados_calendar.SelectionEnd = data;
+                var data = (DateTime)lista.SelectedItem;
+                calendario.SelectionStart = data;
+                calendario.SelectionEnd = data;
             }
         }
 
-        private void tab_feriados_calendar_DateSelected(object sender, DateRangeEventArgs e)
+        private static void FeriadosFerias_Calendario_DateSelected(ListBox lista, MonthCalendar calendario)
         {
-            var datas = this.tab_feriados_calendar.SelectionRange.AllInRange();
+            var datas = calendario.SelectionRange.AllInRange();
             if (datas.Count() == 1)
             {
                 var data = datas.Single();
-                if (this.tab_feriados_lstFeriados.Items.Cast<DateTime>().Contains(data))
-                    this.tab_feriados_lstFeriados.SelectedItem = data;
+                if (lista.Items.Cast<DateTime>().Contains(data))
+                    lista.SelectedItem = data;
             }
         }
+
+        #endregion
 
         #endregion
     }
