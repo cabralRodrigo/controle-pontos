@@ -1,4 +1,7 @@
-﻿16/08/2016 1.2.3:
+﻿17/08/2016 1.2.4:
+	* Corrigido nome do arquivo de configuração de backup no arquivo zip de backup.
+
+16/08/2016 1.2.3:
 	* Corrigido bug de redimensionamento do grid do dashboard.
 
 16/08/2016 1.2.2:
