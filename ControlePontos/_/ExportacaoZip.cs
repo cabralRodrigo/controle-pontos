@@ -24,7 +24,7 @@ namespace ControlePontos.Exportacao
             {
                 var configBackup = Path.Combine(diretorioData, "config-backup.json");
                 if (File.Exists(configBackup))
-                    zip.CreateEntryFromFile(configBackup, "config-backcup.json", CompressionLevel.Optimal);
+                    zip.CreateEntryFromFile(configBackup, "config-backup.json", CompressionLevel.Optimal);
 
                 var configFeriados = Path.Combine(diretorioData, "config-feriados.json");
                 if (File.Exists(configFeriados))
