@@ -20,7 +20,7 @@ namespace ControlePontos.Report.Reports
             get { return "Evolução do Coeficiente"; }
         }
 
-        public IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho)
+        public IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 
@@ -91,7 +91,7 @@ namespace ControlePontos.Report.Reports
             });
         }
 
-        private IHtmlSection RelacaoEvolucaoCoeficiente(ConfiguracaoDias config, MesTrabalho mesTrabalho)
+        private IHtmlSection RelacaoEvolucaoCoeficiente(ConfigApp config, MesTrabalho mesTrabalho)
         {
             var data = mesTrabalho.Dias.Where(w => !w.Falta && w.Coeficiente(config.HoraInicio, config.HoraFim).HasValue)
                 .ToDictionary(w => w.Data.ToString("dd/MM/yyyy"), w => w.Coeficiente(config.HoraInicio, config.HoraFim).Value.Negate().TotalSeconds);

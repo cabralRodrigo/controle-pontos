@@ -8,7 +8,7 @@ namespace ControlePontos.Report
         //TODO: Adicionar a função de escolher a saida do relatório: html, csv, pdf, markdown...
         string Name { get; }
 
-        IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho);
+        IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho);
     }
 
     internal interface IReportExecutionResult

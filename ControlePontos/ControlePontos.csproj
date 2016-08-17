@@ -57,6 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=3.2.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.2.0\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -73,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="Configuracao\ConfigApp.cs" />
     <Compile Include="Configuracao\ConfigBackup.cs" />
     <Compile Include="Configuracao\ConfigFeriados.cs" />
     <Compile Include="Control\DiaTrabalhoDataGridView.cs">
@@ -114,6 +119,8 @@
     <Compile Include="Report\Reports\Template\Html\Section\Chart\ChartType.cs" />
     <Compile Include="Report\Reports\Template\Html\Section\IHtmlSection.cs" />
     <Compile Include="Report\Reports\Template\Html\Section\TextHtmlSection.cs" />
+    <Compile Include="Servicos\ArmazenamentoServico.cs" />
+    <Compile Include="Servicos\ConfiguracaoServico.cs" />
     <Compile Include="_\DataFile.cs" />
     <Compile Include="_\DataFileScanner.cs" />
     <Compile Include="_\ExportacaoResultado.cs" />
@@ -131,7 +138,6 @@
     <Compile Include="Forms\MonthPicker.designer.cs">
       <DependentUpon>MonthPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ConfiguracaoDias.cs" />
     <Compile Include="Model\DiaTrabalho.cs" />
     <Compile Include="Model\EntradaSaida.cs" />
     <Compile Include="Forms\Dashboard.cs">
