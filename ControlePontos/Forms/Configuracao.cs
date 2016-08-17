@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Configuracao;
+using ControlePontos.Servicos;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,16 +8,21 @@ namespace ControlePontos.Forms
 {
     public partial class Configuracao : Form
     {
-        public Configuracao()
+        private readonly IConfiguracaoServico configuracaoServico;
+
+        public Configuracao(IConfiguracaoServico configuracaoServico)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.configuracaoServico = configuracaoServico;
         }
 
         private void Configuracao_Load(object sender, EventArgs e)
         {
-            this.tab_backup_lstDiretorioBackup.Items.AddRange(ConfigBackup.Carregar().Diretorios.ToArray());
+            var config = this.configuracaoServico.ObterConfiguracao();
 
-            var datas = ConfigFeriados.Carregar().Feriados;
+            this.tab_backup_lstDiretorioBackup.Items.AddRange(config.Backup.Diretorios.ToArray());
+
+            var datas = config.Feriados.Feriados;
             foreach (var data in datas.OrderBy(w => w))
             {
                 this.tab_feriados_calendar.AddBoldedDate(data);
@@ -28,8 +34,13 @@ namespace ControlePontos.Forms
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            ConfigBackup.Salvar(new ConfigBackup(this.tab_backup_lstDiretorioBackup.Items.Cast<string>().ToArray()));
-            ConfigFeriados.Salvar(new ConfigFeriados(this.tab_feriados_lstFeriados.Items.Cast<DateTime>().ToArray()));
+            var config = new ConfigApp
+            {
+                Backup = new ConfigBackup(this.tab_backup_lstDiretorioBackup.Items.Cast<string>().ToArray()),
+                Feriados = new ConfigFeriados(this.tab_feriados_lstFeriados.Items.Cast<DateTime>().ToArray())
+            };
+
+            this.configuracaoServico.SalvarConfiguracao(config);
 
             this.DialogResult = DialogResult.OK;
             this.Close();

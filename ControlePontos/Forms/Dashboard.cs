@@ -3,6 +3,7 @@ using ControlePontos.Dialog;
 using ControlePontos.Exportacao;
 using ControlePontos.Model;
 using ControlePontos.Report;
+using ControlePontos.Servicos;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,46 +19,48 @@ namespace ControlePontos.Forms
 {
     internal partial class Dashboard : Form
     {
-        public ConfiguracaoDias config = new ConfiguracaoDias
-        {
-            HoraInicio = new TimeSpan(9, 0, 0),
-            HoraFim = new TimeSpan(18, 0, 0),
-            DiasTrabalho = new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday },
-            Ferias = new DateTime[]
-            {
-                new DateTime(2016, 4, 1),
-                new DateTime(2016, 4, 4),
-                new DateTime(2016, 4, 5),
-                new DateTime(2016, 4, 6),
-                new DateTime(2016, 4, 7),
-                new DateTime(2016, 4, 8)
-            }
-        };
-
-        private ConfigFeriados feriados;
+        private readonly IConfiguracaoServico configuracaoServico;
         private MesTrabalho mesTrabalho;
+        private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard()
+        public Dashboard(IConfiguracaoServico configuracaoServico)
         {
             this.InitializeComponent();
+
             this.Text = Application.ProductName;
             this.lblVersao.Text = Application.ProductVersion;
+            this.configuracaoServico = configuracaoServico;
+
             this.gridDias.CellValueChanged += (sender, e) =>
             {
                 this.AtualizarTela();
             };
+            this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
+            {
+                this.InitDashboard(this.ano, this.mes, novaConfiguracao);
+            };
+
             this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
         }
 
-        private void InitDashboard(int ano, int mes)
+        private void EventoConfiguracaoMudou(ConfigApp novaConfiguracao)
         {
+            throw new NotImplementedException();
+        }
+
+        private void InitDashboard(int ano, int mes, ConfigApp config = null)
+        {
+            if (config == null)
+                this.config = this.configuracaoServico.ObterConfiguracao();
+            else
+                this.config = config;
+
             this.ano = ano;
             this.mes = mes;
-            this.feriados = ConfigFeriados.Carregar();
 
             this.mesTrabalho = Dias(this.ano, this.mes);
-            this.gridDias.BindDias(this.config, this.feriados, this.mesTrabalho.Dias);
+            this.gridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
         }
@@ -81,17 +84,17 @@ namespace ControlePontos.Forms
             var data = new DateTime(this.ano, this.mes, 1);
             this.btnMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
 
-            this.lblCoeficiente.Text = Calculator.Coeficiente(this.config, this.feriados, this.mesTrabalho).Descricao();
-            this.lblCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.feriados, this.mesTrabalho).Descricao();
-            this.lblMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblCoeficiente.Text = Calculator.Coeficiente(this.config, this.mesTrabalho).Descricao();
+            this.lblCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
+            this.lblMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.lblMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
 
-            this.lblMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.feriados, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorTotalTR.Text = Calculator.ValorAtualTr(this.config, this.feriados, this.mesTrabalho).ToString("c");
+            this.lblMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.lblValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.lblValorTotalTR.Text = Calculator.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
 
             this.txtSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
             this.txtOffset.Text = this.mesTrabalho.CoficienteOffset.ToString();
@@ -115,7 +118,7 @@ namespace ControlePontos.Forms
                 var item = new ToolStripMenuItem { Size = new Size(185, 22), Text = relatorio.Name };
                 item.Click += (sender2, e2) =>
                 {
-                    var rel = relatorio.Execute(config, this.feriados, ano, mes, this.mesTrabalho);
+                    var rel = relatorio.Execute(config, ano, mes, this.mesTrabalho);
                     rel.Execute();
                 };
 
@@ -125,10 +128,9 @@ namespace ControlePontos.Forms
 
         private bool RealizarBackupDiario(bool forcar = false)
         {
-            var config = ConfigBackup.Carregar();
             var resultados = new List<bool>();
 
-            foreach (var diretorio in config.Diretorios)
+            foreach (var diretorio in this.config.Backup.Diretorios)
                 resultados.Add(Backup(diretorio, forcar));
 
             return resultados.Where(w => w).Any();
@@ -335,7 +337,7 @@ namespace ControlePontos.Forms
                         offset = 0;
 
                     var mes = JsonConvert.DeserializeObject<MesTrabalho>(File.ReadAllText(Path.Combine(data.Diretorio, data.Nome)));
-                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, this.feriados, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
+                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
 
                     this.txtOffset.Text = coeficiente.ToString();
                     this.mesTrabalho.CoficienteOffset = coeficiente;
@@ -354,7 +356,7 @@ namespace ControlePontos.Forms
 
         private void menu_configuracoes_Click(object sender, EventArgs e)
         {
-            using (var config = new Configuracao())
+            using (var config = App.container.GetInstance<Configuracao>())
                 if (config.ShowDialog() == DialogResult.OK)
                     this.InitDashboard(this.ano, this.mes);
         }

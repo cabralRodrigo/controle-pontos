@@ -18,7 +18,7 @@ namespace ControlePontos.Report.Reports
             get { return "Uso Geral do Sodexo"; }
         }
 
-        public IReportExecutionResult Execute(ConfiguracaoDias config, ConfigFeriados feriados, int ano, int mes, MesTrabalho mesTrabalho)
+        public IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 
