@@ -34,6 +34,10 @@
             this.Geral_Tab = new System.Windows.Forms.TabPage();
             this.Geral_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Geral_Horario_Group = new System.Windows.Forms.GroupBox();
+            this.Geral_Horario_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Geral_Horario_Inicio = new System.Windows.Forms.MaskedTextBox();
+            this.Geral_Horario_Final = new System.Windows.Forms.MaskedTextBox();
+            this.Geral_Horario_Label = new System.Windows.Forms.Label();
             this.Geral_DiasTrabalho_Group = new System.Windows.Forms.GroupBox();
             this.Geral_DiasTrabalho_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Geral_DiasTrabalho_Label = new System.Windows.Forms.Label();
@@ -58,15 +62,12 @@
             this.Backup_Label = new System.Windows.Forms.Label();
             this.Backup_ButtonAdd = new System.Windows.Forms.Button();
             this.Backup_ButtonRemove = new System.Windows.Forms.Button();
-            this.Geral_Horario_Layout = new System.Windows.Forms.TableLayoutPanel();
-            this.Geral_Horario_Final = new System.Windows.Forms.MaskedTextBox();
-            this.Geral_Horario_Inicio = new System.Windows.Forms.MaskedTextBox();
-            this.Geral_Horario_Label = new System.Windows.Forms.Label();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
             this.Geral_Layout.SuspendLayout();
             this.Geral_Horario_Group.SuspendLayout();
+            this.Geral_Horario_Layout.SuspendLayout();
             this.Geral_DiasTrabalho_Group.SuspendLayout();
             this.Geral_DiasTrabalho_Layout.SuspendLayout();
             this.Feriados_Tab.SuspendLayout();
@@ -75,7 +76,6 @@
             this.Ferias_Layout.SuspendLayout();
             this.Backup_Tab.SuspendLayout();
             this.Backup_Layout.SuspendLayout();
-            this.Geral_Horario_Layout.SuspendLayout();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -144,23 +144,69 @@
             this.Geral_Layout.Size = new System.Drawing.Size(521, 231);
             this.Geral_Layout.TabIndex = 0;
             // 
-            // Geral_GroupHorario
+            // Geral_Horario_Group
             // 
             this.Geral_Horario_Group.Controls.Add(this.Geral_Horario_Layout);
             this.Geral_Horario_Group.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 118);
-            this.Geral_Horario_Group.Name = "Geral_GroupHorario";
+            this.Geral_Horario_Group.Name = "Geral_Horario_Group";
             this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 110);
             this.Geral_Horario_Group.TabIndex = 1;
             this.Geral_Horario_Group.TabStop = false;
             this.Geral_Horario_Group.Text = "Horário de Trabalho";
             // 
-            // Geral_GroupDiasTrabalho
+            // Geral_Horario_Layout
+            // 
+            this.Geral_Horario_Layout.ColumnCount = 2;
+            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Inicio, 0, 1);
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Final, 1, 1);
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Label, 0, 0);
+            this.Geral_Horario_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_Horario_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Geral_Horario_Layout.Name = "Geral_Horario_Layout";
+            this.Geral_Horario_Layout.RowCount = 2;
+            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 91);
+            this.Geral_Horario_Layout.TabIndex = 0;
+            // 
+            // Geral_Horario_Inicio
+            // 
+            this.Geral_Horario_Inicio.Location = new System.Drawing.Point(3, 20);
+            this.Geral_Horario_Inicio.Mask = "00:00";
+            this.Geral_Horario_Inicio.Name = "Geral_Horario_Inicio";
+            this.Geral_Horario_Inicio.Size = new System.Drawing.Size(40, 20);
+            this.Geral_Horario_Inicio.TabIndex = 2;
+            this.Geral_Horario_Inicio.ValidatingType = typeof(System.DateTime);
+            // 
+            // Geral_Horario_Final
+            // 
+            this.Geral_Horario_Final.Location = new System.Drawing.Point(50, 20);
+            this.Geral_Horario_Final.Mask = "00:00";
+            this.Geral_Horario_Final.Name = "Geral_Horario_Final";
+            this.Geral_Horario_Final.Size = new System.Drawing.Size(40, 20);
+            this.Geral_Horario_Final.TabIndex = 3;
+            this.Geral_Horario_Final.ValidatingType = typeof(System.DateTime);
+            // 
+            // Geral_Horario_Label
+            // 
+            this.Geral_Horario_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Geral_Horario_Label.AutoSize = true;
+            this.Geral_Horario_Layout.SetColumnSpan(this.Geral_Horario_Label, 2);
+            this.Geral_Horario_Label.Location = new System.Drawing.Point(3, 4);
+            this.Geral_Horario_Label.Name = "Geral_Horario_Label";
+            this.Geral_Horario_Label.Size = new System.Drawing.Size(214, 13);
+            this.Geral_Horario_Label.TabIndex = 4;
+            this.Geral_Horario_Label.Text = "Informe a início e fim da jornada de trabalho";
+            // 
+            // Geral_DiasTrabalho_Group
             // 
             this.Geral_DiasTrabalho_Group.Controls.Add(this.Geral_DiasTrabalho_Layout);
             this.Geral_DiasTrabalho_Group.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_DiasTrabalho_Group.Location = new System.Drawing.Point(3, 3);
-            this.Geral_DiasTrabalho_Group.Name = "Geral_GroupDiasTrabalho";
+            this.Geral_DiasTrabalho_Group.Name = "Geral_DiasTrabalho_Group";
             this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 109);
             this.Geral_DiasTrabalho_Group.TabIndex = 0;
             this.Geral_DiasTrabalho_Group.TabStop = false;
@@ -294,7 +340,7 @@
             this.Ferias_Tab.Location = new System.Drawing.Point(4, 22);
             this.Ferias_Tab.Name = "Ferias_Tab";
             this.Ferias_Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.Ferias_Tab.Size = new System.Drawing.Size(527, 296);
+            this.Ferias_Tab.Size = new System.Drawing.Size(527, 237);
             this.Ferias_Tab.TabIndex = 2;
             this.Ferias_Tab.Text = "Férias";
             this.Ferias_Tab.UseVisualStyleBackColor = true;
@@ -317,7 +363,7 @@
             this.Ferias_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Ferias_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 174F));
             this.Ferias_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Ferias_Layout.Size = new System.Drawing.Size(521, 290);
+            this.Ferias_Layout.Size = new System.Drawing.Size(521, 231);
             this.Ferias_Layout.TabIndex = 1;
             // 
             // Ferias_Calendar
@@ -349,7 +395,7 @@
             this.Ferias_ListBoxFerias.Location = new System.Drawing.Point(3, 23);
             this.Ferias_ListBoxFerias.Name = "Ferias_ListBoxFerias";
             this.Ferias_Layout.SetRowSpan(this.Ferias_ListBoxFerias, 2);
-            this.Ferias_ListBoxFerias.Size = new System.Drawing.Size(275, 264);
+            this.Ferias_ListBoxFerias.Size = new System.Drawing.Size(275, 205);
             this.Ferias_ListBoxFerias.TabIndex = 4;
             this.Ferias_ListBoxFerias.SelectedIndexChanged += new System.EventHandler(this.Ferias_ListBoxFerias_SelectedIndexChanged);
             // 
@@ -380,7 +426,7 @@
             this.Backup_Tab.Location = new System.Drawing.Point(4, 22);
             this.Backup_Tab.Name = "Backup_Tab";
             this.Backup_Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.Backup_Tab.Size = new System.Drawing.Size(527, 296);
+            this.Backup_Tab.Size = new System.Drawing.Size(527, 237);
             this.Backup_Tab.TabIndex = 0;
             this.Backup_Tab.Text = "Backup";
             this.Backup_Tab.UseVisualStyleBackColor = true;
@@ -401,7 +447,7 @@
             this.Backup_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Backup_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.Backup_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.Backup_Layout.Size = new System.Drawing.Size(521, 290);
+            this.Backup_Layout.Size = new System.Drawing.Size(521, 231);
             this.Backup_Layout.TabIndex = 0;
             // 
             // Backup_ListBoxDiretorios
@@ -411,7 +457,7 @@
             this.Backup_ListBoxDiretorios.Location = new System.Drawing.Point(3, 23);
             this.Backup_ListBoxDiretorios.Name = "Backup_ListBoxDiretorios";
             this.Backup_Layout.SetRowSpan(this.Backup_ListBoxDiretorios, 2);
-            this.Backup_ListBoxDiretorios.Size = new System.Drawing.Size(479, 264);
+            this.Backup_ListBoxDiretorios.Size = new System.Drawing.Size(479, 205);
             this.Backup_ListBoxDiretorios.TabIndex = 0;
             // 
             // Backup_Label
@@ -446,52 +492,6 @@
             this.Backup_ButtonRemove.UseVisualStyleBackColor = true;
             this.Backup_ButtonRemove.Click += new System.EventHandler(this.Backup_ButtonRemove_Click);
             // 
-            // tableLayoutPanel1
-            // 
-            this.Geral_Horario_Layout.ColumnCount = 2;
-            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Inicio, 0, 1);
-            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Final, 1, 1);
-            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Label, 0, 0);
-            this.Geral_Horario_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Geral_Horario_Layout.Location = new System.Drawing.Point(3, 16);
-            this.Geral_Horario_Layout.Name = "tableLayoutPanel1";
-            this.Geral_Horario_Layout.RowCount = 2;
-            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
-            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 91);
-            this.Geral_Horario_Layout.TabIndex = 0;
-            // 
-            // Geral_Horario_Final
-            // 
-            this.Geral_Horario_Final.Location = new System.Drawing.Point(50, 20);
-            this.Geral_Horario_Final.Mask = "00:00";
-            this.Geral_Horario_Final.Name = "Geral_Horario_Final";
-            this.Geral_Horario_Final.Size = new System.Drawing.Size(40, 20);
-            this.Geral_Horario_Final.TabIndex = 3;
-            this.Geral_Horario_Final.ValidatingType = typeof(System.DateTime);
-            // 
-            // Geral_Horario_Inicio
-            // 
-            this.Geral_Horario_Inicio.Location = new System.Drawing.Point(3, 20);
-            this.Geral_Horario_Inicio.Mask = "00:00";
-            this.Geral_Horario_Inicio.Name = "Geral_Horario_Inicio";
-            this.Geral_Horario_Inicio.Size = new System.Drawing.Size(40, 20);
-            this.Geral_Horario_Inicio.TabIndex = 2;
-            this.Geral_Horario_Inicio.ValidatingType = typeof(System.DateTime);
-            // 
-            // Geral_Horario_Label
-            // 
-            this.Geral_Horario_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Geral_Horario_Label.AutoSize = true;
-            this.Geral_Horario_Layout.SetColumnSpan(this.Geral_Horario_Label, 2);
-            this.Geral_Horario_Label.Location = new System.Drawing.Point(3, 4);
-            this.Geral_Horario_Label.Name = "Geral_Horario_Label";
-            this.Geral_Horario_Label.Size = new System.Drawing.Size(214, 13);
-            this.Geral_Horario_Label.TabIndex = 4;
-            this.Geral_Horario_Label.Text = "Informe a início e fim da jornada de trabalho";
-            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,6 +507,8 @@
             this.Geral_Tab.ResumeLayout(false);
             this.Geral_Layout.ResumeLayout(false);
             this.Geral_Horario_Group.ResumeLayout(false);
+            this.Geral_Horario_Layout.ResumeLayout(false);
+            this.Geral_Horario_Layout.PerformLayout();
             this.Geral_DiasTrabalho_Group.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.PerformLayout();
@@ -519,8 +521,6 @@
             this.Backup_Tab.ResumeLayout(false);
             this.Backup_Layout.ResumeLayout(false);
             this.Backup_Layout.PerformLayout();
-            this.Geral_Horario_Layout.ResumeLayout(false);
-            this.Geral_Horario_Layout.PerformLayout();
             this.ResumeLayout(false);
 
         }

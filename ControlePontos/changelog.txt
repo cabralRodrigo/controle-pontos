@@ -1,4 +1,7 @@
-﻿18/08/2016 1.4.1:
+﻿18/08/2016 1.5.0:
+	* Adicionado atalhos na tela de configuração: Esc para sair e Enter para salvar e fechar.
+
+18/08/2016 1.4.1:
 	* Corrigido erro no calculo do coeficiente diário de trabalho.
 
 18/08/2016 1.4.0:
