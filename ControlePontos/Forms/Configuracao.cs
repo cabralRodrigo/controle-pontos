@@ -2,6 +2,7 @@
 using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -47,6 +48,19 @@ namespace ControlePontos.Forms
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+            else if (keyData == Keys.Enter)
+                this.ButtonSalvar_Click(this, EventArgs.Empty);
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         #region Backup
