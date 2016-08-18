@@ -20,12 +20,13 @@ namespace ControlePontos.Model
             if (this.EstaCompleto())
             {
                 const int HORAS_ALMOCO = 1;
-                var HORAS_POR_DIA = (int)(horaFim - horaInicio).TotalHours - HORAS_ALMOCO;
+
+                var tempoPorDia = (horaFim - horaInicio).Add(new TimeSpan(HORAS_ALMOCO * -1, 0, 0));
 
                 var acc = this.Empresa.Saida.Value - this.Empresa.Entrada.Value;
                 var accAlmoco = this.Almoco.Saida.Value - this.Almoco.Entrada.Value;
 
-                return new TimeSpan(HORAS_POR_DIA, 0, 0) - (acc - accAlmoco);
+                return tempoPorDia - (acc - accAlmoco);
             }
             else
                 return null;
