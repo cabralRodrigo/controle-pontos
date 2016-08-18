@@ -1,4 +1,4 @@
-﻿using ControlePontos.Configuracao;
+﻿using ControlePontos.Model;
 using Newtonsoft.Json;
 
 namespace ControlePontos.Servicos

@@ -1,5 +1,4 @@
-﻿using ControlePontos.Configuracao;
-using ControlePontos.Dialog;
+﻿using ControlePontos.Dialog;
 using ControlePontos.Exportacao;
 using ControlePontos.Model;
 using ControlePontos.Report;
@@ -19,18 +18,20 @@ namespace ControlePontos.Forms
 {
     internal partial class Dashboard : Form
     {
+        private readonly IFormOpener formOpener;
         private readonly IConfiguracaoServico configuracaoServico;
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IConfiguracaoServico configuracaoServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico)
         {
             this.InitializeComponent();
 
             this.Text = Application.ProductName;
             this.lblVersao.Text = Application.ProductVersion;
             this.configuracaoServico = configuracaoServico;
+            this.formOpener = formOpener;
 
             this.gridDias.CellValueChanged += (sender, e) =>
             {
@@ -42,11 +43,6 @@ namespace ControlePontos.Forms
             };
 
             this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
-        }
-
-        private void EventoConfiguracaoMudou(ConfigApp novaConfiguracao)
-        {
-            throw new NotImplementedException();
         }
 
         private void InitDashboard(int ano, int mes, ConfigApp config = null)
@@ -356,9 +352,7 @@ namespace ControlePontos.Forms
 
         private void menu_configuracoes_Click(object sender, EventArgs e)
         {
-            using (var config = App.container.GetInstance<Configuracao>())
-                if (config.ShowDialog() == DialogResult.OK)
-                    this.InitDashboard(this.ano, this.mes);
+            this.formOpener.ShowModalForm<Configuracao>();
         }
 
         #endregion Eventos

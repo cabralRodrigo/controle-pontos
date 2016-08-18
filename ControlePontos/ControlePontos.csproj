@@ -77,15 +77,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
-    <Compile Include="Configuracao\ConfigApp.cs" />
-    <Compile Include="Configuracao\ConfigBackup.cs" />
-    <Compile Include="Configuracao\ConfigFeriados.cs" />
+    <Compile Include="Misc\CheckboxListItem.cs" />
+    <Compile Include="Model\ConfigApp.cs" />
+    <Compile Include="Model\ConfigBackup.cs" />
+    <Compile Include="Model\ConfigFeriados.cs" />
     <Compile Include="Control\DiaTrabalhoDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Control\DiaTrabalhoDataGridView.Designer.cs">
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOpener.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

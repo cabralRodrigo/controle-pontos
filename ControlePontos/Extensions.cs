@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SimpleInjector;
+using SimpleInjector.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -87,6 +89,18 @@ namespace ControlePontos
 
             list.Items.Clear();
             list.Items.AddRange(items.Cast<object>().ToArray());
+        }
+
+        public static void RegisterForm(this Container container, params Type[] forms)
+        {
+            foreach (var form in forms)
+                container.Register(form);
+
+            foreach (var form in forms)
+            {
+                var registration = container.GetRegistration(form).Registration;
+                registration.SuppressDiagnosticWarning(DiagnosticType.DisposableTransientComponent, "Winforms registration supression.");
+            }
         }
     }
 }

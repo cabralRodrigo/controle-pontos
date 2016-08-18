@@ -1,5 +1,4 @@
-﻿using ControlePontos.Configuracao;
-using ControlePontos.Model;
+﻿using ControlePontos.Model;
 
 namespace ControlePontos.Report
 {

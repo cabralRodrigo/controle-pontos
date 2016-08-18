@@ -8,8 +8,7 @@ namespace ControlePontos
 {
     internal static class App
     {
-        //TODO: Marcar esse campo como privado.
-        public static Container container;
+        private static Container container;
 
         [STAThread]
         private static void Main()
@@ -24,15 +23,14 @@ namespace ControlePontos
         private static void Bootstrap()
         {
             container = new Container();
-
-            container.Register<Dashboard>();
-            container.Register<Forms.Configuracao>();
-
+           
             container.RegisterSingleton<IArmazenamentoServico, ArmazenamentoServico>();
             container.RegisterSingleton<IConfiguracaoServico, ConfiguracaoServico>();
+            container.RegisterSingleton<IFormOpener, FormOpener>();
 
-            //TODO: Descomentar esse método quando a issue for resolvida: https://github.com/simpleinjector/SimpleInjector/issues/286
-            //container.Verify();
+            container.RegisterForm(typeof(Dashboard), typeof(Configuracao));
+
+            container.Verify();
         }
     }
 }

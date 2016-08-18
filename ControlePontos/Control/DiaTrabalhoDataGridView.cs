@@ -1,5 +1,4 @@
-﻿using ControlePontos.Configuracao;
-using ControlePontos.Model;
+﻿using ControlePontos.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -50,7 +49,7 @@ namespace ControlePontos.Control
 
             this.Columns.Add(Nomes.DATA, "Data");
             this.Columns.Add(Nomes.DIA_SEMANA, "Dia da Semana");
-            this.Columns.Add(new DataGridViewCheckBoxColumn() { Name = Nomes.FALTA, HeaderText = "Falta" });
+            this.Columns.Add(new DataGridViewCheckBoxColumn { Name = Nomes.FALTA, HeaderText = "Falta" });
             this.Columns.Add(Nomes.ENTRADA, "Entrada");
             this.Columns.Add(Nomes.ALMOCO_SAIDA, "Almoço - Saída");
             this.Columns.Add(Nomes.ALMOCO_RETORNO, "Almoço - Retorno");
@@ -144,7 +143,7 @@ namespace ControlePontos.Control
                     this.UpdateTimeSpan(e.ColumnIndex, e.RowIndex, valor, acao);
             }
 
-        evento:
+            evento:
             base.OnCellValueChanged(e);
         }
 
