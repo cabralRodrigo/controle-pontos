@@ -1,4 +1,7 @@
-﻿18/08/2016 1.5.0:
+﻿18/08/2016 1.5.1:
+	* Transferido a responsábilidade de criar e manipular os meses de trabalho do dashboard para um serviço apropriado.
+
+18/08/2016 1.5.0:
 	* Adicionado atalhos na tela de configuração: Esc para sair e Enter para salvar e fechar.
 
 18/08/2016 1.4.1:

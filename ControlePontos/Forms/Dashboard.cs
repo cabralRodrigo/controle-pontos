@@ -1,7 +1,6 @@
 ﻿using ControlePontos.Dialog;
 using ControlePontos.Exportacao;
 using ControlePontos.Model;
-using ControlePontos.Report;
 using ControlePontos.Servicos;
 using Newtonsoft.Json;
 using System;
@@ -20,11 +19,13 @@ namespace ControlePontos.Forms
     {
         private readonly IFormOpener formOpener;
         private readonly IConfiguracaoServico configuracaoServico;
+        private readonly IMesTrabalhoServico mesTrabalhoServico;
+        private readonly IRelatorioServico relatorioServico;
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico)
         {
             this.InitializeComponent();
 
@@ -32,6 +33,8 @@ namespace ControlePontos.Forms
             this.lblVersao.Text = Application.ProductVersion;
             this.configuracaoServico = configuracaoServico;
             this.formOpener = formOpener;
+            this.mesTrabalhoServico = mesTrabalhoServico;
+            this.relatorioServico = relatorioServico;
 
             this.gridDias.CellValueChanged += (sender, e) =>
             {
@@ -55,24 +58,10 @@ namespace ControlePontos.Forms
             this.ano = ano;
             this.mes = mes;
 
-            this.mesTrabalho = Dias(this.ano, this.mes);
+            this.mesTrabalho = this.mesTrabalhoServico.ObterMesTrabalho(this.ano, this.mes);
             this.gridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
-        }
-
-        private static string BuildFileName(int ano, int mes)
-        {
-            var path = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-            var file = string.Format("horarios-{0}-{1}.json", ano, mes);
-
-            return Path.Combine(path, file);
-        }
-
-        private static MesTrabalho Dias(int ano, int mes)
-        {
-            var file = BuildFileName(ano, mes);
-            return File.Exists(file) ? JsonConvert.DeserializeObject<MesTrabalho>(File.ReadAllText(file)) : MesTrabalho.Gerar(ano, mes);
         }
 
         private void AtualizarTela()
@@ -98,18 +87,12 @@ namespace ControlePontos.Forms
 
         private void Salvar()
         {
-            File.WriteAllText(BuildFileName(this.ano, this.mes), JsonConvert.SerializeObject(this.mesTrabalho, Formatting.Indented));
+            this.mesTrabalhoServico.SalvarMesTrabalho(this.ano, this.mes, this.mesTrabalho);
         }
 
         private void CarregarMenuRelatorios()
         {
-            var tipo = typeof(IReport);
-
-            var relatorios = (from type in AppDomain.CurrentDomain.GetAssemblies().Select(w => w.GetTypes()).SelectMany(s => s).Distinct().ToList()
-                              where tipo.IsAssignableFrom(type) && tipo != type
-                              select Activator.CreateInstance(type) as IReport).ToList();
-
-            foreach (var relatorio in relatorios)
+            foreach (var relatorio in this.relatorioServico.ListarRelatorios().OrderBy(w => w.Name))
             {
                 var item = new ToolStripMenuItem { Size = new Size(185, 22), Text = relatorio.Name };
                 item.Click += (sender2, e2) =>

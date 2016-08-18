@@ -123,6 +123,8 @@
     <Compile Include="Report\Reports\Template\Html\Section\TextHtmlSection.cs" />
     <Compile Include="Servicos\ArmazenamentoServico.cs" />
     <Compile Include="Servicos\ConfiguracaoServico.cs" />
+    <Compile Include="Servicos\MesTrabalhoServico.cs" />
+    <Compile Include="Servicos\RelatorioServico.cs" />
     <Compile Include="_\DataFile.cs" />
     <Compile Include="_\DataFileScanner.cs" />
     <Compile Include="_\ExportacaoResultado.cs" />
