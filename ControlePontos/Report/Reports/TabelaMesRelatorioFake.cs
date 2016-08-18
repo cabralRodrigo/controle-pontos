@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Servicos;
 using System;
 using System.Linq;
 
@@ -6,6 +7,7 @@ namespace ControlePontos.Report.Reports
 {
     internal class TabelaMesRelatorioFake : TabelaMesRelatorio
     {
+
         public override string Name
         {
             get
@@ -14,12 +16,19 @@ namespace ControlePontos.Report.Reports
             }
         }
 
+        private readonly IMesTrabalhoServico mesTrabalhoServico;
+
+        public TabelaMesRelatorioFake(IMesTrabalhoServico mesTrabalhoServico)
+        {
+            this.mesTrabalhoServico = mesTrabalhoServico;
+        }
+
         public override IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var rand = new Random();
             var faltas = mesTrabalho.Dias.Where(w => w.Falta).Select(s => s.Data);
 
-            var dias = MesTrabalho.Gerar(ano, mes).Dias.Select(w => new DiaTrabalho
+            var dias = this.mesTrabalhoServico.GerarMesTrabalho(ano, mes).Dias.Select(w => new DiaTrabalho
             {
                 Data = w.Data,
                 ValorAlmoco = w.ValorAlmoco,

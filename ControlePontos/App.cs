@@ -1,4 +1,6 @@
 ﻿using ControlePontos.Forms;
+using ControlePontos.Report;
+using ControlePontos.Report.Reports;
 using ControlePontos.Servicos;
 using SimpleInjector;
 using System;
@@ -23,10 +25,14 @@ namespace ControlePontos
         private static void Bootstrap()
         {
             container = new Container();
-           
+
+            container.RegisterSingleton<IMesTrabalhoServico, MesTrabalhoServico>();
             container.RegisterSingleton<IArmazenamentoServico, ArmazenamentoServico>();
             container.RegisterSingleton<IConfiguracaoServico, ConfiguracaoServico>();
             container.RegisterSingleton<IFormOpener, FormOpener>();
+
+            container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
+            container.RegisterCollection<IReport>(new[] { typeof(EvolucaoEntradaSaidaRelatorio), typeof(TabelaMesRelatorio), typeof(TabelaMesRelatorioFake), typeof(UsoSodexoRelatorio) });
 
             container.RegisterForm(typeof(Dashboard), typeof(Configuracao));
 
