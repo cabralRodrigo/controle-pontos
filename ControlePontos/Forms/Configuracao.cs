@@ -1,6 +1,8 @@
-﻿using ControlePontos.Configuracao;
+﻿using ControlePontos.Misc;
+using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -20,6 +22,7 @@ namespace ControlePontos.Forms
         {
             var config = this.configuracaoServico.ObterConfiguracao();
 
+            this.Geral_Load(config);
             this.Backup_Load(config);
             this.Feriados_Load(config);
             this.Ferias_Load(config);
@@ -28,6 +31,13 @@ namespace ControlePontos.Forms
         private void ButtonSalvar_Click(object sender, EventArgs e)
         {
             var config = new ConfigApp();
+
+            var erro = this.Geral_Save(config);
+            if (!string.IsNullOrEmpty(erro))
+            {
+                MessageBox.Show(erro, "Geral", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             this.Backup_Save(config);
             this.Feriados_Save(config);
@@ -220,6 +230,56 @@ namespace ControlePontos.Forms
         }
 
         #endregion
+
+        #endregion
+
+        #region Geral
+
+        private void Geral_Load(ConfigApp config)
+        {
+            var ptbr = CultureInfo.GetCultureInfo("pt-br");
+            var dias = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Select(w => new
+            {
+                Item = w,
+                Valor = ptbr.DateTimeFormat.GetDayName(w).ToTitleCase()
+            });
+
+            foreach (var diaSemana in dias.OrderBy(w => w.Item))
+                this.Geral_DiasTrabalho_ListaCheckbox.Items.Add(new CheckboxListItem<DayOfWeek>(diaSemana.Item, diaSemana.Valor), config.DiasTrabalho.Contains(diaSemana.Item));
+
+            this.Geral_Horario_Inicio.ValidatingType = this.Geral_Horario_Final.ValidatingType = typeof(TimeSpan);
+            this.Geral_Horario_Inicio.Text = config.HoraInicio.ToString(@"hh\:mm");
+            this.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
+        }
+
+        private string Geral_Save(ConfigApp config)
+        {
+            var diasTrabalho = this.Geral_DiasTrabalho_ListaCheckbox.CheckedItems.OfType<CheckboxListItem<DayOfWeek>>().ToArray();
+            config.DiasTrabalho = diasTrabalho.Select(w => w.Value).ToArray();
+
+            var inicioObj = this.Geral_Horario_Inicio.ValidateText();
+            var fimObj = this.Geral_Horario_Final.ValidateText();
+
+            if (inicioObj == null || fimObj == null)
+                return "Horário de trabalho inválido.";
+
+            var inicio = (TimeSpan)inicioObj;
+            var fim = (TimeSpan)fimObj;
+
+            if (inicio < new TimeSpan(0, 0, 0))
+                return "Horário de inicio de trabalho inválido.";
+
+            if (fim > new TimeSpan(23, 59, 59))
+                return "Horário de fim de trabalho inválido";
+
+            if (fim <= inicio)
+                return "Fim do horário de trabalho deve ser maior ao horário de inicio.";
+
+            config.HoraInicio = inicio;
+            config.HoraFim = fim;
+
+            return null;
+        }
 
         #endregion
     }

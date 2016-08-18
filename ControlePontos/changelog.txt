@@ -1,4 +1,7 @@
-﻿17/08/2016 1.3.0:
+﻿18/08/2016 1.4.0:
+	* Adicionado tela de configuração de dias de trabalho e horário da jornada de trabalho.
+
+17/08/2016 1.3.0:
 	* Adicionado tela de configuração de férias.
 
 17/08/2016 1.2.5:

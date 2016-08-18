@@ -31,6 +31,13 @@
             this.Configuracao_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Configuracao_ButtonSalvar = new System.Windows.Forms.Button();
             this.Configuracao_TabControl = new System.Windows.Forms.TabControl();
+            this.Geral_Tab = new System.Windows.Forms.TabPage();
+            this.Geral_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Geral_Horario_Group = new System.Windows.Forms.GroupBox();
+            this.Geral_DiasTrabalho_Group = new System.Windows.Forms.GroupBox();
+            this.Geral_DiasTrabalho_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Geral_DiasTrabalho_Label = new System.Windows.Forms.Label();
+            this.Geral_DiasTrabalho_ListaCheckbox = new System.Windows.Forms.CheckedListBox();
             this.Feriados_Tab = new System.Windows.Forms.TabPage();
             this.Feriados_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Feriados_Calendar = new System.Windows.Forms.MonthCalendar();
@@ -51,14 +58,24 @@
             this.Backup_Label = new System.Windows.Forms.Label();
             this.Backup_ButtonAdd = new System.Windows.Forms.Button();
             this.Backup_ButtonRemove = new System.Windows.Forms.Button();
+            this.Geral_Horario_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Geral_Horario_Final = new System.Windows.Forms.MaskedTextBox();
+            this.Geral_Horario_Inicio = new System.Windows.Forms.MaskedTextBox();
+            this.Geral_Horario_Label = new System.Windows.Forms.Label();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
+            this.Geral_Tab.SuspendLayout();
+            this.Geral_Layout.SuspendLayout();
+            this.Geral_Horario_Group.SuspendLayout();
+            this.Geral_DiasTrabalho_Group.SuspendLayout();
+            this.Geral_DiasTrabalho_Layout.SuspendLayout();
             this.Feriados_Tab.SuspendLayout();
             this.Feriados_Layout.SuspendLayout();
             this.Ferias_Tab.SuspendLayout();
             this.Ferias_Layout.SuspendLayout();
             this.Backup_Tab.SuspendLayout();
             this.Backup_Layout.SuspendLayout();
+            this.Geral_Horario_Layout.SuspendLayout();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -73,13 +90,13 @@
             this.Configuracao_Layout.RowCount = 2;
             this.Configuracao_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Configuracao_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.Configuracao_Layout.Size = new System.Drawing.Size(541, 358);
+            this.Configuracao_Layout.Size = new System.Drawing.Size(541, 299);
             this.Configuracao_Layout.TabIndex = 0;
             // 
             // Configuracao_ButtonSalvar
             // 
             this.Configuracao_ButtonSalvar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.Configuracao_ButtonSalvar.Location = new System.Drawing.Point(463, 331);
+            this.Configuracao_ButtonSalvar.Location = new System.Drawing.Point(463, 272);
             this.Configuracao_ButtonSalvar.Name = "Configuracao_ButtonSalvar";
             this.Configuracao_ButtonSalvar.Size = new System.Drawing.Size(75, 23);
             this.Configuracao_ButtonSalvar.TabIndex = 0;
@@ -89,6 +106,7 @@
             // 
             // Configuracao_TabControl
             // 
+            this.Configuracao_TabControl.Controls.Add(this.Geral_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Feriados_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Ferias_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Backup_Tab);
@@ -96,8 +114,93 @@
             this.Configuracao_TabControl.Location = new System.Drawing.Point(3, 3);
             this.Configuracao_TabControl.Name = "Configuracao_TabControl";
             this.Configuracao_TabControl.SelectedIndex = 0;
-            this.Configuracao_TabControl.Size = new System.Drawing.Size(535, 322);
+            this.Configuracao_TabControl.Size = new System.Drawing.Size(535, 263);
             this.Configuracao_TabControl.TabIndex = 1;
+            // 
+            // Geral_Tab
+            // 
+            this.Geral_Tab.Controls.Add(this.Geral_Layout);
+            this.Geral_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Geral_Tab.Name = "Geral_Tab";
+            this.Geral_Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.Geral_Tab.Size = new System.Drawing.Size(527, 237);
+            this.Geral_Tab.TabIndex = 3;
+            this.Geral_Tab.Text = "Geral";
+            this.Geral_Tab.UseVisualStyleBackColor = true;
+            // 
+            // Geral_Layout
+            // 
+            this.Geral_Layout.ColumnCount = 1;
+            this.Geral_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Geral_Layout.Controls.Add(this.Geral_Horario_Group, 0, 1);
+            this.Geral_Layout.Controls.Add(this.Geral_DiasTrabalho_Group, 0, 0);
+            this.Geral_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_Layout.Location = new System.Drawing.Point(3, 3);
+            this.Geral_Layout.Name = "Geral_Layout";
+            this.Geral_Layout.RowCount = 2;
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.Geral_Layout.Size = new System.Drawing.Size(521, 231);
+            this.Geral_Layout.TabIndex = 0;
+            // 
+            // Geral_GroupHorario
+            // 
+            this.Geral_Horario_Group.Controls.Add(this.Geral_Horario_Layout);
+            this.Geral_Horario_Group.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 118);
+            this.Geral_Horario_Group.Name = "Geral_GroupHorario";
+            this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 110);
+            this.Geral_Horario_Group.TabIndex = 1;
+            this.Geral_Horario_Group.TabStop = false;
+            this.Geral_Horario_Group.Text = "Horário de Trabalho";
+            // 
+            // Geral_GroupDiasTrabalho
+            // 
+            this.Geral_DiasTrabalho_Group.Controls.Add(this.Geral_DiasTrabalho_Layout);
+            this.Geral_DiasTrabalho_Group.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_DiasTrabalho_Group.Location = new System.Drawing.Point(3, 3);
+            this.Geral_DiasTrabalho_Group.Name = "Geral_GroupDiasTrabalho";
+            this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 109);
+            this.Geral_DiasTrabalho_Group.TabIndex = 0;
+            this.Geral_DiasTrabalho_Group.TabStop = false;
+            this.Geral_DiasTrabalho_Group.Text = "Dias de Trabalho";
+            // 
+            // Geral_DiasTrabalho_Layout
+            // 
+            this.Geral_DiasTrabalho_Layout.ColumnCount = 1;
+            this.Geral_DiasTrabalho_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_DiasTrabalho_Layout.Controls.Add(this.Geral_DiasTrabalho_Label, 0, 0);
+            this.Geral_DiasTrabalho_Layout.Controls.Add(this.Geral_DiasTrabalho_ListaCheckbox, 0, 1);
+            this.Geral_DiasTrabalho_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_DiasTrabalho_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Geral_DiasTrabalho_Layout.Name = "Geral_DiasTrabalho_Layout";
+            this.Geral_DiasTrabalho_Layout.RowCount = 2;
+            this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Geral_DiasTrabalho_Layout.Size = new System.Drawing.Size(509, 90);
+            this.Geral_DiasTrabalho_Layout.TabIndex = 0;
+            // 
+            // Geral_DiasTrabalho_Label
+            // 
+            this.Geral_DiasTrabalho_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Geral_DiasTrabalho_Label.AutoSize = true;
+            this.Geral_DiasTrabalho_Label.Location = new System.Drawing.Point(3, 4);
+            this.Geral_DiasTrabalho_Label.Name = "Geral_DiasTrabalho_Label";
+            this.Geral_DiasTrabalho_Label.Size = new System.Drawing.Size(297, 13);
+            this.Geral_DiasTrabalho_Label.TabIndex = 0;
+            this.Geral_DiasTrabalho_Label.Text = "Selecione abaixo todos os dias da semana que você trabalha";
+            // 
+            // Geral_DiasTrabalho_ListaCheckbox
+            // 
+            this.Geral_DiasTrabalho_ListaCheckbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_DiasTrabalho_ListaCheckbox.FormattingEnabled = true;
+            this.Geral_DiasTrabalho_ListaCheckbox.Location = new System.Drawing.Point(3, 20);
+            this.Geral_DiasTrabalho_ListaCheckbox.MultiColumn = true;
+            this.Geral_DiasTrabalho_ListaCheckbox.Name = "Geral_DiasTrabalho_ListaCheckbox";
+            this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 67);
+            this.Geral_DiasTrabalho_ListaCheckbox.TabIndex = 1;
             // 
             // Feriados_Tab
             // 
@@ -105,7 +208,7 @@
             this.Feriados_Tab.Location = new System.Drawing.Point(4, 22);
             this.Feriados_Tab.Name = "Feriados_Tab";
             this.Feriados_Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.Feriados_Tab.Size = new System.Drawing.Size(527, 296);
+            this.Feriados_Tab.Size = new System.Drawing.Size(527, 237);
             this.Feriados_Tab.TabIndex = 1;
             this.Feriados_Tab.Text = "Feriados";
             this.Feriados_Tab.UseVisualStyleBackColor = true;
@@ -128,7 +231,7 @@
             this.Feriados_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Feriados_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 174F));
             this.Feriados_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Feriados_Layout.Size = new System.Drawing.Size(521, 290);
+            this.Feriados_Layout.Size = new System.Drawing.Size(521, 231);
             this.Feriados_Layout.TabIndex = 0;
             // 
             // Feriados_Calendar
@@ -160,7 +263,7 @@
             this.Feriados_ListBoxFeriados.Location = new System.Drawing.Point(3, 23);
             this.Feriados_ListBoxFeriados.Name = "Feriados_ListBoxFeriados";
             this.Feriados_Layout.SetRowSpan(this.Feriados_ListBoxFeriados, 2);
-            this.Feriados_ListBoxFeriados.Size = new System.Drawing.Size(275, 264);
+            this.Feriados_ListBoxFeriados.Size = new System.Drawing.Size(275, 205);
             this.Feriados_ListBoxFeriados.TabIndex = 4;
             this.Feriados_ListBoxFeriados.SelectedIndexChanged += new System.EventHandler(this.Feriados_ListBoxFeriados_SelectedIndexChanged);
             // 
@@ -343,11 +446,57 @@
             this.Backup_ButtonRemove.UseVisualStyleBackColor = true;
             this.Backup_ButtonRemove.Click += new System.EventHandler(this.Backup_ButtonRemove_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.Geral_Horario_Layout.ColumnCount = 2;
+            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.Geral_Horario_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Inicio, 0, 1);
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Final, 1, 1);
+            this.Geral_Horario_Layout.Controls.Add(this.Geral_Horario_Label, 0, 0);
+            this.Geral_Horario_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_Horario_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Geral_Horario_Layout.Name = "tableLayoutPanel1";
+            this.Geral_Horario_Layout.RowCount = 2;
+            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 91);
+            this.Geral_Horario_Layout.TabIndex = 0;
+            // 
+            // Geral_Horario_Final
+            // 
+            this.Geral_Horario_Final.Location = new System.Drawing.Point(50, 20);
+            this.Geral_Horario_Final.Mask = "00:00";
+            this.Geral_Horario_Final.Name = "Geral_Horario_Final";
+            this.Geral_Horario_Final.Size = new System.Drawing.Size(40, 20);
+            this.Geral_Horario_Final.TabIndex = 3;
+            this.Geral_Horario_Final.ValidatingType = typeof(System.DateTime);
+            // 
+            // Geral_Horario_Inicio
+            // 
+            this.Geral_Horario_Inicio.Location = new System.Drawing.Point(3, 20);
+            this.Geral_Horario_Inicio.Mask = "00:00";
+            this.Geral_Horario_Inicio.Name = "Geral_Horario_Inicio";
+            this.Geral_Horario_Inicio.Size = new System.Drawing.Size(40, 20);
+            this.Geral_Horario_Inicio.TabIndex = 2;
+            this.Geral_Horario_Inicio.ValidatingType = typeof(System.DateTime);
+            // 
+            // Geral_Horario_Label
+            // 
+            this.Geral_Horario_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Geral_Horario_Label.AutoSize = true;
+            this.Geral_Horario_Layout.SetColumnSpan(this.Geral_Horario_Label, 2);
+            this.Geral_Horario_Label.Location = new System.Drawing.Point(3, 4);
+            this.Geral_Horario_Label.Name = "Geral_Horario_Label";
+            this.Geral_Horario_Label.Size = new System.Drawing.Size(214, 13);
+            this.Geral_Horario_Label.TabIndex = 4;
+            this.Geral_Horario_Label.Text = "Informe a início e fim da jornada de trabalho";
+            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 358);
+            this.ClientSize = new System.Drawing.Size(541, 299);
             this.Controls.Add(this.Configuracao_Layout);
             this.Name = "Configuracao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -355,6 +504,12 @@
             this.Load += new System.EventHandler(this.Configuracao_Load);
             this.Configuracao_Layout.ResumeLayout(false);
             this.Configuracao_TabControl.ResumeLayout(false);
+            this.Geral_Tab.ResumeLayout(false);
+            this.Geral_Layout.ResumeLayout(false);
+            this.Geral_Horario_Group.ResumeLayout(false);
+            this.Geral_DiasTrabalho_Group.ResumeLayout(false);
+            this.Geral_DiasTrabalho_Layout.ResumeLayout(false);
+            this.Geral_DiasTrabalho_Layout.PerformLayout();
             this.Feriados_Tab.ResumeLayout(false);
             this.Feriados_Layout.ResumeLayout(false);
             this.Feriados_Layout.PerformLayout();
@@ -364,6 +519,8 @@
             this.Backup_Tab.ResumeLayout(false);
             this.Backup_Layout.ResumeLayout(false);
             this.Backup_Layout.PerformLayout();
+            this.Geral_Horario_Layout.ResumeLayout(false);
+            this.Geral_Horario_Layout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -396,5 +553,19 @@
         private System.Windows.Forms.MonthCalendar Ferias_Calendar;
         private System.Windows.Forms.TableLayoutPanel Ferias_Layout;
         private System.Windows.Forms.TabPage Ferias_Tab;
+
+        private System.Windows.Forms.TableLayoutPanel Geral_Layout;
+        private System.Windows.Forms.TabPage Geral_Tab;
+
+        private System.Windows.Forms.CheckedListBox Geral_DiasTrabalho_ListaCheckbox;
+        private System.Windows.Forms.Label Geral_DiasTrabalho_Label;
+        private System.Windows.Forms.TableLayoutPanel Geral_DiasTrabalho_Layout;
+        private System.Windows.Forms.GroupBox Geral_DiasTrabalho_Group;
+
+        private System.Windows.Forms.GroupBox Geral_Horario_Group;
+        private System.Windows.Forms.Label Geral_Horario_Label;
+        private System.Windows.Forms.MaskedTextBox Geral_Horario_Final;
+        private System.Windows.Forms.MaskedTextBox Geral_Horario_Inicio;
+        private System.Windows.Forms.TableLayoutPanel Geral_Horario_Layout;
     }
 }
