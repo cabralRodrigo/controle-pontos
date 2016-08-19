@@ -4,6 +4,7 @@ using ControlePontos.Report.Reports;
 using ControlePontos.Servicos;
 using SimpleInjector;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ControlePontos
@@ -26,10 +27,15 @@ namespace ControlePontos
         {
             container = new Container();
 
-            container.RegisterSingleton<IMesTrabalhoServico, MesTrabalhoServico>();
             container.RegisterSingleton<IArmazenamentoServico, ArmazenamentoServico>();
-            container.RegisterSingleton<IConfiguracaoServico, ConfiguracaoServico>();
             container.RegisterSingleton<IFormOpener, FormOpener>();
+            container.RegisterSingleton<IExportacaoServico, ExportacaoServico>();
+            container.RegisterSingleton<IBackupServico, BackupServico>();
+
+            container.RegisterSingletonCollection<IExportar>(new Dictionary<Type, Type> {
+                {typeof(IMesTrabalhoServico), typeof(MesTrabalhoServico)},
+                {typeof(IConfiguracaoServico), typeof(ConfiguracaoServico)}
+            });
 
             container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
             container.RegisterCollection<IReport>(new[] { typeof(EvolucaoEntradaSaidaRelatorio), typeof(TabelaMesRelatorio), typeof(TabelaMesRelatorioFake), typeof(UsoSodexoRelatorio) });

@@ -1,10 +1,8 @@
 ﻿using ControlePontos.Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ControlePontos.Servicos
 {
@@ -15,8 +13,9 @@ namespace ControlePontos.Servicos
         MesTrabalho GerarMesTrabalho(int ano, int mes);
     }
 
-    internal class MesTrabalhoServico : IMesTrabalhoServico
+    internal class MesTrabalhoServico : IMesTrabalhoServico, IExportar
     {
+        private static readonly Regex RegexMesTrabalho = new Regex(@"^horarios-[0-9]{4}-[0-9]{1,2}\.\w+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private readonly IArmazenamentoServico armazenamentoServico;
 
         public MesTrabalhoServico(IArmazenamentoServico armazenamentoServico)
@@ -57,6 +56,11 @@ namespace ControlePontos.Servicos
         private string MontarNomeArquivo(int ano, int mes)
         {
             return string.Format("horarios-{0}-{1}", ano, mes);
+        }
+
+        public Regex RegexArquivos()
+        {
+            return RegexMesTrabalho;
         }
     }
 }

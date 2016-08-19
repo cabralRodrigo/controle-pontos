@@ -4,10 +4,8 @@ using ControlePontos.Model;
 using ControlePontos.Servicos;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,11 +19,14 @@ namespace ControlePontos.Forms
         private readonly IConfiguracaoServico configuracaoServico;
         private readonly IMesTrabalhoServico mesTrabalhoServico;
         private readonly IRelatorioServico relatorioServico;
+        private readonly IExportacaoServico exportacaoServico;
+        private readonly IBackupServico backupServico;
+
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico)
         {
             this.InitializeComponent();
 
@@ -35,6 +36,8 @@ namespace ControlePontos.Forms
             this.formOpener = formOpener;
             this.mesTrabalhoServico = mesTrabalhoServico;
             this.relatorioServico = relatorioServico;
+            this.exportacaoServico = exportacaoServico;
+            this.backupServico = backupServico;
 
             this.gridDias.CellValueChanged += (sender, e) =>
             {
@@ -105,78 +108,24 @@ namespace ControlePontos.Forms
             }
         }
 
-        private bool RealizarBackupDiario(bool forcar = false)
+        private void RealizarBackupDiario(bool forcarBackup = false)
         {
-            var resultados = new List<bool>();
-
-            foreach (var diretorio in this.config.Backup.Diretorios)
-                resultados.Add(Backup(diretorio, forcar));
-
-            return resultados.Where(w => w).Any();
-        }
-
-        private bool Backup(string diretorio, bool forcarBackup)
-        {
-            try
+            if (forcarBackup || !this.backupServico.BackupAgendadoRealizado())
             {
-                if (!Directory.Exists(diretorio))
-                    Directory.CreateDirectory(diretorio);
+                var res = this.backupServico.RealizarBackup();
 
-                var jsonbackup = Path.Combine(diretorio, "backup.json");
-
-                IEnumerable<DateTime> datas;
-                using (var file = new StreamReader(File.Open(jsonbackup, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)))
+                if (res.Tipo == TipoMensagem.Aviso && res.Valor == BackupResultado.DriveNaoDisponivel)
                 {
-                    var json = file.ReadToEnd();
-
-                    if (string.IsNullOrEmpty(json))
-                        datas = new List<DateTime>();
+                    if (MessageBox.Show("O seguinte drive não esta disponível no momento: " + res.ValorMensagem + "\nDeseja tentar novamente?", "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        this.RealizarBackupDiario(true);
+                }
+                else if (res.Tipo == TipoMensagem.Erro)
+                {
+                    if (res.Excecao != null)
+                        MessageBox.Show("Erro ao realizar backup: " + res.Excecao.ToString(), "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
-                        datas = JsonConvert.DeserializeObject<DateTime[]>(json);
+                        MessageBox.Show("Erro desconhecido ao realizar o backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                if (forcarBackup || !datas.Any(w => w.Date == DateTime.Now.Date))
-                {
-                    var resultado = new ExportacaoZip().RealizarBackup(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, Path.Combine(diretorio, DateTime.Now.ToString("yyyy.MM.dd hh.mm.ss") + ".zip"));
-
-                    if (resultado.QuantidadeArquivos == 0)
-                    {
-                        MessageBox.Show("Não foi possivel encontrar nenhum arquivo para fazer o backup diario. Look into that please...");
-                        return false;
-                    }
-
-                    var novasDatas = datas.ToList();
-                    novasDatas.Add(DateTime.Now);
-
-                    File.WriteAllText(jsonbackup, JsonConvert.SerializeObject(novasDatas));
-                }
-
-                return true;
-            }
-            catch (DirectoryNotFoundException)
-            {
-                var drive = Path.GetPathRoot(diretorio);
-
-                if (!new DriveInfo(drive).IsReady)
-                {
-                    var msg = "Ocorre um erro no processo de backup.\nO seguinte drive não esta diponível: " + drive + "\nDeseja tentar novamente?";
-
-                    if (MessageBox.Show(msg, "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        return Backup(diretorio, forcarBackup);
-                    else
-                        return false;
-                }
-                else
-                {
-                    MessageBox.Show("Ocorreu um erro desconhecido no processo de backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu um erro no processo de backup.");
-                MessageBox.Show(ex.ToString());
-                return false;
             }
         }
 
@@ -261,35 +210,37 @@ namespace ControlePontos.Forms
         private void menu_dados_exportar_zip_Click(object sender, EventArgs e)
         {
             this.Salvar();
+
             using (var dialog = new SaveFileDialog())
             {
                 dialog.AddExtension = true;
                 dialog.DefaultExt = ".zip";
                 dialog.FileName = string.Format("controle-pontos-backup {0:yyyy.MM.dd} {0:hh.mm.ss}.zip", DateTime.Now);
                 dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                dialog.Filter = "Zip File (*.zip)|*.zip";
+                dialog.Filter = "Arquivo Zip (*.zip)|*.zip";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var resultado = new ExportacaoZip().RealizarBackup(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, dialog.FileName);
+                    var arquivo = new FileInfo(dialog.FileName);
+                    var resultado = this.exportacaoServico.ExportarDados(arquivo.DirectoryName, arquivo.Name);
 
-                    bool abrir;
-                    if (resultado.QuantidadeArquivos == 0)
-                        abrir = MessageBox.Show("Exportação foi executada com sucesso porém não foi possivel localizar as arquivos com os dados atuais.\nDeseja abrir a pasta onde foi criado o backup?", "Exportação", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes;
-                    else
+                    if (resultado.Tipo == TipoMensagem.Sucesso)
                     {
-                        var inicio = new DateTime(resultado.AnoInicio, resultado.MesInicio, 1);
-                        var fim = new DateTime(resultado.AnoFim, resultado.MesFim, 1);
-
-                        var mesInicio = CultureInfo.CurrentUICulture.DateTimeFormat.GetMonthName(inicio.Month).ToTitleCase();
-                        var mesFim = CultureInfo.CurrentUICulture.DateTimeFormat.GetMonthName(fim.Month).ToTitleCase();
-
-                        var mensagem = "Exportação foi executada com sucesso com dados entre {0} de {1:yyyy} a {2} de {3:yyyy}.\nDeseja abrir a pasta onde foi criado o arquivo de exportação ?".FormatWith(mesInicio, inicio, mesFim, fim);
-                        abrir = MessageBox.Show(mensagem, "Exportação", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes;
+                        if (MessageBox.Show("Exportação realizada com sucesso.\nDeseja abrir a pasta onde o arquivo foi criado?", "Exportação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            Process.Start("explorer", "/e, /select, \"{0}\"".FormatWith(dialog.FileName));
                     }
-
-                    if (abrir)
-                        Process.Start("explorer", "/e, /select, \"{0}\"".FormatWith(resultado.ArquivoZip));
+                    else if (resultado.Tipo == TipoMensagem.Aviso)
+                    {
+                        switch (resultado.Valor)
+                        {
+                            case ExportacaoResulado.NenhumDadoEncontrado:
+                                MessageBox.Show("Nenhum dado foi encontrado para realizar a exportação.", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                break;
+                            case ExportacaoResulado.DriveNaoDisponivel:
+                                MessageBox.Show("Não foi possível acessar o drive onde o arquivo de exportação seria gravado.", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -342,11 +293,32 @@ namespace ControlePontos.Forms
 
         private void menu_dados_realizarBackup_Click(object sender, EventArgs e)
         {
-            var resultado = this.RealizarBackupDiario(true);
-            if (resultado)
-                MessageBox.Show("Backup realizado com sucesso.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var res = this.backupServico.RealizarBackup();
+            if (res.Tipo == TipoMensagem.Sucesso)
+                MessageBox.Show("Backup realizado com sucesso!", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (res.Tipo == TipoMensagem.Aviso)
+            {
+                switch (res.Valor)
+                {
+                    case BackupResultado.NenhumDadoEncontrado:
+                        MessageBox.Show("Não foi encontrado nenhum dado para realizar o backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    case BackupResultado.NenhumDiretorioParaBackup:
+                        MessageBox.Show("Não há nenhum diretório configurado no processo de backup.\nEntre no menu de configurações, na aba de Backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        break;
+                    case BackupResultado.DriveNaoDisponivel:
+                        if (MessageBox.Show("O seguinte drive não esta disponível no momento: " + res.ValorMensagem + "\nDeseja tentar novamente?", "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            this.menu_dados_realizarBackup_Click(sender, e);
+                        break;
+                }
+            }
             else
-                MessageBox.Show("Backup não foi realizado com sucesso.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                if (res.Excecao != null)
+                    MessageBox.Show("Erro ao realizar backup: " + res.Excecao.ToString(), "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("Erro desconhecido ao realizar o backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

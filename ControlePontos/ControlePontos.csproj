@@ -88,6 +88,7 @@
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="FormOpener.cs" />
+    <Compile Include="Model\Resultado.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -122,13 +123,13 @@
     <Compile Include="Report\Reports\Template\Html\Section\IHtmlSection.cs" />
     <Compile Include="Report\Reports\Template\Html\Section\TextHtmlSection.cs" />
     <Compile Include="Servicos\ArmazenamentoServico.cs" />
+    <Compile Include="Servicos\BackupServico.cs" />
     <Compile Include="Servicos\ConfiguracaoServico.cs" />
+    <Compile Include="Servicos\ExportacaoServico.cs" />
     <Compile Include="Servicos\MesTrabalhoServico.cs" />
     <Compile Include="Servicos\RelatorioServico.cs" />
     <Compile Include="_\DataFile.cs" />
     <Compile Include="_\DataFileScanner.cs" />
-    <Compile Include="_\ExportacaoResultado.cs" />
-    <Compile Include="_\ExportacaoZip.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Forms\Configuracao.cs">
       <SubType>Form</SubType>
