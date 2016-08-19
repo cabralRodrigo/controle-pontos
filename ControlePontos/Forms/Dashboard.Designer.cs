@@ -2,6 +2,7 @@
 {
     internal partial class Dashboard
     {
+        
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -29,6 +30,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_Relatorio = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +74,6 @@
             this.TextBoxSodexo = new System.Windows.Forms.TextBox();
             this.ButtonMesAno = new System.Windows.Forms.Button();
             this.Layout = new System.Windows.Forms.TableLayoutPanel();
-            this.GridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
             this.LayoutFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelSeparador10 = new System.Windows.Forms.Label();
             this.LabelSeparador07 = new System.Windows.Forms.Label();
@@ -80,11 +86,24 @@
             this.LabelSeparador00 = new System.Windows.Forms.Label();
             this.LabelSeparador09 = new System.Windows.Forms.Label();
             this.LabelSeparador08 = new System.Windows.Forms.Label();
+            this.GridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Menu.SuspendLayout();
             this.Status.SuspendLayout();
             this.Layout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridDias)).BeginInit();
             this.LayoutFlow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridDias)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -412,41 +431,24 @@
             this.ButtonMesAno.UseVisualStyleBackColor = true;
             this.ButtonMesAno.Click += new System.EventHandler(this.ButtonMesAno_Click);
             // 
-            // LayoutFlow
+            // Layout
             // 
             this.Layout.ColumnCount = 2;
             this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
-            this.Layout.Controls.Add(this.GridDias, 0, 0);
             this.Layout.Controls.Add(this.ButtonMesAno, 1, 1);
             this.Layout.Controls.Add(this.LayoutFlow, 1, 0);
+            this.Layout.Controls.Add(this.GridDias, 0, 0);
             this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Layout.Location = new System.Drawing.Point(0, 24);
-            this.Layout.Name = "LayoutFlow";
+            this.Layout.Name = "Layout";
             this.Layout.RowCount = 2;
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.Layout.Size = new System.Drawing.Size(1347, 715);
             this.Layout.TabIndex = 46;
             // 
-            // GridDias
-            // 
-            this.GridDias.AllowUserToAddRows = false;
-            this.GridDias.AllowUserToDeleteRows = false;
-            this.GridDias.AllowUserToResizeRows = false;
-            this.GridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.GridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridDias.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.GridDias.Location = new System.Drawing.Point(3, 3);
-            this.GridDias.MultiSelect = false;
-            this.GridDias.Name = "GridDias";
-            this.GridDias.RowHeadersVisible = false;
-            this.Layout.SetRowSpan(this.GridDias, 2);
-            this.GridDias.Size = new System.Drawing.Size(1190, 709);
-            this.GridDias.TabIndex = 45;
-            // 
-            // flowLayoutPanel1
+            // LayoutFlow
             // 
             this.LayoutFlow.AutoScroll = true;
             this.LayoutFlow.Controls.Add(this.LabelCoeficienteDisplay);
@@ -487,109 +489,225 @@
             this.LayoutFlow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LayoutFlow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.LayoutFlow.Location = new System.Drawing.Point(1199, 3);
-            this.LayoutFlow.Name = "flowLayoutPanel1";
+            this.LayoutFlow.Name = "LayoutFlow";
             this.LayoutFlow.Size = new System.Drawing.Size(145, 679);
             this.LayoutFlow.TabIndex = 46;
             this.LayoutFlow.WrapContents = false;
             // 
-            // label1
+            // LabelSeparador10
             // 
             this.LabelSeparador10.AutoSize = true;
             this.LabelSeparador10.Location = new System.Drawing.Point(3, 26);
-            this.LabelSeparador10.Name = "label1";
+            this.LabelSeparador10.Name = "LabelSeparador10";
             this.LabelSeparador10.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador10.TabIndex = 47;
             this.LabelSeparador10.Text = "separator";
             // 
-            // label2
+            // LabelSeparador07
             // 
             this.LabelSeparador07.AutoSize = true;
             this.LabelSeparador07.Location = new System.Drawing.Point(3, 65);
-            this.LabelSeparador07.Name = "label2";
+            this.LabelSeparador07.Name = "LabelSeparador07";
             this.LabelSeparador07.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador07.TabIndex = 47;
             this.LabelSeparador07.Text = "separator";
             // 
-            // label3
+            // LabelSeparador06
             // 
             this.LabelSeparador06.AutoSize = true;
             this.LabelSeparador06.Location = new System.Drawing.Point(3, 104);
-            this.LabelSeparador06.Name = "label3";
+            this.LabelSeparador06.Name = "LabelSeparador06";
             this.LabelSeparador06.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador06.TabIndex = 47;
             this.LabelSeparador06.Text = "separator";
             // 
-            // label4
+            // LabelSeparador05
             // 
             this.LabelSeparador05.AutoSize = true;
             this.LabelSeparador05.Location = new System.Drawing.Point(3, 143);
-            this.LabelSeparador05.Name = "label4";
+            this.LabelSeparador05.Name = "LabelSeparador05";
             this.LabelSeparador05.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador05.TabIndex = 47;
             this.LabelSeparador05.Text = "separator";
             // 
-            // label5
+            // LabelSeparador04
             // 
             this.LabelSeparador04.AutoSize = true;
             this.LabelSeparador04.Location = new System.Drawing.Point(3, 182);
-            this.LabelSeparador04.Name = "label5";
+            this.LabelSeparador04.Name = "LabelSeparador04";
             this.LabelSeparador04.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador04.TabIndex = 47;
             this.LabelSeparador04.Text = "separator";
             // 
-            // label6
+            // LabelSeparador03
             // 
             this.LabelSeparador03.AutoSize = true;
             this.LabelSeparador03.Location = new System.Drawing.Point(3, 221);
-            this.LabelSeparador03.Name = "label6";
+            this.LabelSeparador03.Name = "LabelSeparador03";
             this.LabelSeparador03.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador03.TabIndex = 47;
             this.LabelSeparador03.Text = "separator";
             // 
-            // label7
+            // LabelSeparador02
             // 
             this.LabelSeparador02.AutoSize = true;
             this.LabelSeparador02.Location = new System.Drawing.Point(3, 260);
-            this.LabelSeparador02.Name = "label7";
+            this.LabelSeparador02.Name = "LabelSeparador02";
             this.LabelSeparador02.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador02.TabIndex = 47;
             this.LabelSeparador02.Text = "separator";
             // 
-            // label8
+            // LabelSeparador01
             // 
             this.LabelSeparador01.AutoSize = true;
             this.LabelSeparador01.Location = new System.Drawing.Point(3, 299);
-            this.LabelSeparador01.Name = "label8";
+            this.LabelSeparador01.Name = "LabelSeparador01";
             this.LabelSeparador01.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador01.TabIndex = 47;
             this.LabelSeparador01.Text = "separator";
             // 
-            // label9
+            // LabelSeparador00
             // 
             this.LabelSeparador00.AutoSize = true;
             this.LabelSeparador00.Location = new System.Drawing.Point(3, 338);
-            this.LabelSeparador00.Name = "label9";
+            this.LabelSeparador00.Name = "LabelSeparador00";
             this.LabelSeparador00.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador00.TabIndex = 47;
             this.LabelSeparador00.Text = "separator";
             // 
-            // label10
+            // LabelSeparador09
             // 
             this.LabelSeparador09.AutoSize = true;
             this.LabelSeparador09.Location = new System.Drawing.Point(3, 377);
-            this.LabelSeparador09.Name = "label10";
+            this.LabelSeparador09.Name = "LabelSeparador09";
             this.LabelSeparador09.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador09.TabIndex = 47;
             this.LabelSeparador09.Text = "separator";
             // 
-            // label11
+            // LabelSeparador08
             // 
             this.LabelSeparador08.AutoSize = true;
             this.LabelSeparador08.Location = new System.Drawing.Point(3, 429);
-            this.LabelSeparador08.Name = "label11";
+            this.LabelSeparador08.Name = "LabelSeparador08";
             this.LabelSeparador08.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador08.TabIndex = 47;
             this.LabelSeparador08.Text = "separator";
+            // 
+            // GridDias
+            // 
+            this.GridDias.AllowUserToAddRows = false;
+            this.GridDias.AllowUserToDeleteRows = false;
+            this.GridDias.AllowUserToResizeRows = false;
+            this.GridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.GridDias.CalculoServico = null;
+            this.GridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridDias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.GridDias.Location = new System.Drawing.Point(3, 3);
+            this.GridDias.MultiSelect = false;
+            this.GridDias.Name = "GridDias";
+            this.GridDias.RowHeadersVisible = false;
+            this.Layout.SetRowSpan(this.GridDias, 2);
+            this.GridDias.Size = new System.Drawing.Size(1190, 709);
+            this.GridDias.TabIndex = 47;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Data";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 22;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Dia da Semana";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 21;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.FillWeight = 162.4473F;
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Falta";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Width = 35;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewCellStyle2.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn3.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Entrada";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle3.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewTextBoxColumn4.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Almoço - Saída";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewCellStyle4.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn5.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Almoço - Retorno";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewCellStyle5.Format = "hh\\:mm";
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn6.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Saída";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewCellStyle6.Format = "c";
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewTextBoxColumn7.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Valor Almoço";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 19;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Tempo Almoço";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Coeficiente";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.FillWeight = 92.19409F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "Total de Horas";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 20;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Visible = false;
             // 
             // Dashboard
             // 
@@ -612,9 +730,9 @@
             this.Status.ResumeLayout(false);
             this.Status.PerformLayout();
             this.Layout.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GridDias)).EndInit();
             this.LayoutFlow.ResumeLayout(false);
             this.LayoutFlow.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridDias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -622,7 +740,6 @@
 
         #endregion
 
-        private Control.DiaTrabalhoDataGridView GridDias;
         private System.Windows.Forms.Button ButtonMesAno;
         private System.Windows.Forms.FlowLayoutPanel LayoutFlow;
         private System.Windows.Forms.Label LabelAlmocoRetorno;
@@ -672,5 +789,18 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Dados_RealizarBackup;
         private System.Windows.Forms.ToolStripMenuItem Menu_Relatorio;
         private System.Windows.Forms.ToolStripStatusLabel Status_LabelVersao;
+        private Control.DiaTrabalhoDataGridView GridDias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
     }
 }

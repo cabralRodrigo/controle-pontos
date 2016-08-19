@@ -1,4 +1,5 @@
-﻿using ControlePontos.Forms;
+﻿using ControlePontos.Control;
+using ControlePontos.Forms;
 using ControlePontos.Report;
 using ControlePontos.Report.Reports;
 using ControlePontos.Servicos;
@@ -31,6 +32,7 @@ namespace ControlePontos
             container.RegisterSingleton<IFormOpener, FormOpener>();
             container.RegisterSingleton<IExportacaoServico, ExportacaoServico>();
             container.RegisterSingleton<IBackupServico, BackupServico>();
+            container.RegisterSingleton<ICalculoServico, CalculoServico>();
 
             container.RegisterSingletonCollection<IExportar>(new Dictionary<Type, Type> {
                 {typeof(IMesTrabalhoServico), typeof(MesTrabalhoServico)},
@@ -40,7 +42,7 @@ namespace ControlePontos
             container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
             container.RegisterCollection<IReport>(new[] { typeof(EvolucaoEntradaSaidaRelatorio), typeof(TabelaMesRelatorio), typeof(TabelaMesRelatorioFake), typeof(UsoSodexoRelatorio) });
 
-            container.RegisterForm(typeof(Dashboard), typeof(Configuracao));
+            container.RegisterDisposable(typeof(Dashboard), typeof(Configuracao), typeof(DiaTrabalhoDataGridView));
 
             container.Verify();
         }
