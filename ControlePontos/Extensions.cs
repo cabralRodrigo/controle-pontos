@@ -91,7 +91,7 @@ namespace ControlePontos
             list.Items.AddRange(items.Cast<object>().ToArray());
         }
 
-        public static void RegisterForm(this Container container, params Type[] forms)
+        public static void RegisterDisposable(this Container container, params Type[] forms)
         {
             foreach (var form in forms)
                 container.Register(form);

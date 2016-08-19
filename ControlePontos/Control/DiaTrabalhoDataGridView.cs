@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,6 +27,7 @@ namespace ControlePontos.Control
             public const string CALCULO_HORAS_TRABALHADAS = "calculo-horas-trabalhadas";
         }
 
+        public ICalculoServico CalculoServico { get; set; }
         private ConfigApp config;
 
         public DiaTrabalhoDataGridView()
@@ -93,7 +95,7 @@ namespace ControlePontos.Control
                     dia.ValorAlmoco,
                     dia.Almoco.TempoTotal().Descricao(),
                     coeficiente.HasValue ? coeficiente.Value.Negate().Descricao() : null,
-                    Calculator.TotalHorasTrabalhadas(dia),
+                    this.CalculoServico.TotalHorasTrabalhadas(dia),
                     dia
                 });
             }
@@ -143,7 +145,7 @@ namespace ControlePontos.Control
                     this.UpdateTimeSpan(e.ColumnIndex, e.RowIndex, valor, acao);
             }
 
-            evento:
+        evento:
             base.OnCellValueChanged(e);
         }
 
@@ -256,7 +258,7 @@ namespace ControlePontos.Control
             this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS].Style.ForeColor = coeficiente.HasValue ? (coeficiente.Value < new TimeSpan(8, 0, 0) ? Color.Blue : Color.Red) : Color.Black;
 
             this.Rows[rowIndex].Cells[Nomes.CALCULO_TEMPO_ALMOCO].Value = dia.Almoco.TempoTotal().Descricao();
-            this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS_TRABALHADAS].Value = Calculator.TotalHorasTrabalhadas(dia);
+            this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS_TRABALHADAS].Value = this.CalculoServico.TotalHorasTrabalhadas(dia);
             this.Refresh();
         }
 

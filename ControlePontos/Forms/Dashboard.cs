@@ -1,4 +1,5 @@
-﻿using ControlePontos.Dialog;
+﻿using ControlePontos.Control;
+using ControlePontos.Dialog;
 using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;
@@ -13,40 +14,29 @@ namespace ControlePontos.Forms
 {
     internal partial class Dashboard : Form
     {
-        private readonly IFormOpener formOpener;
+        private readonly IBackupServico backupServico;
+        private readonly ICalculoServico calculoServico;
         private readonly IConfiguracaoServico configuracaoServico;
+        private readonly IExportacaoServico exportacaoServico;
+        private readonly IFormOpener formOpener;
         private readonly IMesTrabalhoServico mesTrabalhoServico;
         private readonly IRelatorioServico relatorioServico;
-        private readonly IExportacaoServico exportacaoServico;
-        private readonly IBackupServico backupServico;
 
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico)
         {
             this.InitializeComponent();
 
-            this.Text = Application.ProductName;
-            this.Status_LabelVersao.Text = Application.ProductVersion;
             this.configuracaoServico = configuracaoServico;
             this.formOpener = formOpener;
             this.mesTrabalhoServico = mesTrabalhoServico;
             this.relatorioServico = relatorioServico;
             this.exportacaoServico = exportacaoServico;
             this.backupServico = backupServico;
-
-            this.GridDias.CellValueChanged += (sender, e) =>
-            {
-                this.AtualizarTela();
-            };
-            this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
-            {
-                this.InitDashboard(this.ano, this.mes, novaConfiguracao);
-            };
-
-            this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
+            this.calculoServico = calculoServico;
         }
 
         private void InitDashboard(int ano, int mes, ConfigApp config = null)
@@ -60,6 +50,7 @@ namespace ControlePontos.Forms
             this.mes = mes;
 
             this.mesTrabalho = this.mesTrabalhoServico.ObterMesTrabalho(this.ano, this.mes);
+            this.GridDias.CalculoServico = this.calculoServico;
             this.GridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
@@ -70,17 +61,17 @@ namespace ControlePontos.Forms
             var data = new DateTime(this.ano, this.mes, 1);
             this.ButtonMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
 
-            this.LabelCoeficiente.Text = Calculator.Coeficiente(this.config, this.mesTrabalho).Descricao();
-            this.LabelCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
-            this.LabelMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelCoeficiente.Text = this.calculoServico.Coeficiente(this.config, this.mesTrabalho).Descricao();
+            this.LabelCoeficientePorDia.Text = this.calculoServico.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
+            this.LabelMediaEntrada.Text = this.calculoServico.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelMediaSaida.Text = this.calculoServico.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelAlmocoSaida.Text = this.calculoServico.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelAlmocoRetorno.Text = this.calculoServico.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelMediaTempoAlmoco.Text = this.calculoServico.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
 
-            this.LabelMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.LabelValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.LabelValorTotalTr.Text = Calculator.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
+            this.LabelMediaValorAlmoco.Text = this.calculoServico.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.LabelValorIdealDiario.Text = this.calculoServico.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.LabelValorTotalTr.Text = this.calculoServico.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
 
             this.TextBoxSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
             this.TextBoxOffset.Text = this.mesTrabalho.CoficienteOffset.ToString();
@@ -145,6 +136,20 @@ namespace ControlePontos.Forms
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            this.GridDias.CellValueChanged += (a, b) =>
+            {
+                this.AtualizarTela();
+            };
+            this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
+            {
+                this.InitDashboard(this.ano, this.mes, novaConfiguracao);
+            };
+
+            this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
+
+            this.Text = Application.ProductName;
+            this.Status_LabelVersao.Text = Application.ProductVersion;
+
             this.CarregarMenuRelatorios();
             this.RealizarBackupDiario();
             this.PrepararSeparadores();
@@ -268,7 +273,7 @@ namespace ControlePontos.Forms
                     if (MessageBox.Show("Deseja adicionar 6 horas a esse coeficiente?", "Importar Coeficiente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                         minutosOffset = 0;
 
-                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mesAnterior).TotalMinutes + minutosOffset, MidpointRounding.AwayFromZero);
+                    var coeficiente = (int)Math.Round(this.calculoServico.Coeficiente(this.config, mesAnterior).TotalMinutes + minutosOffset, MidpointRounding.AwayFromZero);
                     this.TextBoxOffset.Text = coeficiente.ToString();
                     this.mesTrabalho.CoficienteOffset = coeficiente;
 

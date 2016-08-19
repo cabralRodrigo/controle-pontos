@@ -76,7 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculator.cs" />
     <Compile Include="Misc\CheckboxListItem.cs" />
     <Compile Include="Model\ConfigApp.cs" />
     <Compile Include="Model\ConfigBackup.cs" />
@@ -124,6 +123,7 @@
     <Compile Include="Report\Reports\Template\Html\Section\TextHtmlSection.cs" />
     <Compile Include="Servicos\ArmazenamentoServico.cs" />
     <Compile Include="Servicos\BackupServico.cs" />
+    <Compile Include="Servicos\CalculoServico.cs" />
     <Compile Include="Servicos\ConfiguracaoServico.cs" />
     <Compile Include="Servicos\ExportacaoServico.cs" />
     <Compile Include="Servicos\MesTrabalhoServico.cs" />
