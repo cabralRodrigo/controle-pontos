@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ControlePontos.Forms
 {
-    public partial class Configuracao : Form
+    internal partial class Configuracao : Form
     {
         private readonly IConfiguracaoServico configuracaoServico;
 

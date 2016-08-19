@@ -102,5 +102,22 @@ namespace ControlePontos
                 registration.SuppressDiagnosticWarning(DiagnosticType.DisposableTransientComponent, "Winforms registration supression.");
             }
         }
+
+        public static void RegisterSingletonCollection<T>(this Container container, Dictionary<Type, Type> tipos) where T : class
+        {
+            var interfaceTipos = container.GetTypesToRegister(typeof(T), new[] { typeof(T).Assembly });
+
+            var interfaceRegistros = (
+                from tipo in interfaceTipos
+                select Lifestyle.Singleton.CreateRegistration(tipo, container)).ToList();
+
+            container.RegisterCollection<T>(interfaceRegistros);
+
+            foreach (var tipo in tipos)
+            {
+                var tipoRegistro = interfaceRegistros.Single(w => w.ImplementationType == tipo.Value);
+                container.AddRegistration(tipo.Key, tipoRegistro);
+            }
+        }
     }
 }

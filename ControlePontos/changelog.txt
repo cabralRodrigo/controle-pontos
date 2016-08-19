@@ -1,4 +1,7 @@
-﻿18/08/2016 1.5.1:
+﻿19/08/2016 1.5.2:
+	* Centralizado processamento de exportação e backup de dados.
+
+18/08/2016 1.5.1:
 	* Transferido a responsábilidade de criar e manipular os meses de trabalho do dashboard para um serviço apropriado.
 
 18/08/2016 1.5.0:
