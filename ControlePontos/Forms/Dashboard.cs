@@ -1,8 +1,6 @@
 ﻿using ControlePontos.Dialog;
-using ControlePontos.Exportacao;
 using ControlePontos.Model;
 using ControlePontos.Servicos;
-using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -259,31 +257,27 @@ namespace ControlePontos.Forms
 
         private void Menu_Dados_ImportarCoeficiente_Click(object sender, EventArgs e)
         {
-            var scanner = new DataFileScanner(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName);
-            var arquivos = scanner.FindAll();
-
             var anterior = new DateTime(this.ano, this.mes, 1).AddMonths(-1);
+            var mesAnterior = this.mesTrabalhoServico.ObterMesTrabalho(anterior.Year, anterior.Month, false);
 
-            var data = arquivos.FirstOrDefault(s => s.Ano == anterior.Year && s.Mes == anterior.Month);
-
-            if (data == null)
-                MessageBox.Show("Não foi possivel encontrar dados do mês anterior.");
-            else
+            if (mesAnterior != null)
             {
-                if (MessageBox.Show("Deseja realmente importar o coeficiente do mês anterior?", "Importação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Deseja realmente importar o coeficiente do mês anterior?", "Importar Coeficiente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    var offset = 6 * 60;
-                    if (MessageBox.Show("Deseja adicionar as 6 horas desse coeficiente?", "Importação", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
-                        offset = 0;
+                    var minutosOffset = 6 * 60;
+                    if (MessageBox.Show("Deseja adicionar 6 horas a esse coeficiente?", "Importar Coeficiente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        minutosOffset = 0;
 
-                    var mes = JsonConvert.DeserializeObject<MesTrabalho>(File.ReadAllText(Path.Combine(data.Diretorio, data.Nome)));
-                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
-
+                    var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mesAnterior).TotalMinutes + minutosOffset, MidpointRounding.AwayFromZero);
                     this.TextBoxOffset.Text = coeficiente.ToString();
                     this.mesTrabalho.CoficienteOffset = coeficiente;
+
+                    this.Salvar();
                     this.AtualizarTela();
                 }
             }
+            else
+                MessageBox.Show("Não foi possível encontrar dados do mês anterior.", "Importar Coeficiente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void Menu_Dados_RealizarBackup_Click(object sender, EventArgs e)
