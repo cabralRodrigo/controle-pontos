@@ -31,7 +31,7 @@ namespace ControlePontos.Forms
             this.InitializeComponent();
 
             this.Text = Application.ProductName;
-            this.lblVersao.Text = Application.ProductVersion;
+            this.Status_LabelVersao.Text = Application.ProductVersion;
             this.configuracaoServico = configuracaoServico;
             this.formOpener = formOpener;
             this.mesTrabalhoServico = mesTrabalhoServico;
@@ -39,7 +39,7 @@ namespace ControlePontos.Forms
             this.exportacaoServico = exportacaoServico;
             this.backupServico = backupServico;
 
-            this.gridDias.CellValueChanged += (sender, e) =>
+            this.GridDias.CellValueChanged += (sender, e) =>
             {
                 this.AtualizarTela();
             };
@@ -62,7 +62,7 @@ namespace ControlePontos.Forms
             this.mes = mes;
 
             this.mesTrabalho = this.mesTrabalhoServico.ObterMesTrabalho(this.ano, this.mes);
-            this.gridDias.BindDias(this.config, this.mesTrabalho.Dias);
+            this.GridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
         }
@@ -70,22 +70,22 @@ namespace ControlePontos.Forms
         private void AtualizarTela()
         {
             var data = new DateTime(this.ano, this.mes, 1);
-            this.btnMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
+            this.ButtonMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
 
-            this.lblCoeficiente.Text = Calculator.Coeficiente(this.config, this.mesTrabalho).Descricao();
-            this.lblCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
-            this.lblMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.lblMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelCoeficiente.Text = Calculator.Coeficiente(this.config, this.mesTrabalho).Descricao();
+            this.LabelCoeficientePorDia.Text = Calculator.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
+            this.LabelMediaEntrada.Text = Calculator.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelMediaSaida.Text = Calculator.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelAlmocoSaida.Text = Calculator.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelAlmocoRetorno.Text = Calculator.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelMediaTempoAlmoco.Text = Calculator.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
 
-            this.lblMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.lblValorTotalTR.Text = Calculator.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
+            this.LabelMediaValorAlmoco.Text = Calculator.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.LabelValorIdealDiario.Text = Calculator.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.LabelValorTotalTr.Text = Calculator.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
 
-            this.txtSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
-            this.txtOffset.Text = this.mesTrabalho.CoficienteOffset.ToString();
+            this.TextBoxSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
+            this.TextBoxOffset.Text = this.mesTrabalho.CoficienteOffset.ToString();
         }
 
         private void Salvar()
@@ -104,7 +104,7 @@ namespace ControlePontos.Forms
                     rel.Execute();
                 };
 
-                this.menu_relatorio.DropDownItems.Add(item);
+                this.Menu_Relatorio.DropDownItems.Add(item);
             }
         }
 
@@ -129,6 +129,15 @@ namespace ControlePontos.Forms
             }
         }
 
+        private void PrepararSeparadores()
+        {
+            typeof(Dashboard).GetFields(BindingFlags.Instance | BindingFlags.NonPublic).Where(w => w.FieldType == typeof(Label)).Select(w => w.GetValue(this))
+                .Cast<Label>()
+                .Where(w => w.Text == "separator")
+                .ToList()
+                .ForEach(w => w.Text = string.Empty);
+        }
+
         #region Eventos
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
@@ -136,49 +145,56 @@ namespace ControlePontos.Forms
             this.Salvar();
         }
 
-        private void txtOffset_Leave(object sender, EventArgs e)
+        private void Dashboard_Load(object sender, EventArgs e)
         {
-            if (this.txtOffset.Text.IsNullOrEmpty())
-                this.txtOffset.Text = "0";
+            this.CarregarMenuRelatorios();
+            this.RealizarBackupDiario();
+            this.PrepararSeparadores();
+        }
+
+        private void TextBoxOffset_Leave(object sender, EventArgs e)
+        {
+            if (this.TextBoxOffset.Text.IsNullOrEmpty())
+                this.TextBoxOffset.Text = "0";
 
             int novoValor;
-            if (int.TryParse(this.txtOffset.Text, out novoValor))
+            if (int.TryParse(this.TextBoxOffset.Text, out novoValor))
                 this.mesTrabalho.CoficienteOffset = novoValor;
 
             this.AtualizarTela();
         }
 
-        private void txtOffset_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxOffset_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.txtOffset.Enabled = false;
-                this.txtOffset.Enabled = true;
+                this.TextBoxOffset.Enabled = false;
+                this.TextBoxOffset.Enabled = true;
             }
         }
 
-        private void txtSodexo_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxSodexo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.txtSodexo.Enabled = false;
-                this.txtSodexo.Enabled = true;
+                this.TextBoxSodexo.Enabled = false;
+                this.TextBoxSodexo.Enabled = true;
             }
         }
 
-        private void txtSodexo_Leave(object sender, EventArgs e)
+        private void TexBoxSodexo_Leave(object sender, EventArgs e)
         {
-            if (this.txtSodexo.Text.IsNullOrEmpty())
-                this.txtSodexo.Text = "0";
+            if (this.TextBoxSodexo.Text.IsNullOrEmpty())
+                this.TextBoxSodexo.Text = "0";
 
             decimal novoValor;
-            if (decimal.TryParse(this.txtSodexo.Text, out novoValor))
+            if (decimal.TryParse(this.TextBoxSodexo.Text, out novoValor))
                 this.mesTrabalho.ValorSodexo = novoValor;
 
             this.AtualizarTela();
         }
 
-        private void btnMesAno_Click(object sender, EventArgs e)
+        private void ButtonMesAno_Click(object sender, EventArgs e)
         {
             using (var dialog = new MonthPicker(new DateTime(this.ano, this.mes, 1)))
                 if (dialog.ShowDialog() == DialogResult.OK)
@@ -188,17 +204,11 @@ namespace ControlePontos.Forms
                 }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            this.status.Text = "Salvando dados...";
+            this.Status.Text = "Salvando dados...";
             this.Salvar();
-            this.status.Text = string.Empty;
-        }
-
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
-            this.CarregarMenuRelatorios();
-            this.RealizarBackupDiario();
+            this.Status.Text = string.Empty;
         }
 
         #region Menu
@@ -207,7 +217,7 @@ namespace ControlePontos.Forms
 
         #region Exportação
 
-        private void menu_dados_exportar_zip_Click(object sender, EventArgs e)
+        private void Menu_Dados_Exportar_Zip_Click(object sender, EventArgs e)
         {
             this.Salvar();
 
@@ -245,9 +255,9 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion Exportação
+        #endregion
 
-        private void menu_dados_importarCoeficiente_Click(object sender, EventArgs e)
+        private void Menu_Dados_ImportarCoeficiente_Click(object sender, EventArgs e)
         {
             var scanner = new DataFileScanner(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName);
             var arquivos = scanner.FindAll();
@@ -269,29 +279,14 @@ namespace ControlePontos.Forms
                     var mes = JsonConvert.DeserializeObject<MesTrabalho>(File.ReadAllText(Path.Combine(data.Diretorio, data.Nome)));
                     var coeficiente = (int)Math.Round(Calculator.Coeficiente(this.config, mes).TotalMinutes + offset, MidpointRounding.AwayFromZero);
 
-                    this.txtOffset.Text = coeficiente.ToString();
+                    this.TextBoxOffset.Text = coeficiente.ToString();
                     this.mesTrabalho.CoficienteOffset = coeficiente;
                     this.AtualizarTela();
                 }
             }
         }
 
-        #endregion Dados
-
-        private void Dashboard_Shown(object sender, EventArgs e)
-        {
-        }
-
-        #endregion Menu
-
-        private void menu_configuracoes_Click(object sender, EventArgs e)
-        {
-            this.formOpener.ShowModalForm<Configuracao>();
-        }
-
-        #endregion Eventos
-
-        private void menu_dados_realizarBackup_Click(object sender, EventArgs e)
+        private void Menu_Dados_RealizarBackup_Click(object sender, EventArgs e)
         {
             var res = this.backupServico.RealizarBackup();
             if (res.Tipo == TipoMensagem.Sucesso)
@@ -308,7 +303,7 @@ namespace ControlePontos.Forms
                         break;
                     case BackupResultado.DriveNaoDisponivel:
                         if (MessageBox.Show("O seguinte drive não esta disponível no momento: " + res.ValorMensagem + "\nDeseja tentar novamente?", "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            this.menu_dados_realizarBackup_Click(sender, e);
+                            this.Menu_Dados_RealizarBackup_Click(sender, e);
                         break;
                 }
             }
@@ -320,5 +315,16 @@ namespace ControlePontos.Forms
                     MessageBox.Show("Erro desconhecido ao realizar o backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        #endregion
+
+        private void Menu_Configuracoes_Click(object sender, EventArgs e)
+        {
+            this.formOpener.ShowModalForm<Configuracao>();
+        }
+
+        #endregion
+
+        #endregion
     }
 }
