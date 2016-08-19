@@ -1,4 +1,7 @@
-﻿19/08/2016 1.5.2:
+﻿19/08/2016 1.5.3:
+	* Remodelado layout da dashboard.
+
+19/08/2016 1.5.2:
 	* Centralizado processamento de exportação e backup de dados.
 
 18/08/2016 1.5.1:
