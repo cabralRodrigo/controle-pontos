@@ -1,4 +1,7 @@
-﻿19/08/2016 1.5.3:
+﻿19/08/2016 1.5.4:
+	* Adicionado implementação de serviços na opção de importar coeficiente mensal.
+
+19/08/2016 1.5.3:
 	* Remodelado layout da dashboard.
 
 19/08/2016 1.5.2:
