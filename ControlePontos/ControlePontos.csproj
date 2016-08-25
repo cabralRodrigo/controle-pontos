@@ -76,6 +76,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\DiaTrabalhoColumnConfiguracao.cs" />
+    <Compile Include="Control\DiaTrabalhoCheckBoxControls.cs" />
+    <Compile Include="Control\DiaTrabalhoTextBoxControls.cs" />
+    <Compile Include="Control\IDiaTrabalhoCell.cs" />
     <Compile Include="Misc\CheckboxListItem.cs" />
     <Compile Include="Model\ConfigApp.cs" />
     <Compile Include="Model\ConfigBackup.cs" />
@@ -88,6 +92,7 @@
     </Compile>
     <Compile Include="FormOpener.cs" />
     <Compile Include="Model\Resultado.cs" />
+    <Compile Include="Native\ControlRenderer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,6 +132,7 @@
     <Compile Include="Servicos\ConfiguracaoServico.cs" />
     <Compile Include="Servicos\ExportacaoServico.cs" />
     <Compile Include="Servicos\MesTrabalhoServico.cs" />
+    <Compile Include="Servicos\ParserServico.cs" />
     <Compile Include="Servicos\RelatorioServico.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Forms\Configuracao.cs">

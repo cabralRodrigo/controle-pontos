@@ -19,9 +19,7 @@ namespace ControlePontos.Model
         {
             if (this.EstaCompleto())
             {
-                const int HORAS_ALMOCO = 1;
-
-                var tempoPorDia = (horaFim - horaInicio).Add(new TimeSpan(HORAS_ALMOCO * -1, 0, 0));
+                var tempoPorDia = (horaFim - horaInicio).Add(new TimeSpan(ConfigApp.HORAS_ALMOCO * -1, 0, 0));
 
                 var acc = this.Empresa.Saida.Value - this.Empresa.Entrada.Value;
                 var accAlmoco = this.Almoco.Saida.Value - this.Almoco.Entrada.Value;

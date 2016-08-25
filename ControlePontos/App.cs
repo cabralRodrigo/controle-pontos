@@ -1,11 +1,13 @@
 ﻿using ControlePontos.Control;
 using ControlePontos.Forms;
+using ControlePontos.Native;
 using ControlePontos.Report;
 using ControlePontos.Report.Reports;
 using ControlePontos.Servicos;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ControlePontos
@@ -17,6 +19,8 @@ namespace ControlePontos
         [STAThread]
         private static void Main()
         {
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             App.Bootstrap();
@@ -33,6 +37,8 @@ namespace ControlePontos
             container.RegisterSingleton<IExportacaoServico, ExportacaoServico>();
             container.RegisterSingleton<IBackupServico, BackupServico>();
             container.RegisterSingleton<ICalculoServico, CalculoServico>();
+            container.RegisterSingleton<IControlRenderer, ControlRenderer>();
+            container.RegisterSingleton<IParserServico, ParserServico>();
 
             container.RegisterSingletonCollection<IExportar>(new Dictionary<Type, Type> {
                 {typeof(IMesTrabalhoServico), typeof(MesTrabalhoServico)},

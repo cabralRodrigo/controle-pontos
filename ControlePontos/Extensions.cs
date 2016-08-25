@@ -33,6 +33,11 @@ namespace ControlePontos
             return (time.Ticks < 0 ? "- " : string.Empty) + desc;
         }
 
+        public static TimeSpan? Negate(this TimeSpan? time)
+        {
+            return time.HasValue ? (TimeSpan?)time.Value.Negate() : null;
+        }
+
         public static TimeSpan Average(this IEnumerable<TimeSpan?> times)
         {
             return times.Where(w => w.HasValue).Select(s => s.Value).Average();

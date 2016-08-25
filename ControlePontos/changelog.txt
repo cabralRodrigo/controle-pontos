@@ -1,4 +1,8 @@
-﻿19/08/2016 1.5.5:
+﻿25/08/2016 1.5.6:
+	* Reimplementado grid view dos dias para ser mais performatico.
+	* Adicionada instrução para lançar exceções não tratadas.
+
+19/08/2016 1.5.5:
 	* Implementado serviço de calculo de coeficientes via serviço.
 
 19/08/2016 1.5.4:
