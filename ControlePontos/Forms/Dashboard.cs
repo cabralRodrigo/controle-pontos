@@ -1,6 +1,6 @@
-﻿using ControlePontos.Control;
-using ControlePontos.Dialog;
+﻿using ControlePontos.Dialog;
 using ControlePontos.Model;
+using ControlePontos.Native;
 using ControlePontos.Servicos;
 using System;
 using System.Diagnostics;
@@ -21,12 +21,14 @@ namespace ControlePontos.Forms
         private readonly IFormOpener formOpener;
         private readonly IMesTrabalhoServico mesTrabalhoServico;
         private readonly IRelatorioServico relatorioServico;
+        private readonly IControlRenderer controlRenderer;
+        private readonly IParserServico parserServico;
 
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico)
         {
             this.InitializeComponent();
 
@@ -37,6 +39,8 @@ namespace ControlePontos.Forms
             this.exportacaoServico = exportacaoServico;
             this.backupServico = backupServico;
             this.calculoServico = calculoServico;
+            this.controlRenderer = controlRenderer;
+            this.parserServico = parserServico;
         }
 
         private void InitDashboard(int ano, int mes, ConfigApp config = null)
@@ -51,6 +55,8 @@ namespace ControlePontos.Forms
 
             this.mesTrabalho = this.mesTrabalhoServico.ObterMesTrabalho(this.ano, this.mes);
             this.GridDias.CalculoServico = this.calculoServico;
+            this.GridDias.ControlRenderer = this.controlRenderer;
+            this.GridDias.ParserServico = this.parserServico;
             this.GridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
@@ -136,10 +142,7 @@ namespace ControlePontos.Forms
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            this.GridDias.CellValueChanged += (a, b) =>
-            {
-                this.AtualizarTela();
-            };
+            this.GridDias.ValoresAtualizados += this.AtualizarTela;
             this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
             {
                 this.InitDashboard(this.ano, this.mes, novaConfiguracao);

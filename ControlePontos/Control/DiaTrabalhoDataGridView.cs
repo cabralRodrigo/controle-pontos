@@ -1,9 +1,9 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Native;
 using ControlePontos.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,7 +11,7 @@ namespace ControlePontos.Control
 {
     internal partial class DiaTrabalhoDataGridView : DataGridView
     {
-        private static class Nomes
+        private static class Colunas
         {
             public const string DATA = "data";
             public const string DIA_SEMANA = "dia-semana";
@@ -25,10 +25,16 @@ namespace ControlePontos.Control
             public const string CALCULO_HORAS = "calculo-horas";
             public const string CALCULO_TEMPO_ALMOCO = "calculo-tempo-almoco";
             public const string CALCULO_HORAS_TRABALHADAS = "calculo-horas-trabalhadas";
+
+            public static readonly string[] TEMPOS = { ENTRADA, ALMOCO_SAIDA, ALMOCO_RETORNO, SAIDA };
         }
 
         public ICalculoServico CalculoServico { get; set; }
+        public IControlRenderer ControlRenderer { get; set; }
+        public IParserServico ParserServico { get; set; }
         private ConfigApp config;
+
+        public event Action ValoresAtualizados;
 
         public DiaTrabalhoDataGridView()
         {
@@ -41,44 +47,132 @@ namespace ControlePontos.Control
             this.Columns.Clear();
 
             InitializeComponent();
-            this.BindDias(null, new List<DiaTrabalho>());
+        }
+
+        private DiaTrabalho this[int rowIndex]
+        {
+            get
+            {
+                return this.Rows[rowIndex].Cells[Colunas.OBJETO].Value as DiaTrabalho;
+            }
+            set
+            {
+                this.Rows[rowIndex].Cells[Colunas.OBJETO].Value = value;
+            }
         }
 
         public void BindDias(ConfigApp config, IEnumerable<DiaTrabalho> dias)
         {
             this.config = config;
             this.Columns.Clear();
+            Func<object, string> descricaoTimeSpan = tempo =>
+            {
+                var timespan = tempo as TimeSpan?;
+                if (timespan.HasValue)
+                    return timespan.Descricao();
+                else
+                    return string.Empty;
+            };
 
-            this.Columns.Add(Nomes.DATA, "Data");
-            this.Columns.Add(Nomes.DIA_SEMANA, "Dia da Semana");
-            this.Columns.Add(new DataGridViewCheckBoxColumn { Name = Nomes.FALTA, HeaderText = "Falta" });
-            this.Columns.Add(Nomes.ENTRADA, "Entrada");
-            this.Columns.Add(Nomes.ALMOCO_SAIDA, "Almoço - Saída");
-            this.Columns.Add(Nomes.ALMOCO_RETORNO, "Almoço - Retorno");
-            this.Columns.Add(Nomes.SAIDA, "Saída");
-            this.Columns.Add(Nomes.ALMOCO_VALOR, "Valor Almoço");
-            this.Columns.Add(Nomes.CALCULO_TEMPO_ALMOCO, "Tempo Almoço");
-            this.Columns.Add(Nomes.CALCULO_HORAS, "Coeficiente");
-            this.Columns.Add(Nomes.CALCULO_HORAS_TRABALHADAS, "Total de Horas");
-            this.Columns.Add(Nomes.OBJETO, string.Empty);
+            #region Colunas
 
-            this.Columns[Nomes.CALCULO_HORAS_TRABALHADAS].CellTemplate = new Cell();
+            this.Columns.Add(new TextBoxColumn(Colunas.DATA, "Data", new DiaTrabalhoColumnConfiguracao
+            {
+                Formato = "dd/MM/yyyy",
+                SempreReadOnly = true,
+                Tipo = typeof(DateTime)
+            }));
 
-            this.Columns[Nomes.DATA].ReadOnly = true;
-            this.Columns[Nomes.DIA_SEMANA].ReadOnly = true;
-            this.Columns[Nomes.CALCULO_TEMPO_ALMOCO].ReadOnly = true;
-            this.Columns[Nomes.CALCULO_HORAS_TRABALHADAS].ReadOnly = true;
-            this.Columns[Nomes.CALCULO_HORAS].ReadOnly = true;
+            this.Columns.Add(new TextBoxColumn(Colunas.DIA_SEMANA, "Dia da Semana", new DiaTrabalhoColumnConfiguracao
+            {
+                Formato = "dddd",
+                SempreReadOnly = true,
+                Tipo = typeof(DateTime)
+            }));
 
-            this.Columns[Nomes.OBJETO].Visible = false;
-            this.Columns[Nomes.DATA].DefaultCellStyle.Format = "dd/MM/yyyy";
-            this.Columns[Nomes.ALMOCO_VALOR].DefaultCellStyle.Format = "c";
-            this.Columns[Nomes.ALMOCO_VALOR].ValueType = typeof(decimal?);
-            this.Columns[Nomes.ENTRADA].DefaultCellStyle.Format = @"hh\:mm";
-            this.Columns[Nomes.ALMOCO_SAIDA].DefaultCellStyle.Format = @"hh\:mm";
-            this.Columns[Nomes.ALMOCO_RETORNO].DefaultCellStyle.Format = @"hh\:mm";
-            this.Columns[Nomes.SAIDA].DefaultCellStyle.Format = @"hh\:mm";
-            this.Columns[Nomes.FALTA].Width = 35;
+            this.Columns.Add(new CheckBoxColumn(Colunas.FALTA, "Falta"));
+            this.Columns[Colunas.FALTA].Width = 150;
+
+            this.Columns.Add(new TextBoxColumn(Colunas.ENTRADA, "Entrada", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = false,
+                Tipo = typeof(string)
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.ALMOCO_SAIDA, "Almoço - Saída", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = false,
+                Tipo = typeof(string)
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.ALMOCO_RETORNO, "Almoço - Retorno", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = false,
+                Tipo = typeof(string)
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.SAIDA, "Saída", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = false,
+                Tipo = typeof(string)
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.ALMOCO_VALOR, "Valor Almoço", new DiaTrabalhoColumnConfiguracao
+            {
+                Formato = "c",
+                SempreReadOnly = false,
+                Tipo = typeof(decimal?)
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.CALCULO_TEMPO_ALMOCO, "Tempo Almoço", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = true,
+                Tipo = typeof(TimeSpan?),
+                Formatador = descricaoTimeSpan,
+                Colorizador = (configApp, dia, valor) =>
+                {
+                    var tempo = valor as TimeSpan?;
+                    if (tempo.HasValue)
+                        return tempo.Value.TotalHours > ConfigApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
+                    else
+                        return null;
+                }
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.CALCULO_HORAS, "Coeficiente", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = true,
+                Tipo = typeof(TimeSpan?),
+                Formatador = descricaoTimeSpan,
+                Colorizador = (configApp, dia, valor) =>
+                {
+                    var tempo = valor as TimeSpan?;
+                    if (tempo.HasValue)
+                        return tempo.Value.TotalHours < 0 ? Color.Red : Color.DarkBlue;
+                    else
+                        return null;
+                }
+            }));
+
+            this.Columns.Add(new TextBoxColumn(Colunas.CALCULO_HORAS_TRABALHADAS, "Total de Horas", new DiaTrabalhoColumnConfiguracao
+            {
+                SempreReadOnly = true,
+                Tipo = typeof(TimeSpan?),
+                Formatador = descricaoTimeSpan,
+                Colorizador = (configApp, dia, valor) =>
+                {
+                    var tempo = valor as TimeSpan?;
+                    if (tempo.HasValue)
+                        return tempo.Value.TotalHours < (config.HoraFim - config.HoraInicio).TotalHours - ConfigApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
+                    else
+                        return null;
+                }
+            }));
+
+            this.Columns.Add(Colunas.OBJETO, string.Empty);
+            this.Columns[Colunas.OBJETO].Visible = false;
+
+            #endregion
 
             foreach (var dia in dias)
             {
@@ -86,212 +180,139 @@ namespace ControlePontos.Control
 
                 this.Rows.Add(new object[]  {
                     dia.Data,
-                    dia.Data.ToString("dddd", new CultureInfo("pt-br")),
+                    dia.Data,
                     dia.Falta,
-                    dia.Empresa.Entrada,
-                    dia.Almoco.Entrada,
-                    dia.Almoco.Saida,
-                    dia.Empresa.Saida,
+                    dia.Empresa.Entrada.ToStringOr(string.Empty,@"hh\:mm"),
+                    dia.Almoco.Entrada.ToStringOr(string.Empty,@"hh\:mm"),
+                    dia.Almoco.Saida.ToStringOr(string.Empty,@"hh\:mm"),
+                    dia.Empresa.Saida.ToStringOr(string.Empty,@"hh\:mm"),
                     dia.ValorAlmoco,
-                    dia.Almoco.TempoTotal().Descricao(),
-                    coeficiente.HasValue ? coeficiente.Value.Negate().Descricao() : null,
+                    dia.Almoco.TempoTotal(),
+                    coeficiente.Negate(),
                     this.CalculoServico.TotalHorasTrabalhadas(dia),
                     dia
                 });
             }
-
-            foreach (var row in this.Rows.Cast<DataGridViewRow>())
-                AplicarEstiloNaLinha(row, true);
         }
 
-        protected override void OnCellValueChanged(DataGridViewCellEventArgs e)
+        private void AtualizarEstatisticas(int rowIndex, bool tempoAlmoco = true, bool coeficiente = true, bool totalHoras = true)
+        {
+            if (tempoAlmoco || coeficiente || totalHoras)
+            {
+                var linha = this.Rows[rowIndex];
+                var dia = linha.Cells[Colunas.OBJETO].Value as DiaTrabalho;
+
+                if (tempoAlmoco)
+                {
+                    var cell = this.Rows[rowIndex].Cells[Colunas.CALCULO_TEMPO_ALMOCO] as IDiaTrabalhoCell;
+
+                    cell.Value = dia.Almoco.TempoTotal();
+                    cell.UpdateCell(this.config, dia);
+                }
+
+                if (coeficiente)
+                {
+                    var cell = this.Rows[rowIndex].Cells[Colunas.CALCULO_HORAS] as IDiaTrabalhoCell;
+
+                    cell.Value = dia.Coeficiente(this.config.HoraInicio, this.config.HoraFim).Negate();
+                    cell.UpdateCell(this.config, dia);
+                }
+
+                if (totalHoras)
+                {
+                    var cell = this.Rows[rowIndex].Cells[Colunas.CALCULO_HORAS_TRABALHADAS] as IDiaTrabalhoCell;
+
+                    cell.Value = this.CalculoServico.TotalHorasTrabalhadas(dia);
+                    cell.UpdateCell(this.config, dia);
+                }
+            }
+        }
+
+        private void AtualizarHorarios(int rowIndex, string nomeColuna)
+        {
+            var valor = (string)this.Rows[rowIndex].Cells[nomeColuna].Value;
+            var timeSpan = this.ParserServico.ParseTimeSpan(valor);
+
+            this.Rows[rowIndex].Cells[nomeColuna].Value = timeSpan.HasValue ? timeSpan.Value.ToString(@"hh\:mm") : null;
+
+            var atualizarTempoAlmoco = false;
+            switch (nomeColuna)
+            {
+                case Colunas.ENTRADA:
+                    this[rowIndex].Empresa.Entrada = timeSpan;
+                    break;
+                case Colunas.ALMOCO_SAIDA:
+                    atualizarTempoAlmoco = true;
+                    this[rowIndex].Almoco.Entrada = timeSpan;
+                    break;
+                case Colunas.ALMOCO_RETORNO:
+                    atualizarTempoAlmoco = true;
+                    this[rowIndex].Almoco.Saida = timeSpan;
+                    break;
+                case Colunas.SAIDA:
+                    this[rowIndex].Empresa.Saida = timeSpan;
+                    break;
+            }
+
+            this.AtualizarEstatisticas(rowIndex, tempoAlmoco: atualizarTempoAlmoco, coeficiente: true, totalHoras: true);
+            if (this.ValoresAtualizados != null)
+                this.ValoresAtualizados();
+        }
+
+        private void AtualizarValorAlmoco(int rowIndex)
+        {
+            var valor = (decimal?)this.Rows[rowIndex].Cells[Colunas.ALMOCO_VALOR].Value;
+
+            this[rowIndex].ValorAlmoco = valor;
+            if (this.ValoresAtualizados != null)
+                this.ValoresAtualizados();
+        }
+
+        private void AtualizarFalta(int rowIndex)
+        {
+            var valor = (bool)this.Rows[rowIndex].Cells[Colunas.FALTA].Value;
+            this[rowIndex].Falta = valor;
+
+            this.AtualizarCelulasLinhas(rowIndex);
+            if (this.ValoresAtualizados != null)
+                this.ValoresAtualizados();
+        }
+
+        private void AtualizarCelulasLinhas(int rowIndex)
+        {
+            foreach (var cell in this.Rows[rowIndex].Cells.Cast<DataGridViewCell>().OfType<IDiaTrabalhoCell>())
+                cell.AddedCell(this.config, this[rowIndex]);
+        }
+
+        #region Eventos
+
+        protected override void OnRowsAdded(DataGridViewRowsAddedEventArgs e)
+        {
+            this.AtualizarCelulasLinhas(e.RowIndex);
+            base.OnRowsAdded(e);
+        }
+
+        protected override void OnCellEndEdit(DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                var valor = this.Cell(e.ColumnIndex, e.RowIndex).Value;
-                Action<DiaTrabalho, TimeSpan?> acao = null;
+                var nomeColuna = this.Columns[e.ColumnIndex].Name;
 
-                switch (this.Columns[e.ColumnIndex].Name)
-                {
-                    case Nomes.ENTRADA:
-                        acao = (dia, span) => dia.Empresa.Entrada = span;
-                        break;
-
-                    case Nomes.ALMOCO_SAIDA:
-                        acao = (dia, span) => dia.Almoco.Entrada = span;
-                        break;
-
-                    case Nomes.ALMOCO_RETORNO:
-                        acao = (dia, span) => dia.Almoco.Saida = span;
-                        break;
-
-                    case Nomes.SAIDA:
-                        acao = (dia, span) => dia.Empresa.Saida = span;
-                        break;
-
-                    case Nomes.ALMOCO_VALOR:
-                        this.UpdateValor(e.RowIndex);
-                        goto evento;
-                    case Nomes.FALTA:
-                        this.UpdateFalta(e.RowIndex);
-                        this.AplicarEstiloFalta(this.Rows[e.RowIndex]);
-                        this.AplicarEstiloNaLinha(this.Rows[e.RowIndex]);
-                        goto evento;
-                    default:
-                        return;
-                }
-
-                if (acao != null)
-                    this.UpdateTimeSpan(e.ColumnIndex, e.RowIndex, valor, acao);
+                if (nomeColuna == Colunas.ALMOCO_VALOR)
+                    this.AtualizarValorAlmoco(e.RowIndex);
+                else if (nomeColuna == Colunas.FALTA)
+                    this.AtualizarFalta(e.RowIndex);
+                else if (Colunas.TEMPOS.Contains(nomeColuna))
+                    this.AtualizarHorarios(e.RowIndex, nomeColuna);
             }
 
-        evento:
-            base.OnCellValueChanged(e);
-        }
-
-        private void AplicarEstiloNaLinha(DataGridViewRow row, bool inicial = false)
-        {
-            var dia = row.Cells[Nomes.OBJETO].Value as DiaTrabalho;
-            var color = Color.Black;
-            var readOnly = true;
-            var mudarRow = true;
-
-            if (inicial)
-                this.AplicarEstiloFalta(row);
-
-            if (this.config.Ferias.Contains(dia.Data.Date))
-            {
-                color = Color.FromArgb(144, 195, 212);
-                readOnly = true;
-            }
-            else if (!this.config.DiasTrabalho.Contains(dia.Data.DayOfWeek))
-            {
-                color = Color.FromArgb(212, 144, 147);
-                readOnly = true;
-            }
-            else if (this.config.Feriados.Feriados.Contains(dia.Data.Date))
-            {
-                color = Color.FromArgb(175, 144, 212);
-                readOnly = true;
-            }
-            else if (dia.Data.Date == DateTime.Now.Date)
-            {
-                color = Color.FromArgb(161, 212, 144);
-                readOnly = false;
-            }
-            else
-                mudarRow = false;
-
-            foreach (var cell in row.Cells.Cast<DataGridViewCell>())
-            {
-                if (mudarRow)
-                {
-                    cell.ReadOnly = readOnly;
-                    cell.Style.BackColor = color;
-                }
-                if (cell.ReadOnly)
-                    cell.Style.ForeColor = Color.FromArgb(92, 92, 92);
-            }
-        }
-
-        private void AplicarEstiloFalta(DataGridViewRow row)
-        {
-            var dia = row.Cells[Nomes.OBJETO].Value as DiaTrabalho;
-            if (dia.Falta)
-                foreach (var cell in row.Cells.Cast<DataGridViewCell>())
-                {
-                    if (cell.OwningColumn.Name != Nomes.FALTA && !cell.ReadOnly)
-                    {
-                        cell.ReadOnly = true;
-                        cell.Tag = new object();
-                    }
-
-                    cell.Style.BackColor = Color.FromArgb(186, 116, 4);
-                }
-            else
-                foreach (var cell in row.Cells.Cast<DataGridViewCell>())
-                {
-                    if (cell.Tag != null)
-                    {
-                        cell.ReadOnly = false;
-                        cell.Tag = null;
-                        cell.Style.ForeColor = cell.OwningRow.DefaultCellStyle.ForeColor;
-                    }
-                    cell.Style.BackColor = Color.White;
-                }
-        }
-
-        private void UpdateTimeSpan(int columnIndex, int rowIndex, object valor, Action<DiaTrabalho, TimeSpan?> updater)
-        {
-            var dia = (DiaTrabalho)this.Rows[rowIndex].Cells[Nomes.OBJETO].Value;
-
-            if (valor == null)
-                updater(dia, null);
-            else
-            {
-                var valors = valor.ToString();
-
-                if (valors.Length == 4)
-                    valors = string.Format("{0}{1}:{2}{3}", valors[0], valors[1], valors[2], valors[3]);
-                else if (valors.Length == 3)
-                    valors = string.Format("0{0}:{1}{2}", valors[0], valors[1], valors[2]);
-
-                TimeSpan resultado;
-                if (TimeSpan.TryParse(valors, out resultado))
-                {
-                    updater(dia, resultado);
-                    this.Cell(columnIndex, rowIndex).Value = resultado;
-                }
-                else
-                {
-                    MessageBox.Show("Valor não válido!", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    updater(dia, null);
-                    this.Cell(columnIndex, rowIndex).Value = null;
-                }
-            }
-
-            this.Rows[rowIndex].Cells[Nomes.OBJETO].Value = dia;
-
-            var coeficiente = dia.Coeficiente(this.config.HoraInicio, this.config.HoraFim);
-
-            this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS].Value = coeficiente.HasValue ? coeficiente.Value.Negate().Descricao() : null;
-            this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS].Style.ForeColor = coeficiente.HasValue ? (coeficiente.Value < new TimeSpan(8, 0, 0) ? Color.Blue : Color.Red) : Color.Black;
-
-            this.Rows[rowIndex].Cells[Nomes.CALCULO_TEMPO_ALMOCO].Value = dia.Almoco.TempoTotal().Descricao();
-            this.Rows[rowIndex].Cells[Nomes.CALCULO_HORAS_TRABALHADAS].Value = this.CalculoServico.TotalHorasTrabalhadas(dia);
-            this.Refresh();
-        }
-
-        private void UpdateValor(int rowIndex)
-        {
-            var dia = (DiaTrabalho)this.Rows[rowIndex].Cells[Nomes.OBJETO].Value;
-
-            if (this.Rows[rowIndex].Cells[Nomes.ALMOCO_VALOR].Value != null)
-                dia.ValorAlmoco = (decimal)this.Rows[rowIndex].Cells[Nomes.ALMOCO_VALOR].Value;
-            else
-                dia.ValorAlmoco = null;
-
-            this.Rows[rowIndex].Cells[Nomes.OBJETO].Value = dia;
-        }
-
-        private void UpdateFalta(int rowIndex)
-        {
-            var dia = (DiaTrabalho)this.Rows[rowIndex].Cells[Nomes.OBJETO].Value;
-
-            dia.Falta = (bool)this.Rows[rowIndex].Cells[Nomes.FALTA].Value;
-
-            this.Rows[rowIndex].Cells[Nomes.OBJETO].Value = dia;
-        }
-
-        private DataGridViewCell Cell(int columnIndex, int rowIndex)
-        {
-            return this.Rows[rowIndex].Cells[columnIndex];
+            base.OnCellEndEdit(e);
         }
 
         protected override void OnCellContentClick(DataGridViewCellEventArgs e)
         {
             base.OnCellContentClick(e);
-            if (this.Columns[e.ColumnIndex].Name == Nomes.FALTA)
+            if (this.Columns[e.ColumnIndex].Name == Colunas.FALTA)
             {
                 this.CurrentCell = this[0, e.RowIndex];
                 this.CurrentCell.Selected = false;
@@ -300,24 +321,7 @@ namespace ControlePontos.Control
                 this.CurrentCell.Selected = true;
             }
         }
-    }
 
-    internal class Cell : DataGridViewTextBoxCell
-    {
-        private static readonly TimeSpan tempo = new TimeSpan(8, 0, 0);
-
-        public Cell()
-        {
-            this.ValueType = typeof(TimeSpan?);
-        }
-
-        protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
-        {
-            var time = value as TimeSpan?;
-            if (time.HasValue)
-                cellStyle.ForeColor = time.Value < tempo ? Color.Red : Color.Blue;
-
-            base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-        }
+        #endregion
     }
 }
