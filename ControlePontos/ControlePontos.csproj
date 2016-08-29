@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstraper.cs" />
     <Compile Include="Control\DiaTrabalhoColumnConfiguracao.cs" />
     <Compile Include="Control\DiaTrabalhoCheckBoxControls.cs" />
     <Compile Include="Control\DiaTrabalhoTextBoxControls.cs" />
