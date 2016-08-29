@@ -62,6 +62,21 @@
             this.Backup_Label = new System.Windows.Forms.Label();
             this.Backup_ButtonAdd = new System.Windows.Forms.Button();
             this.Backup_ButtonRemove = new System.Windows.Forms.Button();
+            this.Cores_Tab = new System.Windows.Forms.TabPage();
+            this.Cores_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Cores_Label = new System.Windows.Forms.Label();
+            this.Cores_Label_Ferias = new System.Windows.Forms.Label();
+            this.Cores_Label_NaoTrabalho = new System.Windows.Forms.Label();
+            this.Cores_Label_Hoje = new System.Windows.Forms.Label();
+            this.Cores_Label_Falta = new System.Windows.Forms.Label();
+            this.Cores_Label_Feriado = new System.Windows.Forms.Label();
+            this.Cores_Label_DiaTrabalho = new System.Windows.Forms.Label();
+            this.Cores_Image_DiaTrabalho = new System.Windows.Forms.PictureBox();
+            this.Cores_Image_Ferias = new System.Windows.Forms.PictureBox();
+            this.Cores_Image_NaoTrabalho = new System.Windows.Forms.PictureBox();
+            this.Cores_Image_Feriado = new System.Windows.Forms.PictureBox();
+            this.Cores_Image_Falta = new System.Windows.Forms.PictureBox();
+            this.Cores_Image_Hoje = new System.Windows.Forms.PictureBox();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
@@ -76,6 +91,14 @@
             this.Ferias_Layout.SuspendLayout();
             this.Backup_Tab.SuspendLayout();
             this.Backup_Layout.SuspendLayout();
+            this.Cores_Tab.SuspendLayout();
+            this.Cores_Layout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_DiaTrabalho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Ferias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_NaoTrabalho)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).BeginInit();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -110,6 +133,7 @@
             this.Configuracao_TabControl.Controls.Add(this.Feriados_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Ferias_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Backup_Tab);
+            this.Configuracao_TabControl.Controls.Add(this.Cores_Tab);
             this.Configuracao_TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Configuracao_TabControl.Location = new System.Drawing.Point(3, 3);
             this.Configuracao_TabControl.Name = "Configuracao_TabControl";
@@ -492,6 +516,205 @@
             this.Backup_ButtonRemove.UseVisualStyleBackColor = true;
             this.Backup_ButtonRemove.Click += new System.EventHandler(this.Backup_ButtonRemove_Click);
             // 
+            // Cores_Tab
+            // 
+            this.Cores_Tab.Controls.Add(this.Cores_Layout);
+            this.Cores_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Cores_Tab.Name = "Cores_Tab";
+            this.Cores_Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.Cores_Tab.Size = new System.Drawing.Size(527, 237);
+            this.Cores_Tab.TabIndex = 4;
+            this.Cores_Tab.Text = "Cores";
+            this.Cores_Tab.UseVisualStyleBackColor = true;
+            // 
+            // Cores_Layout
+            // 
+            this.Cores_Layout.ColumnCount = 3;
+            this.Cores_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.Cores_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.Cores_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Cores_Layout.Controls.Add(this.Cores_Label, 0, 0);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_Ferias, 0, 2);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_NaoTrabalho, 0, 3);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_Hoje, 0, 6);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_Falta, 0, 5);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_Feriado, 0, 4);
+            this.Cores_Layout.Controls.Add(this.Cores_Label_DiaTrabalho, 0, 1);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_DiaTrabalho, 1, 1);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_Ferias, 1, 2);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_NaoTrabalho, 1, 3);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_Feriado, 1, 4);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_Falta, 1, 5);
+            this.Cores_Layout.Controls.Add(this.Cores_Image_Hoje, 1, 6);
+            this.Cores_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Layout.Location = new System.Drawing.Point(3, 3);
+            this.Cores_Layout.Name = "Cores_Layout";
+            this.Cores_Layout.RowCount = 8;
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Cores_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.Cores_Layout.Size = new System.Drawing.Size(521, 231);
+            this.Cores_Layout.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.Cores_Label.AutoSize = true;
+            this.Cores_Layout.SetColumnSpan(this.Cores_Label, 3);
+            this.Cores_Label.Location = new System.Drawing.Point(3, 0);
+            this.Cores_Label.Name = "label1";
+            this.Cores_Label.Size = new System.Drawing.Size(307, 13);
+            this.Cores_Label.TabIndex = 0;
+            this.Cores_Label.Text = "Selecione abaixo as cores que serão usadas na tabela principal";
+            // 
+            // label3
+            // 
+            this.Cores_Label_Ferias.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_Ferias.AutoSize = true;
+            this.Cores_Label_Ferias.Location = new System.Drawing.Point(3, 51);
+            this.Cores_Label_Ferias.Name = "label3";
+            this.Cores_Label_Ferias.Size = new System.Drawing.Size(35, 13);
+            this.Cores_Label_Ferias.TabIndex = 2;
+            this.Cores_Label_Ferias.Text = "Férias";
+            // 
+            // label4
+            // 
+            this.Cores_Label_NaoTrabalho.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_NaoTrabalho.AutoSize = true;
+            this.Cores_Label_NaoTrabalho.Location = new System.Drawing.Point(3, 76);
+            this.Cores_Label_NaoTrabalho.Name = "label4";
+            this.Cores_Label_NaoTrabalho.Size = new System.Drawing.Size(52, 13);
+            this.Cores_Label_NaoTrabalho.TabIndex = 5;
+            this.Cores_Label_NaoTrabalho.Text = "Dia Folga";
+            // 
+            // label5
+            // 
+            this.Cores_Label_Hoje.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_Hoje.AutoSize = true;
+            this.Cores_Label_Hoje.Location = new System.Drawing.Point(3, 151);
+            this.Cores_Label_Hoje.Name = "label5";
+            this.Cores_Label_Hoje.Size = new System.Drawing.Size(29, 13);
+            this.Cores_Label_Hoje.TabIndex = 6;
+            this.Cores_Label_Hoje.Text = "Hoje";
+            // 
+            // label6
+            // 
+            this.Cores_Label_Falta.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_Falta.AutoSize = true;
+            this.Cores_Label_Falta.Location = new System.Drawing.Point(3, 126);
+            this.Cores_Label_Falta.Name = "label6";
+            this.Cores_Label_Falta.Size = new System.Drawing.Size(30, 13);
+            this.Cores_Label_Falta.TabIndex = 7;
+            this.Cores_Label_Falta.Text = "Falta";
+            // 
+            // label7
+            // 
+            this.Cores_Label_Feriado.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_Feriado.AutoSize = true;
+            this.Cores_Label_Feriado.Location = new System.Drawing.Point(3, 101);
+            this.Cores_Label_Feriado.Name = "label7";
+            this.Cores_Label_Feriado.Size = new System.Drawing.Size(42, 13);
+            this.Cores_Label_Feriado.TabIndex = 8;
+            this.Cores_Label_Feriado.Text = "Feriado";
+            // 
+            // label2
+            // 
+            this.Cores_Label_DiaTrabalho.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Cores_Label_DiaTrabalho.AutoSize = true;
+            this.Cores_Label_DiaTrabalho.Location = new System.Drawing.Point(3, 26);
+            this.Cores_Label_DiaTrabalho.Name = "label2";
+            this.Cores_Label_DiaTrabalho.Size = new System.Drawing.Size(83, 13);
+            this.Cores_Label_DiaTrabalho.TabIndex = 1;
+            this.Cores_Label_DiaTrabalho.Text = "Dia de Trabalho";
+            // 
+            // Cores_Image_DiaTrabalho
+            // 
+            this.Cores_Image_DiaTrabalho.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_DiaTrabalho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_DiaTrabalho.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_DiaTrabalho.ErrorImage = null;
+            this.Cores_Image_DiaTrabalho.InitialImage = null;
+            this.Cores_Image_DiaTrabalho.Location = new System.Drawing.Point(97, 23);
+            this.Cores_Image_DiaTrabalho.Name = "Cores_Image_DiaTrabalho";
+            this.Cores_Image_DiaTrabalho.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_DiaTrabalho.TabIndex = 9;
+            this.Cores_Image_DiaTrabalho.TabStop = false;
+            this.Cores_Image_DiaTrabalho.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
+            // Cores_Image_Ferias
+            // 
+            this.Cores_Image_Ferias.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_Ferias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_Ferias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_Ferias.ErrorImage = null;
+            this.Cores_Image_Ferias.InitialImage = null;
+            this.Cores_Image_Ferias.Location = new System.Drawing.Point(97, 48);
+            this.Cores_Image_Ferias.Name = "Cores_Image_Ferias";
+            this.Cores_Image_Ferias.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_Ferias.TabIndex = 9;
+            this.Cores_Image_Ferias.TabStop = false;
+            this.Cores_Image_Ferias.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
+            // Cores_Image_NaoTrabalho
+            // 
+            this.Cores_Image_NaoTrabalho.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_NaoTrabalho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_NaoTrabalho.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_NaoTrabalho.ErrorImage = null;
+            this.Cores_Image_NaoTrabalho.InitialImage = null;
+            this.Cores_Image_NaoTrabalho.Location = new System.Drawing.Point(97, 73);
+            this.Cores_Image_NaoTrabalho.Name = "Cores_Image_NaoTrabalho";
+            this.Cores_Image_NaoTrabalho.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_NaoTrabalho.TabIndex = 9;
+            this.Cores_Image_NaoTrabalho.TabStop = false;
+            this.Cores_Image_NaoTrabalho.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
+            // Cores_Image_Feriado
+            // 
+            this.Cores_Image_Feriado.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_Feriado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_Feriado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_Feriado.ErrorImage = null;
+            this.Cores_Image_Feriado.InitialImage = null;
+            this.Cores_Image_Feriado.Location = new System.Drawing.Point(97, 98);
+            this.Cores_Image_Feriado.Name = "Cores_Image_Feriado";
+            this.Cores_Image_Feriado.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_Feriado.TabIndex = 9;
+            this.Cores_Image_Feriado.TabStop = false;
+            this.Cores_Image_Feriado.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
+            // Cores_Image_Falta
+            // 
+            this.Cores_Image_Falta.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_Falta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_Falta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_Falta.ErrorImage = null;
+            this.Cores_Image_Falta.InitialImage = null;
+            this.Cores_Image_Falta.Location = new System.Drawing.Point(97, 123);
+            this.Cores_Image_Falta.Name = "Cores_Image_Falta";
+            this.Cores_Image_Falta.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_Falta.TabIndex = 9;
+            this.Cores_Image_Falta.TabStop = false;
+            this.Cores_Image_Falta.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
+            // Cores_Image_Hoje
+            // 
+            this.Cores_Image_Hoje.BackColor = System.Drawing.Color.Silver;
+            this.Cores_Image_Hoje.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cores_Image_Hoje.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cores_Image_Hoje.ErrorImage = null;
+            this.Cores_Image_Hoje.InitialImage = null;
+            this.Cores_Image_Hoje.Location = new System.Drawing.Point(97, 148);
+            this.Cores_Image_Hoje.Name = "Cores_Image_Hoje";
+            this.Cores_Image_Hoje.Size = new System.Drawing.Size(63, 19);
+            this.Cores_Image_Hoje.TabIndex = 9;
+            this.Cores_Image_Hoje.TabStop = false;
+            this.Cores_Image_Hoje.Click += new System.EventHandler(this.Cores_Image_Click);
+            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,6 +744,15 @@
             this.Backup_Tab.ResumeLayout(false);
             this.Backup_Layout.ResumeLayout(false);
             this.Backup_Layout.PerformLayout();
+            this.Cores_Tab.ResumeLayout(false);
+            this.Cores_Layout.ResumeLayout(false);
+            this.Cores_Layout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_DiaTrabalho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Ferias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_NaoTrabalho)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -556,16 +788,30 @@
 
         private System.Windows.Forms.TableLayoutPanel Geral_Layout;
         private System.Windows.Forms.TabPage Geral_Tab;
-
         private System.Windows.Forms.CheckedListBox Geral_DiasTrabalho_ListaCheckbox;
         private System.Windows.Forms.Label Geral_DiasTrabalho_Label;
         private System.Windows.Forms.TableLayoutPanel Geral_DiasTrabalho_Layout;
         private System.Windows.Forms.GroupBox Geral_DiasTrabalho_Group;
-
         private System.Windows.Forms.GroupBox Geral_Horario_Group;
         private System.Windows.Forms.Label Geral_Horario_Label;
         private System.Windows.Forms.MaskedTextBox Geral_Horario_Final;
         private System.Windows.Forms.MaskedTextBox Geral_Horario_Inicio;
         private System.Windows.Forms.TableLayoutPanel Geral_Horario_Layout;
+
+        private System.Windows.Forms.Label Cores_Label;
+        private System.Windows.Forms.Label Cores_Label_DiaTrabalho;
+        private System.Windows.Forms.Label Cores_Label_Falta;
+        private System.Windows.Forms.Label Cores_Label_Feriado;
+        private System.Windows.Forms.Label Cores_Label_Ferias;
+        private System.Windows.Forms.Label Cores_Label_Hoje;
+        private System.Windows.Forms.Label Cores_Label_NaoTrabalho;
+        private System.Windows.Forms.PictureBox Cores_Image_DiaTrabalho;
+        private System.Windows.Forms.PictureBox Cores_Image_Falta;
+        private System.Windows.Forms.PictureBox Cores_Image_Feriado;
+        private System.Windows.Forms.PictureBox Cores_Image_Ferias;
+        private System.Windows.Forms.PictureBox Cores_Image_Hoje;
+        private System.Windows.Forms.PictureBox Cores_Image_NaoTrabalho;
+        private System.Windows.Forms.TableLayoutPanel Cores_Layout;
+        private System.Windows.Forms.TabPage Cores_Tab;
     }
 }

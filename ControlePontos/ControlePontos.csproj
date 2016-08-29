@@ -92,6 +92,7 @@
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="FormOpener.cs" />
+    <Compile Include="Model\CoresConfig.cs" />
     <Compile Include="Model\Resultado.cs" />
     <Compile Include="Native\ControlRenderer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

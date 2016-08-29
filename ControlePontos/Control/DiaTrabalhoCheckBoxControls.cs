@@ -17,28 +17,28 @@ namespace ControlePontos.Control
         {
             var config = this.Configuracao() ?? new DiaTrabalhoColumnConfiguracao();
 
-            var cor = ConfigApp.Cores.Normal;
+            var cor = appConfig.Cores.DiaNormal;
             var @readonly = false;
             
             if (dia.Falta)
-                cor = ConfigApp.Cores.Falta;
+                cor = appConfig.Cores.Falta;
             else if (!appConfig.DiasTrabalho.Contains(dia.Data.DayOfWeek))
             {
-                cor = ConfigApp.Cores.NaoTrabalho;
+                cor = appConfig.Cores.NaoTrabalho;
                 @readonly = true;
             }
             else if (appConfig.Feriados.Feriados.Contains(dia.Data.Date))
             {
-                cor = ConfigApp.Cores.Feriado;
+                cor = appConfig.Cores.Feriado;
                 @readonly = true;
             }
             else if (appConfig.Ferias.Contains(dia.Data.Date))
             {
-                cor = ConfigApp.Cores.Ferias;
+                cor = appConfig.Cores.Ferias;
                 @readonly = true;
             }
             else if (DateTime.Now.Date == dia.Data.Date)
-                cor = ConfigApp.Cores.Hoje;
+                cor = appConfig.Cores.Hoje;
 
             this.Style.BackColor = cor;
             this.SetReadonly(@readonly);

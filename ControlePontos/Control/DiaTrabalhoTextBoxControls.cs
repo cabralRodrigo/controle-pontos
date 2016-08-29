@@ -26,12 +26,12 @@ namespace ControlePontos.Control
             if (config != null && config.Colorizador != null)
                 customColor = config.Colorizador(appConfig, dia, this.Value);
 
-            this.Style.BackColor = ConfigApp.Cores.Normal;
+            this.Style.BackColor = appConfig.Cores.DiaNormal;
             this.SetReadonly(config.SempreReadOnly, config.SempreReadOnly, customColor);
 
             if (dia.Falta)
             {
-                this.Style.BackColor = ConfigApp.Cores.Falta;
+                this.Style.BackColor = appConfig.Cores.Falta;
                 this.SetReadonly(true, false, customColor);
             }
             else
@@ -42,25 +42,25 @@ namespace ControlePontos.Control
 
                 if (!appConfig.DiasTrabalho.Contains(dia.Data.DayOfWeek))
                 {
-                    cor = ConfigApp.Cores.NaoTrabalho;
+                    cor = appConfig.Cores.NaoTrabalho;
                     @readonly = true;
                     aplicarCustomColor = false;
                 }
                 else if (appConfig.Feriados.Feriados.Contains(dia.Data.Date))
                 {
-                    cor = ConfigApp.Cores.Feriado;
+                    cor = appConfig.Cores.Feriado;
                     @readonly = true;
                     aplicarCustomColor = false;
                 }
                 else if (appConfig.Ferias.Contains(dia.Data.Date))
                 {
-                    cor = ConfigApp.Cores.Ferias;
+                    cor = appConfig.Cores.Ferias;
                     @readonly = true;
                     aplicarCustomColor = false;
                 }
                 else if (DateTime.Now.Date == dia.Data.Date)
-                    cor = ConfigApp.Cores.Hoje;
-                
+                    cor = appConfig.Cores.Hoje;
+
 
                 this.Style.BackColor = cor;
                 this.SetReadonly(@readonly, aplicarCustomColor, customColor);

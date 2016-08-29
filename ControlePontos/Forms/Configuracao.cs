@@ -27,6 +27,7 @@ namespace ControlePontos.Forms
             this.Backup_Load(config);
             this.Feriados_Load(config);
             this.Ferias_Load(config);
+            this.Cores_Load(config);
         }
 
         private void ButtonSalvar_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace ControlePontos.Forms
             this.Backup_Save(config);
             this.Feriados_Save(config);
             this.Ferias_Save(config);
+            this.Cores_Save(config);
 
             this.configuracaoServico.SalvarConfiguracao(config);
 
@@ -293,6 +295,43 @@ namespace ControlePontos.Forms
             config.HoraFim = fim;
 
             return null;
+        }
+
+        #endregion
+
+        #region Cores
+
+        private void Cores_Load(ConfigApp config)
+        {
+            this.Cores_Image_DiaTrabalho.BackColor = config.Cores.DiaNormal;
+            this.Cores_Image_Ferias.BackColor = config.Cores.Ferias;
+            this.Cores_Image_NaoTrabalho.BackColor = config.Cores.NaoTrabalho;
+            this.Cores_Image_Feriado.BackColor = config.Cores.Feriado;
+            this.Cores_Image_Falta.BackColor = config.Cores.Falta;
+            this.Cores_Image_Hoje.BackColor = config.Cores.Hoje;
+        }
+
+        private void Cores_Save(ConfigApp config)
+        {
+            config.Cores.DiaNormal = this.Cores_Image_DiaTrabalho.BackColor;
+            config.Cores.Ferias = this.Cores_Image_Ferias.BackColor;
+            config.Cores.NaoTrabalho = this.Cores_Image_NaoTrabalho.BackColor;
+            config.Cores.Feriado = this.Cores_Image_Feriado.BackColor;
+            config.Cores.Falta = this.Cores_Image_Falta.BackColor;
+            config.Cores.Hoje = this.Cores_Image_Hoje.BackColor;
+        }
+
+        private void Cores_Image_Click(object sender, EventArgs e)
+        {
+            var box = sender as PictureBox;
+            if (box != null)
+            {
+                using (var dialog = new ColorDialog { Color = box.BackColor })
+                {
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                        box.BackColor = dialog.Color;
+                }
+            }
         }
 
         #endregion
