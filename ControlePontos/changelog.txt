@@ -1,4 +1,7 @@
-﻿29/08/2016 1.5.7:
+﻿29/08/2016 1.5.8:
+	* Separado lógica da injeção de dependência.
+
+29/08/2016 1.5.7:
 	* Adicionado código de segurança para quando o arquivo de configuração não existir.
 
 25/08/2016 1.5.6:
