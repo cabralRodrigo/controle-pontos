@@ -45,13 +45,22 @@ namespace ControlePontos.Forms
 
         private void InitDashboard(int ano, int mes, ConfigApp config = null)
         {
-            if (config == null)
-                this.config = this.configuracaoServico.ObterConfiguracao();
-            else
-                this.config = config;
-
             this.ano = ano;
             this.mes = mes;
+
+            var abrirConfiguracoes = false;
+            if (config == null)
+            {
+                this.config = this.configuracaoServico.ObterConfiguracao();
+                if (this.config == null)
+                {
+                    this.configuracaoServico.SalvarConfiguracao(this.configuracaoServico.GerarConfiguracaoPadrao());
+
+                    abrirConfiguracoes = MessageBox.Show("Essa parece ser a primeira vez que você abre o Controle de Pontos.\nDeseja customizar as configurações padrões?", "Controle de Pontos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                }
+            }
+            else
+                this.config = config;
 
             this.mesTrabalho = this.mesTrabalhoServico.ObterMesTrabalho(this.ano, this.mes);
             this.GridDias.CalculoServico = this.calculoServico;
@@ -60,6 +69,9 @@ namespace ControlePontos.Forms
             this.GridDias.BindDias(this.config, this.mesTrabalho.Dias);
 
             this.AtualizarTela();
+
+            if (abrirConfiguracoes)
+                this.Menu_Configuracoes_Click(this, EventArgs.Empty);
         }
 
         private void AtualizarTela()
