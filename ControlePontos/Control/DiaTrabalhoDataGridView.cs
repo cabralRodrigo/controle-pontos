@@ -91,7 +91,6 @@ namespace ControlePontos.Control
             }));
 
             this.Columns.Add(new CheckBoxColumn(Colunas.FALTA, "Falta"));
-            this.Columns[Colunas.FALTA].Width = 150;
 
             this.Columns.Add(new TextBoxColumn(Colunas.ENTRADA, "Entrada", new DiaTrabalhoColumnConfiguracao
             {
@@ -171,6 +170,10 @@ namespace ControlePontos.Control
 
             this.Columns.Add(Colunas.OBJETO, string.Empty);
             this.Columns[Colunas.OBJETO].Visible = false;
+
+            this.Columns[Colunas.DATA].Width = 80;
+            this.Columns[Colunas.DIA_SEMANA].Width = 110;
+            this.Columns[Colunas.FALTA].Width = 36;
 
             #endregion
 

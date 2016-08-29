@@ -1,4 +1,7 @@
-﻿29/08/2016 1.5.8:
+﻿29/08/2016 1.5.9:
+	* Ajustado tamanho das colunas na dashboard.
+
+29/08/2016 1.5.8:
 	* Separado lógica da injeção de dependência.
 
 29/08/2016 1.5.7:
