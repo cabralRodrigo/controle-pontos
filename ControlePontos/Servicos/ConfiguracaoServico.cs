@@ -1,17 +1,16 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using ControlePontos.Model;
+﻿using ControlePontos.Model;
 using Newtonsoft.Json;
+using System;
+using System.Text.RegularExpressions;
 
 namespace ControlePontos.Servicos
 {
-    internal delegate void ConfiguracaoMudouHandler(ConfigApp novaConfiguracao);
-
     internal interface IConfiguracaoServico
     {
-        event ConfiguracaoMudouHandler ConfiguracaoMudou;
+        event Action<ConfigApp> ConfiguracaoMudou;
         void SalvarConfiguracao(ConfigApp configuracao);
         ConfigApp ObterConfiguracao();
+        ConfigApp GerarConfiguracaoPadrao();
     }
 
     internal class ConfiguracaoServico : IConfiguracaoServico, IExportar
@@ -19,7 +18,7 @@ namespace ControlePontos.Servicos
         private static readonly Regex RegexArquivoConfiguracao = new Regex(@"^config-app\.\w+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private readonly IArmazenamentoServico armazenamento;
 
-        public event ConfiguracaoMudouHandler ConfiguracaoMudou;
+        public event Action<ConfigApp> ConfiguracaoMudou;
 
         public ConfiguracaoServico(IArmazenamentoServico armazenamento)
         {
@@ -30,7 +29,7 @@ namespace ControlePontos.Servicos
         {
             var json = this.armazenamento.Carregar("config-app");
             if (string.IsNullOrEmpty(json))
-                return new ConfigApp();
+                return null;
             else
                 return JsonConvert.DeserializeObject<ConfigApp>(json);
         }
@@ -38,9 +37,19 @@ namespace ControlePontos.Servicos
         public void SalvarConfiguracao(ConfigApp configuracao)
         {
             this.armazenamento.Salvar("config-app", JsonConvert.SerializeObject(configuracao, Formatting.Indented));
-            
+
             if (this.ConfiguracaoMudou != null)
                 this.ConfiguracaoMudou(configuracao);
+        }
+
+        public ConfigApp GerarConfiguracaoPadrao()
+        {
+            return new ConfigApp
+            {
+                HoraInicio = new TimeSpan(9, 0, 0),
+                HoraFim = new TimeSpan(18, 0, 0),
+                DiasTrabalho = new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday }
+            };
         }
 
         public Regex RegexArquivos()
