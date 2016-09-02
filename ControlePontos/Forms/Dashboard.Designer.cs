@@ -400,6 +400,8 @@
             this.TextBoxOffset.Name = "TextBoxOffset";
             this.TextBoxOffset.Size = new System.Drawing.Size(116, 20);
             this.TextBoxOffset.TabIndex = 42;
+            this.TextBoxOffset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxOffset_KeyDown);
+            this.TextBoxOffset.Leave += new System.EventHandler(this.TextBoxOffset_Leave);
             // 
             // LabelValorSodexo
             // 
@@ -417,6 +419,8 @@
             this.TextBoxSodexo.Name = "TextBoxSodexo";
             this.TextBoxSodexo.Size = new System.Drawing.Size(116, 20);
             this.TextBoxSodexo.TabIndex = 44;
+            this.TextBoxSodexo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxSodexo_KeyDown);
+            this.TextBoxSodexo.Leave += new System.EventHandler(this.TexBoxSodexo_Leave);
             // 
             // ButtonMesAno
             // 
@@ -601,11 +605,13 @@
             this.GridDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridDias.CalculoServico = null;
             this.GridDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridDias.ControlRenderer = null;
             this.GridDias.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridDias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.GridDias.Location = new System.Drawing.Point(3, 3);
             this.GridDias.MultiSelect = false;
             this.GridDias.Name = "GridDias";
+            this.GridDias.ParserServico = null;
             this.GridDias.RowHeadersVisible = false;
             this.Layout.SetRowSpan(this.GridDias, 2);
             this.GridDias.Size = new System.Drawing.Size(1190, 709);
