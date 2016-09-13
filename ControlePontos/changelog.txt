@@ -1,4 +1,7 @@
-﻿02/09/2016 1.6.1:
+﻿10/09/2016 1.6.2:
+	* Adicionada estatistica sobre a quantidade de horas total que o tfs do cliente deve ter.
+
+02/09/2016 1.6.1:
 	* Corrigido bug nos textboxs do dashboard, onde eles não estavam atualizando os dados e a tela.
 
 30/08/2016 1.6.0:

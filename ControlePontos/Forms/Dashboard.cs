@@ -86,6 +86,7 @@ namespace ControlePontos.Forms
             this.LabelAlmocoSaida.Text = this.calculoServico.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
             this.LabelAlmocoRetorno.Text = this.calculoServico.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
             this.LabelMediaTempoAlmoco.Text = this.calculoServico.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelTotalHorasTfs.Text = this.calculoServico.TotalHorasTfs(this.config, this.mesTrabalho).Descricao();
 
             this.LabelMediaValorAlmoco.Text = this.calculoServico.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
             this.LabelValorIdealDiario.Text = this.calculoServico.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");

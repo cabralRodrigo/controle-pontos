@@ -30,6 +30,8 @@ namespace ControlePontos.Servicos
         decimal ValorAtualTr(ConfigApp config, MesTrabalho mes);
 
         TimeSpan? TotalHorasTrabalhadas(DiaTrabalho dia);
+
+        TimeSpan TotalHorasTfs(ConfigApp config, MesTrabalho mesTrabalho);
     }
 
     internal class CalculoServico : ICalculoServico
@@ -108,6 +110,17 @@ namespace ControlePontos.Servicos
                 return null;
             else
                 return dia.Empresa.TempoTotal() - dia.Almoco.TempoTotal();
+        }
+
+        public TimeSpan TotalHorasTfs(ConfigApp config, MesTrabalho mesTrabalho)
+        {
+            var totalDias = this.Validate(mesTrabalho.Dias, config).Where(w => w.Data <= DateTime.Now).Count();
+            var minutosPorDia = Math.Round((config.HoraFim - config.HoraInicio).TotalMinutes);
+
+            //Remove a hora de almoço e também 1 hora de distração.
+            var descontos = ((ConfigApp.HORAS_ALMOCO + 1) * 60);
+
+            return new TimeSpan(0, Convert.ToInt32(minutosPorDia - descontos) * totalDias, 0);
         }
 
         private Dictionary<DateTime, TimeSpan?> CoeficienteDiario(ConfigApp config, MesTrabalho mes)
