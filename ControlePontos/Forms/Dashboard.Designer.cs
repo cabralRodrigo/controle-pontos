@@ -76,6 +76,9 @@
             this.Layout = new System.Windows.Forms.TableLayoutPanel();
             this.LayoutFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelSeparador10 = new System.Windows.Forms.Label();
+            this.LabelSeparador09 = new System.Windows.Forms.Label();
+            this.LabelTotalHorasTfsDisplay = new System.Windows.Forms.Label();
+            this.LabelTotalHorasTfs = new System.Windows.Forms.Label();
             this.LabelSeparador07 = new System.Windows.Forms.Label();
             this.LabelSeparador06 = new System.Windows.Forms.Label();
             this.LabelSeparador05 = new System.Windows.Forms.Label();
@@ -84,7 +87,7 @@
             this.LabelSeparador02 = new System.Windows.Forms.Label();
             this.LabelSeparador01 = new System.Windows.Forms.Label();
             this.LabelSeparador00 = new System.Windows.Forms.Label();
-            this.LabelSeparador09 = new System.Windows.Forms.Label();
+            this.LabelSeparador11 = new System.Windows.Forms.Label();
             this.LabelSeparador08 = new System.Windows.Forms.Label();
             this.GridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -215,7 +218,7 @@
             // LabelMediaEntradaDisplay
             // 
             this.LabelMediaEntradaDisplay.AutoSize = true;
-            this.LabelMediaEntradaDisplay.Location = new System.Drawing.Point(3, 78);
+            this.LabelMediaEntradaDisplay.Location = new System.Drawing.Point(3, 117);
             this.LabelMediaEntradaDisplay.Name = "LabelMediaEntradaDisplay";
             this.LabelMediaEntradaDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaEntradaDisplay.Size = new System.Drawing.Size(76, 13);
@@ -225,7 +228,7 @@
             // LabelMediaEntrada
             // 
             this.LabelMediaEntrada.AutoSize = true;
-            this.LabelMediaEntrada.Location = new System.Drawing.Point(3, 91);
+            this.LabelMediaEntrada.Location = new System.Drawing.Point(3, 130);
             this.LabelMediaEntrada.Name = "LabelMediaEntrada";
             this.LabelMediaEntrada.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaEntrada.Size = new System.Drawing.Size(83, 13);
@@ -253,7 +256,7 @@
             // LabelAlmocoRetorno
             // 
             this.LabelAlmocoRetorno.AutoSize = true;
-            this.LabelAlmocoRetorno.Location = new System.Drawing.Point(3, 208);
+            this.LabelAlmocoRetorno.Location = new System.Drawing.Point(3, 247);
             this.LabelAlmocoRetorno.Name = "LabelAlmocoRetorno";
             this.LabelAlmocoRetorno.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelAlmocoRetorno.Size = new System.Drawing.Size(90, 13);
@@ -263,7 +266,7 @@
             // LabelAlmocoRetornoDisplay
             // 
             this.LabelAlmocoRetornoDisplay.AutoSize = true;
-            this.LabelAlmocoRetornoDisplay.Location = new System.Drawing.Point(3, 195);
+            this.LabelAlmocoRetornoDisplay.Location = new System.Drawing.Point(3, 234);
             this.LabelAlmocoRetornoDisplay.Name = "LabelAlmocoRetornoDisplay";
             this.LabelAlmocoRetornoDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelAlmocoRetornoDisplay.Size = new System.Drawing.Size(115, 13);
@@ -273,7 +276,7 @@
             // LabelAlmocoSaida
             // 
             this.LabelAlmocoSaida.AutoSize = true;
-            this.LabelAlmocoSaida.Location = new System.Drawing.Point(3, 169);
+            this.LabelAlmocoSaida.Location = new System.Drawing.Point(3, 208);
             this.LabelAlmocoSaida.Name = "LabelAlmocoSaida";
             this.LabelAlmocoSaida.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelAlmocoSaida.Size = new System.Drawing.Size(79, 13);
@@ -283,7 +286,7 @@
             // LabelMediaSaidaDisplay
             // 
             this.LabelMediaSaidaDisplay.AutoSize = true;
-            this.LabelMediaSaidaDisplay.Location = new System.Drawing.Point(3, 117);
+            this.LabelMediaSaidaDisplay.Location = new System.Drawing.Point(3, 156);
             this.LabelMediaSaidaDisplay.Name = "LabelMediaSaidaDisplay";
             this.LabelMediaSaidaDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaSaidaDisplay.Size = new System.Drawing.Size(66, 13);
@@ -293,7 +296,7 @@
             // LabelMediaSaida
             // 
             this.LabelMediaSaida.AutoSize = true;
-            this.LabelMediaSaida.Location = new System.Drawing.Point(3, 130);
+            this.LabelMediaSaida.Location = new System.Drawing.Point(3, 169);
             this.LabelMediaSaida.Name = "LabelMediaSaida";
             this.LabelMediaSaida.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaSaida.Size = new System.Drawing.Size(73, 13);
@@ -303,7 +306,7 @@
             // LabelAlmocoSaidaDisplay
             // 
             this.LabelAlmocoSaidaDisplay.AutoSize = true;
-            this.LabelAlmocoSaidaDisplay.Location = new System.Drawing.Point(3, 156);
+            this.LabelAlmocoSaidaDisplay.Location = new System.Drawing.Point(3, 195);
             this.LabelAlmocoSaidaDisplay.Name = "LabelAlmocoSaidaDisplay";
             this.LabelAlmocoSaidaDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelAlmocoSaidaDisplay.Size = new System.Drawing.Size(104, 13);
@@ -313,7 +316,7 @@
             // LabelMediaValorAlmocoDisplay
             // 
             this.LabelMediaValorAlmocoDisplay.AutoSize = true;
-            this.LabelMediaValorAlmocoDisplay.Location = new System.Drawing.Point(3, 234);
+            this.LabelMediaValorAlmocoDisplay.Location = new System.Drawing.Point(3, 273);
             this.LabelMediaValorAlmocoDisplay.Name = "LabelMediaValorAlmocoDisplay";
             this.LabelMediaValorAlmocoDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaValorAlmocoDisplay.Size = new System.Drawing.Size(110, 13);
@@ -323,7 +326,7 @@
             // LabelMediaTempoAlmoco
             // 
             this.LabelMediaTempoAlmoco.AutoSize = true;
-            this.LabelMediaTempoAlmoco.Location = new System.Drawing.Point(3, 247);
+            this.LabelMediaTempoAlmoco.Location = new System.Drawing.Point(3, 286);
             this.LabelMediaTempoAlmoco.Name = "LabelMediaTempoAlmoco";
             this.LabelMediaTempoAlmoco.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.LabelMediaTempoAlmoco.Size = new System.Drawing.Size(114, 13);
@@ -333,7 +336,7 @@
             // LabelMedioValorAlmocoDisplay
             // 
             this.LabelMedioValorAlmocoDisplay.AutoSize = true;
-            this.LabelMedioValorAlmocoDisplay.Location = new System.Drawing.Point(3, 273);
+            this.LabelMedioValorAlmocoDisplay.Location = new System.Drawing.Point(3, 312);
             this.LabelMedioValorAlmocoDisplay.Name = "LabelMedioValorAlmocoDisplay";
             this.LabelMedioValorAlmocoDisplay.Size = new System.Drawing.Size(116, 13);
             this.LabelMedioValorAlmocoDisplay.TabIndex = 31;
@@ -342,7 +345,7 @@
             // LabelMediaValorAlmoco
             // 
             this.LabelMediaValorAlmoco.AutoSize = true;
-            this.LabelMediaValorAlmoco.Location = new System.Drawing.Point(3, 286);
+            this.LabelMediaValorAlmoco.Location = new System.Drawing.Point(3, 325);
             this.LabelMediaValorAlmoco.Name = "LabelMediaValorAlmoco";
             this.LabelMediaValorAlmoco.Size = new System.Drawing.Size(105, 13);
             this.LabelMediaValorAlmoco.TabIndex = 32;
@@ -351,7 +354,7 @@
             // LabelValorTotalTrDisplay
             // 
             this.LabelValorTotalTrDisplay.AutoSize = true;
-            this.LabelValorTotalTrDisplay.Location = new System.Drawing.Point(3, 312);
+            this.LabelValorTotalTrDisplay.Location = new System.Drawing.Point(3, 351);
             this.LabelValorTotalTrDisplay.Name = "LabelValorTotalTrDisplay";
             this.LabelValorTotalTrDisplay.Size = new System.Drawing.Size(110, 13);
             this.LabelValorTotalTrDisplay.TabIndex = 33;
@@ -360,7 +363,7 @@
             // LabelValorTotalTr
             // 
             this.LabelValorTotalTr.AutoSize = true;
-            this.LabelValorTotalTr.Location = new System.Drawing.Point(3, 325);
+            this.LabelValorTotalTr.Location = new System.Drawing.Point(3, 364);
             this.LabelValorTotalTr.Name = "LabelValorTotalTr";
             this.LabelValorTotalTr.Size = new System.Drawing.Size(80, 13);
             this.LabelValorTotalTr.TabIndex = 34;
@@ -369,7 +372,7 @@
             // LabelValorIdealDiarioDisplay
             // 
             this.LabelValorIdealDiarioDisplay.AutoSize = true;
-            this.LabelValorIdealDiarioDisplay.Location = new System.Drawing.Point(3, 351);
+            this.LabelValorIdealDiarioDisplay.Location = new System.Drawing.Point(3, 390);
             this.LabelValorIdealDiarioDisplay.Name = "LabelValorIdealDiarioDisplay";
             this.LabelValorIdealDiarioDisplay.Size = new System.Drawing.Size(87, 13);
             this.LabelValorIdealDiarioDisplay.TabIndex = 35;
@@ -378,7 +381,7 @@
             // LabelValorIdealDiario
             // 
             this.LabelValorIdealDiario.AutoSize = true;
-            this.LabelValorIdealDiario.Location = new System.Drawing.Point(3, 364);
+            this.LabelValorIdealDiario.Location = new System.Drawing.Point(3, 403);
             this.LabelValorIdealDiario.Name = "LabelValorIdealDiario";
             this.LabelValorIdealDiario.Size = new System.Drawing.Size(91, 13);
             this.LabelValorIdealDiario.TabIndex = 36;
@@ -387,7 +390,7 @@
             // LabelOffsetCoeficiente
             // 
             this.LabelOffsetCoeficiente.AutoSize = true;
-            this.LabelOffsetCoeficiente.Location = new System.Drawing.Point(3, 390);
+            this.LabelOffsetCoeficiente.Location = new System.Drawing.Point(3, 429);
             this.LabelOffsetCoeficiente.Name = "LabelOffsetCoeficiente";
             this.LabelOffsetCoeficiente.Size = new System.Drawing.Size(116, 13);
             this.LabelOffsetCoeficiente.TabIndex = 41;
@@ -396,7 +399,7 @@
             // TextBoxOffset
             // 
             this.TextBoxOffset.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TextBoxOffset.Location = new System.Drawing.Point(3, 406);
+            this.TextBoxOffset.Location = new System.Drawing.Point(3, 445);
             this.TextBoxOffset.Name = "TextBoxOffset";
             this.TextBoxOffset.Size = new System.Drawing.Size(116, 20);
             this.TextBoxOffset.TabIndex = 42;
@@ -406,7 +409,7 @@
             // LabelValorSodexo
             // 
             this.LabelValorSodexo.AutoSize = true;
-            this.LabelValorSodexo.Location = new System.Drawing.Point(3, 442);
+            this.LabelValorSodexo.Location = new System.Drawing.Point(3, 481);
             this.LabelValorSodexo.Name = "LabelValorSodexo";
             this.LabelValorSodexo.Size = new System.Drawing.Size(116, 13);
             this.LabelValorSodexo.TabIndex = 43;
@@ -415,7 +418,7 @@
             // TextBoxSodexo
             // 
             this.TextBoxSodexo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TextBoxSodexo.Location = new System.Drawing.Point(3, 458);
+            this.TextBoxSodexo.Location = new System.Drawing.Point(3, 497);
             this.TextBoxSodexo.Name = "TextBoxSodexo";
             this.TextBoxSodexo.Size = new System.Drawing.Size(116, 20);
             this.TextBoxSodexo.TabIndex = 44;
@@ -460,6 +463,9 @@
             this.LayoutFlow.Controls.Add(this.LabelSeparador10);
             this.LayoutFlow.Controls.Add(this.LabelCodicienteDiaDisplay);
             this.LayoutFlow.Controls.Add(this.LabelCoeficientePorDia);
+            this.LayoutFlow.Controls.Add(this.LabelSeparador09);
+            this.LayoutFlow.Controls.Add(this.LabelTotalHorasTfsDisplay);
+            this.LayoutFlow.Controls.Add(this.LabelTotalHorasTfs);
             this.LayoutFlow.Controls.Add(this.LabelSeparador07);
             this.LayoutFlow.Controls.Add(this.LabelMediaEntradaDisplay);
             this.LayoutFlow.Controls.Add(this.LabelMediaEntrada);
@@ -484,7 +490,7 @@
             this.LayoutFlow.Controls.Add(this.LabelSeparador00);
             this.LayoutFlow.Controls.Add(this.LabelValorIdealDiarioDisplay);
             this.LayoutFlow.Controls.Add(this.LabelValorIdealDiario);
-            this.LayoutFlow.Controls.Add(this.LabelSeparador09);
+            this.LayoutFlow.Controls.Add(this.LabelSeparador11);
             this.LayoutFlow.Controls.Add(this.LabelOffsetCoeficiente);
             this.LayoutFlow.Controls.Add(this.TextBoxOffset);
             this.LayoutFlow.Controls.Add(this.LabelSeparador08);
@@ -507,10 +513,37 @@
             this.LabelSeparador10.TabIndex = 47;
             this.LabelSeparador10.Text = "separator";
             // 
+            // LabelSeparador09
+            // 
+            this.LabelSeparador09.AutoSize = true;
+            this.LabelSeparador09.Location = new System.Drawing.Point(3, 65);
+            this.LabelSeparador09.Name = "LabelSeparador09";
+            this.LabelSeparador09.Size = new System.Drawing.Size(51, 13);
+            this.LabelSeparador09.TabIndex = 47;
+            this.LabelSeparador09.Text = "separator";
+            // 
+            // LabelTotalHorasTfsDisplay
+            // 
+            this.LabelTotalHorasTfsDisplay.AutoSize = true;
+            this.LabelTotalHorasTfsDisplay.Location = new System.Drawing.Point(3, 78);
+            this.LabelTotalHorasTfsDisplay.Name = "LabelTotalHorasTfsDisplay";
+            this.LabelTotalHorasTfsDisplay.Size = new System.Drawing.Size(100, 13);
+            this.LabelTotalHorasTfsDisplay.TabIndex = 49;
+            this.LabelTotalHorasTfsDisplay.Text = "Total de Horas TFS";
+            // 
+            // LabelTotalHorasTfs
+            // 
+            this.LabelTotalHorasTfs.AutoSize = true;
+            this.LabelTotalHorasTfs.Location = new System.Drawing.Point(3, 91);
+            this.LabelTotalHorasTfs.Name = "LabelTotalHorasTfs";
+            this.LabelTotalHorasTfs.Size = new System.Drawing.Size(84, 13);
+            this.LabelTotalHorasTfs.TabIndex = 50;
+            this.LabelTotalHorasTfs.Text = "lblTotalHorasTfs";
+            // 
             // LabelSeparador07
             // 
             this.LabelSeparador07.AutoSize = true;
-            this.LabelSeparador07.Location = new System.Drawing.Point(3, 65);
+            this.LabelSeparador07.Location = new System.Drawing.Point(3, 104);
             this.LabelSeparador07.Name = "LabelSeparador07";
             this.LabelSeparador07.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador07.TabIndex = 47;
@@ -519,7 +552,7 @@
             // LabelSeparador06
             // 
             this.LabelSeparador06.AutoSize = true;
-            this.LabelSeparador06.Location = new System.Drawing.Point(3, 104);
+            this.LabelSeparador06.Location = new System.Drawing.Point(3, 143);
             this.LabelSeparador06.Name = "LabelSeparador06";
             this.LabelSeparador06.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador06.TabIndex = 47;
@@ -528,7 +561,7 @@
             // LabelSeparador05
             // 
             this.LabelSeparador05.AutoSize = true;
-            this.LabelSeparador05.Location = new System.Drawing.Point(3, 143);
+            this.LabelSeparador05.Location = new System.Drawing.Point(3, 182);
             this.LabelSeparador05.Name = "LabelSeparador05";
             this.LabelSeparador05.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador05.TabIndex = 47;
@@ -537,7 +570,7 @@
             // LabelSeparador04
             // 
             this.LabelSeparador04.AutoSize = true;
-            this.LabelSeparador04.Location = new System.Drawing.Point(3, 182);
+            this.LabelSeparador04.Location = new System.Drawing.Point(3, 221);
             this.LabelSeparador04.Name = "LabelSeparador04";
             this.LabelSeparador04.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador04.TabIndex = 47;
@@ -546,7 +579,7 @@
             // LabelSeparador03
             // 
             this.LabelSeparador03.AutoSize = true;
-            this.LabelSeparador03.Location = new System.Drawing.Point(3, 221);
+            this.LabelSeparador03.Location = new System.Drawing.Point(3, 260);
             this.LabelSeparador03.Name = "LabelSeparador03";
             this.LabelSeparador03.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador03.TabIndex = 47;
@@ -555,7 +588,7 @@
             // LabelSeparador02
             // 
             this.LabelSeparador02.AutoSize = true;
-            this.LabelSeparador02.Location = new System.Drawing.Point(3, 260);
+            this.LabelSeparador02.Location = new System.Drawing.Point(3, 299);
             this.LabelSeparador02.Name = "LabelSeparador02";
             this.LabelSeparador02.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador02.TabIndex = 47;
@@ -564,7 +597,7 @@
             // LabelSeparador01
             // 
             this.LabelSeparador01.AutoSize = true;
-            this.LabelSeparador01.Location = new System.Drawing.Point(3, 299);
+            this.LabelSeparador01.Location = new System.Drawing.Point(3, 338);
             this.LabelSeparador01.Name = "LabelSeparador01";
             this.LabelSeparador01.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador01.TabIndex = 47;
@@ -573,25 +606,25 @@
             // LabelSeparador00
             // 
             this.LabelSeparador00.AutoSize = true;
-            this.LabelSeparador00.Location = new System.Drawing.Point(3, 338);
+            this.LabelSeparador00.Location = new System.Drawing.Point(3, 377);
             this.LabelSeparador00.Name = "LabelSeparador00";
             this.LabelSeparador00.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador00.TabIndex = 47;
             this.LabelSeparador00.Text = "separator";
             // 
-            // LabelSeparador09
+            // LabelSeparador11
             // 
-            this.LabelSeparador09.AutoSize = true;
-            this.LabelSeparador09.Location = new System.Drawing.Point(3, 377);
-            this.LabelSeparador09.Name = "LabelSeparador09";
-            this.LabelSeparador09.Size = new System.Drawing.Size(51, 13);
-            this.LabelSeparador09.TabIndex = 47;
-            this.LabelSeparador09.Text = "separator";
+            this.LabelSeparador11.AutoSize = true;
+            this.LabelSeparador11.Location = new System.Drawing.Point(3, 416);
+            this.LabelSeparador11.Name = "LabelSeparador11";
+            this.LabelSeparador11.Size = new System.Drawing.Size(51, 13);
+            this.LabelSeparador11.TabIndex = 48;
+            this.LabelSeparador11.Text = "separator";
             // 
             // LabelSeparador08
             // 
             this.LabelSeparador08.AutoSize = true;
-            this.LabelSeparador08.Location = new System.Drawing.Point(3, 429);
+            this.LabelSeparador08.Location = new System.Drawing.Point(3, 468);
             this.LabelSeparador08.Name = "LabelSeparador08";
             this.LabelSeparador08.Size = new System.Drawing.Size(51, 13);
             this.LabelSeparador08.TabIndex = 47;
@@ -781,6 +814,9 @@
         private System.Windows.Forms.Label LabelValorSodexo;
         private System.Windows.Forms.Label LabelValorTotalTr;
         private System.Windows.Forms.Label LabelValorTotalTrDisplay;
+        private System.Windows.Forms.Label LabelTotalHorasTfsDisplay;
+        private System.Windows.Forms.Label LabelTotalHorasTfs;
+        private System.Windows.Forms.Label LabelSeparador11;
         private System.Windows.Forms.MenuStrip Menu;
         private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.TableLayoutPanel Layout;
