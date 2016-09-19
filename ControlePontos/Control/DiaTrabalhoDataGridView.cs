@@ -175,7 +175,7 @@ namespace ControlePontos.Control
             this.Columns[Colunas.DIA_SEMANA].Width = 110;
             this.Columns[Colunas.FALTA].Width = 36;
 
-            #endregion
+            #endregion Colunas
 
             foreach (var dia in dias)
             {
@@ -244,14 +244,17 @@ namespace ControlePontos.Control
                 case Colunas.ENTRADA:
                     this[rowIndex].Empresa.Entrada = timeSpan;
                     break;
+
                 case Colunas.ALMOCO_SAIDA:
                     atualizarTempoAlmoco = true;
                     this[rowIndex].Almoco.Entrada = timeSpan;
                     break;
+
                 case Colunas.ALMOCO_RETORNO:
                     atualizarTempoAlmoco = true;
                     this[rowIndex].Almoco.Saida = timeSpan;
                     break;
+
                 case Colunas.SAIDA:
                     this[rowIndex].Empresa.Saida = timeSpan;
                     break;
@@ -325,6 +328,6 @@ namespace ControlePontos.Control
             }
         }
 
-        #endregion
+        #endregion Eventos
     }
 }

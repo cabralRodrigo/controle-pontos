@@ -7,6 +7,7 @@ namespace ControlePontos.Control
         object Value { get; set; }
 
         void AddedCell(ConfigApp appConfig, DiaTrabalho dia);
+
         void UpdateCell(ConfigApp appConfig, DiaTrabalho dia);
     }
 }

@@ -16,8 +16,7 @@ namespace ControlePontos.Dialog
             this.InicializarDialog();
         }
 
-        public MonthPicker(DateTime dataAtual)
-            : this()
+        public MonthPicker(DateTime dataAtual) : this()
         {
             this.DataSelecionada = dataAtual;
             this.InicializarDialog();
@@ -73,12 +72,12 @@ namespace ControlePontos.Dialog
             }
         }
 
-        #endregion Eventos
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        #endregion Eventos
     }
 }

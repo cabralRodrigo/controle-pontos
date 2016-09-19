@@ -9,7 +9,9 @@ namespace ControlePontos.Servicos
     internal interface IMesTrabalhoServico
     {
         MesTrabalho ObterMesTrabalho(int ano, int mes, bool gerarMesSeNaoDisponivel = true);
+
         void SalvarMesTrabalho(int ano, int mes, MesTrabalho mesTrabalho);
+
         MesTrabalho GerarMesTrabalho(int ano, int mes);
     }
 

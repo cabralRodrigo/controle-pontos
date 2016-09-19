@@ -265,6 +265,7 @@ namespace ControlePontos.Forms
                             case ExportacaoResulado.NenhumDadoEncontrado:
                                 MessageBox.Show("Nenhum dado foi encontrado para realizar a exportação.", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 break;
+
                             case ExportacaoResulado.DriveNaoDisponivel:
                                 MessageBox.Show("Não foi possível acessar o drive onde o arquivo de exportação seria gravado.", "Exportação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 break;
@@ -274,7 +275,7 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Exportação
 
         private void Menu_Dados_ImportarCoeficiente_Click(object sender, EventArgs e)
         {
@@ -313,9 +314,11 @@ namespace ControlePontos.Forms
                     case BackupResultado.NenhumDadoEncontrado:
                         MessageBox.Show("Não foi encontrado nenhum dado para realizar o backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
+
                     case BackupResultado.NenhumDiretorioParaBackup:
                         MessageBox.Show("Não há nenhum diretório configurado no processo de backup.\nEntre no menu de configurações, na aba de Backup.", "Backup", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         break;
+
                     case BackupResultado.DriveNaoDisponivel:
                         if (MessageBox.Show("O seguinte drive não esta disponível no momento: " + res.ValorMensagem + "\nDeseja tentar novamente?", "Backup", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             this.Menu_Dados_RealizarBackup_Click(sender, e);
@@ -331,15 +334,15 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Dados
 
         private void Menu_Configuracoes_Click(object sender, EventArgs e)
         {
             this.formOpener.ShowModalForm<Configuracao>();
         }
 
-        #endregion
+        #endregion Menu
 
-        #endregion
+        #endregion Eventos
     }
 }

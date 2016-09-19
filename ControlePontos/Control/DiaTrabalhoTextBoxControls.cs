@@ -61,7 +61,6 @@ namespace ControlePontos.Control
                 else if (DateTime.Now.Date == dia.Data.Date)
                     cor = appConfig.Cores.Hoje;
 
-
                 this.Style.BackColor = cor;
                 this.SetReadonly(@readonly, aplicarCustomColor, customColor);
             }

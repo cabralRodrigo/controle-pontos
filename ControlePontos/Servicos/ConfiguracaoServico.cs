@@ -8,8 +8,11 @@ namespace ControlePontos.Servicos
     internal interface IConfiguracaoServico
     {
         event Action<ConfigApp> ConfiguracaoMudou;
+
         void SalvarConfiguracao(ConfigApp configuracao);
+
         ConfigApp ObterConfiguracao();
+
         ConfigApp GerarConfiguracaoPadrao();
     }
 
@@ -37,9 +40,7 @@ namespace ControlePontos.Servicos
         public void SalvarConfiguracao(ConfigApp configuracao)
         {
             this.armazenamento.Salvar("config-app", JsonConvert.SerializeObject(configuracao, Formatting.Indented));
-
-            if (this.ConfiguracaoMudou != null)
-                this.ConfiguracaoMudou(configuracao);
+            this.ConfiguracaoMudou?.Invoke(configuracao);
         }
 
         public ConfigApp GerarConfiguracaoPadrao()

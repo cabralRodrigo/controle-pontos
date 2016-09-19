@@ -2,7 +2,6 @@
 using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -97,7 +96,7 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Backup
 
         #region Feriados & Férias
 
@@ -133,7 +132,7 @@ namespace ControlePontos.Forms
             Configuracao.FeriadosFerias_Calendario_DateSelected(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
         }
 
-        #endregion
+        #endregion Feriados
 
         #region Férias
 
@@ -167,7 +166,7 @@ namespace ControlePontos.Forms
             Configuracao.FeriadosFerias_Calendario_DateSelected(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
         }
 
-        #endregion
+        #endregion Férias
 
         #region Lógica
 
@@ -245,9 +244,9 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Lógica
 
-        #endregion
+        #endregion Feriados & Férias
 
         #region Geral
 
@@ -297,7 +296,7 @@ namespace ControlePontos.Forms
             return null;
         }
 
-        #endregion
+        #endregion Geral
 
         #region Cores
 
@@ -334,6 +333,6 @@ namespace ControlePontos.Forms
             }
         }
 
-        #endregion
+        #endregion Cores
     }
 }
