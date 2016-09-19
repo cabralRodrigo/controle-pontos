@@ -1,4 +1,7 @@
-﻿10/09/2016 1.6.2:
+﻿19/09/2016 1.6.3:
+	* Formatação geral de código.
+
+10/09/2016 1.6.2:
 	* Adicionada estatistica sobre a quantidade de horas total que o tfs do cliente deve ter.
 
 02/09/2016 1.6.1:

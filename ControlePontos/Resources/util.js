@@ -1,7 +1,6 @@
 ﻿var util;
 (function (util) {
     util.secondsToTimeSpan = function (seconds, plusSignal) {
-
         var addSignal = seconds < 0;
 
         var date = new Date(null);

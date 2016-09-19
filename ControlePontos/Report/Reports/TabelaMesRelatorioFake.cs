@@ -7,7 +7,6 @@ namespace ControlePontos.Report.Reports
 {
     internal class TabelaMesRelatorioFake : TabelaMesRelatorio
     {
-
         public override string Name
         {
             get

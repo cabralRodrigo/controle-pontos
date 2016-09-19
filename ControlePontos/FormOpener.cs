@@ -10,6 +10,7 @@ namespace ControlePontos
     public interface IFormOpener
     {
         void ShowModelessForm<TForm>() where TForm : Form;
+
         DialogResult ShowModalForm<TForm>() where TForm : Form;
     }
 
@@ -29,9 +30,9 @@ namespace ControlePontos
             Form form;
             if (this.openedForms.ContainsKey(typeof(TForm)))
             {
-                // a form can be held open in the background, somewhat like 
+                // a form can be held open in the background, somewhat like
                 // singleton behavior, and reopened/reshown this way
-                // when a form is 'closed' using form.Hide()   
+                // when a form is 'closed' using form.Hide()
                 form = this.openedForms[typeof(TForm)];
             }
             else

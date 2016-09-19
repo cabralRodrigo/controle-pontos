@@ -6,6 +6,7 @@ namespace ControlePontos.Native
     internal interface IControlRenderer
     {
         void PauseRender(System.Windows.Forms.Control control);
+
         void ResumeRender(System.Windows.Forms.Control control);
     }
 

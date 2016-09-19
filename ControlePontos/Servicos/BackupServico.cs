@@ -9,6 +9,7 @@ namespace ControlePontos.Servicos
     internal interface IBackupServico
     {
         bool BackupAgendadoRealizado();
+
         Resultado<BackupResultado> RealizarBackup();
     }
 
