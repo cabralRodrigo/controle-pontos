@@ -3,6 +3,7 @@ using SimpleInjector.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ControlePontos
@@ -123,6 +124,35 @@ namespace ControlePontos
                 var tipoRegistro = interfaceRegistros.Single(w => w.ImplementationType == tipo.Value);
                 container.AddRegistration(tipo.Key, tipoRegistro);
             }
+        }
+
+        public static void Continue<T>(this Task<T> task, Action<T> action, Action<Exception> onFail = null)
+        {
+            task.ContinueWith(async t =>
+            {
+                if (t.Status == TaskStatus.Faulted)
+                    onFail?.Invoke(t.Exception?.InnerException);
+
+                action?.Invoke(await t);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        public static void Continue(this Task task, Action action, Action<Exception> onFail = null)
+        {
+            task.ContinueWith(async t =>
+            {
+                if (t.Status == TaskStatus.Faulted)
+                    onFail?.Invoke(t.Exception?.InnerException);
+
+                await t;
+
+                action.Invoke();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        public static Task<DialogResult> ShowDialogAsync(this Form form, Form parent)
+        {
+            return Task.Factory.FromAsync(parent.BeginInvoke(new Func<DialogResult>(() => form.ShowDialog(parent))), res => (DialogResult)form.EndInvoke(res));
         }
     }
 }

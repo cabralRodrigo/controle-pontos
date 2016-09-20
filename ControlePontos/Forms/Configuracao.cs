@@ -265,6 +265,8 @@ namespace ControlePontos.Forms
             this.Geral_Horario_Inicio.ValidatingType = this.Geral_Horario_Final.ValidatingType = typeof(TimeSpan);
             this.Geral_Horario_Inicio.Text = config.HoraInicio.ToString(@"hh\:mm");
             this.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
+
+            this.Geral_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
         }
 
         private string Geral_Save(ConfigApp config)
@@ -292,6 +294,16 @@ namespace ControlePontos.Forms
 
             config.HoraInicio = inicio;
             config.HoraFim = fim;
+
+            if (!string.IsNullOrEmpty(this.Geral_TeamService_TextBox.Text))
+            {
+                Uri enderecoTeamService;
+                if (!Uri.TryCreate(this.Geral_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))
+                    return "Endereço do TFS/Team Service não é válido.";
+                config.TeamService.Endereco = enderecoTeamService;
+            }
+            else
+                config.TeamService.Endereco = null;
 
             return null;
         }

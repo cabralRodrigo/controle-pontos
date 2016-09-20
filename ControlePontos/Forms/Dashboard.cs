@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Dialog;
+using ControlePontos.Forms.TeamServices;
 using ControlePontos.Model;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
@@ -335,6 +336,11 @@ namespace ControlePontos.Forms
         }
 
         #endregion Dados
+
+        private void Menu_TeamService_Click(object sender, EventArgs e)
+        {
+            this.formOpener.ShowModalForm<TotalHorasIntegracaoAtual>();
+        }
 
         private void Menu_Configuracoes_Click(object sender, EventArgs e)
         {

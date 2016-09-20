@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Control;
 using ControlePontos.Forms;
+using ControlePontos.Forms.TeamServices;
 using ControlePontos.Native;
 using ControlePontos.Report;
 using ControlePontos.Report.Reports;
@@ -52,6 +53,7 @@ namespace ControlePontos
             this.container.RegisterSingleton<ICalculoServico, CalculoServico>();
             this.container.RegisterSingleton<IParserServico, ParserServico>();
             this.container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
+            this.container.RegisterSingleton<ITeamServiceServico, TeamServiceServico>();
         }
 
         private void RegistrarServicosExportaveis()
@@ -77,7 +79,9 @@ namespace ControlePontos
             this.container.RegisterDisposable(new[]{
                 typeof(Dashboard), 
                 typeof(Configuracao), 
-                typeof(DiaTrabalhoDataGridView)
+                typeof(DiaTrabalhoDataGridView),
+                typeof(TotalHorasIntegracaoAtual),
+                typeof(ProgressoCarregamento)
             });
         }
     }
