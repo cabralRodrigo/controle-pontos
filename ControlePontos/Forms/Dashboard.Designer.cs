@@ -89,6 +89,7 @@
             this.LabelSeparador00 = new System.Windows.Forms.Label();
             this.LabelSeparador11 = new System.Windows.Forms.Label();
             this.LabelSeparador08 = new System.Windows.Forms.Label();
+            this.Menu_TeamService = new System.Windows.Forms.ToolStripMenuItem();
             this.GridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -114,6 +115,7 @@
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Relatorio,
             this.Menu_Dados,
+            this.Menu_TeamService,
             this.Menu_Configuracoes});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
@@ -630,6 +632,13 @@
             this.LabelSeparador08.TabIndex = 47;
             this.LabelSeparador08.Text = "separator";
             // 
+            // Menu_TeamService
+            // 
+            this.Menu_TeamService.Name = "Menu_TeamService";
+            this.Menu_TeamService.Size = new System.Drawing.Size(89, 20);
+            this.Menu_TeamService.Text = "Team Service";
+            this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
+            // 
             // GridDias
             // 
             this.GridDias.AllowUserToAddRows = false;
@@ -844,5 +853,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.ToolStripMenuItem Menu_TeamService;
     }
 }

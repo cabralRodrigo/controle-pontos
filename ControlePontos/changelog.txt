@@ -1,4 +1,7 @@
-﻿19/09/2016 1.6.3:
+﻿20/09/2016 1.7.0:
+	* Adicionado integração básica com o TFS/Team Services.
+
+19/09/2016 1.6.3:
 	* Formatação geral de código.
 
 10/09/2016 1.6.2:

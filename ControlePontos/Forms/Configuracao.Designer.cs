@@ -77,6 +77,10 @@
             this.Cores_Image_Feriado = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Falta = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Hoje = new System.Windows.Forms.PictureBox();
+            this.Geral_TeamService_Group = new System.Windows.Forms.GroupBox();
+            this.Geral_TeamService_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Geral_TeamService_Label = new System.Windows.Forms.Label();
+            this.Geral_TeamService_TextBox = new System.Windows.Forms.TextBox();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
@@ -99,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).BeginInit();
+            this.Geral_TeamService_Group.SuspendLayout();
+            this.Geral_TeamService_Layout.SuspendLayout();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -156,15 +162,16 @@
             // 
             this.Geral_Layout.ColumnCount = 1;
             this.Geral_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Geral_Layout.Controls.Add(this.Geral_Horario_Group, 0, 1);
             this.Geral_Layout.Controls.Add(this.Geral_DiasTrabalho_Group, 0, 0);
+            this.Geral_Layout.Controls.Add(this.Geral_TeamService_Group, 0, 2);
             this.Geral_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_Layout.Location = new System.Drawing.Point(3, 3);
             this.Geral_Layout.Name = "Geral_Layout";
-            this.Geral_Layout.RowCount = 2;
-            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.Geral_Layout.RowCount = 3;
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.Geral_Layout.Size = new System.Drawing.Size(521, 231);
             this.Geral_Layout.TabIndex = 0;
             // 
@@ -172,9 +179,9 @@
             // 
             this.Geral_Horario_Group.Controls.Add(this.Geral_Horario_Layout);
             this.Geral_Horario_Group.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 118);
+            this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 95);
             this.Geral_Horario_Group.Name = "Geral_Horario_Group";
-            this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 110);
+            this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 63);
             this.Geral_Horario_Group.TabIndex = 1;
             this.Geral_Horario_Group.TabStop = false;
             this.Geral_Horario_Group.Text = "Horário de Trabalho";
@@ -193,7 +200,7 @@
             this.Geral_Horario_Layout.RowCount = 2;
             this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 91);
+            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 44);
             this.Geral_Horario_Layout.TabIndex = 0;
             // 
             // Geral_Horario_Inicio
@@ -231,7 +238,7 @@
             this.Geral_DiasTrabalho_Group.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_DiasTrabalho_Group.Location = new System.Drawing.Point(3, 3);
             this.Geral_DiasTrabalho_Group.Name = "Geral_DiasTrabalho_Group";
-            this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 109);
+            this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 86);
             this.Geral_DiasTrabalho_Group.TabIndex = 0;
             this.Geral_DiasTrabalho_Group.TabStop = false;
             this.Geral_DiasTrabalho_Group.Text = "Dias de Trabalho";
@@ -249,7 +256,7 @@
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.Geral_DiasTrabalho_Layout.Size = new System.Drawing.Size(509, 90);
+            this.Geral_DiasTrabalho_Layout.Size = new System.Drawing.Size(509, 67);
             this.Geral_DiasTrabalho_Layout.TabIndex = 0;
             // 
             // Geral_DiasTrabalho_Label
@@ -269,7 +276,7 @@
             this.Geral_DiasTrabalho_ListaCheckbox.Location = new System.Drawing.Point(3, 20);
             this.Geral_DiasTrabalho_ListaCheckbox.MultiColumn = true;
             this.Geral_DiasTrabalho_ListaCheckbox.Name = "Geral_DiasTrabalho_ListaCheckbox";
-            this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 67);
+            this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 44);
             this.Geral_DiasTrabalho_ListaCheckbox.TabIndex = 1;
             // 
             // Feriados_Tab
@@ -561,72 +568,72 @@
             this.Cores_Layout.Size = new System.Drawing.Size(521, 231);
             this.Cores_Layout.TabIndex = 0;
             // 
-            // label1
+            // Cores_Label
             // 
             this.Cores_Label.AutoSize = true;
             this.Cores_Layout.SetColumnSpan(this.Cores_Label, 3);
             this.Cores_Label.Location = new System.Drawing.Point(3, 0);
-            this.Cores_Label.Name = "label1";
+            this.Cores_Label.Name = "Cores_Label";
             this.Cores_Label.Size = new System.Drawing.Size(307, 13);
             this.Cores_Label.TabIndex = 0;
             this.Cores_Label.Text = "Selecione abaixo as cores que serão usadas na tabela principal";
             // 
-            // label3
+            // Cores_Label_Ferias
             // 
             this.Cores_Label_Ferias.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_Ferias.AutoSize = true;
             this.Cores_Label_Ferias.Location = new System.Drawing.Point(3, 51);
-            this.Cores_Label_Ferias.Name = "label3";
+            this.Cores_Label_Ferias.Name = "Cores_Label_Ferias";
             this.Cores_Label_Ferias.Size = new System.Drawing.Size(35, 13);
             this.Cores_Label_Ferias.TabIndex = 2;
             this.Cores_Label_Ferias.Text = "Férias";
             // 
-            // label4
+            // Cores_Label_NaoTrabalho
             // 
             this.Cores_Label_NaoTrabalho.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_NaoTrabalho.AutoSize = true;
             this.Cores_Label_NaoTrabalho.Location = new System.Drawing.Point(3, 76);
-            this.Cores_Label_NaoTrabalho.Name = "label4";
+            this.Cores_Label_NaoTrabalho.Name = "Cores_Label_NaoTrabalho";
             this.Cores_Label_NaoTrabalho.Size = new System.Drawing.Size(52, 13);
             this.Cores_Label_NaoTrabalho.TabIndex = 5;
             this.Cores_Label_NaoTrabalho.Text = "Dia Folga";
             // 
-            // label5
+            // Cores_Label_Hoje
             // 
             this.Cores_Label_Hoje.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_Hoje.AutoSize = true;
             this.Cores_Label_Hoje.Location = new System.Drawing.Point(3, 151);
-            this.Cores_Label_Hoje.Name = "label5";
+            this.Cores_Label_Hoje.Name = "Cores_Label_Hoje";
             this.Cores_Label_Hoje.Size = new System.Drawing.Size(29, 13);
             this.Cores_Label_Hoje.TabIndex = 6;
             this.Cores_Label_Hoje.Text = "Hoje";
             // 
-            // label6
+            // Cores_Label_Falta
             // 
             this.Cores_Label_Falta.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_Falta.AutoSize = true;
             this.Cores_Label_Falta.Location = new System.Drawing.Point(3, 126);
-            this.Cores_Label_Falta.Name = "label6";
+            this.Cores_Label_Falta.Name = "Cores_Label_Falta";
             this.Cores_Label_Falta.Size = new System.Drawing.Size(30, 13);
             this.Cores_Label_Falta.TabIndex = 7;
             this.Cores_Label_Falta.Text = "Falta";
             // 
-            // label7
+            // Cores_Label_Feriado
             // 
             this.Cores_Label_Feriado.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_Feriado.AutoSize = true;
             this.Cores_Label_Feriado.Location = new System.Drawing.Point(3, 101);
-            this.Cores_Label_Feriado.Name = "label7";
+            this.Cores_Label_Feriado.Name = "Cores_Label_Feriado";
             this.Cores_Label_Feriado.Size = new System.Drawing.Size(42, 13);
             this.Cores_Label_Feriado.TabIndex = 8;
             this.Cores_Label_Feriado.Text = "Feriado";
             // 
-            // label2
+            // Cores_Label_DiaTrabalho
             // 
             this.Cores_Label_DiaTrabalho.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Cores_Label_DiaTrabalho.AutoSize = true;
             this.Cores_Label_DiaTrabalho.Location = new System.Drawing.Point(3, 26);
-            this.Cores_Label_DiaTrabalho.Name = "label2";
+            this.Cores_Label_DiaTrabalho.Name = "Cores_Label_DiaTrabalho";
             this.Cores_Label_DiaTrabalho.Size = new System.Drawing.Size(83, 13);
             this.Cores_Label_DiaTrabalho.TabIndex = 1;
             this.Cores_Label_DiaTrabalho.Text = "Dia de Trabalho";
@@ -715,6 +722,52 @@
             this.Cores_Image_Hoje.TabStop = false;
             this.Cores_Image_Hoje.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
+            // Geral_TeamService_Group
+            // 
+            this.Geral_TeamService_Group.Controls.Add(this.Geral_TeamService_Layout);
+            this.Geral_TeamService_Group.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_TeamService_Group.Location = new System.Drawing.Point(3, 164);
+            this.Geral_TeamService_Group.Name = "Geral_TeamService_Group";
+            this.Geral_TeamService_Group.Size = new System.Drawing.Size(515, 64);
+            this.Geral_TeamService_Group.TabIndex = 2;
+            this.Geral_TeamService_Group.TabStop = false;
+            this.Geral_TeamService_Group.Text = "Team Service";
+            // 
+            // Geral_TeamService_Layout
+            // 
+            this.Geral_TeamService_Layout.ColumnCount = 1;
+            this.Geral_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Geral_TeamService_Layout.Controls.Add(this.Geral_TeamService_Label, 0, 0);
+            this.Geral_TeamService_Layout.Controls.Add(this.Geral_TeamService_TextBox, 0, 1);
+            this.Geral_TeamService_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Geral_TeamService_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Geral_TeamService_Layout.Name = "Geral_TeamService_Layout";
+            this.Geral_TeamService_Layout.RowCount = 2;
+            this.Geral_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Geral_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Geral_TeamService_Layout.Size = new System.Drawing.Size(509, 45);
+            this.Geral_TeamService_Layout.TabIndex = 1;
+            // 
+            // Geral_TeamService_Label
+            // 
+            this.Geral_TeamService_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Geral_TeamService_Label.AutoSize = true;
+            this.Geral_TeamService_Layout.SetColumnSpan(this.Geral_TeamService_Label, 2);
+            this.Geral_TeamService_Label.Location = new System.Drawing.Point(3, 4);
+            this.Geral_TeamService_Label.Name = "Geral_TeamService_Label";
+            this.Geral_TeamService_Label.Size = new System.Drawing.Size(202, 13);
+            this.Geral_TeamService_Label.TabIndex = 5;
+            this.Geral_TeamService_Label.Text = "Endereço do servidor TFS/Team Service";
+            // 
+            // Geral_TeamService_TextBox
+            // 
+            this.Geral_TeamService_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Geral_TeamService_TextBox.Location = new System.Drawing.Point(3, 21);
+            this.Geral_TeamService_TextBox.Name = "Geral_TeamService_TextBox";
+            this.Geral_TeamService_TextBox.Size = new System.Drawing.Size(503, 20);
+            this.Geral_TeamService_TextBox.TabIndex = 6;
+            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -753,6 +806,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).EndInit();
+            this.Geral_TeamService_Group.ResumeLayout(false);
+            this.Geral_TeamService_Layout.ResumeLayout(false);
+            this.Geral_TeamService_Layout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -813,5 +869,10 @@
         private System.Windows.Forms.PictureBox Cores_Image_NaoTrabalho;
         private System.Windows.Forms.TableLayoutPanel Cores_Layout;
         private System.Windows.Forms.TabPage Cores_Tab;
+
+        private System.Windows.Forms.GroupBox Geral_TeamService_Group;
+        private System.Windows.Forms.TableLayoutPanel Geral_TeamService_Layout;
+        private System.Windows.Forms.Label Geral_TeamService_Label;
+        private System.Windows.Forms.TextBox Geral_TeamService_TextBox;
     }
 }
