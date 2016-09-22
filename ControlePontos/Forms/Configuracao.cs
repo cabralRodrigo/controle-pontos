@@ -2,6 +2,8 @@
 using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,40 +12,341 @@ namespace ControlePontos.Forms
 {
     internal partial class Configuracao : Form
     {
+        #region Partes
+
+        private interface IConfiguracaoParte
+        {
+            void Carregar(Configuracao form, ConfigApp config);
+            Resultado Salvar(Configuracao form, ConfigApp config);
+        }
+
+        private class ConfiguracaoBackup : IConfiguracaoParte
+        {
+            public void Carregar(Configuracao form, ConfigApp config)
+            {
+                form.Backup_ListBoxDiretorios.Items.AddRange(config.Backup.Diretorios.ToArray());
+
+                form.Backup_ButtonAdd.Click += (sender, e) => this.ButtonAdd_Click(form);
+                form.Backup_ButtonRemove.Click += (sender, e) => this.ButtonRemove_Click(form);
+            }
+
+            public Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                config.Backup = new ConfigBackup(form.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
+
+                return Resultado.Sucesso();
+            }
+
+            private void ButtonAdd_Click(Configuracao form)
+            {
+                using (var folderDiaglog = new FolderBrowserDialog())
+                {
+                    if (folderDiaglog.ShowDialog() == DialogResult.OK)
+                        form.Backup_ListBoxDiretorios.Items.Add(folderDiaglog.SelectedPath);
+                }
+            }
+
+            private void ButtonRemove_Click(Configuracao form)
+            {
+                var index = form.Backup_ListBoxDiretorios.SelectedIndex;
+                if (index > -1)
+                {
+                    form.Backup_ListBoxDiretorios.Items.RemoveAt(index--);
+                    if (index > -1)
+                        form.Backup_ListBoxDiretorios.SelectedIndex = index;
+                }
+            }
+        }
+
+        private abstract class ConfiguracaoFeriadoFerias : IConfiguracaoParte
+        {
+            protected void Carregar(ListBox lista, MonthCalendar calendario, DateTime[] datas)
+            {
+                foreach (var data in datas.OrderBy(w => w))
+                {
+                    calendario.AddBoldedDate(data);
+                    lista.Items.Add(data);
+                }
+                lista.SortBy<DateTime, DateTime>(w => w);
+                calendario.UpdateBoldedDates();
+            }
+
+            protected void ButtonAdd_Click(ListBox lista, MonthCalendar calendario)
+            {
+                var novas = calendario.SelectionRange.AllInRange().ToList();
+                var antigas = lista.Items.Cast<DateTime>().ToList();
+
+                var datas = novas.Where(w => !antigas.Contains(w));
+
+                foreach (var data in datas)
+                {
+                    lista.Items.Add(data);
+                    calendario.AddBoldedDate(data);
+                }
+
+                if (datas.Any())
+                {
+                    calendario.UpdateBoldedDates();
+                    lista.SortBy<DateTime, DateTime>(w => w);
+
+                    if (datas.Count() == 1)
+                        lista.SelectedIndex = lista.Items.IndexOf(datas.Single());
+                }
+            }
+
+            protected void ButtonRemove_Click(ListBox lista, MonthCalendar calendario)
+            {
+                var index = lista.SelectedIndex;
+                if (index > -1)
+                {
+                    var data = (DateTime)lista.SelectedItem;
+
+                    lista.Items.RemoveAt(index--);
+                    if (index > -1)
+                        lista.SelectedIndex = index;
+                    else if (lista.Items.Count > 0)
+                        lista.SelectedIndex = 0;
+
+                    calendario.RemoveBoldedDate(data);
+                    calendario.UpdateBoldedDates();
+                }
+            }
+
+            protected void Lista_SelectedIndexChanged(ListBox lista, MonthCalendar calendario)
+            {
+                var index = lista.SelectedIndex;
+                if (index > -1)
+                {
+                    var data = (DateTime)lista.SelectedItem;
+                    calendario.SelectionStart = data;
+                    calendario.SelectionEnd = data;
+                }
+            }
+
+            protected void Calendario_DateSelected(ListBox lista, MonthCalendar calendario)
+            {
+                var datas = calendario.SelectionRange.AllInRange();
+                if (datas.Count() == 1)
+                {
+                    var data = datas.Single();
+                    if (lista.Items.Cast<DateTime>().Contains(data))
+                        lista.SelectedItem = data;
+                }
+            }
+
+            public abstract void Carregar(Configuracao form, ConfigApp config);
+
+            public abstract Resultado Salvar(Configuracao form, ConfigApp config);
+        }
+
+        private class ConfiguracaoFeriado : ConfiguracaoFeriadoFerias
+        {
+            public override void Carregar(Configuracao form, ConfigApp config)
+            {
+                base.Carregar(form.Feriados_ListBoxFeriados, form.Feriados_Calendar, config.Feriados.Feriados.ToArray());
+
+                form.Feriados_ButtonAdd.Click += (sender, e) => base.ButtonAdd_Click(form.Feriados_ListBoxFeriados, form.Feriados_Calendar);
+                form.Feriados_ButtonRemove.Click += (sende, e) => base.ButtonRemove_Click(form.Feriados_ListBoxFeriados, form.Feriados_Calendar);
+                form.Feriados_ListBoxFeriados.SelectedIndexChanged += (sender, e) => base.Lista_SelectedIndexChanged(form.Feriados_ListBoxFeriados, form.Feriados_Calendar);
+                form.Feriados_Calendar.DateSelected += (sender, e) => base.Calendario_DateSelected(form.Feriados_ListBoxFeriados, form.Feriados_Calendar);
+            }
+
+            public override Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                config.Feriados = new ConfigFeriados(form.Feriados_ListBoxFeriados.Items.Cast<DateTime>().ToArray());
+
+                return Resultado.Sucesso();
+            }
+        }
+
+        private class ConfiguracaoFerias : ConfiguracaoFeriadoFerias
+        {
+            public override void Carregar(Configuracao form, ConfigApp config)
+            {
+                base.Carregar(form.Ferias_ListBoxFerias, form.Ferias_Calendar, config.Ferias.ToArray());
+
+                form.Ferias_ButtonAdd.Click += (sender, e) => base.ButtonAdd_Click(form.Ferias_ListBoxFerias, form.Ferias_Calendar);
+                form.Ferias_ButtonRemove.Click += (sende, e) => base.ButtonRemove_Click(form.Ferias_ListBoxFerias, form.Ferias_Calendar);
+                form.Ferias_ListBoxFerias.SelectedIndexChanged += (sender, e) => base.Lista_SelectedIndexChanged(form.Ferias_ListBoxFerias, form.Ferias_Calendar);
+                form.Ferias_Calendar.DateSelected += (sender, e) => base.Calendario_DateSelected(form.Ferias_ListBoxFerias, form.Ferias_Calendar);
+            }
+
+            public override Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                config.Ferias = form.Ferias_ListBoxFerias.Items.Cast<DateTime>().ToArray();
+
+                return Resultado.Sucesso();
+            }
+        }
+
+        private class ConfiguracaoGeral : IConfiguracaoParte
+        {
+            public void Carregar(Configuracao form, ConfigApp config)
+            {
+                var ptbr = CultureInfo.GetCultureInfo("pt-br");
+                var dias = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Select(w => new
+                {
+                    Item = w,
+                    Valor = ptbr.DateTimeFormat.GetDayName(w).ToTitleCase()
+                });
+
+                foreach (var diaSemana in dias.OrderBy(w => w.Item))
+                    form.Geral_DiasTrabalho_ListaCheckbox.Items.Add(new CheckboxListItem<DayOfWeek>(diaSemana.Item, diaSemana.Valor), config.DiasTrabalho.Contains(diaSemana.Item));
+
+                form.Geral_Horario_Inicio.ValidatingType = form.Geral_Horario_Final.ValidatingType = typeof(TimeSpan);
+                form.Geral_Horario_Inicio.Text = config.HoraInicio.ToString(@"hh\:mm");
+                form.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
+
+                form.Geral_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
+            }
+
+            public Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                var diasTrabalho = form.Geral_DiasTrabalho_ListaCheckbox.CheckedItems.OfType<CheckboxListItem<DayOfWeek>>().ToArray();
+                config.DiasTrabalho = diasTrabalho.Select(w => w.Value).ToArray();
+
+                var inicioObj = form.Geral_Horario_Inicio.ValidateText();
+                var fimObj = form.Geral_Horario_Final.ValidateText();
+
+                if (inicioObj == null || fimObj == null)
+                    return Resultado.Erro(mensagem: "Horário de trabalho inválido.");
+
+                var inicio = (TimeSpan)inicioObj;
+                var fim = (TimeSpan)fimObj;
+
+                if (inicio < new TimeSpan(0, 0, 0))
+                    return Resultado.Erro(mensagem: "Horário de inicio de trabalho inválido.");
+
+                if (fim > new TimeSpan(23, 59, 59))
+                    return Resultado.Erro(mensagem: "Horário de fim de trabalho inválido");
+
+                if (fim <= inicio)
+                    return Resultado.Erro(mensagem: "Fim do horário de trabalho deve ser maior ao horário de inicio.");
+
+                config.HoraInicio = inicio;
+                config.HoraFim = fim;
+
+                if (!string.IsNullOrEmpty(form.Geral_TeamService_TextBox.Text))
+                {
+                    Uri enderecoTeamService;
+                    if (!Uri.TryCreate(form.Geral_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))
+                        return Resultado.Erro(mensagem: "Endereço do TFS/Team Service não é válido.");
+                    config.TeamService.Endereco = enderecoTeamService;
+                }
+                else
+                    config.TeamService.Endereco = null;
+
+                return Resultado.Sucesso();
+            }
+        }
+
+        private class ConfiguracaoCores : IConfiguracaoParte
+        {
+            public void Carregar(Configuracao form, ConfigApp config)
+            {
+                form.Cores_Image_DiaTrabalho.BackColor = config.Cores.DiaNormal;
+                form.Cores_Image_Ferias.BackColor = config.Cores.Ferias;
+                form.Cores_Image_NaoTrabalho.BackColor = config.Cores.NaoTrabalho;
+                form.Cores_Image_Feriado.BackColor = config.Cores.Feriado;
+                form.Cores_Image_Falta.BackColor = config.Cores.Falta;
+                form.Cores_Image_Hoje.BackColor = config.Cores.Hoje;
+
+                form.Cores_Image_DiaTrabalho.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+                form.Cores_Image_Ferias.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+                form.Cores_Image_NaoTrabalho.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+                form.Cores_Image_Feriado.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+                form.Cores_Image_Falta.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+                form.Cores_Image_Hoje.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
+            }
+
+            public Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                bool algumaCorTransparente = false;
+                Func<Color, Color> processarCor = cor =>
+                {
+                    var verificacao = this.Cores_RemoverAlpha(cor);
+                    if (verificacao.Key)
+                        algumaCorTransparente = true;
+
+                    return verificacao.Value;
+                };
+
+                config.Cores.DiaNormal = processarCor(form.Cores_Image_DiaTrabalho.BackColor);
+                config.Cores.Ferias = processarCor(form.Cores_Image_Ferias.BackColor);
+                config.Cores.NaoTrabalho = processarCor(form.Cores_Image_NaoTrabalho.BackColor);
+                config.Cores.Feriado = processarCor(form.Cores_Image_Feriado.BackColor);
+                config.Cores.Falta = processarCor(form.Cores_Image_Falta.BackColor);
+                config.Cores.Hoje = processarCor(form.Cores_Image_Hoje.BackColor);
+
+                if (algumaCorTransparente)
+                    return Resultado.Aviso("Alguma cor foi selecionada com transparência. Isso não é suportado.\nA transparência da cor foi removida.");
+                else
+                    return Resultado.Sucesso();
+            }
+
+            private void Cores_Image_Click(PictureBox box)
+            {
+                if (box != null)
+                {
+                    using (var dialog = new ColorDialog { Color = box.BackColor })
+                    {
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                            box.BackColor = dialog.Color;
+                    }
+                }
+            }
+
+            private KeyValuePair<bool, Color> Cores_RemoverAlpha(Color cor)
+            {
+                if (cor.A == 255)
+                    return new KeyValuePair<bool, Color>(false, cor);
+                else
+                    return new KeyValuePair<bool, Color>(true, Color.FromArgb(cor.R, cor.G, cor.B));
+            }
+        }
+
+        #endregion
+
         private readonly IConfiguracaoServico configuracaoServico;
+        private readonly List<IConfiguracaoParte> partes;
 
         public Configuracao(IConfiguracaoServico configuracaoServico)
         {
             this.InitializeComponent();
             this.configuracaoServico = configuracaoServico;
+            this.partes = new List<IConfiguracaoParte>();
         }
 
         private void Configuracao_Load(object sender, EventArgs e)
         {
             var config = this.configuracaoServico.ObterConfiguracao();
 
-            this.Geral_Load(config);
-            this.Backup_Load(config);
-            this.Feriados_Load(config);
-            this.Ferias_Load(config);
-            this.Cores_Load(config);
+            this.partes.AddRange(new IConfiguracaoParte[] {
+                new ConfiguracaoBackup(),
+                new ConfiguracaoFeriado(),
+                new ConfiguracaoFerias(),
+                new ConfiguracaoGeral(),
+                new ConfiguracaoCores()
+            });
+
+            foreach (var parte in this.partes)
+                parte.Carregar(this, config);
         }
 
         private void ButtonSalvar_Click(object sender, EventArgs e)
         {
             var config = new ConfigApp();
 
-            var erro = this.Geral_Save(config);
-            if (!string.IsNullOrEmpty(erro))
+            foreach (var parte in this.partes)
             {
-                MessageBox.Show(erro, "Geral", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                var resultado = parte.Salvar(this, config);
+                if (resultado.Tipo != TipoMensagem.Sucesso)
+                {
+                    resultado.ToMessageBox("Configurações");
+                    if (resultado.Tipo == TipoMensagem.Erro)
+                        return;
+                }
             }
-
-            this.Backup_Save(config);
-            this.Feriados_Save(config);
-            this.Ferias_Save(config);
-            this.Cores_Save(config);
 
             this.configuracaoServico.SalvarConfiguracao(config);
 
@@ -63,288 +366,5 @@ namespace ControlePontos.Forms
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        #region Backup
-
-        private void Backup_Load(ConfigApp config)
-        {
-            this.Backup_ListBoxDiretorios.Items.AddRange(config.Backup.Diretorios.ToArray());
-        }
-
-        private void Backup_Save(ConfigApp config)
-        {
-            config.Backup = new ConfigBackup(this.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
-        }
-
-        private void Backup_ButtonAdd_Click(object sender, EventArgs e)
-        {
-            using (var folderDiaglog = new FolderBrowserDialog())
-            {
-                if (folderDiaglog.ShowDialog() == DialogResult.OK)
-                    this.Backup_ListBoxDiretorios.Items.Add(folderDiaglog.SelectedPath);
-            }
-        }
-
-        private void Backup_ButtonRemove_Click(object sender, EventArgs e)
-        {
-            var index = this.Backup_ListBoxDiretorios.SelectedIndex;
-            if (index > -1)
-            {
-                this.Backup_ListBoxDiretorios.Items.RemoveAt(index--);
-                if (index > -1)
-                    this.Backup_ListBoxDiretorios.SelectedIndex = index;
-            }
-        }
-
-        #endregion Backup
-
-        #region Feriados & Férias
-
-        #region Feriados
-
-        private void Feriados_Load(ConfigApp config)
-        {
-            Configuracao.FeriadosFerias_Load(this.Feriados_ListBoxFeriados, this.Feriados_Calendar, config.Feriados.Feriados.ToArray());
-        }
-
-        private void Feriados_Save(ConfigApp config)
-        {
-            config.Feriados = new ConfigFeriados(this.Feriados_ListBoxFeriados.Items.Cast<DateTime>().ToArray());
-        }
-
-        private void Feriados_ButtonAdd_Click(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_BtnAdd_Click(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
-        }
-
-        private void Feriados_ButtonRemove_Click(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_BtnRemove_Click(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
-        }
-
-        private void Feriados_ListBoxFeriados_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_Lista_SelectedIndexChanged(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
-        }
-
-        private void Feriados_Calendar_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            Configuracao.FeriadosFerias_Calendario_DateSelected(this.Feriados_ListBoxFeriados, this.Feriados_Calendar);
-        }
-
-        #endregion Feriados
-
-        #region Férias
-
-        private void Ferias_Load(ConfigApp config)
-        {
-            Configuracao.FeriadosFerias_Load(this.Ferias_ListBoxFerias, this.Ferias_Calendar, config.Ferias);
-        }
-
-        private void Ferias_Save(ConfigApp config)
-        {
-            config.Ferias = this.Ferias_ListBoxFerias.Items.Cast<DateTime>().ToArray();
-        }
-
-        private void Ferias_ButtonAdd_Click(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_BtnAdd_Click(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
-        }
-
-        private void Ferias_ButtonRemove_Click(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_BtnRemove_Click(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
-        }
-
-        private void Ferias_ListBoxFerias_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Configuracao.FeriadosFerias_Lista_SelectedIndexChanged(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
-        }
-
-        private void Ferias_Calendar_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            Configuracao.FeriadosFerias_Calendario_DateSelected(this.Ferias_ListBoxFerias, this.Ferias_Calendar);
-        }
-
-        #endregion Férias
-
-        #region Lógica
-
-        private static void FeriadosFerias_Load(ListBox lista, MonthCalendar calendario, DateTime[] datas)
-        {
-            foreach (var data in datas.OrderBy(w => w))
-            {
-                calendario.AddBoldedDate(data);
-                lista.Items.Add(data);
-            }
-            lista.SortBy<DateTime, DateTime>(w => w);
-            calendario.UpdateBoldedDates();
-        }
-
-        private static void FeriadosFerias_BtnAdd_Click(ListBox lista, MonthCalendar calendario)
-        {
-            var novas = calendario.SelectionRange.AllInRange().ToList();
-            var antigas = lista.Items.Cast<DateTime>().ToList();
-
-            var datas = novas.Where(w => !antigas.Contains(w));
-
-            foreach (var data in datas)
-            {
-                lista.Items.Add(data);
-                calendario.AddBoldedDate(data);
-            }
-
-            if (datas.Any())
-            {
-                calendario.UpdateBoldedDates();
-                lista.SortBy<DateTime, DateTime>(w => w);
-
-                if (datas.Count() == 1)
-                    lista.SelectedIndex = lista.Items.IndexOf(datas.Single());
-            }
-        }
-
-        private static void FeriadosFerias_BtnRemove_Click(ListBox lista, MonthCalendar calendario)
-        {
-            var index = lista.SelectedIndex;
-            if (index > -1)
-            {
-                var data = (DateTime)lista.SelectedItem;
-
-                lista.Items.RemoveAt(index--);
-                if (index > -1)
-                    lista.SelectedIndex = index;
-                else if (lista.Items.Count > 0)
-                    lista.SelectedIndex = 0;
-
-                calendario.RemoveBoldedDate(data);
-                calendario.UpdateBoldedDates();
-            }
-        }
-
-        private static void FeriadosFerias_Lista_SelectedIndexChanged(ListBox lista, MonthCalendar calendario)
-        {
-            var index = lista.SelectedIndex;
-            if (index > -1)
-            {
-                var data = (DateTime)lista.SelectedItem;
-                calendario.SelectionStart = data;
-                calendario.SelectionEnd = data;
-            }
-        }
-
-        private static void FeriadosFerias_Calendario_DateSelected(ListBox lista, MonthCalendar calendario)
-        {
-            var datas = calendario.SelectionRange.AllInRange();
-            if (datas.Count() == 1)
-            {
-                var data = datas.Single();
-                if (lista.Items.Cast<DateTime>().Contains(data))
-                    lista.SelectedItem = data;
-            }
-        }
-
-        #endregion Lógica
-
-        #endregion Feriados & Férias
-
-        #region Geral
-
-        private void Geral_Load(ConfigApp config)
-        {
-            var ptbr = CultureInfo.GetCultureInfo("pt-br");
-            var dias = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Select(w => new
-            {
-                Item = w,
-                Valor = ptbr.DateTimeFormat.GetDayName(w).ToTitleCase()
-            });
-
-            foreach (var diaSemana in dias.OrderBy(w => w.Item))
-                this.Geral_DiasTrabalho_ListaCheckbox.Items.Add(new CheckboxListItem<DayOfWeek>(diaSemana.Item, diaSemana.Valor), config.DiasTrabalho.Contains(diaSemana.Item));
-
-            this.Geral_Horario_Inicio.ValidatingType = this.Geral_Horario_Final.ValidatingType = typeof(TimeSpan);
-            this.Geral_Horario_Inicio.Text = config.HoraInicio.ToString(@"hh\:mm");
-            this.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
-
-            this.Geral_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
-        }
-
-        private string Geral_Save(ConfigApp config)
-        {
-            var diasTrabalho = this.Geral_DiasTrabalho_ListaCheckbox.CheckedItems.OfType<CheckboxListItem<DayOfWeek>>().ToArray();
-            config.DiasTrabalho = diasTrabalho.Select(w => w.Value).ToArray();
-
-            var inicioObj = this.Geral_Horario_Inicio.ValidateText();
-            var fimObj = this.Geral_Horario_Final.ValidateText();
-
-            if (inicioObj == null || fimObj == null)
-                return "Horário de trabalho inválido.";
-
-            var inicio = (TimeSpan)inicioObj;
-            var fim = (TimeSpan)fimObj;
-
-            if (inicio < new TimeSpan(0, 0, 0))
-                return "Horário de inicio de trabalho inválido.";
-
-            if (fim > new TimeSpan(23, 59, 59))
-                return "Horário de fim de trabalho inválido";
-
-            if (fim <= inicio)
-                return "Fim do horário de trabalho deve ser maior ao horário de inicio.";
-
-            config.HoraInicio = inicio;
-            config.HoraFim = fim;
-
-            if (!string.IsNullOrEmpty(this.Geral_TeamService_TextBox.Text))
-            {
-                Uri enderecoTeamService;
-                if (!Uri.TryCreate(this.Geral_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))
-                    return "Endereço do TFS/Team Service não é válido.";
-                config.TeamService.Endereco = enderecoTeamService;
-            }
-            else
-                config.TeamService.Endereco = null;
-
-            return null;
-        }
-
-        #endregion Geral
-
-        #region Cores
-
-        private void Cores_Load(ConfigApp config)
-        {
-            this.Cores_Image_DiaTrabalho.BackColor = config.Cores.DiaNormal;
-            this.Cores_Image_Ferias.BackColor = config.Cores.Ferias;
-            this.Cores_Image_NaoTrabalho.BackColor = config.Cores.NaoTrabalho;
-            this.Cores_Image_Feriado.BackColor = config.Cores.Feriado;
-            this.Cores_Image_Falta.BackColor = config.Cores.Falta;
-            this.Cores_Image_Hoje.BackColor = config.Cores.Hoje;
-        }
-
-        private void Cores_Save(ConfigApp config)
-        {
-            config.Cores.DiaNormal = this.Cores_Image_DiaTrabalho.BackColor;
-            config.Cores.Ferias = this.Cores_Image_Ferias.BackColor;
-            config.Cores.NaoTrabalho = this.Cores_Image_NaoTrabalho.BackColor;
-            config.Cores.Feriado = this.Cores_Image_Feriado.BackColor;
-            config.Cores.Falta = this.Cores_Image_Falta.BackColor;
-            config.Cores.Hoje = this.Cores_Image_Hoje.BackColor;
-        }
-
-        private void Cores_Image_Click(object sender, EventArgs e)
-        {
-            var box = sender as PictureBox;
-            if (box != null)
-            {
-                using (var dialog = new ColorDialog { Color = box.BackColor })
-                {
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                        box.BackColor = dialog.Color;
-                }
-            }
-        }
-
-        #endregion Cores
     }
 }

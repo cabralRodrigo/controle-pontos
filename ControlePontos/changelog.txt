@@ -1,4 +1,7 @@
-﻿22/09/2016 1.7.2:
+﻿22/09/2016 1.7.3:
+	* Adicionado checagem para evitar que cores sejam configuradas com transparência.
+
+22/09/2016 1.7.2:
 	* Criado borda na tela de configuração de cores e definido valores padrões para as cores.
 
 22/09/2016 1.7.1:
