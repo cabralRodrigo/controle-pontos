@@ -31,7 +31,7 @@ namespace ControlePontos.Servicos
         public ConfigApp ObterConfiguracao()
         {
             var json = this.armazenamento.Carregar("config-app");
-            if (string.IsNullOrEmpty(json))
+            if (json.IsNullOrEmpty())
                 return null;
             else
                 return JsonConvert.DeserializeObject<ConfigApp>(json);

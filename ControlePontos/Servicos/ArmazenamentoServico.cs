@@ -23,7 +23,7 @@ namespace ControlePontos.Servicos
         {
             get
             {
-                if (string.IsNullOrEmpty(this.diretorioArmazenamento))
+                if (this.diretorioArmazenamento.IsNullOrEmpty())
                     this.diretorioArmazenamento = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "dados");
 
                 return this.diretorioArmazenamento;

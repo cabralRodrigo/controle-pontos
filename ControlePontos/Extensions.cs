@@ -11,14 +11,6 @@ namespace ControlePontos
 {
     internal static class Extensions
     {
-        public static string Descricao(this TimeSpan? time)
-        {
-            if (time.HasValue)
-                return time.Value.Descricao();
-            else
-                return null;
-        }
-
         public static string Descricao(this TimeSpan time)
         {
             var horas = Math.Abs(Math.Truncate(time.TotalHours));
@@ -26,18 +18,13 @@ namespace ControlePontos
 
             string desc;
             if (horas == 0)
-                desc = string.Format("{0} minuto{1}", minutos, minutos == 1 ? string.Empty : "s");
+                desc = $"{minutos} minuto{(minutos == 1 ? string.Empty : "s")}";
             else if (minutos == 0)
-                desc = string.Format("{0} hora{1}", horas, horas == 1 ? string.Empty : "s");
+                desc = $"{horas} hora{(horas == 1 ? string.Empty : "s")}";
             else
-                desc = string.Format("{0} hora{1}, {2} minuto{3}", horas, horas == 1 ? string.Empty : "s", minutos, minutos == 1 ? string.Empty : "s");
+                desc = $"{horas} hora{(horas == 1 ? string.Empty : "s")}, {minutos} minuto{(minutos == 1 ? string.Empty : "s")}";
 
             return (time.Ticks < 0 ? "- " : string.Empty) + desc;
-        }
-
-        public static TimeSpan? Negate(this TimeSpan? time)
-        {
-            return time.HasValue ? (TimeSpan?)time.Value.Negate() : null;
         }
 
         public static TimeSpan Average(this IEnumerable<TimeSpan?> times)
@@ -67,21 +54,6 @@ namespace ControlePontos
                 return source.ToUpper();
 
             return char.ToUpper(source[0]) + source.Substring(1);
-        }
-
-        public static string FormatWith(this string source, params object[] objects)
-        {
-            return string.Format(source, objects);
-        }
-
-        public static string ToStringOr(this TimeSpan? timeSpan, string @else, string format = null)
-        {
-            return timeSpan.HasValue ? (format == null ? timeSpan.Value.ToString() : timeSpan.Value.ToString(format)) : @else;
-        }
-
-        public static string ToStringOr(this decimal? timeSpan, string @else, string format = null)
-        {
-            return timeSpan.HasValue ? (format == null ? timeSpan.Value.ToString() : timeSpan.Value.ToString(format)) : @else;
         }
 
         public static IEnumerable<DateTime> AllInRange(this SelectionRange range)

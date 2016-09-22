@@ -26,16 +26,12 @@ namespace ControlePontos.Report.Reports.Template.Html.Section
 
         public string Render()
         {
-            var json = JsonConvert.SerializeObject(this.parameters);
-
-            var tag = @"
+            return $@"
                 <script type'text/javascript'>
                     (function(args){{
-                        {0}
-                    }})(JSON.parse('{1}'));
+                        {this.body}
+                    }})(JSON.parse('{JsonConvert.SerializeObject(this.parameters)}'));
                 </script>";
-
-            return string.Format(tag, this.body, json);
         }
     }
 }

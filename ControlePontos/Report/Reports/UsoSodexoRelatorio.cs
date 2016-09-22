@@ -23,7 +23,7 @@ namespace ControlePontos.Report.Reports
 
             using (var writer = new StreamWriter(File.Open(file, FileMode.CreateNew), Encoding.UTF8))
             {
-                var template = new HtmlTemplate(string.Format("Relatório mensal: {0} de {1}", new CultureInfo("pt-br").DateTimeFormat.GetMonthName(mes).ToTitleCase(), ano));
+                var template = new HtmlTemplate($"Relatório mensal: {new CultureInfo("pt-br").DateTimeFormat.GetMonthName(mes).ToTitleCase()} de {ano}");
 
                 template.AddScript(Script.ChartJs);
                 template.AddSection(new ChartHtmlSection("Evolução do Uso (Mês Completo)", "graf-1", this.CreateChart(mesTrabalho, true, ChartType.Line)));

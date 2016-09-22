@@ -11,13 +11,13 @@ namespace ControlePontos.Servicos
     {
         public TimeSpan? ParseTimeSpan(string timeSpan)
         {
-            if (!string.IsNullOrEmpty(timeSpan))
+            if (!timeSpan.IsNullOrEmpty())
             {
                 string novoValor;
                 if (timeSpan.Length == 4)
-                    novoValor = string.Format("{0}{1}:{2}{3}", timeSpan[0], timeSpan[1], timeSpan[2], timeSpan[3]);
+                    novoValor = $"{timeSpan[0]}{timeSpan[1]}:{timeSpan[2]}{timeSpan[3]}";
                 else if (timeSpan.Length == 3)
-                    novoValor = string.Format("0{0}:{1}{2}", timeSpan[0], timeSpan[1], timeSpan[2]);
+                    novoValor = $"0{timeSpan[0]}:{timeSpan[1]}{timeSpan[2]}";
                 else
                     novoValor = timeSpan;
 

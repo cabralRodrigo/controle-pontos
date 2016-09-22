@@ -29,7 +29,7 @@ namespace ControlePontos.Servicos
         {
             var json = this.armazenamentoServico.Carregar(this.MontarNomeArquivo(ano, mes));
 
-            if (!string.IsNullOrEmpty(json))
+            if (!json.IsNullOrEmpty())
                 return JsonConvert.DeserializeObject<MesTrabalho>(json);
             else if (gerarMesSeNaoDisponivel)
                 return this.GerarMesTrabalho(ano, mes);
@@ -57,7 +57,7 @@ namespace ControlePontos.Servicos
 
         private string MontarNomeArquivo(int ano, int mes)
         {
-            return string.Format("horarios-{0}-{1}", ano, mes);
+            return $"horarios-{ano}-{mes}";
         }
 
         public Regex RegexArquivos()

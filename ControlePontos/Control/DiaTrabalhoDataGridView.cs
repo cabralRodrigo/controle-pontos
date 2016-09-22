@@ -68,10 +68,7 @@ namespace ControlePontos.Control
             Func<object, string> descricaoTimeSpan = tempo =>
             {
                 var timespan = tempo as TimeSpan?;
-                if (timespan.HasValue)
-                    return timespan.Descricao();
-                else
-                    return string.Empty;
+                return timespan?.Descricao() ?? string.Empty;
             };
 
             #region Colunas
@@ -185,13 +182,13 @@ namespace ControlePontos.Control
                     dia.Data,
                     dia.Data,
                     dia.Falta,
-                    dia.Empresa.Entrada.ToStringOr(string.Empty,@"hh\:mm"),
-                    dia.Almoco.Entrada.ToStringOr(string.Empty,@"hh\:mm"),
-                    dia.Almoco.Saida.ToStringOr(string.Empty,@"hh\:mm"),
-                    dia.Empresa.Saida.ToStringOr(string.Empty,@"hh\:mm"),
+                    dia.Empresa.Entrada?.ToString(@"hh\:mm") ?? string.Empty,
+                    dia.Almoco.Entrada?.ToString(@"hh\:mm") ?? string.Empty,
+                    dia.Almoco.Saida?.ToString(@"hh\:mm") ?? string.Empty,
+                    dia.Empresa.Saida?.ToString(@"hh\:mm") ?? string.Empty,
                     dia.ValorAlmoco,
                     dia.Almoco.TempoTotal(),
-                    coeficiente.Negate(),
+                    coeficiente?.Negate(),
                     this.CalculoServico.TotalHorasTrabalhadas(dia),
                     dia
                 });
@@ -217,7 +214,7 @@ namespace ControlePontos.Control
                 {
                     var cell = this.Rows[rowIndex].Cells[Colunas.CALCULO_HORAS] as IDiaTrabalhoCell;
 
-                    cell.Value = dia.Coeficiente(this.config.HoraInicio, this.config.HoraFim).Negate();
+                    cell.Value = dia.Coeficiente(this.config.HoraInicio, this.config.HoraFim)?.Negate();
                     cell.UpdateCell(this.config, dia);
                 }
 
