@@ -365,7 +365,6 @@
             this.Feriados_Calendar.MaxSelectionCount = 1;
             this.Feriados_Calendar.Name = "Feriados_Calendar";
             this.Feriados_Calendar.TabIndex = 0;
-            this.Feriados_Calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.Feriados_Calendar_DateSelected);
             // 
             // Feriados_ButtonAdd
             // 
@@ -377,7 +376,6 @@
             this.Feriados_ButtonAdd.Size = new System.Drawing.Size(30, 30);
             this.Feriados_ButtonAdd.TabIndex = 3;
             this.Feriados_ButtonAdd.UseVisualStyleBackColor = true;
-            this.Feriados_ButtonAdd.Click += new System.EventHandler(this.Feriados_ButtonAdd_Click);
             // 
             // Feriados_ListBoxFeriados
             // 
@@ -388,7 +386,6 @@
             this.Feriados_Layout.SetRowSpan(this.Feriados_ListBoxFeriados, 2);
             this.Feriados_ListBoxFeriados.Size = new System.Drawing.Size(275, 205);
             this.Feriados_ListBoxFeriados.TabIndex = 4;
-            this.Feriados_ListBoxFeriados.SelectedIndexChanged += new System.EventHandler(this.Feriados_ListBoxFeriados_SelectedIndexChanged);
             // 
             // Feriados_ButtonRemove
             // 
@@ -399,7 +396,6 @@
             this.Feriados_ButtonRemove.Size = new System.Drawing.Size(30, 30);
             this.Feriados_ButtonRemove.TabIndex = 5;
             this.Feriados_ButtonRemove.UseVisualStyleBackColor = true;
-            this.Feriados_ButtonRemove.Click += new System.EventHandler(this.Feriados_ButtonRemove_Click);
             // 
             // Feriados_Label
             // 
@@ -451,7 +447,6 @@
             this.Ferias_Calendar.MaxSelectionCount = 31;
             this.Ferias_Calendar.Name = "Ferias_Calendar";
             this.Ferias_Calendar.TabIndex = 0;
-            this.Ferias_Calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.Ferias_Calendar_DateSelected);
             // 
             // Ferias_ButtonAdd
             // 
@@ -463,7 +458,6 @@
             this.Ferias_ButtonAdd.Size = new System.Drawing.Size(30, 30);
             this.Ferias_ButtonAdd.TabIndex = 3;
             this.Ferias_ButtonAdd.UseVisualStyleBackColor = true;
-            this.Ferias_ButtonAdd.Click += new System.EventHandler(this.Ferias_ButtonAdd_Click);
             // 
             // Ferias_ListBoxFerias
             // 
@@ -474,7 +468,6 @@
             this.Ferias_Layout.SetRowSpan(this.Ferias_ListBoxFerias, 2);
             this.Ferias_ListBoxFerias.Size = new System.Drawing.Size(275, 205);
             this.Ferias_ListBoxFerias.TabIndex = 4;
-            this.Ferias_ListBoxFerias.SelectedIndexChanged += new System.EventHandler(this.Ferias_ListBoxFerias_SelectedIndexChanged);
             // 
             // Ferias_ButtonRemove
             // 
@@ -485,7 +478,6 @@
             this.Ferias_ButtonRemove.Size = new System.Drawing.Size(30, 30);
             this.Ferias_ButtonRemove.TabIndex = 5;
             this.Ferias_ButtonRemove.UseVisualStyleBackColor = true;
-            this.Ferias_ButtonRemove.Click += new System.EventHandler(this.Ferias_ButtonRemove_Click);
             // 
             // Ferias_Label
             // 
@@ -556,7 +548,6 @@
             this.Backup_ButtonAdd.Size = new System.Drawing.Size(30, 30);
             this.Backup_ButtonAdd.TabIndex = 2;
             this.Backup_ButtonAdd.UseVisualStyleBackColor = true;
-            this.Backup_ButtonAdd.Click += new System.EventHandler(this.Backup_ButtonAdd_Click);
             // 
             // Backup_ButtonRemove
             // 
@@ -567,7 +558,6 @@
             this.Backup_ButtonRemove.Size = new System.Drawing.Size(30, 30);
             this.Backup_ButtonRemove.TabIndex = 3;
             this.Backup_ButtonRemove.UseVisualStyleBackColor = true;
-            this.Backup_ButtonRemove.Click += new System.EventHandler(this.Backup_ButtonRemove_Click);
             // 
             // Cores_Tab
             // 
@@ -697,7 +687,6 @@
             this.Cores_Image_DiaTrabalho.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_DiaTrabalho.TabIndex = 9;
             this.Cores_Image_DiaTrabalho.TabStop = false;
-            this.Cores_Image_DiaTrabalho.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Cores_Image_Ferias
             // 
@@ -712,7 +701,6 @@
             this.Cores_Image_Ferias.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_Ferias.TabIndex = 9;
             this.Cores_Image_Ferias.TabStop = false;
-            this.Cores_Image_Ferias.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Cores_Image_NaoTrabalho
             // 
@@ -727,7 +715,6 @@
             this.Cores_Image_NaoTrabalho.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_NaoTrabalho.TabIndex = 9;
             this.Cores_Image_NaoTrabalho.TabStop = false;
-            this.Cores_Image_NaoTrabalho.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Cores_Image_Feriado
             // 
@@ -742,7 +729,6 @@
             this.Cores_Image_Feriado.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_Feriado.TabIndex = 9;
             this.Cores_Image_Feriado.TabStop = false;
-            this.Cores_Image_Feriado.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Cores_Image_Falta
             // 
@@ -757,7 +743,6 @@
             this.Cores_Image_Falta.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_Falta.TabIndex = 9;
             this.Cores_Image_Falta.TabStop = false;
-            this.Cores_Image_Falta.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Cores_Image_Hoje
             // 
@@ -772,7 +757,6 @@
             this.Cores_Image_Hoje.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_Hoje.TabIndex = 9;
             this.Cores_Image_Hoje.TabStop = false;
-            this.Cores_Image_Hoje.Click += new System.EventHandler(this.Cores_Image_Click);
             // 
             // Configuracao
             // 
