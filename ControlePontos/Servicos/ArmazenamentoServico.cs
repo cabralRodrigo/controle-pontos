@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ControlePontos.Servicos
 {
-    public interface IArmazenamentoServico
+    internal interface IArmazenamentoServico
     {
         string Carregar(string nome, string diretorio = null);
 
@@ -14,10 +14,21 @@ namespace ControlePontos.Servicos
         void Salvar(string nome, string json, string diretorio = null);
     }
 
-    public class ArmazenamentoServico : IArmazenamentoServico
+    internal class ArmazenamentoServico : IArmazenamentoServico
     {
         private string Extensao { get { return ".json"; } }
-        private string DiretorioArmazenamento { get { return new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName; } }
+
+        private string diretorioArmazenamento;
+        private string DiretorioArmazenamento
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.diretorioArmazenamento))
+                    this.diretorioArmazenamento = Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName, "dados");
+
+                return this.diretorioArmazenamento;
+            }
+        }
 
         public IEnumerable<string> BuscarArquivos(Regex regex)
         {
@@ -44,6 +55,9 @@ namespace ControlePontos.Servicos
         public void Salvar(string nome, string json, string diretorio = null)
         {
             var diretorioAtual = diretorio == null ? this.DiretorioArmazenamento : diretorio;
+
+            if (!Directory.Exists(diretorioAtual))
+                Directory.CreateDirectory(diretorioAtual);
 
             File.WriteAllText(Path.Combine(diretorioAtual, this.NomeArquivo(nome)), json);
         }
