@@ -1,4 +1,7 @@
-﻿22/09/2016 1.7.1:
+﻿22/09/2016 1.7.2:
+	* Criado borda na tela de configuração de cores e definido valores padrões para as cores.
+
+22/09/2016 1.7.1:
 	* Alterado o diretório de dados da aplicação.
 
 20/09/2016 1.7.0:
