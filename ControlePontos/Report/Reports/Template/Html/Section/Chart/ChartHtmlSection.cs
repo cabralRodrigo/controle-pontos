@@ -31,37 +31,33 @@ namespace ControlePontos.Report.Reports.Template.Html.Section.Chart
         {
             var chartId = Guid.NewGuid();
 
-            var html = @"
-                <div id='{0}'>
-                    {1}
+            return $@"
+                <div id='{this.Link}'>
+                    {this.RenderChartJs(chartId.ToString())}
                     <div>
-                        <h1>{2}</h1>
-                        <canvas id='{3}'></canvas>
-                        <label>{4}</label>
+                        <h1>{this.Name}</h1>
+                        <canvas id='{chartId}'></canvas>
+                        <label>{this.Legend}</label>
                     </div>
                 </div>
             ";
-
-            return string.Format(html, this.Link, this.RenderChartJs(chartId.ToString()), this.Name, chartId, this.Legend);
         }
 
         private string RenderChartJs(string chartId)
         {
-            var js = @"
+            return $@"
                 <script type='text/javascript'>
                     window.addEventListener('load', function load(){{
                         window.removeEventListener('load', load, false);
 
-                        new Chart(document.getElementById('{0}'), {{
-                            type: '{1}',
-                            data: JSON.parse('{2}'),
-                            options: {3}
+                        new Chart(document.getElementById('{this.chart.Type.ToString().ToLower()}'), {{
+                            type: '{chartId}',
+                            data: JSON.parse('{this.RenderChartData()}'),
+                            options: {this.RenderChartOptions()}
                         }});
                     }}, false);
                 </script>
             ";
-
-            return string.Format(js, chartId, this.chart.Type.ToString().ToLower(), this.RenderChartData(), this.RenderChartOptions());
         }
 
         private string RenderChartOptions()
@@ -69,7 +65,7 @@ namespace ControlePontos.Report.Reports.Template.Html.Section.Chart
             if (this.chart.Options is string)
                 return this.chart.Options as string;
             else
-                return string.Format("JSON.parse('{0}')", JsonConvert.SerializeObject(this.chart.Options));
+                return $"JSON.parse('{JsonConvert.SerializeObject(this.chart.Options)}')";
         }
 
         private string RenderChartData()

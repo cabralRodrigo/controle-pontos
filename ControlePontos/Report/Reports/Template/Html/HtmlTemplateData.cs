@@ -28,7 +28,7 @@ namespace ControlePontos.Report.Reports.Template.Html
                 foreach (var sectionScript in section.GetDependencies())
                 {
                     if (!this.scripts.Contains(sectionScript))
-                        throw new Exception(string.Format("Section '{0}' requer que o script '{1}' esteja no template", section.Name, sectionScript.Nome));
+                        throw new Exception($"Section '{section.Name}' requer que o script '{sectionScript.Nome}' esteja no template");
                 }
         }
 

@@ -151,7 +151,7 @@ namespace ControlePontos.Forms.TeamServices
             {
                 var horasString = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
 
-                if (!string.IsNullOrEmpty(horasString))
+                if (!horasString.IsNullOrEmpty())
                 {
                     int horas;
                     if (int.TryParse(horasString, out horas))
@@ -184,7 +184,7 @@ namespace ControlePontos.Forms.TeamServices
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Gray;
 
-                        this.tfs.AtualizarWorkItemCompletedHoursAsync(this.project, id, string.IsNullOrEmpty(horasString) ? null : (int?)horas).Continue(() =>
+                        this.tfs.AtualizarWorkItemCompletedHoursAsync(this.project, id, horasString.IsNullOrEmpty() ? null : (int?)horas).Continue(() =>
                         {
                             this.AtualizarBarraStatus();
 

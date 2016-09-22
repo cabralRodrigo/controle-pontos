@@ -25,16 +25,14 @@ namespace ControlePontos.Report.Reports.Template.Html.Section
 
         public string Render()
         {
-            var html = @"
-                <div id='{0}'>
+            return $@"
+                <div id='{this.Link}'>
                     <div>
-                        <h1>{1}</h1>
-                        {2}
+                        <h1>{this.Name}</h1>
+                        {this.texto}
                     </div>
                 </div>
             ";
-
-            return string.Format(html, this.Link, this.Name, this.texto);
         }
     }
 }

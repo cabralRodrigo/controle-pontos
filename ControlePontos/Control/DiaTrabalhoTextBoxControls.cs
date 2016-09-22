@@ -12,7 +12,7 @@ namespace ControlePontos.Control
         {
             var config = this.Configuracao();
 
-            if (config != null && !string.IsNullOrEmpty(config.Formato))
+            if (config != null && !config.Formato.IsNullOrEmpty())
                 this.Style.Format = config.Formato;
 
             this.UpdateCell(appConfig, dia);

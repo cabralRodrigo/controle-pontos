@@ -226,7 +226,7 @@ namespace ControlePontos.Forms
                 config.HoraInicio = inicio;
                 config.HoraFim = fim;
 
-                if (!string.IsNullOrEmpty(form.Geral_TeamService_TextBox.Text))
+                if (!form.Geral_TeamService_TextBox.Text.IsNullOrEmpty())
                 {
                     Uri enderecoTeamService;
                     if (!Uri.TryCreate(form.Geral_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))

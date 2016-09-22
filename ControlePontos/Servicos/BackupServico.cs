@@ -45,7 +45,7 @@ namespace ControlePontos.Servicos
             foreach (var diretorio in this.configuracao.Backup.Diretorios)
             {
                 var json = this.armazenamentoServico.Carregar("backup", diretorio);
-                if (string.IsNullOrEmpty(json))
+                if (json.IsNullOrEmpty())
                     return false;
 
                 var datas = JsonConvert.DeserializeObject<DateTime[]>(json);

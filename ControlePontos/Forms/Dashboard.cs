@@ -78,19 +78,19 @@ namespace ControlePontos.Forms
         private void AtualizarTela()
         {
             var data = new DateTime(this.ano, this.mes, 1);
-            this.ButtonMesAno.Text = "{0} de {1}".FormatWith(data.ToString("MMMM").ToTitleCase(), data.ToString("yyyy"));
+            this.ButtonMesAno.Text = $"{data.ToString("MMMM").ToTitleCase()} de {data.ToString("yyyy")}";
 
             this.LabelCoeficiente.Text = this.calculoServico.Coeficiente(this.config, this.mesTrabalho).Descricao();
             this.LabelCoeficientePorDia.Text = this.calculoServico.CoeficientePorDia(this.config, this.mesTrabalho).Descricao();
-            this.LabelMediaEntrada.Text = this.calculoServico.MediaEntradaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelMediaSaida.Text = this.calculoServico.MediaSaidaEmpresa(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelAlmocoSaida.Text = this.calculoServico.MediaEntradaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelAlmocoRetorno.Text = this.calculoServico.MediaSaidaAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
-            this.LabelMediaTempoAlmoco.Text = this.calculoServico.MediaTempoAlmoco(this.config, this.mesTrabalho).ToStringOr("----", @"hh\:mm");
+            this.LabelMediaEntrada.Text = this.calculoServico.MediaEntradaEmpresa(this.config, this.mesTrabalho)?.ToString(@"hh\:mm") ?? string.Empty;
+            this.LabelMediaSaida.Text = this.calculoServico.MediaSaidaEmpresa(this.config, this.mesTrabalho)?.ToString(@"hh\:mm") ?? string.Empty;
+            this.LabelAlmocoSaida.Text = this.calculoServico.MediaEntradaAlmoco(this.config, this.mesTrabalho)?.ToString(@"hh\:mm") ?? string.Empty;
+            this.LabelAlmocoRetorno.Text = this.calculoServico.MediaSaidaAlmoco(this.config, this.mesTrabalho)?.ToString(@"hh\:mm") ?? string.Empty;
+            this.LabelMediaTempoAlmoco.Text = this.calculoServico.MediaTempoAlmoco(this.config, this.mesTrabalho)?.ToString(@"hh\:mm") ?? string.Empty;
             this.LabelTotalHorasTfs.Text = this.calculoServico.TotalHorasTfs(this.config, this.mesTrabalho).Descricao();
 
-            this.LabelMediaValorAlmoco.Text = this.calculoServico.MediaValorAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
-            this.LabelValorIdealDiario.Text = this.calculoServico.ValorIdealAlmoco(this.config, this.mesTrabalho).ToStringOr("----", "c");
+            this.LabelMediaValorAlmoco.Text = this.calculoServico.MediaValorAlmoco(this.config, this.mesTrabalho)?.ToString("c") ?? "-----";
+            this.LabelValorIdealDiario.Text = this.calculoServico.ValorIdealAlmoco(this.config, this.mesTrabalho)?.ToString("c") ?? "-----";
             this.LabelValorTotalTr.Text = this.calculoServico.ValorAtualTr(this.config, this.mesTrabalho).ToString("c");
 
             this.TextBoxSodexo.Text = this.mesTrabalho.ValorSodexo.ToString("F");
@@ -257,7 +257,7 @@ namespace ControlePontos.Forms
                     if (resultado.Tipo == TipoMensagem.Sucesso)
                     {
                         if (MessageBox.Show("Exportação realizada com sucesso.\nDeseja abrir a pasta onde o arquivo foi criado?", "Exportação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            Process.Start("explorer", "/e, /select, \"{0}\"".FormatWith(dialog.FileName));
+                            Process.Start("explorer", $"/e, /select, \"{dialog.FileName}\"");
                     }
                     else if (resultado.Tipo == TipoMensagem.Aviso)
                     {
