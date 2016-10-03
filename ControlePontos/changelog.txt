@@ -1,4 +1,7 @@
-﻿22/09/2016 1.7.4:
+﻿03/10/2016 1.7.5:
+	* Corrigido bug ao gerar relatórios com charts.
+
+22/09/2016 1.7.4:
 	* Removido código desnecessário na nova versão do C# (6.0).
 
 22/09/2016 1.7.3:
