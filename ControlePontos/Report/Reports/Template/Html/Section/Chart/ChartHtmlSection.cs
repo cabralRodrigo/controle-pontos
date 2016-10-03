@@ -50,8 +50,8 @@ namespace ControlePontos.Report.Reports.Template.Html.Section.Chart
                     window.addEventListener('load', function load(){{
                         window.removeEventListener('load', load, false);
 
-                        new Chart(document.getElementById('{this.chart.Type.ToString().ToLower()}'), {{
-                            type: '{chartId}',
+                        new Chart(document.getElementById('{chartId}'), {{
+                            type: '{this.chart.Type.ToString().ToLower()}',
                             data: JSON.parse('{this.RenderChartData()}'),
                             options: {this.RenderChartOptions()}
                         }});
