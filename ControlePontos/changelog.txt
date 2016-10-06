@@ -1,4 +1,7 @@
-﻿06/10/2016 1.7.6:
+﻿06/10/2016 1.7.7:
+	* Corrigido bug ao ordernar o grid de horários pela coluna de dia da semana.
+
+06/10/2016 1.7.6:
 	* Corrigido crash ao tentar ordenar o grid de horários pela coluna de falta.
 
 03/10/2016 1.7.5:
