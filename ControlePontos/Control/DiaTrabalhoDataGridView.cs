@@ -315,7 +315,7 @@ namespace ControlePontos.Control
         protected override void OnCellContentClick(DataGridViewCellEventArgs e)
         {
             base.OnCellContentClick(e);
-            if (this.Columns[e.ColumnIndex].Name == Colunas.FALTA)
+            if (this.Columns[e.ColumnIndex].Name == Colunas.FALTA && e.RowIndex >= 0)
             {
                 this.CurrentCell = this[0, e.RowIndex];
                 this.CurrentCell.Selected = false;
