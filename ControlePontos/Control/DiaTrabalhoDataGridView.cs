@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ControlePontos.Control
@@ -82,9 +83,9 @@ namespace ControlePontos.Control
 
             this.Columns.Add(new TextBoxColumn(Colunas.DIA_SEMANA, "Dia da Semana", new DiaTrabalhoColumnConfiguracao
             {
-                Formato = "dddd",
                 SempreReadOnly = true,
-                Tipo = typeof(DateTime)
+                Tipo = typeof(DayOfWeek),
+                Formatador = dia => Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetDayName((DayOfWeek)dia)
             }));
 
             this.Columns.Add(new CheckBoxColumn(Colunas.FALTA, "Falta"));
@@ -180,7 +181,7 @@ namespace ControlePontos.Control
 
                 this.Rows.Add(new object[]  {
                     dia.Data,
-                    dia.Data,
+                    dia.Data.DayOfWeek,
                     dia.Falta,
                     dia.Empresa.Entrada?.ToString(@"hh\:mm") ?? string.Empty,
                     dia.Almoco.Entrada?.ToString(@"hh\:mm") ?? string.Empty,
