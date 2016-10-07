@@ -39,6 +39,12 @@ namespace ControlePontos.Servicos
 
         public void SalvarMesTrabalho(int ano, int mes, MesTrabalho mesTrabalho)
         {
+            if (ano < DateTime.MinValue.Year || ano > DateTime.MaxValue.Year)
+                throw new ArgumentOutOfRangeException(nameof(ano));
+
+            if (mes < 1 || mes > 12)
+                throw new ArgumentOutOfRangeException(nameof(mes));
+
             this.armazenamentoServico.Salvar(this.MontarNomeArquivo(ano, mes), JsonConvert.SerializeObject(mesTrabalho));
         }
 
