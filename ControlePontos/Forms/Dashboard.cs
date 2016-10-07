@@ -156,6 +156,7 @@ namespace ControlePontos.Forms
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            this.Timer.Enabled = true;
             this.GridDias.ValoresAtualizados += this.AtualizarTela;
             this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
             {

@@ -1,4 +1,7 @@
-﻿06/10/2016 1.7.7:
+﻿07/10/2016 1.7.8:
+	* Corrigido bug ao salvar um arquivo de mes de trabalho com mes e ano 0.
+
+06/10/2016 1.7.7:
 	* Corrigido bug ao ordernar o grid de horários pela coluna de dia da semana.
 
 06/10/2016 1.7.6:

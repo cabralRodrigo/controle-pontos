@@ -44,6 +44,7 @@
             this.Menu_Dados_Exportar_Zip = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_ImportarCoeficiente = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_RealizarBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_TeamService = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.Status_LabelVersao = new System.Windows.Forms.ToolStripStatusLabel();
@@ -89,7 +90,6 @@
             this.LabelSeparador00 = new System.Windows.Forms.Label();
             this.LabelSeparador11 = new System.Windows.Forms.Label();
             this.LabelSeparador08 = new System.Windows.Forms.Label();
-            this.Menu_TeamService = new System.Windows.Forms.ToolStripMenuItem();
             this.GridDias = new ControlePontos.Control.DiaTrabalhoDataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -168,6 +168,13 @@
             this.Menu_Dados_RealizarBackup.Text = "Realizar Backup";
             this.Menu_Dados_RealizarBackup.Click += new System.EventHandler(this.Menu_Dados_RealizarBackup_Click);
             // 
+            // Menu_TeamService
+            // 
+            this.Menu_TeamService.Name = "Menu_TeamService";
+            this.Menu_TeamService.Size = new System.Drawing.Size(88, 20);
+            this.Menu_TeamService.Text = "Team Service";
+            this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
+            // 
             // Menu_Configuracoes
             // 
             this.Menu_Configuracoes.Name = "Menu_Configuracoes";
@@ -179,7 +186,7 @@
             // 
             this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Status_LabelVersao});
-            this.Status.Location = new System.Drawing.Point(0, 739);
+            this.Status.Location = new System.Drawing.Point(0, 719);
             this.Status.Name = "Status";
             this.Status.Size = new System.Drawing.Size(1347, 22);
             this.Status.TabIndex = 16;
@@ -195,7 +202,6 @@
             // 
             // Timer
             // 
-            this.Timer.Enabled = true;
             this.Timer.Interval = 5000;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
@@ -432,7 +438,7 @@
             this.ButtonMesAno.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonMesAno.Location = new System.Drawing.Point(1199, 688);
+            this.ButtonMesAno.Location = new System.Drawing.Point(1199, 668);
             this.ButtonMesAno.Name = "ButtonMesAno";
             this.ButtonMesAno.Size = new System.Drawing.Size(145, 24);
             this.ButtonMesAno.TabIndex = 28;
@@ -454,7 +460,7 @@
             this.Layout.RowCount = 2;
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.Layout.Size = new System.Drawing.Size(1347, 715);
+            this.Layout.Size = new System.Drawing.Size(1347, 695);
             this.Layout.TabIndex = 46;
             // 
             // LayoutFlow
@@ -502,7 +508,7 @@
             this.LayoutFlow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.LayoutFlow.Location = new System.Drawing.Point(1199, 3);
             this.LayoutFlow.Name = "LayoutFlow";
-            this.LayoutFlow.Size = new System.Drawing.Size(145, 679);
+            this.LayoutFlow.Size = new System.Drawing.Size(145, 659);
             this.LayoutFlow.TabIndex = 46;
             this.LayoutFlow.WrapContents = false;
             // 
@@ -632,13 +638,6 @@
             this.LabelSeparador08.TabIndex = 47;
             this.LabelSeparador08.Text = "separator";
             // 
-            // Menu_TeamService
-            // 
-            this.Menu_TeamService.Name = "Menu_TeamService";
-            this.Menu_TeamService.Size = new System.Drawing.Size(89, 20);
-            this.Menu_TeamService.Text = "Team Service";
-            this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
-            // 
             // GridDias
             // 
             this.GridDias.AllowUserToAddRows = false;
@@ -656,7 +655,7 @@
             this.GridDias.ParserServico = null;
             this.GridDias.RowHeadersVisible = false;
             this.Layout.SetRowSpan(this.GridDias, 2);
-            this.GridDias.Size = new System.Drawing.Size(1190, 709);
+            this.GridDias.Size = new System.Drawing.Size(1190, 689);
             this.GridDias.TabIndex = 47;
             // 
             // dataGridViewTextBoxColumn1
@@ -762,7 +761,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1347, 761);
+            this.ClientSize = new System.Drawing.Size(1347, 741);
             this.Controls.Add(this.Layout);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.Menu);
