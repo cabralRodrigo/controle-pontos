@@ -13,6 +13,15 @@ namespace ControlePontos.Forms.TeamServices
 {
     internal partial class TotalHorasIntegracaoAtual : BaseForm
     {
+        private static class Colunas
+        {
+            public const int ID = 0;
+            public const int Criacao = 1;
+            public const int Titulo = 2;
+            public const int Estado = 3;
+            public const int Horas = 4;
+        }
+
         private readonly ITeamServiceServico tfs;
         private readonly ProgressoCarregamento progressoForm;
         private readonly CancellationTokenSource tokenSource;
@@ -50,7 +59,7 @@ namespace ControlePontos.Forms.TeamServices
         {
             var total = this.Grid.Rows.OfType<DataGridViewRow>().Select(linha =>
             {
-                var horaString = linha.Cells[4 /*Horas*/].Value?.ToString();
+                var horaString = linha.Cells[Colunas.Horas].Value?.ToString();
 
                 int hora;
                 if (int.TryParse(horaString, out hora))
@@ -114,11 +123,11 @@ namespace ControlePontos.Forms.TeamServices
 
         private void TotalHorasIntegracaoAtual_Load(object sender, EventArgs e)
         {
-            this.Grid.Columns[0].Width = 41;
-            this.Grid.Columns[1].Width = 116;
-            this.Grid.Columns[2].Width = 555;
-            this.Grid.Columns[3].Width = 63;
-            this.Grid.Columns[4].Width = 45;
+            this.Grid.Columns[Colunas.ID].Width = 41;
+            this.Grid.Columns[Colunas.Criacao].Width = 116;
+            this.Grid.Columns[Colunas.Titulo].Width = 555;
+            this.Grid.Columns[Colunas.Estado].Width = 63;
+            this.Grid.Columns[Colunas.Horas].Width = 45;
 
             this.progressoForm.Titulo = this.progressoForm.Mensagem = "Carregando...";
             this.progressoForm.TotalPassos = 3;
@@ -136,7 +145,7 @@ namespace ControlePontos.Forms.TeamServices
 
         private void Grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0 /*ID*/ && e.RowIndex >= 0)
+            if (e.ColumnIndex == Colunas.ID && e.RowIndex >= 0)
             {
                 var id = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
                 var url = $@"http://waplprd26v:8080/tfs/DEMOGRAF_SOCIAIS/GECEN.SIGC/_workitems?id={id}&_a=edit";
@@ -147,7 +156,7 @@ namespace ControlePontos.Forms.TeamServices
 
         private void Grid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (e.ColumnIndex == 4 /*Horas*/)
+            if (e.ColumnIndex == Colunas.Horas)
             {
                 var horasString = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
 
@@ -166,10 +175,10 @@ namespace ControlePontos.Forms.TeamServices
 
         private void Grid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4 /*Horas*/)
+            if (e.ColumnIndex == Colunas.Horas)
             {
                 var horasString = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-                var idString = this.Grid.Rows[e.RowIndex].Cells[0/*ID*/].Value?.ToString();
+                var idString = this.Grid.Rows[e.RowIndex].Cells[Colunas.ID].Value?.ToString();
 
                 if (!string.IsNullOrEmpty(idString))
                 {
