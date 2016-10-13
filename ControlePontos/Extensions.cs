@@ -156,5 +156,13 @@ namespace ControlePontos
             else
                 return null;
         }
+
+        public static string ObterDescricao(this Enum valorEnum)
+        {
+            var field = valorEnum?.GetType()?.GetField(valorEnum?.ToString());
+            var atributos = field?.GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), true);
+
+            return (atributos?.FirstOrDefault() as System.ComponentModel.DescriptionAttribute)?.Description ?? valorEnum?.ToString();
+        }
     }
 }

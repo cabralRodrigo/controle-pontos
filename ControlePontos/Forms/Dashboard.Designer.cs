@@ -45,7 +45,6 @@
             this.Menu_Dados_ImportarCoeficiente = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_RealizarBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_TeamService = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.Status_LabelVersao = new System.Windows.Forms.ToolStripStatusLabel();
             this.Timer = new System.Windows.Forms.Timer(this.components);
@@ -103,6 +102,9 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Menu_Ajuda_Changelog = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Ajuda_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Ajuda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.Status.SuspendLayout();
             this.Layout.SuspendLayout();
@@ -116,7 +118,7 @@
             this.Menu_Relatorio,
             this.Menu_Dados,
             this.Menu_TeamService,
-            this.Menu_Configuracoes});
+            this.Menu_Ajuda});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(1347, 24);
@@ -171,16 +173,9 @@
             // Menu_TeamService
             // 
             this.Menu_TeamService.Name = "Menu_TeamService";
-            this.Menu_TeamService.Size = new System.Drawing.Size(88, 20);
+            this.Menu_TeamService.Size = new System.Drawing.Size(89, 20);
             this.Menu_TeamService.Text = "Team Service";
             this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
-            // 
-            // Menu_Configuracoes
-            // 
-            this.Menu_Configuracoes.Name = "Menu_Configuracoes";
-            this.Menu_Configuracoes.Size = new System.Drawing.Size(96, 20);
-            this.Menu_Configuracoes.Text = "Configurações";
-            this.Menu_Configuracoes.Click += new System.EventHandler(this.Menu_Configuracoes_Click);
             // 
             // Status
             // 
@@ -756,6 +751,29 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Visible = false;
             // 
+            // Menu_Ajuda_Changelog
+            // 
+            this.Menu_Ajuda_Changelog.Name = "Menu_Ajuda_Changelog";
+            this.Menu_Ajuda_Changelog.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Ajuda_Changelog.Text = "Changelog";
+            this.Menu_Ajuda_Changelog.Click += new System.EventHandler(this.Menu_Ajuda_Changelog_Click);
+            // 
+            // Menu_Ajuda_Configuracoes
+            // 
+            this.Menu_Ajuda_Configuracoes.Name = "Menu_Ajuda_Configuracoes";
+            this.Menu_Ajuda_Configuracoes.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Ajuda_Configuracoes.Text = "Configurações";
+            this.Menu_Ajuda_Configuracoes.Click += new System.EventHandler(this.Menu_Ajuda_Configuracoes_Click);
+            // 
+            // Menu_Ajuda
+            // 
+            this.Menu_Ajuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Menu_Ajuda_Changelog,
+            this.Menu_Ajuda_Configuracoes});
+            this.Menu_Ajuda.Name = "Menu_Ajuda";
+            this.Menu_Ajuda.Size = new System.Drawing.Size(50, 20);
+            this.Menu_Ajuda.Text = "Ajuda";
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -831,7 +849,6 @@
         private System.Windows.Forms.TextBox TextBoxOffset;
         private System.Windows.Forms.TextBox TextBoxSodexo;
         private System.Windows.Forms.Timer Timer;
-        private System.Windows.Forms.ToolStripMenuItem Menu_Configuracoes;
         private System.Windows.Forms.ToolStripMenuItem Menu_Dados;
         private System.Windows.Forms.ToolStripMenuItem Menu_Dados_Exportar;
         private System.Windows.Forms.ToolStripMenuItem Menu_Dados_Exportar_Zip;
@@ -853,5 +870,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.ToolStripMenuItem Menu_TeamService;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Changelog;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Configuracoes;
     }
 }

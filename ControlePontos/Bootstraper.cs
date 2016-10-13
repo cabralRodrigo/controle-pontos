@@ -54,6 +54,7 @@ namespace ControlePontos
             this.container.RegisterSingleton<IParserServico, ParserServico>();
             this.container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
             this.container.RegisterSingleton<ITeamServiceServico, TeamServiceServico>();
+            this.container.RegisterSingleton<IAppInfoServico, AppInfoServico>();
         }
 
         private void RegistrarServicosExportaveis()
@@ -81,7 +82,8 @@ namespace ControlePontos
                 typeof(Configuracao), 
                 typeof(DiaTrabalhoDataGridView),
                 typeof(TotalHorasIntegracaoAtual),
-                typeof(ProgressoCarregamento)
+                typeof(ProgressoCarregamento),
+                typeof(Changelog)
             });
         }
     }
