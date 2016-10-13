@@ -16,10 +16,11 @@ namespace ControlePontos.Forms.TeamServices
         private static class Colunas
         {
             public const int ID = 0;
-            public const int Criacao = 1;
-            public const int Titulo = 2;
-            public const int Estado = 3;
-            public const int Horas = 4;
+            public const int Projeto = ID + 1;
+            public const int Criacao = Projeto + 1;
+            public const int Titulo = Criacao + 1;
+            public const int Estado = Titulo + 1;
+            public const int Horas = Estado + 1;
         }
 
         private readonly ITeamServiceServico tfs;
@@ -46,6 +47,7 @@ namespace ControlePontos.Forms.TeamServices
             foreach (var workItem in workItems)
                 this.Grid.Rows.Add(new object[] {
                         workItem.Id,
+                        workItem.Fields[TeamServiceServico.CamposTfs.TeamProject]?.Value,
                         workItem.Fields[TeamServiceServico.CamposTfs.CreatedDate]?.Value,
                         workItem.Title,
                         workItem.State,
@@ -124,6 +126,7 @@ namespace ControlePontos.Forms.TeamServices
         private void TotalHorasIntegracaoAtual_Load(object sender, EventArgs e)
         {
             this.Grid.Columns[Colunas.ID].Width = 41;
+            this.Grid.Columns[Colunas.Projeto].Width = 116;
             this.Grid.Columns[Colunas.Criacao].Width = 116;
             this.Grid.Columns[Colunas.Titulo].Width = 555;
             this.Grid.Columns[Colunas.Estado].Width = 63;

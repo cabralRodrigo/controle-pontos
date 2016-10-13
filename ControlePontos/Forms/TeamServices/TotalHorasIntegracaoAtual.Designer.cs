@@ -32,6 +32,7 @@
             this.LabelStatusAtual = new System.Windows.Forms.ToolStripStatusLabel();
             this.Grid = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Projeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +50,7 @@
             this.LabelStatusAtual});
             this.statusStrip1.Location = new System.Drawing.Point(0, 551);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(823, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(905, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -68,6 +69,7 @@
             this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.Projeto,
             this.CreatedDate,
             this.Title,
             this.State,
@@ -78,7 +80,7 @@
             this.Grid.MultiSelect = false;
             this.Grid.Name = "Grid";
             this.Grid.RowHeadersVisible = false;
-            this.Grid.Size = new System.Drawing.Size(823, 551);
+            this.Grid.Size = new System.Drawing.Size(905, 551);
             this.Grid.TabIndex = 1;
             this.Grid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CellBeginEdit);
             this.Grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CellContentClick);
@@ -92,6 +94,12 @@
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Projeto
+            // 
+            this.Projeto.HeaderText = "Projeto";
+            this.Projeto.Name = "Projeto";
+            this.Projeto.ReadOnly = true;
             // 
             // CreatedDate
             // 
@@ -148,13 +156,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 573);
+            this.ClientSize = new System.Drawing.Size(905, 573);
             this.Controls.Add(this.Grid);
             this.Controls.Add(this.statusStrip1);
             this.Name = "TotalHorasIntegracaoAtual";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Total de Horas da Itegração Atual";
             this.Load += new System.EventHandler(this.TotalHorasIntegracaoAtual_Load);
             this.statusStrip1.ResumeLayout(false);
@@ -174,6 +179,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewLinkColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Projeto;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
