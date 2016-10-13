@@ -33,7 +33,7 @@
             this.GroupBox_Estatisticas_Layout = new System.Windows.Forms.FlowLayoutPanel();
             this.GroupBox_Legenda = new System.Windows.Forms.GroupBox();
             this.GroupBox_Legenda_Layout = new System.Windows.Forms.FlowLayoutPanel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.TreeView_Changelog = new System.Windows.Forms.TreeView();
             this.Layout.SuspendLayout();
             this.GroupBox_Estatisticas.SuspendLayout();
             this.GroupBox_Legenda.SuspendLayout();
@@ -46,7 +46,7 @@
             this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.Layout.Controls.Add(this.GroupBox_Estatisticas, 1, 0);
             this.Layout.Controls.Add(this.GroupBox_Legenda, 1, 1);
-            this.Layout.Controls.Add(this.treeView1, 0, 0);
+            this.Layout.Controls.Add(this.TreeView_Changelog, 0, 0);
             this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Layout.Location = new System.Drawing.Point(0, 0);
             this.Layout.Name = "Layout";
@@ -106,12 +106,12 @@
             // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            this.Layout.SetRowSpan(this.treeView1, 2);
-            this.treeView1.Size = new System.Drawing.Size(1003, 737);
-            this.treeView1.TabIndex = 3;
+            this.TreeView_Changelog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TreeView_Changelog.Location = new System.Drawing.Point(3, 3);
+            this.TreeView_Changelog.Name = "treeView1";
+            this.Layout.SetRowSpan(this.TreeView_Changelog, 2);
+            this.TreeView_Changelog.Size = new System.Drawing.Size(1003, 737);
+            this.TreeView_Changelog.TabIndex = 3;
             // 
             // Changelog
             // 
@@ -137,7 +137,7 @@
         private System.Windows.Forms.TableLayoutPanel Layout;
         private System.Windows.Forms.GroupBox GroupBox_Estatisticas;
         private System.Windows.Forms.GroupBox GroupBox_Legenda;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView TreeView_Changelog;
         private System.Windows.Forms.FlowLayoutPanel GroupBox_Legenda_Layout;
         private System.Windows.Forms.FlowLayoutPanel GroupBox_Estatisticas_Layout;
     }
