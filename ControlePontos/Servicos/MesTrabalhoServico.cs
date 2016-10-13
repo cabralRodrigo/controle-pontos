@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Model;
 using Newtonsoft.Json;
 using System;
 using System.Linq;

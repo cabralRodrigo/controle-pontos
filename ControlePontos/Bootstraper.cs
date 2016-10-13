@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Control;
+using ControlePontos.Extensions;
 using ControlePontos.Forms;
 using ControlePontos.Forms.TeamServices;
 using ControlePontos.Native;
@@ -67,10 +68,10 @@ namespace ControlePontos
 
         private void RegistrarRelatorios()
         {
-            this.container.RegisterCollection<IReport>(new[] { 
-                typeof(EvolucaoEntradaSaidaRelatorio), 
-                typeof(TabelaMesRelatorio), 
-                typeof(TabelaMesRelatorioFake), 
+            this.container.RegisterCollection<IReport>(new[] {
+                typeof(EvolucaoEntradaSaidaRelatorio),
+                typeof(TabelaMesRelatorio),
+                typeof(TabelaMesRelatorioFake),
                 typeof(UsoSodexoRelatorio)
             });
         }
@@ -78,8 +79,8 @@ namespace ControlePontos
         private void RegistrarForms()
         {
             this.container.RegisterDisposable(new[]{
-                typeof(Dashboard), 
-                typeof(Configuracao), 
+                typeof(Dashboard),
+                typeof(Configuracao),
                 typeof(DiaTrabalhoDataGridView),
                 typeof(TotalHorasIntegracaoAtual),
                 typeof(ProgressoCarregamento),

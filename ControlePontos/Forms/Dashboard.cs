@@ -1,4 +1,5 @@
-﻿using ControlePontos.Forms.TeamServices;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Forms.TeamServices;
 using ControlePontos.Model;
 using ControlePontos.Native;
 using ControlePontos.Servicos;

@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Model;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section;
