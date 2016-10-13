@@ -23,16 +23,10 @@ namespace ControlePontos.Model
 
         public static bool operator >(Versao a, Versao b)
         {
-            if (b.VersaoMaior < a.VersaoMaior)
-                return true;
+            var versaoA = $"{a.VersaoMaior}{a.VersaoFuncionalidade}{a.VersaoBugs}";
+            var versaoB = $"{b.VersaoMaior}{b.VersaoFuncionalidade}{b.VersaoBugs}";
 
-            if (b.VersaoFuncionalidade < a.VersaoMaior)
-                return true;
-
-            if (b.VersaoBugs < a.VersaoBugs)
-                return true;
-
-            return false;
+            return int.Parse(versaoA) > int.Parse(versaoB);
         }
 
         public static bool operator <(Versao a, Versao b)
