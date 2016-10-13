@@ -19,7 +19,7 @@ namespace ControlePontos.Forms
         private readonly ICalculoServico calculoServico;
         private readonly IConfiguracaoServico configuracaoServico;
         private readonly IExportacaoServico exportacaoServico;
-        private readonly IFormServico formOpener;
+        private readonly IFormServico formServico;
         private readonly IMesTrabalhoServico mesTrabalhoServico;
         private readonly IRelatorioServico relatorioServico;
         private readonly IControlRenderer controlRenderer;
@@ -35,7 +35,7 @@ namespace ControlePontos.Forms
             this.InitializeComponent();
 
             this.configuracaoServico = configuracaoServico;
-            this.formOpener = formOpener;
+            this.formServico = formOpener;
             this.mesTrabalhoServico = mesTrabalhoServico;
             this.relatorioServico = relatorioServico;
             this.exportacaoServico = exportacaoServico;
@@ -339,19 +339,19 @@ namespace ControlePontos.Forms
 
         private void Menu_TeamService_Click(object sender, EventArgs e)
         {
-            this.formOpener.AbrirDialogo<TotalHorasIntegracaoAtual>();
+            this.formServico.AbrirDialogo<TotalHorasIntegracaoAtual>();
         }
 
         #region Ajuda
 
         private void Menu_Ajuda_Changelog_Click(object sender, EventArgs e)
         {
-            this.formOpener.AbrirDialogo<Changelog>();
+            this.formServico.AbrirDialogo<Changelog>();
         }
 
         private void Menu_Ajuda_Configuracoes_Click(object sender, EventArgs e)
         {
-            this.formOpener.AbrirDialogo<Configuracao>();
+            this.formServico.AbrirDialogo<Configuracao>();
         }
 
         #endregion
