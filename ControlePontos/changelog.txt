@@ -1,4 +1,14 @@
-﻿07/10/2016 1.7.8:
+﻿11/10/2016 1.8.0:
+	* Centralizado serviço para obter informações sobre o app (nome, versão, changelog).
+	* Centralizado código de configuração básica para forms.
+	* Centralizado códigos das colunas da tela de informações do team services.
+	+ Adicionado tipo de mudança no changelog.
+	+ Adicionada tela de visualização changelog.
+	+ Adicionada coluna do projeto do work item na tela do team services.
+	@ Reordenado o menu da tela principial.
+	! Removido bug que ocorria ao tentar ir para um work item no browser pela tela do team services.
+
+07/10/2016 1.7.8:
 	! Corrigido bug ao salvar um arquivo de mes de trabalho com mes e ano 0.
 
 06/10/2016 1.7.7:
