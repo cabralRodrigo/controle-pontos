@@ -1,5 +1,4 @@
-﻿using ControlePontos.Dialog;
-using ControlePontos.Forms.TeamServices;
+﻿using ControlePontos.Forms.TeamServices;
 using ControlePontos.Model;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
@@ -24,12 +23,13 @@ namespace ControlePontos.Forms
         private readonly IRelatorioServico relatorioServico;
         private readonly IControlRenderer controlRenderer;
         private readonly IParserServico parserServico;
+        private readonly IAppInfoServico appInfoServico;
 
         private MesTrabalho mesTrabalho;
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico)
+        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico)
         {
             this.InitializeComponent();
 
@@ -42,6 +42,7 @@ namespace ControlePontos.Forms
             this.calculoServico = calculoServico;
             this.controlRenderer = controlRenderer;
             this.parserServico = parserServico;
+            this.appInfoServico = appInfoServico;
         }
 
         private void InitDashboard(int ano, int mes, ConfigApp config = null)
@@ -72,7 +73,7 @@ namespace ControlePontos.Forms
             this.AtualizarTela();
 
             if (abrirConfiguracoes)
-                this.Menu_Configuracoes_Click(this, EventArgs.Empty);
+                this.Menu_Ajuda_Configuracoes_Click(this, EventArgs.Empty);
         }
 
         private void AtualizarTela()
@@ -106,14 +107,14 @@ namespace ControlePontos.Forms
         {
             foreach (var relatorio in this.relatorioServico.ListarRelatorios().OrderBy(w => w.Name))
             {
-                var item = new ToolStripMenuItem { Size = new Size(185, 22), Text = relatorio.Name };
-                item.Click += (sender2, e2) =>
+                var menu = new ToolStripMenuItem { Size = new Size(185, 22), Text = relatorio.Name };
+                menu.Click += (sender, e) =>
                 {
-                    var rel = relatorio.Execute(config, ano, mes, this.mesTrabalho);
-                    rel.Execute();
+                    var resultado = relatorio.Execute(config, ano, mes, this.mesTrabalho);
+                    resultado.Execute();
                 };
 
-                this.Menu_Relatorio.DropDownItems.Add(item);
+                this.Menu_Relatorio.DropDownItems.Add(menu);
             }
         }
 
@@ -158,15 +159,12 @@ namespace ControlePontos.Forms
         {
             this.Timer.Enabled = true;
             this.GridDias.ValoresAtualizados += this.AtualizarTela;
-            this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao =>
-            {
-                this.InitDashboard(this.ano, this.mes, novaConfiguracao);
-            };
+            this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao => this.InitDashboard(this.ano, this.mes, novaConfiguracao);
 
             this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
 
-            this.Text = Application.ProductName;
-            this.Status_LabelVersao.Text = Application.ProductVersion;
+            this.Text = this.appInfoServico.ObterNomeApp();
+            this.Status_LabelVersao.Text = this.appInfoServico.ObterVersaoAtual().ToString();
 
             this.CarregarMenuRelatorios();
             this.RealizarBackupDiario();
@@ -343,10 +341,19 @@ namespace ControlePontos.Forms
             this.formOpener.ShowModalForm<TotalHorasIntegracaoAtual>();
         }
 
-        private void Menu_Configuracoes_Click(object sender, EventArgs e)
+        #region Ajuda
+
+        private void Menu_Ajuda_Changelog_Click(object sender, EventArgs e)
+        {
+            this.formOpener.ShowModalForm<Changelog>();
+        }
+
+        private void Menu_Ajuda_Configuracoes_Click(object sender, EventArgs e)
         {
             this.formOpener.ShowModalForm<Configuracao>();
         }
+
+        #endregion
 
         #endregion Menu
 
