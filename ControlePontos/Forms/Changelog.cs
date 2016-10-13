@@ -26,7 +26,7 @@ namespace ControlePontos.Forms
             foreach (var log in changelog)
             {
                 var node = new TreeNode($"{log.Versao} - {log.Data.ToString("dd/MM/yyyy")}");
-                foreach (var alteracao in log.Mudancas)
+                foreach (var alteracao in log.Mudancas.OrderBy(w => w.Tipo).ThenBy(w => w.Descricao))
                     node.Nodes.Add(new TreeNode { Text = alteracao.Descricao, ForeColor = this.ObterCorParaTipoMudanca(alteracao.Tipo) });
 
                 this.TreeView_Changelog.Nodes.Add(node);
