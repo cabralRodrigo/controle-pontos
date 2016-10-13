@@ -349,6 +349,11 @@ namespace ControlePontos.Forms
             this.formServico.AbrirDialogo<Changelog>();
         }
 
+        private void Menu_Ajuda_Sobre_Click(object sender, EventArgs e)
+        {
+            this.formServico.AbrirDialogo<Sobre>();
+        }
+
         private void Menu_Ajuda_Configuracoes_Click(object sender, EventArgs e)
         {
             this.formServico.AbrirDialogo<Configuracao>();
