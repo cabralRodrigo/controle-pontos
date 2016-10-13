@@ -19,7 +19,7 @@ namespace ControlePontos.Forms
         private readonly ICalculoServico calculoServico;
         private readonly IConfiguracaoServico configuracaoServico;
         private readonly IExportacaoServico exportacaoServico;
-        private readonly IFormOpener formOpener;
+        private readonly IFormServico formOpener;
         private readonly IMesTrabalhoServico mesTrabalhoServico;
         private readonly IRelatorioServico relatorioServico;
         private readonly IControlRenderer controlRenderer;
@@ -30,7 +30,7 @@ namespace ControlePontos.Forms
         private ConfigApp config;
         private int ano, mes;
 
-        public Dashboard(IFormOpener formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico)
+        public Dashboard(IFormServico formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico)
         {
             this.InitializeComponent();
 
@@ -339,19 +339,19 @@ namespace ControlePontos.Forms
 
         private void Menu_TeamService_Click(object sender, EventArgs e)
         {
-            this.formOpener.ShowModalForm<TotalHorasIntegracaoAtual>();
+            this.formOpener.AbrirDialogo<TotalHorasIntegracaoAtual>();
         }
 
         #region Ajuda
 
         private void Menu_Ajuda_Changelog_Click(object sender, EventArgs e)
         {
-            this.formOpener.ShowModalForm<Changelog>();
+            this.formOpener.AbrirDialogo<Changelog>();
         }
 
         private void Menu_Ajuda_Configuracoes_Click(object sender, EventArgs e)
         {
-            this.formOpener.ShowModalForm<Configuracao>();
+            this.formOpener.AbrirDialogo<Configuracao>();
         }
 
         #endregion

@@ -48,7 +48,7 @@ namespace ControlePontos
         private void RegistrarServicos()
         {
             this.container.RegisterSingleton<IArmazenamentoServico, ArmazenamentoServico>();
-            this.container.RegisterSingleton<IFormOpener, FormOpener>();
+            this.container.RegisterSingleton<IFormServico, FormServico>();
             this.container.RegisterSingleton<IExportacaoServico, ExportacaoServico>();
             this.container.RegisterSingleton<IBackupServico, BackupServico>();
             this.container.RegisterSingleton<ICalculoServico, CalculoServico>();
