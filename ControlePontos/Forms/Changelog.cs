@@ -21,7 +21,7 @@ namespace ControlePontos.Forms
 
         private void CarregarChangelog(IEnumerable<ChangelogInfo> changelog)
         {
-            this.treeView1.Nodes.Clear();
+            this.TreeView_Changelog.Nodes.Clear();
 
             foreach (var log in changelog)
             {
@@ -29,10 +29,11 @@ namespace ControlePontos.Forms
                 foreach (var alteracao in log.Mudancas)
                     node.Nodes.Add(new TreeNode { Text = alteracao.Descricao, ForeColor = this.ObterCorParaTipoMudanca(alteracao.Tipo) });
 
-                this.treeView1.Nodes.Add(node);
+                this.TreeView_Changelog.Nodes.Add(node);
             }
 
-            this.treeView1.ExpandAll();
+            this.TreeView_Changelog.ExpandAll();
+            this.TreeView_Changelog.Nodes[0].EnsureVisible();
         }
 
         private void CarregarLegenda()
