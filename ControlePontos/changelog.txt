@@ -1,4 +1,14 @@
-﻿11/10/2016 1.8.0:
+﻿13/10/2016 1.9.0:
+	* Reorganizando os métodos de extensão em classes separadas.
+	* Movendo a classe form opener para o formato de serviço, para padronizar as classes no projeto.
+	* Padronizando uso do método IsNullOrEmpty da classe string, para usar o método de extensão.
+	! Corrigido bug que fazia com que a treeview da tela de changelog aparecesse no último item quando carregada.
+	@ Alterado a ordem padrão dos changelogs dentro de uma versão, para um ordem padrão e alfabética.
+	! Corrigido bug no método de comparação de versões.
+	+ Adicionado tela 'Sobre' do Controle de Pontos;
+	* Criado pasta para arquivos de inicialização com o bootstrapper.cs e o app.cs.
+
+11/10/2016 1.8.0:
 	* Centralizado serviço para obter informações sobre o app (nome, versão, changelog).
 	* Centralizado código de configuração básica para forms.
 	* Centralizado códigos das colunas da tela de informações do team services.
