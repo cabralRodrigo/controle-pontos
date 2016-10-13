@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ControlePontos.Dialog
+namespace ControlePontos.Forms
 {
-    public partial class MonthPicker : Form
+    internal partial class MonthPicker : BaseForm
     {
         public DateTime DataSelecionada { get; private set; }
 

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ControlePontos.Forms.TeamServices
 {
-    internal partial class TotalHorasIntegracaoAtual : Form
+    internal partial class TotalHorasIntegracaoAtual : BaseForm
     {
         private readonly ITeamServiceServico tfs;
         private readonly ProgressoCarregamento progressoForm;
