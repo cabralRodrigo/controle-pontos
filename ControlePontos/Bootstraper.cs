@@ -84,7 +84,8 @@ namespace ControlePontos
                 typeof(DiaTrabalhoDataGridView),
                 typeof(TotalHorasIntegracaoAtual),
                 typeof(ProgressoCarregamento),
-                typeof(Changelog)
+                typeof(Changelog),
+                typeof(Sobre)
             });
         }
     }
