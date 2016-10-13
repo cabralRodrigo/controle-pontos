@@ -40,6 +40,7 @@ namespace ControlePontos.Servicos
             public const string ClosedData = "Microsoft.VSTS.Common.ClosedDate";
             public const string WorkItemType = "System.WorkItemType";
             public const string CreatedDate = "System.CreatedDate";
+            public const string TeamProject = "System.TeamProject";
         }
 
         private ConfigApp config;
@@ -158,7 +159,8 @@ namespace ControlePontos.Servicos
                         [{CamposTfs.IterationPath}], 
                         [{CamposTfs.CompletedWork}], 
                         [{CamposTfs.ClosedData}],
-                        [{CamposTfs.CreatedDate}]
+                        [{CamposTfs.CreatedDate}],
+                        [{CamposTfs.TeamProject}]
                     from WorkItems 
                     where [{CamposTfs.IterationId}] in ({parametrosQuery}) and 
                           [{CamposTfs.AssignedTo}] = @Me and
