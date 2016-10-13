@@ -297,7 +297,7 @@
     <Compile Include="Control\DiaTrabalhoDataGridView.Designer.cs">
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOpener.cs" />
+    <Compile Include="Servicos\FormServico.cs" />
     <Compile Include="Model\ConfigTeamService.cs" />
     <Compile Include="Model\CoresConfig.cs" />
     <Compile Include="Model\Resultado.cs" />
