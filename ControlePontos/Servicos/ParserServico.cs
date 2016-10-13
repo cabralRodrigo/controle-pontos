@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlePontos.Extensions;
+using System;
 
 namespace ControlePontos.Servicos
 {

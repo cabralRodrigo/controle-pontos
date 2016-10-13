@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ControlePontos.Extensions;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;

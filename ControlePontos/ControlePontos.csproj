@@ -261,6 +261,10 @@
     <Compile Include="Control\DiaTrabalhoCheckBoxControls.cs" />
     <Compile Include="Control\DiaTrabalhoTextBoxControls.cs" />
     <Compile Include="Control\IDiaTrabalhoCell.cs" />
+    <Compile Include="Extensions\DotNetExtensions.cs" />
+    <Compile Include="Extensions\SimpleInjectorExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\WindowsFormsExtensions.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,7 +345,6 @@
     <Compile Include="Servicos\MesTrabalhoServico.cs" />
     <Compile Include="Servicos\ParserServico.cs" />
     <Compile Include="Servicos\RelatorioServico.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Forms\Configuracao.cs">
       <SubType>Form</SubType>
     </Compile>

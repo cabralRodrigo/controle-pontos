@@ -1,4 +1,5 @@
-﻿using ControlePontos.Misc;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Misc;
 using ControlePontos.Model;
 using ControlePontos.Servicos;
 using System;

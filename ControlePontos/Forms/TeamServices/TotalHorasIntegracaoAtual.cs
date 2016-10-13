@@ -1,4 +1,5 @@
-﻿using ControlePontos.Servicos;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Servicos;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;

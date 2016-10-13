@@ -1,4 +1,5 @@
-﻿using ControlePontos.Model;
+﻿using ControlePontos.Extensions;
+using ControlePontos.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
