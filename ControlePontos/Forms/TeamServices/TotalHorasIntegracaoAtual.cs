@@ -24,6 +24,7 @@ namespace ControlePontos.Forms.TeamServices
         }
 
         private readonly ITeamServiceServico tfs;
+        private readonly IConfiguracaoServico configuracaoServico;
         private readonly ProgressoCarregamento progressoForm;
         private readonly CancellationTokenSource tokenSource;
 
@@ -31,11 +32,12 @@ namespace ControlePontos.Forms.TeamServices
         private int[] iteracoesIDs;
         private TfsTeamProjectCollection project;
 
-        public TotalHorasIntegracaoAtual(ITeamServiceServico tfs, ProgressoCarregamento progressoForm)
+        public TotalHorasIntegracaoAtual(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, ProgressoCarregamento progressoForm)
         {
             this.InitializeComponent();
 
             this.tfs = tfs;
+            this.configuracaoServico = configuracaoServico;
             this.progressoForm = progressoForm;
             this.tokenSource = new CancellationTokenSource();
         }
@@ -151,7 +153,9 @@ namespace ControlePontos.Forms.TeamServices
             if (e.ColumnIndex == Colunas.ID && e.RowIndex >= 0)
             {
                 var id = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-                var url = $@"http://waplprd26v:8080/tfs/DEMOGRAF_SOCIAIS/GECEN.SIGC/_workitems?id={id}&_a=edit";
+                var projeto = this.Grid.Rows[e.RowIndex].Cells[Colunas.Projeto].Value?.ToString();
+
+                var url = $@"{this.configuracaoServico.ObterConfiguracao().TeamService.Endereco}/{projeto}/_workitems?id={id}&_a=edit";
 
                 Process.Start(url);
             }
