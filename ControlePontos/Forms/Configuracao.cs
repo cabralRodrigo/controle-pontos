@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ControlePontos.Forms
 {
-    internal partial class Configuracao : Form
+    internal partial class Configuracao : BaseForm
     {
         #region Partes
 
@@ -313,6 +313,7 @@ namespace ControlePontos.Forms
         public Configuracao(IConfiguracaoServico configuracaoServico)
         {
             this.InitializeComponent();
+
             this.configuracaoServico = configuracaoServico;
             this.partes = new List<IConfiguracaoParte>();
         }
@@ -356,12 +357,7 @@ namespace ControlePontos.Forms
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
-            {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
-            else if (keyData == Keys.Enter)
+            if (keyData == Keys.Enter)
                 this.ButtonSalvar_Click(this, EventArgs.Empty);
 
             return base.ProcessCmdKey(ref msg, keyData);

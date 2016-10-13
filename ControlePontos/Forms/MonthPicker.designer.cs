@@ -1,4 +1,4 @@
-﻿namespace ControlePontos.Dialog
+﻿namespace ControlePontos.Forms
 {
     partial class MonthPicker
     {
