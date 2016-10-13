@@ -87,7 +87,7 @@ namespace ControlePontos.Servicos
         private void MarcarBackupComoFeito(string diretorio)
         {
             var json = this.armazenamentoServico.Carregar("backup", diretorio);
-            if (string.IsNullOrEmpty(json))
+            if (json.IsNullOrEmpty())
                 json = "[]";
 
             var datas = JsonConvert.DeserializeObject<List<DateTime>>(json);

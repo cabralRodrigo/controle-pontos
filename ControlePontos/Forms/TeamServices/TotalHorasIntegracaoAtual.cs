@@ -188,10 +188,10 @@ namespace ControlePontos.Forms.TeamServices
                 var horasString = this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
                 var idString = this.Grid.Rows[e.RowIndex].Cells[Colunas.ID].Value?.ToString();
 
-                if (!string.IsNullOrEmpty(idString))
+                if (!idString.IsNullOrEmpty())
                 {
                     int horas = 0, id;
-                    if ((string.IsNullOrEmpty(horasString) || int.TryParse(horasString, out horas)) && int.TryParse(idString, out id) && (string.IsNullOrEmpty(horasString) || this.horasAntigas != horas))
+                    if ((horasString.IsNullOrEmpty() || int.TryParse(horasString, out horas)) && int.TryParse(idString, out id) && (horasString.IsNullOrEmpty() || this.horasAntigas != horas))
                     {
                         //Copia a hora antiga antes da atualização da celula pois, como a atualizar é assincrona, essa variavel pode mudar antes de o processo ser atualizado.
                         int? horasAntigasCelula = this.horasAntigas;

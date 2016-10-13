@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlePontos.Extensions;
+using System;
 
 namespace ControlePontos.Model
 {
@@ -81,7 +82,7 @@ namespace ControlePontos.Model
 
         private void Parse(string versao)
         {
-            if (string.IsNullOrEmpty(versao))
+            if (versao.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(versao));
 
             var partes = versao.Split('.');
