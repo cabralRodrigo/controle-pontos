@@ -35,6 +35,7 @@ namespace ControlePontos.Control
         public IControlRenderer ControlRenderer { get; set; }
         public IParserServico ParserServico { get; set; }
         private ConfigApp config;
+        private TimeSpan? ultimoHorarioEditado;
 
         public event Action ValoresAtualizados;
 
@@ -233,7 +234,7 @@ namespace ControlePontos.Control
         private void AtualizarHorarios(int rowIndex, string nomeColuna)
         {
             var valor = (string)this.Rows[rowIndex].Cells[nomeColuna].Value;
-            var timeSpan = this.ParserServico.ParseTimeSpan(valor);
+            var timeSpan = this.ValidarHorario(this.ParserServico.ParseTimeSpan(valor), nomeColuna, rowIndex);
 
             this.Rows[rowIndex].Cells[nomeColuna].Value = timeSpan.HasValue ? timeSpan.Value.ToString(@"hh\:mm") : null;
 
@@ -260,8 +261,78 @@ namespace ControlePontos.Control
             }
 
             this.AtualizarEstatisticas(rowIndex, tempoAlmoco: atualizarTempoAlmoco, coeficiente: true, totalHoras: true);
-            if (this.ValoresAtualizados != null)
-                this.ValoresAtualizados();
+            this.ValoresAtualizados?.Invoke();
+        }
+
+        private TimeSpan? ValidarHorario(TimeSpan? horario, string nomeColuna, int rowIndex)
+        {
+            if (horario.HasValue)
+            {
+                var dia = this.Rows[rowIndex].Cells[Colunas.OBJETO].Value as DiaTrabalho;
+                string mensagemErro = null;
+
+                switch (nomeColuna)
+                {
+                    case Colunas.ENTRADA:
+                        {
+                            if (dia.Almoco.Entrada.HasValue && dia.Almoco.Entrada.Value <= horario.Value)
+                                mensagemErro = "O horário de entrada deve ser menor que o horário de saída para o almoço";
+
+                            if (dia.Almoco.Saida.HasValue && dia.Almoco.Saida.Value <= horario.Value)
+                                mensagemErro = "O horário de entrada deve ser menor que o horário de retorno do almoço";
+
+                            if (dia.Empresa.Saida.HasValue && dia.Empresa.Saida.Value <= horario.Value)
+                                mensagemErro = "O horário de entrada deve ser menor que o horário de saída";
+                        }
+                        break;
+                    case Colunas.ALMOCO_SAIDA:
+                        {
+                            if (dia.Empresa.Entrada.HasValue && dia.Empresa.Entrada.Value >= horario.Value)
+                                mensagemErro = "O horário de saída para o almoço deve ser maior que o horário de entrada";
+
+                            if (dia.Almoco.Saida.HasValue && dia.Almoco.Saida.Value < horario.Value)
+                                mensagemErro = "O horário de saída para o almoço deve ser menor que o horário de retorno do almoço";
+
+                            if (dia.Empresa.Saida.HasValue && dia.Empresa.Saida.Value <= horario.Value)
+                                mensagemErro = "O horário de saída para o almoço deve ser menor que o horário de saída";
+                        }
+                        break;
+                    case Colunas.ALMOCO_RETORNO:
+                        {
+                            if (dia.Empresa.Entrada.HasValue && dia.Empresa.Entrada.Value >= horario.Value)
+                                mensagemErro = "O horário de retorno do almoço deve ser maior que o horário de entrada";
+
+                            if (dia.Almoco.Entrada.HasValue && dia.Almoco.Entrada.Value > horario.Value)
+                                mensagemErro = "O horário de retorno do almoço deve ser maior que o horário de saída para o almoço";
+
+                            if (dia.Empresa.Saida.HasValue && dia.Empresa.Saida.Value <= horario.Value)
+                                mensagemErro = "O horário de retorno do almoço deve ser menor que o horário de saída";
+                        }
+                        break;
+                    case Colunas.SAIDA:
+                        {
+                            if (dia.Empresa.Entrada.HasValue && dia.Empresa.Entrada.Value >= horario.Value)
+                                mensagemErro = "O horário de saída deve ser maior que o horário de entrada";
+
+                            if (dia.Almoco.Entrada.HasValue && dia.Almoco.Entrada.Value >= horario.Value)
+                                mensagemErro = "O horário de saída deve ser maior que o horário de saída para o almoço";
+
+                            if (dia.Almoco.Saida.HasValue && dia.Almoco.Saida.Value >= horario.Value)
+                                mensagemErro = "O horário de saída deve ser maior que o horário de retorno do almoço";
+                        }
+                        break;
+                    default:
+                        return horario;
+                }
+
+                if (!mensagemErro.IsNullOrEmpty())
+                {
+                    MessageBox.Show(mensagemErro, "Horário Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.ultimoHorarioEditado;
+                }
+            }
+
+            return horario;
         }
 
         private void AtualizarValorAlmoco(int rowIndex)
@@ -297,6 +368,14 @@ namespace ControlePontos.Control
             base.OnRowsAdded(e);
         }
 
+        protected override void OnCellBeginEdit(DataGridViewCellCancelEventArgs e)
+        {
+            if (e.RowIndex > 0 && Colunas.TEMPOS.Contains(this.Columns[e.ColumnIndex].Name))
+                this.ultimoHorarioEditado = this.ParserServico.ParseTimeSpan(this.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString());
+
+            base.OnCellBeginEdit(e);
+        }
+
         protected override void OnCellEndEdit(DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -311,6 +390,7 @@ namespace ControlePontos.Control
                     this.AtualizarHorarios(e.RowIndex, nomeColuna);
             }
 
+            this.ultimoHorarioEditado = null;
             base.OnCellEndEdit(e);
         }
 
