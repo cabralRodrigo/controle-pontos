@@ -1,4 +1,7 @@
-﻿13/10/2016 1.9.0:
+﻿14/10/2016 1.10.0:
+	+ Adicionado validação dos horários na tela principal.
+
+13/10/2016 1.9.0:
 	* Reorganizando os métodos de extensão em classes separadas.
 	* Movendo a classe form opener para o formato de serviço, para padronizar as classes no projeto.
 	* Padronizando uso do método IsNullOrEmpty da classe string, para usar o método de extensão.
