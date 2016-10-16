@@ -57,9 +57,7 @@
             this.Feriados_Tab = new System.Windows.Forms.TabPage();
             this.Feriados_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Feriados_Calendar = new System.Windows.Forms.MonthCalendar();
-            this.Feriados_ButtonAdd = new System.Windows.Forms.Button();
             this.Feriados_ListBoxFeriados = new System.Windows.Forms.ListBox();
-            this.Feriados_ButtonRemove = new System.Windows.Forms.Button();
             this.Feriados_Label = new System.Windows.Forms.Label();
             this.Ferias_Tab = new System.Windows.Forms.TabPage();
             this.Ferias_Layout = new System.Windows.Forms.TableLayoutPanel();
@@ -89,6 +87,8 @@
             this.Cores_Image_Feriado = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Falta = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Hoje = new System.Windows.Forms.PictureBox();
+            this.Feriados_ButtonAdd = new System.Windows.Forms.Button();
+            this.Feriados_ButtonRemove = new System.Windows.Forms.Button();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
@@ -477,17 +477,6 @@
             this.Feriados_Calendar.Name = "Feriados_Calendar";
             this.Feriados_Calendar.TabIndex = 0;
             // 
-            // Feriados_ButtonAdd
-            // 
-            this.Feriados_ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Feriados_ButtonAdd.BackgroundImage = global::ControlePontos.Properties.Resources.add;
-            this.Feriados_ButtonAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Feriados_ButtonAdd.Location = new System.Drawing.Point(368, 197);
-            this.Feriados_ButtonAdd.Name = "Feriados_ButtonAdd";
-            this.Feriados_ButtonAdd.Size = new System.Drawing.Size(30, 30);
-            this.Feriados_ButtonAdd.TabIndex = 3;
-            this.Feriados_ButtonAdd.UseVisualStyleBackColor = true;
-            // 
             // Feriados_ListBoxFeriados
             // 
             this.Feriados_ListBoxFeriados.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -497,16 +486,6 @@
             this.Feriados_Layout.SetRowSpan(this.Feriados_ListBoxFeriados, 2);
             this.Feriados_ListBoxFeriados.Size = new System.Drawing.Size(275, 205);
             this.Feriados_ListBoxFeriados.TabIndex = 4;
-            // 
-            // Feriados_ButtonRemove
-            // 
-            this.Feriados_ButtonRemove.BackgroundImage = global::ControlePontos.Properties.Resources.delete;
-            this.Feriados_ButtonRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Feriados_ButtonRemove.Location = new System.Drawing.Point(404, 197);
-            this.Feriados_ButtonRemove.Name = "Feriados_ButtonRemove";
-            this.Feriados_ButtonRemove.Size = new System.Drawing.Size(30, 30);
-            this.Feriados_ButtonRemove.TabIndex = 5;
-            this.Feriados_ButtonRemove.UseVisualStyleBackColor = true;
             // 
             // Feriados_Label
             // 
@@ -562,8 +541,8 @@
             // Ferias_ButtonAdd
             // 
             this.Ferias_ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Ferias_ButtonAdd.BackgroundImage = global::ControlePontos.Properties.Resources.add;
             this.Ferias_ButtonAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Ferias_ButtonAdd.Image = global::ControlePontos.Properties.Resources.add;
             this.Ferias_ButtonAdd.Location = new System.Drawing.Point(368, 197);
             this.Ferias_ButtonAdd.Name = "Ferias_ButtonAdd";
             this.Ferias_ButtonAdd.Size = new System.Drawing.Size(30, 30);
@@ -582,8 +561,8 @@
             // 
             // Ferias_ButtonRemove
             // 
-            this.Ferias_ButtonRemove.BackgroundImage = global::ControlePontos.Properties.Resources.delete;
             this.Ferias_ButtonRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Ferias_ButtonRemove.Image = global::ControlePontos.Properties.Resources.delete;
             this.Ferias_ButtonRemove.Location = new System.Drawing.Point(404, 197);
             this.Ferias_ButtonRemove.Name = "Ferias_ButtonRemove";
             this.Ferias_ButtonRemove.Size = new System.Drawing.Size(30, 30);
@@ -652,7 +631,6 @@
             // 
             // Backup_ButtonAdd
             // 
-            this.Backup_ButtonAdd.BackgroundImage = global::ControlePontos.Properties.Resources.add;
             this.Backup_ButtonAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Backup_ButtonAdd.Location = new System.Drawing.Point(488, 23);
             this.Backup_ButtonAdd.Name = "Backup_ButtonAdd";
@@ -662,7 +640,6 @@
             // 
             // Backup_ButtonRemove
             // 
-            this.Backup_ButtonRemove.BackgroundImage = global::ControlePontos.Properties.Resources.delete;
             this.Backup_ButtonRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Backup_ButtonRemove.Location = new System.Drawing.Point(488, 61);
             this.Backup_ButtonRemove.Name = "Backup_ButtonRemove";
@@ -868,6 +845,27 @@
             this.Cores_Image_Hoje.Size = new System.Drawing.Size(63, 19);
             this.Cores_Image_Hoje.TabIndex = 9;
             this.Cores_Image_Hoje.TabStop = false;
+            // 
+            // Feriados_ButtonAdd
+            // 
+            this.Feriados_ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Feriados_ButtonAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Feriados_ButtonAdd.Image = global::ControlePontos.Properties.Resources.add;
+            this.Feriados_ButtonAdd.Location = new System.Drawing.Point(368, 197);
+            this.Feriados_ButtonAdd.Name = "Feriados_ButtonAdd";
+            this.Feriados_ButtonAdd.Size = new System.Drawing.Size(30, 30);
+            this.Feriados_ButtonAdd.TabIndex = 3;
+            this.Feriados_ButtonAdd.UseVisualStyleBackColor = true;
+            // 
+            // Feriados_ButtonRemove
+            // 
+            this.Feriados_ButtonRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Feriados_ButtonRemove.Image = global::ControlePontos.Properties.Resources.delete;
+            this.Feriados_ButtonRemove.Location = new System.Drawing.Point(404, 197);
+            this.Feriados_ButtonRemove.Name = "Feriados_ButtonRemove";
+            this.Feriados_ButtonRemove.Size = new System.Drawing.Size(30, 30);
+            this.Feriados_ButtonRemove.TabIndex = 5;
+            this.Feriados_ButtonRemove.UseVisualStyleBackColor = true;
             // 
             // Configuracao
             // 

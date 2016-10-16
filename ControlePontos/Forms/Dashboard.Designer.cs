@@ -46,6 +46,7 @@
             this.Menu_Dados_RealizarBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Integracoes = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Integracoes_TeamService = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Integracoes_Sodexo = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Changelog = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +110,6 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Menu_Integracoes_Sodexo = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.Status.SuspendLayout();
             this.Layout.SuspendLayout();
@@ -187,9 +187,16 @@
             // Menu_Integracoes_TeamService
             // 
             this.Menu_Integracoes_TeamService.Name = "Menu_Integracoes_TeamService";
-            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(143, 22);
             this.Menu_Integracoes_TeamService.Text = "Team Service";
             this.Menu_Integracoes_TeamService.Click += new System.EventHandler(this.Menu_Integracoes_TeamService_Click);
+            // 
+            // Menu_Integracoes_Sodexo
+            // 
+            this.Menu_Integracoes_Sodexo.Name = "Menu_Integracoes_Sodexo";
+            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(143, 22);
+            this.Menu_Integracoes_Sodexo.Text = "Sodexo";
+            this.Menu_Integracoes_Sodexo.Click += new System.EventHandler(this.Menu_Integracoes_Sodexo_Click);
             // 
             // Menu_Ajuda
             // 
@@ -816,13 +823,6 @@
             this.dataGridViewTextBoxColumn11.HeaderText = "";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Visible = false;
-            // 
-            // Menu_Integracoes_Sodexo
-            // 
-            this.Menu_Integracoes_Sodexo.Name = "Menu_Integracoes_Sodexo";
-            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(152, 22);
-            this.Menu_Integracoes_Sodexo.Text = "Sodexo";
-            this.Menu_Integracoes_Sodexo.Click += new System.EventHandler(this.Menu_Integracoes_Sodexo_Click);
             // 
             // Dashboard
             // 
