@@ -224,6 +224,25 @@ namespace ControlePontos.Forms
                 }
         }
 
+        private void ButtonMarcarHorario_Click(object sender, EventArgs e)
+        {
+            if (this.ano == DateTime.Now.Year && this.mes == DateTime.Now.Month)
+            {
+                var dia = this.GridDias[DateTime.Now];
+                if (dia != null)
+                {
+                    if (!dia.Empresa.Entrada.HasValue)
+                        this.GridDias.DefinirHoraEntrada(DateTime.Now, DateTime.Now.TimeOfDay);
+                    else if (!dia.Almoco.Entrada.HasValue)
+                        this.GridDias.DefinirHoraAlmocoEntrada(DateTime.Now, DateTime.Now.TimeOfDay);
+                    else if (!dia.Almoco.Saida.HasValue)
+                        this.GridDias.DefinirHoraAlmocoSaida(DateTime.Now, DateTime.Now.TimeOfDay);
+                    else if (!dia.Empresa.Saida.HasValue)
+                        this.GridDias.DefinirHoraSaida(DateTime.Now, DateTime.Now.TimeOfDay);
+                }
+            }
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             this.Status.Text = "Salvando dados...";
