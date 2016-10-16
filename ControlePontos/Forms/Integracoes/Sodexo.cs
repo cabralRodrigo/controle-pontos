@@ -90,7 +90,7 @@ namespace ControlePontos.Forms.Integracoes
                 foreach (var transacao in grupo.OrderByDescending(w => w.Tipo).ThenBy(w => w.Historico))
                     this.GridSodexo.Rows.Add(new object[] {
                         transacao.Data.ToString("dd/MM/yyyy"),
-                        transacao.Tipo,
+                        transacao.Tipo.ToString(),
                         transacao.Historico,
                         transacao.Valor.ToString("c"),
                         transacao
