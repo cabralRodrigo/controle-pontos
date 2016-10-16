@@ -42,10 +42,6 @@
             this.Geral_DiasTrabalho_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Geral_DiasTrabalho_Label = new System.Windows.Forms.Label();
             this.Geral_DiasTrabalho_ListaCheckbox = new System.Windows.Forms.CheckedListBox();
-            this.Geral_TeamService_Group = new System.Windows.Forms.GroupBox();
-            this.Geral_TeamService_Layout = new System.Windows.Forms.TableLayoutPanel();
-            this.Geral_TeamService_Label = new System.Windows.Forms.Label();
-            this.Geral_TeamService_TextBox = new System.Windows.Forms.TextBox();
             this.Feriados_Tab = new System.Windows.Forms.TabPage();
             this.Feriados_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Feriados_Calendar = new System.Windows.Forms.MonthCalendar();
@@ -81,6 +77,12 @@
             this.Cores_Image_Feriado = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Falta = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Hoje = new System.Windows.Forms.PictureBox();
+            this.Integracoes_Tab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Integracoes_TeamService_Group = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.Integracoes_TeamService_Label = new System.Windows.Forms.Label();
+            this.Integracoes_TeamService_TextBox = new System.Windows.Forms.TextBox();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
@@ -89,8 +91,6 @@
             this.Geral_Horario_Layout.SuspendLayout();
             this.Geral_DiasTrabalho_Group.SuspendLayout();
             this.Geral_DiasTrabalho_Layout.SuspendLayout();
-            this.Geral_TeamService_Group.SuspendLayout();
-            this.Geral_TeamService_Layout.SuspendLayout();
             this.Feriados_Tab.SuspendLayout();
             this.Feriados_Layout.SuspendLayout();
             this.Ferias_Tab.SuspendLayout();
@@ -105,6 +105,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).BeginInit();
+            this.Integracoes_Tab.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.Integracoes_TeamService_Group.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -136,6 +140,7 @@
             // Configuracao_TabControl
             // 
             this.Configuracao_TabControl.Controls.Add(this.Geral_Tab);
+            this.Configuracao_TabControl.Controls.Add(this.Integracoes_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Feriados_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Ferias_Tab);
             this.Configuracao_TabControl.Controls.Add(this.Backup_Tab);
@@ -164,14 +169,13 @@
             this.Geral_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Geral_Layout.Controls.Add(this.Geral_Horario_Group, 0, 1);
             this.Geral_Layout.Controls.Add(this.Geral_DiasTrabalho_Group, 0, 0);
-            this.Geral_Layout.Controls.Add(this.Geral_TeamService_Group, 0, 2);
             this.Geral_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_Layout.Location = new System.Drawing.Point(3, 3);
             this.Geral_Layout.Name = "Geral_Layout";
-            this.Geral_Layout.RowCount = 3;
-            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.Geral_Layout.RowCount = 2;
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.14286F));
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85714F));
+            this.Geral_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Geral_Layout.Size = new System.Drawing.Size(521, 231);
             this.Geral_Layout.TabIndex = 0;
             // 
@@ -179,9 +183,9 @@
             // 
             this.Geral_Horario_Group.Controls.Add(this.Geral_Horario_Layout);
             this.Geral_Horario_Group.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 95);
+            this.Geral_Horario_Group.Location = new System.Drawing.Point(3, 135);
             this.Geral_Horario_Group.Name = "Geral_Horario_Group";
-            this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 63);
+            this.Geral_Horario_Group.Size = new System.Drawing.Size(515, 93);
             this.Geral_Horario_Group.TabIndex = 1;
             this.Geral_Horario_Group.TabStop = false;
             this.Geral_Horario_Group.Text = "Horário de Trabalho";
@@ -200,7 +204,7 @@
             this.Geral_Horario_Layout.RowCount = 2;
             this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.Geral_Horario_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 44);
+            this.Geral_Horario_Layout.Size = new System.Drawing.Size(509, 74);
             this.Geral_Horario_Layout.TabIndex = 0;
             // 
             // Geral_Horario_Inicio
@@ -238,7 +242,7 @@
             this.Geral_DiasTrabalho_Group.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Geral_DiasTrabalho_Group.Location = new System.Drawing.Point(3, 3);
             this.Geral_DiasTrabalho_Group.Name = "Geral_DiasTrabalho_Group";
-            this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 86);
+            this.Geral_DiasTrabalho_Group.Size = new System.Drawing.Size(515, 126);
             this.Geral_DiasTrabalho_Group.TabIndex = 0;
             this.Geral_DiasTrabalho_Group.TabStop = false;
             this.Geral_DiasTrabalho_Group.Text = "Dias de Trabalho";
@@ -256,7 +260,7 @@
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Geral_DiasTrabalho_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.Geral_DiasTrabalho_Layout.Size = new System.Drawing.Size(509, 67);
+            this.Geral_DiasTrabalho_Layout.Size = new System.Drawing.Size(509, 107);
             this.Geral_DiasTrabalho_Layout.TabIndex = 0;
             // 
             // Geral_DiasTrabalho_Label
@@ -276,54 +280,8 @@
             this.Geral_DiasTrabalho_ListaCheckbox.Location = new System.Drawing.Point(3, 20);
             this.Geral_DiasTrabalho_ListaCheckbox.MultiColumn = true;
             this.Geral_DiasTrabalho_ListaCheckbox.Name = "Geral_DiasTrabalho_ListaCheckbox";
-            this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 44);
+            this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 84);
             this.Geral_DiasTrabalho_ListaCheckbox.TabIndex = 1;
-            // 
-            // Geral_TeamService_Group
-            // 
-            this.Geral_TeamService_Group.Controls.Add(this.Geral_TeamService_Layout);
-            this.Geral_TeamService_Group.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Geral_TeamService_Group.Location = new System.Drawing.Point(3, 164);
-            this.Geral_TeamService_Group.Name = "Geral_TeamService_Group";
-            this.Geral_TeamService_Group.Size = new System.Drawing.Size(515, 64);
-            this.Geral_TeamService_Group.TabIndex = 2;
-            this.Geral_TeamService_Group.TabStop = false;
-            this.Geral_TeamService_Group.Text = "Team Service";
-            // 
-            // Geral_TeamService_Layout
-            // 
-            this.Geral_TeamService_Layout.ColumnCount = 1;
-            this.Geral_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.Geral_TeamService_Layout.Controls.Add(this.Geral_TeamService_Label, 0, 0);
-            this.Geral_TeamService_Layout.Controls.Add(this.Geral_TeamService_TextBox, 0, 1);
-            this.Geral_TeamService_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Geral_TeamService_Layout.Location = new System.Drawing.Point(3, 16);
-            this.Geral_TeamService_Layout.Name = "Geral_TeamService_Layout";
-            this.Geral_TeamService_Layout.RowCount = 2;
-            this.Geral_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
-            this.Geral_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Geral_TeamService_Layout.Size = new System.Drawing.Size(509, 45);
-            this.Geral_TeamService_Layout.TabIndex = 1;
-            // 
-            // Geral_TeamService_Label
-            // 
-            this.Geral_TeamService_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Geral_TeamService_Label.AutoSize = true;
-            this.Geral_TeamService_Layout.SetColumnSpan(this.Geral_TeamService_Label, 2);
-            this.Geral_TeamService_Label.Location = new System.Drawing.Point(3, 4);
-            this.Geral_TeamService_Label.Name = "Geral_TeamService_Label";
-            this.Geral_TeamService_Label.Size = new System.Drawing.Size(202, 13);
-            this.Geral_TeamService_Label.TabIndex = 5;
-            this.Geral_TeamService_Label.Text = "Endereço do servidor TFS/Team Service";
-            // 
-            // Geral_TeamService_TextBox
-            // 
-            this.Geral_TeamService_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Geral_TeamService_TextBox.Location = new System.Drawing.Point(3, 21);
-            this.Geral_TeamService_TextBox.Name = "Geral_TeamService_TextBox";
-            this.Geral_TeamService_TextBox.Size = new System.Drawing.Size(503, 20);
-            this.Geral_TeamService_TextBox.TabIndex = 6;
             // 
             // Feriados_Tab
             // 
@@ -758,6 +716,78 @@
             this.Cores_Image_Hoje.TabIndex = 9;
             this.Cores_Image_Hoje.TabStop = false;
             // 
+            // Integracoes_Tab
+            // 
+            this.Integracoes_Tab.Controls.Add(this.tableLayoutPanel1);
+            this.Integracoes_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Integracoes_Tab.Name = "Integracoes_Tab";
+            this.Integracoes_Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.Integracoes_Tab.Size = new System.Drawing.Size(527, 237);
+            this.Integracoes_Tab.TabIndex = 5;
+            this.Integracoes_Tab.Text = "Integrações";
+            this.Integracoes_Tab.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.Integracoes_TeamService_Group, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.06493F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.93507F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(521, 231);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // Integracoes_TeamService_Group
+            // 
+            this.Integracoes_TeamService_Group.Controls.Add(this.tableLayoutPanel4);
+            this.Integracoes_TeamService_Group.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Integracoes_TeamService_Group.Location = new System.Drawing.Point(3, 3);
+            this.Integracoes_TeamService_Group.Name = "Integracoes_TeamService_Group";
+            this.Integracoes_TeamService_Group.Size = new System.Drawing.Size(515, 74);
+            this.Integracoes_TeamService_Group.TabIndex = 3;
+            this.Integracoes_TeamService_Group.TabStop = false;
+            this.Integracoes_TeamService_Group.Text = "Team Service";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Controls.Add(this.Integracoes_TeamService_Label, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.Integracoes_TeamService_TextBox, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(509, 55);
+            this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // Integracoes_TeamService_Label
+            // 
+            this.Integracoes_TeamService_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Integracoes_TeamService_Label.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.Integracoes_TeamService_Label, 2);
+            this.Integracoes_TeamService_Label.Location = new System.Drawing.Point(3, 4);
+            this.Integracoes_TeamService_Label.Name = "Integracoes_TeamService_Label";
+            this.Integracoes_TeamService_Label.Size = new System.Drawing.Size(202, 13);
+            this.Integracoes_TeamService_Label.TabIndex = 5;
+            this.Integracoes_TeamService_Label.Text = "Endereço do servidor TFS/Team Service";
+            // 
+            // Integracoes_TeamService_TextBox
+            // 
+            this.Integracoes_TeamService_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Integracoes_TeamService_TextBox.Location = new System.Drawing.Point(3, 26);
+            this.Integracoes_TeamService_TextBox.Name = "Integracoes_TeamService_TextBox";
+            this.Integracoes_TeamService_TextBox.Size = new System.Drawing.Size(503, 20);
+            this.Integracoes_TeamService_TextBox.TabIndex = 6;
+            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -765,7 +795,6 @@
             this.ClientSize = new System.Drawing.Size(541, 299);
             this.Controls.Add(this.Configuracao_Layout);
             this.Name = "Configuracao";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configurações";
             this.Load += new System.EventHandler(this.Configuracao_Load);
             this.Configuracao_Layout.ResumeLayout(false);
@@ -778,9 +807,6 @@
             this.Geral_DiasTrabalho_Group.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.PerformLayout();
-            this.Geral_TeamService_Group.ResumeLayout(false);
-            this.Geral_TeamService_Layout.ResumeLayout(false);
-            this.Geral_TeamService_Layout.PerformLayout();
             this.Feriados_Tab.ResumeLayout(false);
             this.Feriados_Layout.ResumeLayout(false);
             this.Feriados_Layout.PerformLayout();
@@ -799,6 +825,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).EndInit();
+            this.Integracoes_Tab.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.Integracoes_TeamService_Group.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -859,10 +890,11 @@
         private System.Windows.Forms.PictureBox Cores_Image_NaoTrabalho;
         private System.Windows.Forms.TableLayoutPanel Cores_Layout;
         private System.Windows.Forms.TabPage Cores_Tab;
-
-        private System.Windows.Forms.GroupBox Geral_TeamService_Group;
-        private System.Windows.Forms.TableLayoutPanel Geral_TeamService_Layout;
-        private System.Windows.Forms.Label Geral_TeamService_Label;
-        private System.Windows.Forms.TextBox Geral_TeamService_TextBox;
+        private System.Windows.Forms.TabPage Integracoes_Tab;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox Integracoes_TeamService_Group;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label Integracoes_TeamService_Label;
+        private System.Windows.Forms.TextBox Integracoes_TeamService_TextBox;
     }
 }

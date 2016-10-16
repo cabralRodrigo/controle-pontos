@@ -197,8 +197,6 @@ namespace ControlePontos.Forms
                 form.Geral_Horario_Inicio.ValidatingType = form.Geral_Horario_Final.ValidatingType = typeof(TimeSpan);
                 form.Geral_Horario_Inicio.Text = config.HoraInicio.ToString(@"hh\:mm");
                 form.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
-
-                form.Geral_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
             }
 
             public Resultado Salvar(Configuracao form, ConfigApp config)
@@ -226,16 +224,6 @@ namespace ControlePontos.Forms
 
                 config.HoraInicio = inicio;
                 config.HoraFim = fim;
-
-                if (!form.Geral_TeamService_TextBox.Text.IsNullOrEmpty())
-                {
-                    Uri enderecoTeamService;
-                    if (!Uri.TryCreate(form.Geral_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))
-                        return Resultado.Erro(mensagem: "Endereço do TFS/Team Service não é válido.");
-                    config.TeamService.Endereco = enderecoTeamService;
-                }
-                else
-                    config.TeamService.Endereco = null;
 
                 return Resultado.Sucesso();
             }
@@ -306,6 +294,29 @@ namespace ControlePontos.Forms
             }
         }
 
+        private class ConfiguracaoIntegracoes : IConfiguracaoParte
+        {
+            public void Carregar(Configuracao form, ConfigApp config)
+            {
+                form.Integracoes_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
+            }
+
+            public Resultado Salvar(Configuracao form, ConfigApp config)
+            {
+                if (!form.Integracoes_TeamService_TextBox.Text.IsNullOrEmpty())
+                {
+                    Uri enderecoTeamService;
+                    if (!Uri.TryCreate(form.Integracoes_TeamService_TextBox.Text, UriKind.Absolute, out enderecoTeamService))
+                        return Resultado.Erro(mensagem: "Endereço do TFS/Team Service não é válido.");
+                    config.TeamService.Endereco = enderecoTeamService;
+                }
+                else
+                    config.TeamService.Endereco = null;
+
+                return Resultado.Sucesso();
+            }
+        }
+
         #endregion
 
         private readonly IConfiguracaoServico configuracaoServico;
@@ -328,7 +339,8 @@ namespace ControlePontos.Forms
                 new ConfiguracaoFeriado(),
                 new ConfiguracaoFerias(),
                 new ConfiguracaoGeral(),
-                new ConfiguracaoCores()
+                new ConfiguracaoCores(),
+                new ConfiguracaoIntegracoes()
             });
 
             foreach (var parte in this.partes)
