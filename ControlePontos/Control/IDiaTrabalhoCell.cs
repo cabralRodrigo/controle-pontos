@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 
 namespace ControlePontos.Control
 {
@@ -6,8 +7,8 @@ namespace ControlePontos.Control
     {
         object Value { get; set; }
 
-        void AddedCell(ConfigApp appConfig, DiaTrabalho dia);
+        void AddedCell(ConfiguracaoApp appConfig, DiaTrabalho dia);
 
-        void UpdateCell(ConfigApp appConfig, DiaTrabalho dia);
+        void UpdateCell(ConfiguracaoApp appConfig, DiaTrabalho dia);
     }
 }

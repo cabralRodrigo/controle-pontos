@@ -1,6 +1,7 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Misc;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Servicos;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,13 @@ namespace ControlePontos.Forms
 
         private interface IConfiguracaoParte
         {
-            void Carregar(Configuracao form, ConfigApp config);
-            Resultado Salvar(Configuracao form, ConfigApp config);
+            void Carregar(Configuracao form, ConfiguracaoApp config);
+            Resultado Salvar(Configuracao form, ConfiguracaoApp config);
         }
 
         private class ConfiguracaoBackup : IConfiguracaoParte
         {
-            public void Carregar(Configuracao form, ConfigApp config)
+            public void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 form.Backup_ListBoxDiretorios.Items.AddRange(config.Backup.Diretorios.ToArray());
 
@@ -31,9 +32,9 @@ namespace ControlePontos.Forms
                 form.Backup_ButtonRemove.Click += (sender, e) => this.ButtonRemove_Click(form);
             }
 
-            public Resultado Salvar(Configuracao form, ConfigApp config)
+            public Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
-                config.Backup = new ConfigBackup(form.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
+                config.Backup = new Model.Configuracao.ConfiguracaoBackup(form.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
 
                 return Resultado.Sucesso();
             }
@@ -135,14 +136,14 @@ namespace ControlePontos.Forms
                 }
             }
 
-            public abstract void Carregar(Configuracao form, ConfigApp config);
+            public abstract void Carregar(Configuracao form, ConfiguracaoApp config);
 
-            public abstract Resultado Salvar(Configuracao form, ConfigApp config);
+            public abstract Resultado Salvar(Configuracao form, ConfiguracaoApp config);
         }
 
         private class ConfiguracaoFeriado : ConfiguracaoFeriadoFerias
         {
-            public override void Carregar(Configuracao form, ConfigApp config)
+            public override void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 base.Carregar(form.Feriados_ListBoxFeriados, form.Feriados_Calendar, config.Feriados.Feriados.ToArray());
 
@@ -152,9 +153,9 @@ namespace ControlePontos.Forms
                 form.Feriados_Calendar.DateSelected += (sender, e) => base.Calendario_DateSelected(form.Feriados_ListBoxFeriados, form.Feriados_Calendar);
             }
 
-            public override Resultado Salvar(Configuracao form, ConfigApp config)
+            public override Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
-                config.Feriados = new ConfigFeriados(form.Feriados_ListBoxFeriados.Items.Cast<DateTime>().ToArray());
+                config.Feriados = new ConfiguracaoFeriados(form.Feriados_ListBoxFeriados.Items.Cast<DateTime>().ToArray());
 
                 return Resultado.Sucesso();
             }
@@ -162,7 +163,7 @@ namespace ControlePontos.Forms
 
         private class ConfiguracaoFerias : ConfiguracaoFeriadoFerias
         {
-            public override void Carregar(Configuracao form, ConfigApp config)
+            public override void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 base.Carregar(form.Ferias_ListBoxFerias, form.Ferias_Calendar, config.Ferias.ToArray());
 
@@ -172,7 +173,7 @@ namespace ControlePontos.Forms
                 form.Ferias_Calendar.DateSelected += (sender, e) => base.Calendario_DateSelected(form.Ferias_ListBoxFerias, form.Ferias_Calendar);
             }
 
-            public override Resultado Salvar(Configuracao form, ConfigApp config)
+            public override Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
                 config.Ferias = form.Ferias_ListBoxFerias.Items.Cast<DateTime>().ToArray();
 
@@ -182,7 +183,7 @@ namespace ControlePontos.Forms
 
         private class ConfiguracaoGeral : IConfiguracaoParte
         {
-            public void Carregar(Configuracao form, ConfigApp config)
+            public void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 var ptbr = CultureInfo.GetCultureInfo("pt-br");
                 var dias = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Select(w => new
@@ -199,7 +200,7 @@ namespace ControlePontos.Forms
                 form.Geral_Horario_Final.Text = config.HoraFim.ToString(@"hh\:mm");
             }
 
-            public Resultado Salvar(Configuracao form, ConfigApp config)
+            public Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
                 var diasTrabalho = form.Geral_DiasTrabalho_ListaCheckbox.CheckedItems.OfType<CheckboxListItem<DayOfWeek>>().ToArray();
                 config.DiasTrabalho = diasTrabalho.Select(w => w.Value).ToArray();
@@ -231,7 +232,7 @@ namespace ControlePontos.Forms
 
         private class ConfiguracaoCores : IConfiguracaoParte
         {
-            public void Carregar(Configuracao form, ConfigApp config)
+            public void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 form.Cores_Image_DiaTrabalho.BackColor = config.Cores.DiaNormal;
                 form.Cores_Image_Ferias.BackColor = config.Cores.Ferias;
@@ -248,7 +249,7 @@ namespace ControlePontos.Forms
                 form.Cores_Image_Hoje.Click += (sender, e) => this.Cores_Image_Click(sender as PictureBox);
             }
 
-            public Resultado Salvar(Configuracao form, ConfigApp config)
+            public Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
                 bool algumaCorTransparente = false;
                 Func<Color, Color> processarCor = cor =>
@@ -296,14 +297,14 @@ namespace ControlePontos.Forms
 
         private class ConfiguracaoIntegracoes : IConfiguracaoParte
         {
-            public void Carregar(Configuracao form, ConfigApp config)
+            public void Carregar(Configuracao form, ConfiguracaoApp config)
             {
                 form.Integracoes_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
                 form.Integracoes_Sodexo_NumeroCartao_TextBox.Text = config.Sodexo?.NumeroCartao;
                 form.Integracoes_Sodexo_Cpf_TextBox.Text = config.Sodexo?.NumeroCpf;
             }
 
-            public Resultado Salvar(Configuracao form, ConfigApp config)
+            public Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
                 if (!form.Integracoes_TeamService_TextBox.Text.IsNullOrEmpty())
                 {
@@ -359,7 +360,7 @@ namespace ControlePontos.Forms
 
         private void ButtonSalvar_Click(object sender, EventArgs e)
         {
-            var config = new ConfigApp();
+            var config = new ConfiguracaoApp();
 
             foreach (var parte in this.partes)
             {

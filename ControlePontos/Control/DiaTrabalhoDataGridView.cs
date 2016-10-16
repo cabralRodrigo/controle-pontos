@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
 using System;
@@ -34,7 +35,7 @@ namespace ControlePontos.Control
         public ICalculoServico CalculoServico { get; set; }
         public IControlRenderer ControlRenderer { get; set; }
         public IParserServico ParserServico { get; set; }
-        private ConfigApp config;
+        private ConfiguracaoApp config;
         private TimeSpan? ultimoHorarioEditado;
 
         public event Action ValoresAtualizados;
@@ -115,7 +116,7 @@ namespace ControlePontos.Control
             }
         }
 
-        public void BindDias(ConfigApp config, IEnumerable<DiaTrabalho> dias)
+        public void BindDias(ConfiguracaoApp config, IEnumerable<DiaTrabalho> dias)
         {
             this.config = config;
             this.Columns.Clear();
@@ -183,7 +184,7 @@ namespace ControlePontos.Control
                 {
                     var tempo = valor as TimeSpan?;
                     if (tempo.HasValue)
-                        return tempo.Value.TotalHours > ConfigApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
+                        return tempo.Value.TotalHours > ConfiguracaoApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
                     else
                         return null;
                 }
@@ -213,7 +214,7 @@ namespace ControlePontos.Control
                 {
                     var tempo = valor as TimeSpan?;
                     if (tempo.HasValue)
-                        return tempo.Value.TotalHours < (config.HoraFim - config.HoraInicio).TotalHours - ConfigApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
+                        return tempo.Value.TotalHours < (config.HoraFim - config.HoraInicio).TotalHours - ConfiguracaoApp.HORAS_ALMOCO ? Color.Red : Color.DarkBlue;
                     else
                         return null;
                 }

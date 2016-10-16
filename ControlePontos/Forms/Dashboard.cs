@@ -1,6 +1,7 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Forms.Integracoes;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
 using System;
@@ -27,7 +28,7 @@ namespace ControlePontos.Forms
         private readonly IAppInfoServico appInfoServico;
 
         private MesTrabalho mesTrabalho;
-        private ConfigApp config;
+        private ConfiguracaoApp config;
         private int ano, mes;
 
         public Dashboard(IFormServico formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico)
@@ -46,7 +47,7 @@ namespace ControlePontos.Forms
             this.appInfoServico = appInfoServico;
         }
 
-        private void InitDashboard(int ano, int mes, ConfigApp config = null)
+        private void InitDashboard(int ano, int mes, ConfiguracaoApp config = null)
         {
             this.ano = ano;
             this.mes = mes;

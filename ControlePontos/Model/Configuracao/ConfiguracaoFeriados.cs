@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ControlePontos.Model
+namespace ControlePontos.Model.Configuracao
 {
-    public class ConfigFeriados
+    public class ConfiguracaoFeriados
     {
         public List<DateTime> Feriados { get; set; }
 
-        public ConfigFeriados(DateTime[] diretorios)
+        public ConfiguracaoFeriados(DateTime[] diretorios)
         {
             this.Feriados = diretorios.ToList();
         }

@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section;
@@ -20,7 +21,7 @@ namespace ControlePontos.Report.Reports
             get { return "Evolução do Coeficiente"; }
         }
 
-        public IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
+        public IReportExecutionResult Execute(ConfiguracaoApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 
@@ -91,7 +92,7 @@ namespace ControlePontos.Report.Reports
             });
         }
 
-        private IHtmlSection RelacaoEvolucaoCoeficiente(ConfigApp config, MesTrabalho mesTrabalho)
+        private IHtmlSection RelacaoEvolucaoCoeficiente(ConfiguracaoApp config, MesTrabalho mesTrabalho)
         {
             var data = mesTrabalho.Dias.Where(w => !w.Falta && w.Coeficiente(config.HoraInicio, config.HoraFim).HasValue)
                 .ToDictionary(w => w.Data.ToString("dd/MM/yyyy"), w => w.Coeficiente(config.HoraInicio, config.HoraFim).Value.Negate().TotalSeconds);

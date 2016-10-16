@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.ProcessConfiguration.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
@@ -43,7 +44,7 @@ namespace ControlePontos.Servicos
             public const string TeamProject = "System.TeamProject";
         }
 
-        private ConfigApp config;
+        private ConfiguracaoApp config;
 
         public TeamServiceServico(IConfiguracaoServico configuracaoServico)
         {

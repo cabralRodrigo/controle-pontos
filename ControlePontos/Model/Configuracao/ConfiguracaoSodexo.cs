@@ -1,6 +1,6 @@
-﻿namespace ControlePontos.Model
+﻿namespace ControlePontos.Model.Configuracao
 {
-    public class ConfigSodexo
+    public class ConfiguracaoSodexo
     {
         public string NumeroCartao { get; set; }
         public string NumeroCpf { get; set; }

@@ -1,5 +1,5 @@
 ﻿using ControlePontos.Extensions;
-using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using Newtonsoft.Json;
 using System;
 using System.Text.RegularExpressions;
@@ -8,13 +8,13 @@ namespace ControlePontos.Servicos
 {
     internal interface IConfiguracaoServico
     {
-        event Action<ConfigApp> ConfiguracaoMudou;
+        event Action<ConfiguracaoApp> ConfiguracaoMudou;
 
-        void SalvarConfiguracao(ConfigApp configuracao);
+        void SalvarConfiguracao(ConfiguracaoApp configuracao);
 
-        ConfigApp ObterConfiguracao();
+        ConfiguracaoApp ObterConfiguracao();
 
-        ConfigApp GerarConfiguracaoPadrao();
+        ConfiguracaoApp GerarConfiguracaoPadrao();
     }
 
     internal class ConfiguracaoServico : IConfiguracaoServico, IExportar
@@ -22,31 +22,31 @@ namespace ControlePontos.Servicos
         private static readonly Regex RegexArquivoConfiguracao = new Regex(@"^config-app\.\w+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private readonly IArmazenamentoServico armazenamento;
 
-        public event Action<ConfigApp> ConfiguracaoMudou;
+        public event Action<ConfiguracaoApp> ConfiguracaoMudou;
 
         public ConfiguracaoServico(IArmazenamentoServico armazenamento)
         {
             this.armazenamento = armazenamento;
         }
 
-        public ConfigApp ObterConfiguracao()
+        public ConfiguracaoApp ObterConfiguracao()
         {
             var json = this.armazenamento.Carregar("config-app");
             if (json.IsNullOrEmpty())
                 return null;
             else
-                return JsonConvert.DeserializeObject<ConfigApp>(json);
+                return JsonConvert.DeserializeObject<ConfiguracaoApp>(json);
         }
 
-        public void SalvarConfiguracao(ConfigApp configuracao)
+        public void SalvarConfiguracao(ConfiguracaoApp configuracao)
         {
             this.armazenamento.Salvar("config-app", JsonConvert.SerializeObject(configuracao, Formatting.Indented));
             this.ConfiguracaoMudou?.Invoke(configuracao);
         }
 
-        public ConfigApp GerarConfiguracaoPadrao()
+        public ConfiguracaoApp GerarConfiguracaoPadrao()
         {
-            return new ConfigApp
+            return new ConfiguracaoApp
             {
                 HoraInicio = new TimeSpan(9, 0, 0),
                 HoraFim = new TimeSpan(18, 0, 0),

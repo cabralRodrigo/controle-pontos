@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ControlePontos.Model
+namespace ControlePontos.Model.Configuracao
 {
-    public class ConfigBackup
+    public class ConfiguracaoBackup
     {
         public List<string> Diretorios { get; set; }
 
-        public ConfigBackup(string[] diretorios)
+        public ConfiguracaoBackup(string[] diretorios)
         {
             this.Diretorios = diretorios.ToList();
         }

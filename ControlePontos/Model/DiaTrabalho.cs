@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlePontos.Model.Configuracao;
+using System;
 
 namespace ControlePontos.Model
 {
@@ -19,7 +20,7 @@ namespace ControlePontos.Model
         {
             if (this.EstaCompleto())
             {
-                var tempoPorDia = (horaFim - horaInicio).Add(new TimeSpan(ConfigApp.HORAS_ALMOCO * -1, 0, 0));
+                var tempoPorDia = (horaFim - horaInicio).Add(new TimeSpan(ConfiguracaoApp.HORAS_ALMOCO * -1, 0, 0));
 
                 var acc = this.Empresa.Saida.Value - this.Empresa.Entrada.Value;
                 var accAlmoco = this.Almoco.Saida.Value - this.Almoco.Entrada.Value;

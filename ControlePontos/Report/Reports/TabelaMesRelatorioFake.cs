@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Servicos;
 using System;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ControlePontos.Report.Reports
             this.mesTrabalhoServico = mesTrabalhoServico;
         }
 
-        public override IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
+        public override IReportExecutionResult Execute(ConfiguracaoApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var rand = new Random();
             var faltas = mesTrabalho.Dias.Where(w => w.Falta).Select(s => s.Data);
