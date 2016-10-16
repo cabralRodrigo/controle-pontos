@@ -52,6 +52,57 @@ namespace ControlePontos.Control
             InitializeComponent();
         }
 
+        public void DefinirHoraEntrada(DateTime data, TimeSpan hora)
+        {
+            this.DefinirHora(data, hora, Colunas.ENTRADA, d => d.Empresa.Entrada);
+        }
+
+        public void DefinirHoraAlmocoEntrada(DateTime data, TimeSpan hora)
+        {
+            this.DefinirHora(data, hora, Colunas.ALMOCO_SAIDA, d => d.Almoco.Entrada);
+        }
+
+        public void DefinirHoraAlmocoSaida(DateTime data, TimeSpan hora)
+        {
+            this.DefinirHora(data, hora, Colunas.ALMOCO_RETORNO, d => d.Almoco.Saida);
+        }
+
+        public void DefinirHoraSaida(DateTime data, TimeSpan hora)
+        {
+            this.DefinirHora(data, hora, Colunas.SAIDA, d => d.Empresa.Saida);
+        }
+
+        private void DefinirHora(DateTime data, TimeSpan hora, string nomeColuna, Func<DiaTrabalho, TimeSpan?> acessorPropriedade)
+        {
+            int rowIndex = 0;
+            for (int i = 0; i < this.Rows.Count; i++)
+            {
+                var dia = this.Rows[i].Cells[Colunas.OBJETO].Value as DiaTrabalho;
+                if (dia.Data.Date == data.Date)
+                {
+                    this.ultimoHorarioEditado = acessorPropriedade(dia);
+                    rowIndex = i;
+                    break;
+                }
+            }
+            this.Rows[rowIndex].Cells[nomeColuna].Value = hora.ToString(@"hh\:mm");
+            this.AtualizarHorarios(rowIndex, nomeColuna);
+        }
+
+        public DiaTrabalho this[DateTime data]
+        {
+            get
+            {
+                foreach (var dia in this.Rows.OfType<DataGridViewRow>().Select(s => s.Cells[Colunas.OBJETO].Value as DiaTrabalho))
+                {
+                    if (dia.Data.Date == data.Date)
+                        return dia;
+                }
+
+                return null;
+            }
+        }
+
         private DiaTrabalho this[int rowIndex]
         {
             get

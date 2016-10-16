@@ -48,6 +48,8 @@
             this.Menu_Ajuda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Changelog = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Ajuda_Separador = new System.Windows.Forms.ToolStripSeparator();
+            this.Menu_Ajuda_Sobre = new System.Windows.Forms.ToolStripMenuItem();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.Status_LabelVersao = new System.Windows.Forms.ToolStripStatusLabel();
             this.Timer = new System.Windows.Forms.Timer(this.components);
@@ -105,8 +107,7 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Menu_Ajuda_Sobre = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_Ajuda_Separador = new System.Windows.Forms.ToolStripSeparator();
+            this.ButtonMarcarHorario = new System.Windows.Forms.Button();
             this.Menu.SuspendLayout();
             this.Status.SuspendLayout();
             this.Layout.SuspendLayout();
@@ -175,7 +176,7 @@
             // Menu_TeamService
             // 
             this.Menu_TeamService.Name = "Menu_TeamService";
-            this.Menu_TeamService.Size = new System.Drawing.Size(89, 20);
+            this.Menu_TeamService.Size = new System.Drawing.Size(88, 20);
             this.Menu_TeamService.Text = "Team Service";
             this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
             // 
@@ -193,22 +194,34 @@
             // Menu_Ajuda_Changelog
             // 
             this.Menu_Ajuda_Changelog.Name = "Menu_Ajuda_Changelog";
-            this.Menu_Ajuda_Changelog.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Ajuda_Changelog.Size = new System.Drawing.Size(151, 22);
             this.Menu_Ajuda_Changelog.Text = "Changelog";
             this.Menu_Ajuda_Changelog.Click += new System.EventHandler(this.Menu_Ajuda_Changelog_Click);
             // 
             // Menu_Ajuda_Configuracoes
             // 
             this.Menu_Ajuda_Configuracoes.Name = "Menu_Ajuda_Configuracoes";
-            this.Menu_Ajuda_Configuracoes.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Ajuda_Configuracoes.Size = new System.Drawing.Size(151, 22);
             this.Menu_Ajuda_Configuracoes.Text = "Configurações";
             this.Menu_Ajuda_Configuracoes.Click += new System.EventHandler(this.Menu_Ajuda_Configuracoes_Click);
+            // 
+            // Menu_Ajuda_Separador
+            // 
+            this.Menu_Ajuda_Separador.Name = "Menu_Ajuda_Separador";
+            this.Menu_Ajuda_Separador.Size = new System.Drawing.Size(148, 6);
+            // 
+            // Menu_Ajuda_Sobre
+            // 
+            this.Menu_Ajuda_Sobre.Name = "Menu_Ajuda_Sobre";
+            this.Menu_Ajuda_Sobre.Size = new System.Drawing.Size(151, 22);
+            this.Menu_Ajuda_Sobre.Text = "Sobre";
+            this.Menu_Ajuda_Sobre.Click += new System.EventHandler(this.Menu_Ajuda_Sobre_Click);
             // 
             // Status
             // 
             this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Status_LabelVersao});
-            this.Status.Location = new System.Drawing.Point(0, 719);
+            this.Status.Location = new System.Drawing.Point(0, 711);
             this.Status.Name = "Status";
             this.Status.Size = new System.Drawing.Size(1347, 22);
             this.Status.TabIndex = 16;
@@ -460,7 +473,7 @@
             this.ButtonMesAno.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonMesAno.Location = new System.Drawing.Point(1199, 668);
+            this.ButtonMesAno.Location = new System.Drawing.Point(1199, 660);
             this.ButtonMesAno.Name = "ButtonMesAno";
             this.ButtonMesAno.Size = new System.Drawing.Size(145, 24);
             this.ButtonMesAno.TabIndex = 28;
@@ -473,16 +486,18 @@
             this.Layout.ColumnCount = 2;
             this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
-            this.Layout.Controls.Add(this.ButtonMesAno, 1, 1);
+            this.Layout.Controls.Add(this.ButtonMarcarHorario, 1, 1);
             this.Layout.Controls.Add(this.LayoutFlow, 1, 0);
             this.Layout.Controls.Add(this.GridDias, 0, 0);
+            this.Layout.Controls.Add(this.ButtonMesAno, 1, 2);
             this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Layout.Location = new System.Drawing.Point(0, 24);
             this.Layout.Name = "Layout";
-            this.Layout.RowCount = 2;
+            this.Layout.RowCount = 3;
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.Layout.Size = new System.Drawing.Size(1347, 695);
+            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.Layout.Size = new System.Drawing.Size(1347, 687);
             this.Layout.TabIndex = 46;
             // 
             // LayoutFlow
@@ -530,7 +545,7 @@
             this.LayoutFlow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.LayoutFlow.Location = new System.Drawing.Point(1199, 3);
             this.LayoutFlow.Name = "LayoutFlow";
-            this.LayoutFlow.Size = new System.Drawing.Size(145, 659);
+            this.LayoutFlow.Size = new System.Drawing.Size(145, 621);
             this.LayoutFlow.TabIndex = 46;
             this.LayoutFlow.WrapContents = false;
             // 
@@ -676,8 +691,8 @@
             this.GridDias.Name = "GridDias";
             this.GridDias.ParserServico = null;
             this.GridDias.RowHeadersVisible = false;
-            this.Layout.SetRowSpan(this.GridDias, 2);
-            this.GridDias.Size = new System.Drawing.Size(1190, 689);
+            this.Layout.SetRowSpan(this.GridDias, 3);
+            this.GridDias.Size = new System.Drawing.Size(1190, 681);
             this.GridDias.TabIndex = 47;
             // 
             // dataGridViewTextBoxColumn1
@@ -778,24 +793,25 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Visible = false;
             // 
-            // Menu_Ajuda_Sobre
+            // ButtonMarcarHorario
             // 
-            this.Menu_Ajuda_Sobre.Name = "Menu_Ajuda_Sobre";
-            this.Menu_Ajuda_Sobre.Size = new System.Drawing.Size(152, 22);
-            this.Menu_Ajuda_Sobre.Text = "Sobre";
-            this.Menu_Ajuda_Sobre.Click += new System.EventHandler(this.Menu_Ajuda_Sobre_Click);
-            // 
-            // Menu_Ajuda_Separador
-            // 
-            this.Menu_Ajuda_Separador.Name = "Menu_Ajuda_Separador";
-            this.Menu_Ajuda_Separador.Size = new System.Drawing.Size(149, 6);
+            this.ButtonMarcarHorario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonMarcarHorario.Location = new System.Drawing.Point(1199, 630);
+            this.ButtonMarcarHorario.Name = "ButtonMarcarHorario";
+            this.ButtonMarcarHorario.Size = new System.Drawing.Size(145, 24);
+            this.ButtonMarcarHorario.TabIndex = 48;
+            this.ButtonMarcarHorario.Text = "Marcar Horário";
+            this.ButtonMarcarHorario.UseVisualStyleBackColor = true;
+            this.ButtonMarcarHorario.Click += new System.EventHandler(this.ButtonMarcarHorario_Click);
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1347, 741);
+            this.ClientSize = new System.Drawing.Size(1347, 733);
             this.Controls.Add(this.Layout);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.Menu);
@@ -891,5 +907,6 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Configuracoes;
         private System.Windows.Forms.ToolStripSeparator Menu_Ajuda_Separador;
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Sobre;
+        private System.Windows.Forms.Button ButtonMarcarHorario;
     }
 }
