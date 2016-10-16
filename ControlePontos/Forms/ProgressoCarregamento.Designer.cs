@@ -1,4 +1,4 @@
-﻿namespace ControlePontos.Forms.TeamServices
+﻿namespace ControlePontos.Forms
 {
     partial class ProgressoCarregamento
     {

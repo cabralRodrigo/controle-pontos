@@ -42,6 +42,18 @@
             this.Geral_DiasTrabalho_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Geral_DiasTrabalho_Label = new System.Windows.Forms.Label();
             this.Geral_DiasTrabalho_ListaCheckbox = new System.Windows.Forms.CheckedListBox();
+            this.Integracoes_Tab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Integracoes_Sodexo_Group = new System.Windows.Forms.GroupBox();
+            this.Integracoes_Sodexo_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Integracoes_Sodexo_NumeroCartao_Label = new System.Windows.Forms.Label();
+            this.Integracoes_Sodexo_Cpf_Label = new System.Windows.Forms.Label();
+            this.Integracoes_Sodexo_NumeroCartao_TextBox = new System.Windows.Forms.MaskedTextBox();
+            this.Integracoes_Sodexo_Cpf_TextBox = new System.Windows.Forms.MaskedTextBox();
+            this.Integracoes_TeamService_Group = new System.Windows.Forms.GroupBox();
+            this.Integracoes_TeamService_Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Integracoes_TeamService_Label = new System.Windows.Forms.Label();
+            this.Integracoes_TeamService_TextBox = new System.Windows.Forms.TextBox();
             this.Feriados_Tab = new System.Windows.Forms.TabPage();
             this.Feriados_Layout = new System.Windows.Forms.TableLayoutPanel();
             this.Feriados_Calendar = new System.Windows.Forms.MonthCalendar();
@@ -77,12 +89,6 @@
             this.Cores_Image_Feriado = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Falta = new System.Windows.Forms.PictureBox();
             this.Cores_Image_Hoje = new System.Windows.Forms.PictureBox();
-            this.Integracoes_Tab = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.Integracoes_TeamService_Group = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.Integracoes_TeamService_Label = new System.Windows.Forms.Label();
-            this.Integracoes_TeamService_TextBox = new System.Windows.Forms.TextBox();
             this.Configuracao_Layout.SuspendLayout();
             this.Configuracao_TabControl.SuspendLayout();
             this.Geral_Tab.SuspendLayout();
@@ -91,6 +97,12 @@
             this.Geral_Horario_Layout.SuspendLayout();
             this.Geral_DiasTrabalho_Group.SuspendLayout();
             this.Geral_DiasTrabalho_Layout.SuspendLayout();
+            this.Integracoes_Tab.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.Integracoes_Sodexo_Group.SuspendLayout();
+            this.Integracoes_Sodexo_Layout.SuspendLayout();
+            this.Integracoes_TeamService_Group.SuspendLayout();
+            this.Integracoes_TeamService_Layout.SuspendLayout();
             this.Feriados_Tab.SuspendLayout();
             this.Feriados_Layout.SuspendLayout();
             this.Ferias_Tab.SuspendLayout();
@@ -105,10 +117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).BeginInit();
-            this.Integracoes_Tab.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.Integracoes_TeamService_Group.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Configuracao_Layout
@@ -282,6 +290,151 @@
             this.Geral_DiasTrabalho_ListaCheckbox.Name = "Geral_DiasTrabalho_ListaCheckbox";
             this.Geral_DiasTrabalho_ListaCheckbox.Size = new System.Drawing.Size(503, 84);
             this.Geral_DiasTrabalho_ListaCheckbox.TabIndex = 1;
+            // 
+            // Integracoes_Tab
+            // 
+            this.Integracoes_Tab.Controls.Add(this.tableLayoutPanel1);
+            this.Integracoes_Tab.Location = new System.Drawing.Point(4, 22);
+            this.Integracoes_Tab.Name = "Integracoes_Tab";
+            this.Integracoes_Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.Integracoes_Tab.Size = new System.Drawing.Size(527, 237);
+            this.Integracoes_Tab.TabIndex = 5;
+            this.Integracoes_Tab.Text = "Integrações";
+            this.Integracoes_Tab.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.Integracoes_Sodexo_Group, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.Integracoes_TeamService_Group, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.06493F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.93507F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(521, 231);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // Integracoes_Sodexo_Group
+            // 
+            this.Integracoes_Sodexo_Group.Controls.Add(this.Integracoes_Sodexo_Layout);
+            this.Integracoes_Sodexo_Group.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Integracoes_Sodexo_Group.Location = new System.Drawing.Point(3, 83);
+            this.Integracoes_Sodexo_Group.Name = "Integracoes_Sodexo_Group";
+            this.Integracoes_Sodexo_Group.Size = new System.Drawing.Size(515, 106);
+            this.Integracoes_Sodexo_Group.TabIndex = 4;
+            this.Integracoes_Sodexo_Group.TabStop = false;
+            this.Integracoes_Sodexo_Group.Text = "Sodexo";
+            // 
+            // Integracoes_Sodexo_Layout
+            // 
+            this.Integracoes_Sodexo_Layout.ColumnCount = 1;
+            this.Integracoes_Sodexo_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Integracoes_Sodexo_Layout.Controls.Add(this.Integracoes_Sodexo_NumeroCartao_Label, 0, 0);
+            this.Integracoes_Sodexo_Layout.Controls.Add(this.Integracoes_Sodexo_Cpf_Label, 0, 2);
+            this.Integracoes_Sodexo_Layout.Controls.Add(this.Integracoes_Sodexo_NumeroCartao_TextBox, 0, 1);
+            this.Integracoes_Sodexo_Layout.Controls.Add(this.Integracoes_Sodexo_Cpf_TextBox, 0, 3);
+            this.Integracoes_Sodexo_Layout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Integracoes_Sodexo_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Integracoes_Sodexo_Layout.Name = "Integracoes_Sodexo_Layout";
+            this.Integracoes_Sodexo_Layout.RowCount = 4;
+            this.Integracoes_Sodexo_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Integracoes_Sodexo_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Integracoes_Sodexo_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Integracoes_Sodexo_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.Integracoes_Sodexo_Layout.Size = new System.Drawing.Size(509, 87);
+            this.Integracoes_Sodexo_Layout.TabIndex = 1;
+            // 
+            // Integracoes_Sodexo_NumeroCartao_Label
+            // 
+            this.Integracoes_Sodexo_NumeroCartao_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Integracoes_Sodexo_NumeroCartao_Label.AutoSize = true;
+            this.Integracoes_Sodexo_Layout.SetColumnSpan(this.Integracoes_Sodexo_NumeroCartao_Label, 2);
+            this.Integracoes_Sodexo_NumeroCartao_Label.Location = new System.Drawing.Point(3, 4);
+            this.Integracoes_Sodexo_NumeroCartao_Label.Name = "Integracoes_Sodexo_NumeroCartao_Label";
+            this.Integracoes_Sodexo_NumeroCartao_Label.Size = new System.Drawing.Size(132, 13);
+            this.Integracoes_Sodexo_NumeroCartao_Label.TabIndex = 5;
+            this.Integracoes_Sodexo_NumeroCartao_Label.Text = "Número do Cartão Sodexo";
+            // 
+            // Integracoes_Sodexo_Cpf_Label
+            // 
+            this.Integracoes_Sodexo_Cpf_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Integracoes_Sodexo_Cpf_Label.AutoSize = true;
+            this.Integracoes_Sodexo_Layout.SetColumnSpan(this.Integracoes_Sodexo_Cpf_Label, 2);
+            this.Integracoes_Sodexo_Cpf_Label.Location = new System.Drawing.Point(3, 46);
+            this.Integracoes_Sodexo_Cpf_Label.Name = "Integracoes_Sodexo_Cpf_Label";
+            this.Integracoes_Sodexo_Cpf_Label.Size = new System.Drawing.Size(159, 13);
+            this.Integracoes_Sodexo_Cpf_Label.TabIndex = 7;
+            this.Integracoes_Sodexo_Cpf_Label.Text = "CPF do Dono do Cartão Sodexo";
+            // 
+            // Integracoes_Sodexo_NumeroCartao_TextBox
+            // 
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.Location = new System.Drawing.Point(3, 20);
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.Mask = "0000,0000,0000,0000";
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.Name = "Integracoes_Sodexo_NumeroCartao_TextBox";
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.Size = new System.Drawing.Size(503, 20);
+            this.Integracoes_Sodexo_NumeroCartao_TextBox.TabIndex = 9;
+            // 
+            // Integracoes_Sodexo_Cpf_TextBox
+            // 
+            this.Integracoes_Sodexo_Cpf_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Integracoes_Sodexo_Cpf_TextBox.Location = new System.Drawing.Point(3, 62);
+            this.Integracoes_Sodexo_Cpf_TextBox.Mask = "000,000,000-00";
+            this.Integracoes_Sodexo_Cpf_TextBox.Name = "Integracoes_Sodexo_Cpf_TextBox";
+            this.Integracoes_Sodexo_Cpf_TextBox.Size = new System.Drawing.Size(503, 20);
+            this.Integracoes_Sodexo_Cpf_TextBox.TabIndex = 10;
+            // 
+            // Integracoes_TeamService_Group
+            // 
+            this.Integracoes_TeamService_Group.Controls.Add(this.Integracoes_TeamService_Layout);
+            this.Integracoes_TeamService_Group.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Integracoes_TeamService_Group.Location = new System.Drawing.Point(3, 3);
+            this.Integracoes_TeamService_Group.Name = "Integracoes_TeamService_Group";
+            this.Integracoes_TeamService_Group.Size = new System.Drawing.Size(515, 74);
+            this.Integracoes_TeamService_Group.TabIndex = 3;
+            this.Integracoes_TeamService_Group.TabStop = false;
+            this.Integracoes_TeamService_Group.Text = "Team Service";
+            // 
+            // Integracoes_TeamService_Layout
+            // 
+            this.Integracoes_TeamService_Layout.ColumnCount = 1;
+            this.Integracoes_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Integracoes_TeamService_Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Integracoes_TeamService_Layout.Controls.Add(this.Integracoes_TeamService_Label, 0, 0);
+            this.Integracoes_TeamService_Layout.Controls.Add(this.Integracoes_TeamService_TextBox, 0, 1);
+            this.Integracoes_TeamService_Layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Integracoes_TeamService_Layout.Location = new System.Drawing.Point(3, 16);
+            this.Integracoes_TeamService_Layout.Name = "Integracoes_TeamService_Layout";
+            this.Integracoes_TeamService_Layout.RowCount = 2;
+            this.Integracoes_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.Integracoes_TeamService_Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Integracoes_TeamService_Layout.Size = new System.Drawing.Size(509, 55);
+            this.Integracoes_TeamService_Layout.TabIndex = 1;
+            // 
+            // Integracoes_TeamService_Label
+            // 
+            this.Integracoes_TeamService_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Integracoes_TeamService_Label.AutoSize = true;
+            this.Integracoes_TeamService_Layout.SetColumnSpan(this.Integracoes_TeamService_Label, 2);
+            this.Integracoes_TeamService_Label.Location = new System.Drawing.Point(3, 4);
+            this.Integracoes_TeamService_Label.Name = "Integracoes_TeamService_Label";
+            this.Integracoes_TeamService_Label.Size = new System.Drawing.Size(202, 13);
+            this.Integracoes_TeamService_Label.TabIndex = 5;
+            this.Integracoes_TeamService_Label.Text = "Endereço do servidor TFS/Team Service";
+            // 
+            // Integracoes_TeamService_TextBox
+            // 
+            this.Integracoes_TeamService_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.Integracoes_TeamService_TextBox.Location = new System.Drawing.Point(3, 26);
+            this.Integracoes_TeamService_TextBox.Name = "Integracoes_TeamService_TextBox";
+            this.Integracoes_TeamService_TextBox.Size = new System.Drawing.Size(503, 20);
+            this.Integracoes_TeamService_TextBox.TabIndex = 6;
             // 
             // Feriados_Tab
             // 
@@ -716,78 +869,6 @@
             this.Cores_Image_Hoje.TabIndex = 9;
             this.Cores_Image_Hoje.TabStop = false;
             // 
-            // Integracoes_Tab
-            // 
-            this.Integracoes_Tab.Controls.Add(this.tableLayoutPanel1);
-            this.Integracoes_Tab.Location = new System.Drawing.Point(4, 22);
-            this.Integracoes_Tab.Name = "Integracoes_Tab";
-            this.Integracoes_Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.Integracoes_Tab.Size = new System.Drawing.Size(527, 237);
-            this.Integracoes_Tab.TabIndex = 5;
-            this.Integracoes_Tab.Text = "Integrações";
-            this.Integracoes_Tab.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.Integracoes_TeamService_Group, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.06493F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.93507F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(521, 231);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // Integracoes_TeamService_Group
-            // 
-            this.Integracoes_TeamService_Group.Controls.Add(this.tableLayoutPanel4);
-            this.Integracoes_TeamService_Group.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Integracoes_TeamService_Group.Location = new System.Drawing.Point(3, 3);
-            this.Integracoes_TeamService_Group.Name = "Integracoes_TeamService_Group";
-            this.Integracoes_TeamService_Group.Size = new System.Drawing.Size(515, 74);
-            this.Integracoes_TeamService_Group.TabIndex = 3;
-            this.Integracoes_TeamService_Group.TabStop = false;
-            this.Integracoes_TeamService_Group.Text = "Team Service";
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.Integracoes_TeamService_Label, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Integracoes_TeamService_TextBox, 0, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(509, 55);
-            this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // Integracoes_TeamService_Label
-            // 
-            this.Integracoes_TeamService_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Integracoes_TeamService_Label.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.Integracoes_TeamService_Label, 2);
-            this.Integracoes_TeamService_Label.Location = new System.Drawing.Point(3, 4);
-            this.Integracoes_TeamService_Label.Name = "Integracoes_TeamService_Label";
-            this.Integracoes_TeamService_Label.Size = new System.Drawing.Size(202, 13);
-            this.Integracoes_TeamService_Label.TabIndex = 5;
-            this.Integracoes_TeamService_Label.Text = "Endereço do servidor TFS/Team Service";
-            // 
-            // Integracoes_TeamService_TextBox
-            // 
-            this.Integracoes_TeamService_TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.Integracoes_TeamService_TextBox.Location = new System.Drawing.Point(3, 26);
-            this.Integracoes_TeamService_TextBox.Name = "Integracoes_TeamService_TextBox";
-            this.Integracoes_TeamService_TextBox.Size = new System.Drawing.Size(503, 20);
-            this.Integracoes_TeamService_TextBox.TabIndex = 6;
-            // 
             // Configuracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -807,6 +888,14 @@
             this.Geral_DiasTrabalho_Group.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.ResumeLayout(false);
             this.Geral_DiasTrabalho_Layout.PerformLayout();
+            this.Integracoes_Tab.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.Integracoes_Sodexo_Group.ResumeLayout(false);
+            this.Integracoes_Sodexo_Layout.ResumeLayout(false);
+            this.Integracoes_Sodexo_Layout.PerformLayout();
+            this.Integracoes_TeamService_Group.ResumeLayout(false);
+            this.Integracoes_TeamService_Layout.ResumeLayout(false);
+            this.Integracoes_TeamService_Layout.PerformLayout();
             this.Feriados_Tab.ResumeLayout(false);
             this.Feriados_Layout.ResumeLayout(false);
             this.Feriados_Layout.PerformLayout();
@@ -825,11 +914,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Feriado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Falta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Cores_Image_Hoje)).EndInit();
-            this.Integracoes_Tab.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.Integracoes_TeamService_Group.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -893,8 +977,14 @@
         private System.Windows.Forms.TabPage Integracoes_Tab;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox Integracoes_TeamService_Group;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel Integracoes_TeamService_Layout;
         private System.Windows.Forms.Label Integracoes_TeamService_Label;
         private System.Windows.Forms.TextBox Integracoes_TeamService_TextBox;
+        private System.Windows.Forms.GroupBox Integracoes_Sodexo_Group;
+        private System.Windows.Forms.TableLayoutPanel Integracoes_Sodexo_Layout;
+        private System.Windows.Forms.Label Integracoes_Sodexo_NumeroCartao_Label;
+        private System.Windows.Forms.Label Integracoes_Sodexo_Cpf_Label;
+        private System.Windows.Forms.MaskedTextBox Integracoes_Sodexo_NumeroCartao_TextBox;
+        private System.Windows.Forms.MaskedTextBox Integracoes_Sodexo_Cpf_TextBox;
     }
 }

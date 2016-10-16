@@ -10,9 +10,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ControlePontos.Forms.TeamServices
+namespace ControlePontos.Forms.Integracoes
 {
-    internal partial class TotalHorasIntegracaoAtual : BaseForm
+    internal partial class TeamServices : BaseForm
     {
         private static class Colunas
         {
@@ -33,7 +33,7 @@ namespace ControlePontos.Forms.TeamServices
         private int[] iteracoesIDs;
         private TfsTeamProjectCollection project;
 
-        public TotalHorasIntegracaoAtual(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, ProgressoCarregamento progressoForm)
+        public TeamServices(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, ProgressoCarregamento progressoForm)
         {
             this.InitializeComponent();
 

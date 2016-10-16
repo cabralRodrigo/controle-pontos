@@ -1,5 +1,5 @@
 ﻿using ControlePontos.Extensions;
-using ControlePontos.Forms.TeamServices;
+using ControlePontos.Forms.Integracoes;
 using ControlePontos.Model;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
@@ -360,7 +360,12 @@ namespace ControlePontos.Forms
 
         private void Menu_Integracoes_TeamService_Click(object sender, EventArgs e)
         {
-            this.formServico.AbrirDialogo<TotalHorasIntegracaoAtual>();
+            this.formServico.AbrirDialogo<Integracoes.TeamServices>();
+        }
+
+        private void Menu_Integracoes_Sodexo_Click(object sender, EventArgs e)
+        {
+            this.formServico.AbrirDialogo<Sodexo>();
         }
 
         #endregion

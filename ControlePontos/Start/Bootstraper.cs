@@ -1,7 +1,7 @@
 ﻿using ControlePontos.Control;
 using ControlePontos.Extensions;
 using ControlePontos.Forms;
-using ControlePontos.Forms.TeamServices;
+using ControlePontos.Forms.Integracoes;
 using ControlePontos.Native;
 using ControlePontos.Report;
 using ControlePontos.Report.Reports;
@@ -56,6 +56,7 @@ namespace ControlePontos.Start
             this.container.RegisterSingleton<IRelatorioServico, RelatorioServico>();
             this.container.RegisterSingleton<ITeamServiceServico, TeamServiceServico>();
             this.container.RegisterSingleton<IAppInfoServico, AppInfoServico>();
+            this.container.RegisterSingleton<ISodexoServico, SodexoServico>();
         }
 
         private void RegistrarServicosExportaveis()
@@ -82,7 +83,7 @@ namespace ControlePontos.Start
                 typeof(Dashboard),
                 typeof(Configuracao),
                 typeof(DiaTrabalhoDataGridView),
-                typeof(TotalHorasIntegracaoAtual),
+                typeof(TeamServices),
                 typeof(ProgressoCarregamento),
                 typeof(Changelog),
                 typeof(Sobre)

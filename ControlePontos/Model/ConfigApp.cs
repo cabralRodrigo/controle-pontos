@@ -16,6 +16,7 @@ namespace ControlePontos.Model
             this.Backup = new ConfigBackup(new string[0]);
             this.Feriados = new ConfigFeriados(new DateTime[0]);
             this.TeamService = new ConfigTeamService();
+            this.Sodexo = new ConfigSodexo();
 
             this.Cores = new CoresConfig();
             this.Ferias = new DateTime[0];
@@ -26,5 +27,6 @@ namespace ControlePontos.Model
         public ConfigFeriados Feriados { get; set; }
         public CoresConfig Cores { get; set; }
         public ConfigTeamService TeamService { get; set; }
+        public ConfigSodexo Sodexo { get; internal set; }
     }
 }

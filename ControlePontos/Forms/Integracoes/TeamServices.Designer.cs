@@ -1,6 +1,6 @@
-﻿namespace ControlePontos.Forms.TeamServices
+﻿namespace ControlePontos.Forms.Integracoes
 {
-    partial class TotalHorasIntegracaoAtual
+    partial class TeamServices
     {
         /// <summary>
         /// Required designer variable.
