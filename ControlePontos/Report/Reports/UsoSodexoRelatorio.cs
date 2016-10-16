@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section.Chart;
@@ -18,7 +19,7 @@ namespace ControlePontos.Report.Reports
             get { return "Uso Geral do Sodexo"; }
         }
 
-        public IReportExecutionResult Execute(ConfigApp config, int ano, int mes, MesTrabalho mesTrabalho)
+        public IReportExecutionResult Execute(ConfiguracaoApp config, int ano, int mes, MesTrabalho mesTrabalho)
         {
             var file = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
 

@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -8,12 +9,12 @@ namespace ControlePontos.Control
 {
     internal class CheckBoxCell : DataGridViewCheckBoxCell, IDiaTrabalhoCell
     {
-        public void AddedCell(ConfigApp appConfig, DiaTrabalho dia)
+        public void AddedCell(ConfiguracaoApp appConfig, DiaTrabalho dia)
         {
             this.UpdateCell(appConfig, dia);
         }
 
-        public void UpdateCell(ConfigApp appConfig, DiaTrabalho dia)
+        public void UpdateCell(ConfiguracaoApp appConfig, DiaTrabalho dia)
         {
             var config = this.Configuracao() ?? new DiaTrabalhoColumnConfiguracao();
 

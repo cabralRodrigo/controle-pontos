@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Extensions;
 using ControlePontos.Model;
+using ControlePontos.Model.Configuracao;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace ControlePontos.Servicos
     {
         private readonly IArmazenamentoServico armazenamentoServico;
         private readonly IExportacaoServico exportacaoServico;
-        private ConfigApp configuracao;
+        private ConfiguracaoApp configuracao;
 
         public BackupServico(IConfiguracaoServico configuracaoServico, IArmazenamentoServico armazenamentoServico, IExportacaoServico exportacaoServico)
         {

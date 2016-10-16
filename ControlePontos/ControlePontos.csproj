@@ -266,7 +266,7 @@
     </Compile>
     <Compile Include="Misc\DataBrasilJsonConverter.cs" />
     <Compile Include="Misc\RealJsonConverter.cs" />
-    <Compile Include="Model\ConfigSodexo.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoSodexo.cs" />
     <Compile Include="Model\Integracoes\SodexoHistorioUsoModel.cs" />
     <Compile Include="Model\Integracoes\SodexoTipoTransacao.cs" />
     <Compile Include="Model\Integracoes\SodexoTransacaoModel.cs" />
@@ -309,9 +309,9 @@
     </Compile>
     <Compile Include="Misc\CheckboxListItem.cs" />
     <Compile Include="Model\ChagelogInfo.cs" />
-    <Compile Include="Model\ConfigApp.cs" />
-    <Compile Include="Model\ConfigBackup.cs" />
-    <Compile Include="Model\ConfigFeriados.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoApp.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoBackup.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoFeriados.cs" />
     <Compile Include="Control\DiaTrabalhoDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -319,8 +319,8 @@
       <DependentUpon>DiaTrabalhoDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="Servicos\FormServico.cs" />
-    <Compile Include="Model\ConfigTeamService.cs" />
-    <Compile Include="Model\CoresConfig.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoTeamService.cs" />
+    <Compile Include="Model\Configuracao\ConfiguracaoCores.cs" />
     <Compile Include="Model\Resultado.cs" />
     <Compile Include="Model\Versao.cs" />
     <Compile Include="Native\ControlRenderer.cs" />
