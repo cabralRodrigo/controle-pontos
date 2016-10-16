@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ControlePontos.Forms.TeamServices
+namespace ControlePontos.Forms
 {
     internal partial class ProgressoCarregamento : Form
     {
@@ -15,50 +15,32 @@ namespace ControlePontos.Forms.TeamServices
 
         public string Mensagem
         {
-            get
-            {
-                return this.LabelMensagem.Text;
-            }
-            set
-            {
-                this.LabelMensagem.Text = value;
-            }
+            get { return this.LabelMensagem.Text; }
+            set { this.LabelMensagem.Text = value; }
         }
 
         public string Titulo
         {
-            get
-            {
-                return this.Text;
-            }
-            set
-            {
-                this.Text = value;
-            }
+            get { return this.Text; }
+            set { this.Text = value; }
         }
 
         public int TotalPassos
         {
-            get
-            {
-                return this.ProgressBar.Maximum;
-            }
-            set
-            {
-                this.ProgressBar.Maximum = value;
-            }
+            get { return this.ProgressBar.Maximum; }
+            set { this.ProgressBar.Maximum = value; }
         }
 
         public int PassoAtual
         {
-            get
-            {
-                return this.ProgressBar.Value;
-            }
-            set
-            {
-                this.ProgressBar.Value = value;
-            }
+            get { return this.ProgressBar.Value; }
+            set { this.ProgressBar.Value = value; }
+        }
+
+        public ProgressBarStyle TipoBarraCarregamento
+        {
+            get { return this.ProgressBar.Style; }
+            set { this.ProgressBar.Style = value; }
         }
 
         public void OnCancel(Action action)

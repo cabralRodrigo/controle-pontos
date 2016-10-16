@@ -258,6 +258,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Integracoes\Sodexo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Integracoes\Sodexo.Designer.cs">
+      <DependentUpon>Sodexo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\DataBrasilJsonConverter.cs" />
+    <Compile Include="Misc\RealJsonConverter.cs" />
+    <Compile Include="Model\ConfigSodexo.cs" />
+    <Compile Include="Model\Integracoes\SodexoHistorioUsoModel.cs" />
+    <Compile Include="Model\Integracoes\SodexoTipoTransacao.cs" />
+    <Compile Include="Model\Integracoes\SodexoTransacaoModel.cs" />
+    <Compile Include="Servicos\SodexoServico.cs" />
     <Compile Include="Start\Bootstraper.cs" />
     <Compile Include="Control\DiaTrabalhoColumnConfiguracao.cs" />
     <Compile Include="Control\DiaTrabalhoCheckBoxControls.cs" />
@@ -282,17 +295,17 @@
     <Compile Include="Forms\Sobre.Designer.cs">
       <DependentUpon>Sobre.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TeamServices\ProgressoCarregamento.cs">
+    <Compile Include="Forms\ProgressoCarregamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TeamServices\ProgressoCarregamento.Designer.cs">
+    <Compile Include="Forms\ProgressoCarregamento.Designer.cs">
       <DependentUpon>ProgressoCarregamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TeamServices\TotalHorasIntegracaoAtual.cs">
+    <Compile Include="Forms\Integracoes\TeamServices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TeamServices\TotalHorasIntegracaoAtual.Designer.cs">
-      <DependentUpon>TotalHorasIntegracaoAtual.cs</DependentUpon>
+    <Compile Include="Forms\Integracoes\TeamServices.Designer.cs">
+      <DependentUpon>TeamServices.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\CheckboxListItem.cs" />
     <Compile Include="Model\ChagelogInfo.cs" />
@@ -392,11 +405,14 @@
     <EmbeddedResource Include="Forms\Sobre.resx">
       <DependentUpon>Sobre.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TeamServices\ProgressoCarregamento.resx">
+    <EmbeddedResource Include="Forms\Integracoes\Sodexo.resx">
+      <DependentUpon>Sodexo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgressoCarregamento.resx">
       <DependentUpon>ProgressoCarregamento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TeamServices\TotalHorasIntegracaoAtual.resx">
-      <DependentUpon>TotalHorasIntegracaoAtual.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Integracoes\TeamServices.resx">
+      <DependentUpon>TeamServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

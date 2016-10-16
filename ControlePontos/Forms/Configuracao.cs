@@ -299,6 +299,8 @@ namespace ControlePontos.Forms
             public void Carregar(Configuracao form, ConfigApp config)
             {
                 form.Integracoes_TeamService_TextBox.Text = config.TeamService.Endereco?.AbsoluteUri;
+                form.Integracoes_Sodexo_NumeroCartao_TextBox.Text = config.Sodexo?.NumeroCartao;
+                form.Integracoes_Sodexo_Cpf_TextBox.Text = config.Sodexo?.NumeroCpf;
             }
 
             public Resultado Salvar(Configuracao form, ConfigApp config)
@@ -312,6 +314,14 @@ namespace ControlePontos.Forms
                 }
                 else
                     config.TeamService.Endereco = null;
+
+                form.Integracoes_Sodexo_NumeroCartao_TextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                config.Sodexo.NumeroCartao = form.Integracoes_Sodexo_NumeroCartao_TextBox.Text;
+                form.Integracoes_Sodexo_NumeroCartao_TextBox.TextMaskFormat = MaskFormat.IncludeLiterals;
+
+                form.Integracoes_Sodexo_Cpf_TextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+                config.Sodexo.NumeroCpf = form.Integracoes_Sodexo_Cpf_TextBox.Text;
+                form.Integracoes_Sodexo_Cpf_TextBox.TextMaskFormat = MaskFormat.IncludeLiterals;
 
                 return Resultado.Sucesso();
             }

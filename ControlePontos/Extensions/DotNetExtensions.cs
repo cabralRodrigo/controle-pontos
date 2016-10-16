@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ControlePontos.Extensions
 {
@@ -57,6 +58,16 @@ namespace ControlePontos.Extensions
             var atributos = field?.GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), true);
 
             return (atributos?.FirstOrDefault() as System.ComponentModel.DescriptionAttribute)?.Description ?? valorEnum?.ToString();
+        }
+
+        public static string ToHexString(this byte[] bytes)
+        {
+            var hex = new StringBuilder(bytes.Length * 2);
+
+            foreach (var b in bytes)
+                hex.AppendFormat("{0:x2}", b);
+
+            return hex.ToString();
         }
     }
 }
