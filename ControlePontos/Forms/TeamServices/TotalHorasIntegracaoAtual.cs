@@ -117,9 +117,12 @@ namespace ControlePontos.Forms.TeamServices
 
         private void ErroTeamService(Exception ex)
         {
-            MessageBox.Show("Ocorreu um erro carregar os work items.\nErro: " + ex.Message, "Team Services", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            this.progressoForm.Close();
-            this.Close();
+            if (!this.tokenSource.IsCancellationRequested)
+            {
+                MessageBox.Show("Ocorreu um erro carregar os work items.\nErro: " + ex.Message, "Team Services", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.progressoForm.Close();
+                this.Close();
+            }
         }
 
         #endregion
