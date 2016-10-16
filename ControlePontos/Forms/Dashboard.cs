@@ -356,10 +356,14 @@ namespace ControlePontos.Forms
 
         #endregion Dados
 
-        private void Menu_TeamService_Click(object sender, EventArgs e)
+        #region Integrações
+
+        private void Menu_Integracoes_TeamService_Click(object sender, EventArgs e)
         {
             this.formServico.AbrirDialogo<TotalHorasIntegracaoAtual>();
         }
+
+        #endregion
 
         #region Ajuda
 
