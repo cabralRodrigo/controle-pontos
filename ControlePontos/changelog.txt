@@ -1,4 +1,14 @@
-﻿14/10/2016 1.10.0:
+﻿16/10/2016 1.11.0:
+	+ Adicionado botão para marcar o horário atual no dia atual, para facilitar a marcação dos horários.
+	+ Adicionado integração com o sodexo.
+	! Corrigido bug ao ocorrer um erro no processo de carregamento das informações do team services quando o carregamento já havia sido cancelado.
+	@ Criado menu de integrações para acomodar a integração com o team service e futuras integrações.
+	@ Alterada tela de configurações para agrupar configurações referentes a integrações com outros sistemas.
+	* Reorganizando as classes de configuração na pasta model.
+	* Reorganizando arquivo de resources.
+	! Corrigido crash ao reordenar o grid da tela de sodexo.
+
+14/10/2016 1.10.0:
 	+ Adicionado validação dos horários na tela principal.
 
 13/10/2016 1.9.0:
