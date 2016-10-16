@@ -44,7 +44,8 @@
             this.Menu_Dados_Exportar_Zip = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_ImportarCoeficiente = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_RealizarBackup = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_TeamService = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Integracoes = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Integracoes_TeamService = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Changelog = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +80,7 @@
             this.TextBoxSodexo = new System.Windows.Forms.TextBox();
             this.ButtonMesAno = new System.Windows.Forms.Button();
             this.Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.ButtonMarcarHorario = new System.Windows.Forms.Button();
             this.LayoutFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelSeparador10 = new System.Windows.Forms.Label();
             this.LabelSeparador09 = new System.Windows.Forms.Label();
@@ -107,7 +109,6 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ButtonMarcarHorario = new System.Windows.Forms.Button();
             this.Menu.SuspendLayout();
             this.Status.SuspendLayout();
             this.Layout.SuspendLayout();
@@ -120,7 +121,7 @@
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Relatorio,
             this.Menu_Dados,
-            this.Menu_TeamService,
+            this.Menu_Integracoes,
             this.Menu_Ajuda});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
@@ -173,12 +174,20 @@
             this.Menu_Dados_RealizarBackup.Text = "Realizar Backup";
             this.Menu_Dados_RealizarBackup.Click += new System.EventHandler(this.Menu_Dados_RealizarBackup_Click);
             // 
-            // Menu_TeamService
+            // Menu_Integracoes
             // 
-            this.Menu_TeamService.Name = "Menu_TeamService";
-            this.Menu_TeamService.Size = new System.Drawing.Size(88, 20);
-            this.Menu_TeamService.Text = "Team Service";
-            this.Menu_TeamService.Click += new System.EventHandler(this.Menu_TeamService_Click);
+            this.Menu_Integracoes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Menu_Integracoes_TeamService});
+            this.Menu_Integracoes.Name = "Menu_Integracoes";
+            this.Menu_Integracoes.Size = new System.Drawing.Size(80, 20);
+            this.Menu_Integracoes.Text = "Integrações";
+            // 
+            // Menu_Integracoes_TeamService
+            // 
+            this.Menu_Integracoes_TeamService.Name = "Menu_Integracoes_TeamService";
+            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Integracoes_TeamService.Text = "Team Service";
+            this.Menu_Integracoes_TeamService.Click += new System.EventHandler(this.Menu_Integracoes_TeamService_Click);
             // 
             // Menu_Ajuda
             // 
@@ -194,26 +203,26 @@
             // Menu_Ajuda_Changelog
             // 
             this.Menu_Ajuda_Changelog.Name = "Menu_Ajuda_Changelog";
-            this.Menu_Ajuda_Changelog.Size = new System.Drawing.Size(151, 22);
+            this.Menu_Ajuda_Changelog.Size = new System.Drawing.Size(152, 22);
             this.Menu_Ajuda_Changelog.Text = "Changelog";
             this.Menu_Ajuda_Changelog.Click += new System.EventHandler(this.Menu_Ajuda_Changelog_Click);
             // 
             // Menu_Ajuda_Configuracoes
             // 
             this.Menu_Ajuda_Configuracoes.Name = "Menu_Ajuda_Configuracoes";
-            this.Menu_Ajuda_Configuracoes.Size = new System.Drawing.Size(151, 22);
+            this.Menu_Ajuda_Configuracoes.Size = new System.Drawing.Size(152, 22);
             this.Menu_Ajuda_Configuracoes.Text = "Configurações";
             this.Menu_Ajuda_Configuracoes.Click += new System.EventHandler(this.Menu_Ajuda_Configuracoes_Click);
             // 
             // Menu_Ajuda_Separador
             // 
             this.Menu_Ajuda_Separador.Name = "Menu_Ajuda_Separador";
-            this.Menu_Ajuda_Separador.Size = new System.Drawing.Size(148, 6);
+            this.Menu_Ajuda_Separador.Size = new System.Drawing.Size(149, 6);
             // 
             // Menu_Ajuda_Sobre
             // 
             this.Menu_Ajuda_Sobre.Name = "Menu_Ajuda_Sobre";
-            this.Menu_Ajuda_Sobre.Size = new System.Drawing.Size(151, 22);
+            this.Menu_Ajuda_Sobre.Size = new System.Drawing.Size(152, 22);
             this.Menu_Ajuda_Sobre.Text = "Sobre";
             this.Menu_Ajuda_Sobre.Click += new System.EventHandler(this.Menu_Ajuda_Sobre_Click);
             // 
@@ -499,6 +508,19 @@
             this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.Layout.Size = new System.Drawing.Size(1347, 687);
             this.Layout.TabIndex = 46;
+            // 
+            // ButtonMarcarHorario
+            // 
+            this.ButtonMarcarHorario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonMarcarHorario.Location = new System.Drawing.Point(1199, 630);
+            this.ButtonMarcarHorario.Name = "ButtonMarcarHorario";
+            this.ButtonMarcarHorario.Size = new System.Drawing.Size(145, 24);
+            this.ButtonMarcarHorario.TabIndex = 48;
+            this.ButtonMarcarHorario.Text = "Marcar Horário";
+            this.ButtonMarcarHorario.UseVisualStyleBackColor = true;
+            this.ButtonMarcarHorario.Click += new System.EventHandler(this.ButtonMarcarHorario_Click);
             // 
             // LayoutFlow
             // 
@@ -793,19 +815,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Visible = false;
             // 
-            // ButtonMarcarHorario
-            // 
-            this.ButtonMarcarHorario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonMarcarHorario.Location = new System.Drawing.Point(1199, 630);
-            this.ButtonMarcarHorario.Name = "ButtonMarcarHorario";
-            this.ButtonMarcarHorario.Size = new System.Drawing.Size(145, 24);
-            this.ButtonMarcarHorario.TabIndex = 48;
-            this.ButtonMarcarHorario.Text = "Marcar Horário";
-            this.ButtonMarcarHorario.UseVisualStyleBackColor = true;
-            this.ButtonMarcarHorario.Click += new System.EventHandler(this.ButtonMarcarHorario_Click);
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -901,12 +910,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.ToolStripMenuItem Menu_TeamService;
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda;
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Changelog;
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Configuracoes;
         private System.Windows.Forms.ToolStripSeparator Menu_Ajuda_Separador;
         private System.Windows.Forms.ToolStripMenuItem Menu_Ajuda_Sobre;
         private System.Windows.Forms.Button ButtonMarcarHorario;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes_TeamService;
     }
 }
