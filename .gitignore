@@ -536,3 +536,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Build outputs
+/output
+/controle-pontos-*.zip
