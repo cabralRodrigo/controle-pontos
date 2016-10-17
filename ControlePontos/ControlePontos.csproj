@@ -264,6 +264,7 @@
     <Compile Include="Forms\Integracoes\Sodexo.Designer.cs">
       <DependentUpon>Sodexo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\ColunasTeamServices.cs" />
     <Compile Include="Misc\DataBrasilJsonConverter.cs" />
     <Compile Include="Misc\RealJsonConverter.cs" />
     <Compile Include="Model\Configuracao\ConfiguracaoSodexo.cs" />
@@ -392,6 +393,9 @@
     <Compile Include="Servicos\TeamServiceServico.cs" />
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Integracoes\TeamServices.resx">
+      <DependentUpon>TeamServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

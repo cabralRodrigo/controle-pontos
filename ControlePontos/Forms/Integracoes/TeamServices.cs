@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using static ControlePontos.Misc.ColunasTeamServices;
 
 namespace ControlePontos.Forms.Integracoes
 {
@@ -24,11 +25,12 @@ namespace ControlePontos.Forms.Integracoes
             public const int Horas = Estado + 1;
         }
 
-        private readonly ITeamServiceServico tfs;
-        private readonly IConfiguracaoServico configuracaoServico;
+        private readonly ITeamServiceServico teamServices;
         private readonly ProgressoCarregamento progressoForm;
         private readonly CancellationTokenSource tokenSource;
+        private readonly IConfiguracaoServico configuracaoServico;
 
+        private Uri enderecoTeamServices;
         private int? horasAntigas;
         private int[] iteracoesIDs;
         private TfsTeamProjectCollection project;
@@ -37,7 +39,7 @@ namespace ControlePontos.Forms.Integracoes
         {
             this.InitializeComponent();
 
-            this.tfs = tfs;
+            this.teamServices = tfs;
             this.configuracaoServico = configuracaoServico;
             this.progressoForm = progressoForm;
             this.tokenSource = new CancellationTokenSource();
@@ -50,11 +52,11 @@ namespace ControlePontos.Forms.Integracoes
             foreach (var workItem in workItems)
                 this.Grid.Rows.Add(new object[] {
                         workItem.Id,
-                        workItem.Fields[TeamServiceServico.CamposTfs.TeamProject]?.Value,
-                        workItem.Fields[TeamServiceServico.CamposTfs.CreatedDate]?.Value,
+                        workItem.Fields[TeamProject]?.Value,
+                        workItem.Fields[CreatedDate]?.Value,
                         workItem.Title,
                         workItem.State,
-                        workItem.Fields[TeamServiceServico.CamposTfs.CompletedWork]?.Value
+                        workItem.Fields[CompletedWork]?.Value
                     });
 
             this.AtualizarBarraStatus();
@@ -83,7 +85,7 @@ namespace ControlePontos.Forms.Integracoes
             this.progressoForm.Mensagem = "Autenticando usuário...";
             this.progressoForm.PassoAtual++;
 
-            this.tfs.AutenticarUsuarioAsync(this.tokenSource.Token).Continue(project =>
+            this.teamServices.AutenticarUsuarioAsync(this.enderecoTeamServices, this.tokenSource.Token).Continue(project =>
             {
                 this.progressoForm.PassoAtual++;
 
@@ -95,7 +97,7 @@ namespace ControlePontos.Forms.Integracoes
         private void CarregarIterationIDs()
         {
             this.progressoForm.Mensagem = "Carregando iterações atuais...";
-            this.tfs.ListarIteracoesAtuaisAsync(this.project, this.tokenSource.Token).Continue(ids =>
+            this.teamServices.ListarIteracoesAtuaisAsync(this.project, this.tokenSource.Token).Continue(ids =>
             {
                 this.progressoForm.PassoAtual++;
 
@@ -108,7 +110,7 @@ namespace ControlePontos.Forms.Integracoes
         {
             this.progressoForm.Mensagem = "Carregando work items...";
 
-            this.tfs.ListarWorkItemPorIteracaoAsync(this.project, iteracoesIDs, this.tokenSource.Token).Continue(items =>
+            this.teamServices.ListarWorkItemPorIteracaoAsync(this.project, iteracoesIDs, this.tokenSource.Token).Continue(items =>
             {
                 this.CarregarGrid(items);
                 this.progressoForm.Close();
@@ -138,6 +140,7 @@ namespace ControlePontos.Forms.Integracoes
             this.Grid.Columns[Colunas.Estado].Width = 63;
             this.Grid.Columns[Colunas.Horas].Width = 45;
 
+            this.enderecoTeamServices = this.configuracaoServico.ObterConfiguracao().TeamService?.Endereco;
             this.progressoForm.Titulo = this.progressoForm.Mensagem = "Carregando...";
             this.progressoForm.TotalPassos = 3;
             this.progressoForm.OnCancel(() =>
@@ -148,7 +151,6 @@ namespace ControlePontos.Forms.Integracoes
             });
 
             this.progressoForm.ShowDialogAsync(this);
-
             this.AutenticarUsuario();
         }
 
@@ -204,7 +206,7 @@ namespace ControlePontos.Forms.Integracoes
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Gray;
 
-                        this.tfs.AtualizarWorkItemCompletedHoursAsync(this.project, id, horasString.IsNullOrEmpty() ? null : (int?)horas).Continue(() =>
+                        this.teamServices.AtualizarWorkItemCompletedHoursAsync(this.project, id, horasString.IsNullOrEmpty() ? null : (int?)horas).Continue(() =>
                         {
                             this.AtualizarBarraStatus();
 

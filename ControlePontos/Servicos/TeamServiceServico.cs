@@ -1,5 +1,4 @@
-﻿using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
+﻿using ControlePontos.Misc;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.ProcessConfiguration.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
@@ -9,92 +8,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static ControlePontos.Misc.ColunasTeamServices;
 
 namespace ControlePontos.Servicos
 {
     internal interface ITeamServiceServico
     {
-        Task<TfsTeamProjectCollection> AutenticarUsuarioAsync();
-        Task<TfsTeamProjectCollection> AutenticarUsuarioAsync(CancellationToken cancellationToken);
-
-        Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection);
-        Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection, CancellationToken cancellationToken);
-
-        Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs);
-        Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs, CancellationToken cancellationToken);
-
-        Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas);
-        Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas, CancellationToken cancellationToken);
+        Task<TfsTeamProjectCollection> AutenticarUsuarioAsync(Uri enderecoTeamServices, CancellationToken? cancellationToken = null);
+        Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection, CancellationToken? cancellationToken = null);
+        Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs, CancellationToken? cancellationToken = null);
+        Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas, CancellationToken? cancellationToken = null);
     }
 
     internal class TeamServiceServico : ITeamServiceServico
     {
-        public static class CamposTfs
+        public Task<TfsTeamProjectCollection> AutenticarUsuarioAsync(Uri enderecoTeamServices, CancellationToken? cancellationToken = null)
         {
-            public const string IterationId = "System.IterationId";
-            public const string IterationPath = "System.IterationPath";
-            public const string Id = "System.Id";
-            public const string Title = "System.Title";
-            public const string AssignedTo = "System.AssignedTo";
-            public const string State = "System.State";
-            public const string CompletedWork = "Microsoft.VSTS.Scheduling.CompletedWork";
-            public const string ClosedData = "Microsoft.VSTS.Common.ClosedDate";
-            public const string WorkItemType = "System.WorkItemType";
-            public const string CreatedDate = "System.CreatedDate";
-            public const string TeamProject = "System.TeamProject";
-        }
-
-        private ConfiguracaoApp config;
-
-        public TeamServiceServico(IConfiguracaoServico configuracaoServico)
-        {
-            configuracaoServico.ConfiguracaoMudou += c => this.config = c;
-            this.config = configuracaoServico.ObterConfiguracao();
-        }
-
-        #region AutenticarUsuarioAsync
-
-        public Task<TfsTeamProjectCollection> AutenticarUsuarioAsync()
-        {
-            return Task.Run(this.AutenticarUsuarioAsyncInterno(null));
-        }
-
-        public Task<TfsTeamProjectCollection> AutenticarUsuarioAsync(CancellationToken cancellationToken)
-        {
-            return Task.Run(this.AutenticarUsuarioAsyncInterno(cancellationToken), cancellationToken);
-        }
-
-        private Func<TfsTeamProjectCollection> AutenticarUsuarioAsyncInterno(CancellationToken? cancellationToken)
-        {
-            return () =>
+            return Task.Run(() =>
             {
                 var credencial = new VssCredentials(new Microsoft.VisualStudio.Services.Common.WindowsCredential());
-                var collection = new TfsTeamProjectCollection(this.config.TeamService.Endereco, credencial);
+                var collection = new TfsTeamProjectCollection(enderecoTeamServices, credencial);
 
                 cancellationToken?.ThrowIfCancellationRequested();
 
                 collection.EnsureAuthenticated();
                 return collection;
-            };
+            });
         }
 
-        #endregion
-
-        #region ListarIteracoesAtuaisAsync
-
-        public Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection)
+        public Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection, CancellationToken? cancellationToken = null)
         {
-            return Task.Run(this.ListarIteracoesAtuaisAsyncInterno(collection, null));
-        }
-
-        public Task<int[]> ListarIteracoesAtuaisAsync(TfsTeamProjectCollection collection, CancellationToken cancellationToken)
-        {
-            return Task.Run(this.ListarIteracoesAtuaisAsyncInterno(collection, cancellationToken), cancellationToken);
-        }
-
-        private Func<int[]> ListarIteracoesAtuaisAsyncInterno(TfsTeamProjectCollection collection, CancellationToken? cancellationToken)
-        {
-            return () =>
+            return Task.Run(() =>
             {
                 //Obtém o serviço responsável por manipular os work items.
                 var store = collection.GetService<WorkItemStore>();
@@ -116,7 +60,7 @@ namespace ControlePontos.Servicos
                 //Monta a query que irá listar os IDS das iterações.
                 var parametros = iteracoes.Select((iteracao, index) => new { Valor = iteracao, Chave = index }).ToDictionary(w => w.Chave, w => w.Valor.ToString());
                 var queryParametros = string.Join(", ", parametros.Select(w => "@" + w.Key).ToArray());
-                var query = $@"select [{CamposTfs.IterationId}] from WorkItems where [{CamposTfs.IterationPath}] IN (" + queryParametros + ")";
+                var query = $@"select [{IterationId}] from WorkItems where [{IterationPath}] IN (" + queryParametros + ")";
                 cancellationToken?.ThrowIfCancellationRequested();
 
                 //Executa a query e extrai os ids das iterações.
@@ -125,26 +69,12 @@ namespace ControlePontos.Servicos
                     .Select(w => w.IterationId)
                     .Distinct()
                     .ToArray();
-            };
+            });
         }
 
-        #endregion
-
-        #region ListarWorkItemPorIteracaoAsync
-
-        public Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs)
+        public Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs, CancellationToken? cancellationToken = null)
         {
-            return Task.Run(this.ListarWorkItemPorIteracaoAsyncInterno(collection, iterationIDs, null));
-        }
-
-        public Task<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsync(TfsTeamProjectCollection collection, int[] iterationIDs, CancellationToken cancellationToken)
-        {
-            return Task.Run(this.ListarWorkItemPorIteracaoAsyncInterno(collection, iterationIDs, cancellationToken), cancellationToken);
-        }
-
-        public Func<IEnumerable<WorkItem>> ListarWorkItemPorIteracaoAsyncInterno(TfsTeamProjectCollection collection, int[] iterationIDs, CancellationToken? cancellationToken)
-        {
-            return () =>
+            return Task.Run(() =>
             {
                 var store = collection.GetService<WorkItemStore>();
 
@@ -153,44 +83,30 @@ namespace ControlePontos.Servicos
 
                 var query = $@"
                     select 
-                        [{CamposTfs.Id}], 
-                        [{CamposTfs.Title}], 
-                        [{CamposTfs.AssignedTo}], 
-                        [{CamposTfs.State}], 
-                        [{CamposTfs.IterationPath}], 
-                        [{CamposTfs.CompletedWork}], 
-                        [{CamposTfs.ClosedData}],
-                        [{CamposTfs.CreatedDate}],
-                        [{CamposTfs.TeamProject}]
+                        [{Id}], 
+                        [{Title}], 
+                        [{AssignedTo}], 
+                        [{ColunasTeamServices.State}], 
+                        [{IterationPath}], 
+                        [{CompletedWork}], 
+                        [{ClosedData}],
+                        [{CreatedDate}],
+                        [{TeamProject}]
                     from WorkItems 
-                    where [{CamposTfs.IterationId}] in ({parametrosQuery}) and 
-                          [{CamposTfs.AssignedTo}] = @Me and
-                          [{CamposTfs.WorkItemType}] in ('Task', 'Issue') and
-                          [{CamposTfs.State}] <> 'Removed'
-                    order by [{CamposTfs.CreatedDate}]";
+                    where [{IterationId}] in ({parametrosQuery}) and 
+                          [{AssignedTo}] = @Me and
+                          [{ColunasTeamServices.WorkItemType}] in ('Task', 'Issue') and
+                          [{ColunasTeamServices.State}] <> 'Removed'
+                    order by [{CreatedDate}]";
 
                 cancellationToken?.ThrowIfCancellationRequested();
                 return store.Query(query, parametros).OfType<WorkItem>();
-            };
+            });
         }
 
-        #endregion
-
-        #region AtualizarWorkItemCompletedHoursAsync
-
-        public Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas)
+        public Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas, CancellationToken? cancellationToken = null)
         {
-            return Task.Run(this.AtualizarWorkItemCompletedHoursAsyncInterno(collection, workItemID, horas, null));
-        }
-
-        public Task AtualizarWorkItemCompletedHoursAsync(TfsTeamProjectCollection collection, int workItemID, int? horas, CancellationToken cancellationToken)
-        {
-            return Task.Run(this.AtualizarWorkItemCompletedHoursAsyncInterno(collection, workItemID, horas, cancellationToken), cancellationToken);
-        }
-
-        public Action AtualizarWorkItemCompletedHoursAsyncInterno(TfsTeamProjectCollection collection, int workItemID, int? horas, CancellationToken? cancellationToken)
-        {
-            return () =>
+            return Task.Run(() =>
             {
                 var store = collection.GetService<WorkItemStore>();
 
@@ -199,16 +115,14 @@ namespace ControlePontos.Servicos
 
                 if (workItem != null)
                 {
-                    workItem.Fields[CamposTfs.CompletedWork].Value = horas;
+                    workItem.Fields[CompletedWork].Value = horas;
 
                     cancellationToken?.ThrowIfCancellationRequested();
                     workItem.Save();
                 }
                 else
                     throw new InvalidOperationException($"Não foi possível encontrar o work item com id {workItemID}.");
-            };
+            });
         }
-
-        #endregion AtualizarWorkItemCompletedHoursAsync
     }
 }
