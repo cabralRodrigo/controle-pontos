@@ -1,4 +1,12 @@
-﻿16/10/2016 1.11.0:
+﻿17/10/2016 1.12.0:
+	! Corrigido falta do ícone do executável do aplicativo.
+	+ Configurada aplicação para ler dependências da pasta 'dll' dentro da pasta da aplicação.
+	* Limpando app.config.
+	* Removendo dependência do serviço de configuração do serviço de integração com o team services.
+	* Adicionando verificação na tela de team services para verificar se a configuração do team services existe.
+	+ Adicionando funcionalidade de importar o histórico de uso do sodexo.
+
+16/10/2016 1.11.0:
 	+ Adicionado botão para marcar o horário atual no dia atual, para facilitar a marcação dos horários.
 	+ Adicionado integração com o sodexo.
 	! Corrigido bug ao ocorrer um erro no processo de carregamento das informações do team services quando o carregamento já havia sido cancelado.
