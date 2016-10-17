@@ -73,6 +73,31 @@ namespace ControlePontos.Control
             this.DefinirHora(data, hora, Colunas.SAIDA, d => d.Empresa.Saida);
         }
 
+        public void DefinirValorAlmoco(DateTime data, decimal valor)
+        {
+            int rowIndex = -1;
+            for (int i = 0; i < this.Rows.Count; i++)
+            {
+                var dia = this.Rows[i].Cells[Colunas.OBJETO].Value as DiaTrabalho;
+                if (dia.Data.Date == data.Date)
+                {
+                    rowIndex = i;
+                    break;
+                }
+            }
+
+            if (rowIndex >= 0)
+            {
+                this.Rows[rowIndex].Cells[Colunas.ALMOCO_VALOR].Value = valor;
+                this.AtualizarValorAlmoco(rowIndex);
+            }
+        }
+
+        public IEnumerable<DiaTrabalho> ObterDias()
+        {
+            return this.Rows.OfType<DataGridViewRow>().Select(s => s.Cells[Colunas.OBJETO].Value as DiaTrabalho);
+        }
+
         private void DefinirHora(DateTime data, TimeSpan hora, string nomeColuna, Func<DiaTrabalho, TimeSpan?> acessorPropriedade)
         {
             int rowIndex = 0;
@@ -392,8 +417,7 @@ namespace ControlePontos.Control
             var valor = (decimal?)this.Rows[rowIndex].Cells[Colunas.ALMOCO_VALOR].Value;
 
             this[rowIndex].ValorAlmoco = valor;
-            if (this.ValoresAtualizados != null)
-                this.ValoresAtualizados();
+            this.ValoresAtualizados?.Invoke();
         }
 
         private void AtualizarFalta(int rowIndex)

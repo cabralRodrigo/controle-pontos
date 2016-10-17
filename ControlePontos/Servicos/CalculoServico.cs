@@ -32,6 +32,8 @@ namespace ControlePontos.Servicos
         TimeSpan? TotalHorasTrabalhadas(DiaTrabalho dia);
 
         TimeSpan TotalHorasTfs(ConfiguracaoApp config, MesTrabalho mesTrabalho);
+
+        IEnumerable<DiaTrabalho> FiltrarDiasDeTrabalho(IEnumerable<DiaTrabalho> dias, ConfiguracaoApp config);
     }
 
     internal class CalculoServico : ICalculoServico
@@ -44,7 +46,7 @@ namespace ControlePontos.Servicos
 
         public TimeSpan CoeficientePorDia(ConfiguracaoApp config, MesTrabalho mes)
         {
-            var dias = Validate(mes.Dias, config).Where(w => !w.EstaCompleto());
+            var dias = FiltrarDiasDeTrabalho(mes.Dias, config).Where(w => !w.EstaCompleto());
 
             if (dias.Count() == 0)
                 return Coeficiente(config, mes);
@@ -54,27 +56,27 @@ namespace ControlePontos.Servicos
 
         public TimeSpan? MediaEntradaEmpresa(ConfiguracaoApp config, MesTrabalho mes)
         {
-            return MediaTimeSpan(Validate(mes.Dias, config).Select(w => w.Empresa.Entrada));
+            return MediaTimeSpan(FiltrarDiasDeTrabalho(mes.Dias, config).Select(w => w.Empresa.Entrada));
         }
 
         public TimeSpan? MediaSaidaEmpresa(ConfiguracaoApp config, MesTrabalho mes)
         {
-            return MediaTimeSpan(Validate(mes.Dias, config).Select(w => w.Empresa.Saida));
+            return MediaTimeSpan(FiltrarDiasDeTrabalho(mes.Dias, config).Select(w => w.Empresa.Saida));
         }
 
         public TimeSpan? MediaEntradaAlmoco(ConfiguracaoApp config, MesTrabalho mes)
         {
-            return MediaTimeSpan(Validate(mes.Dias, config).Select(w => w.Almoco.Entrada));
+            return MediaTimeSpan(FiltrarDiasDeTrabalho(mes.Dias, config).Select(w => w.Almoco.Entrada));
         }
 
         public TimeSpan? MediaSaidaAlmoco(ConfiguracaoApp config, MesTrabalho mes)
         {
-            return MediaTimeSpan(Validate(mes.Dias, config).Select(w => w.Almoco.Saida));
+            return MediaTimeSpan(FiltrarDiasDeTrabalho(mes.Dias, config).Select(w => w.Almoco.Saida));
         }
 
         public TimeSpan? MediaTempoAlmoco(ConfiguracaoApp config, MesTrabalho mes)
         {
-            return MediaTimeSpan(Validate(mes.Dias, config).Select(w => w.Almoco.TempoTotal()));
+            return MediaTimeSpan(FiltrarDiasDeTrabalho(mes.Dias, config).Select(w => w.Almoco.TempoTotal()));
         }
 
         public decimal? MediaValorAlmoco(ConfiguracaoApp config, MesTrabalho mes)
@@ -88,7 +90,7 @@ namespace ControlePontos.Servicos
 
         public decimal? ValorIdealAlmoco(ConfiguracaoApp config, MesTrabalho mes)
         {
-            var diasSemAlmoco = Validate(mes.Dias, config).Where(w => !w.ValorAlmoco.HasValue);
+            var diasSemAlmoco = FiltrarDiasDeTrabalho(mes.Dias, config).Where(w => !w.ValorAlmoco.HasValue);
             if (diasSemAlmoco.Count() == 0)
                 return null;
             else
@@ -114,7 +116,7 @@ namespace ControlePontos.Servicos
 
         public TimeSpan TotalHorasTfs(ConfiguracaoApp config, MesTrabalho mesTrabalho)
         {
-            var totalDias = this.Validate(mesTrabalho.Dias, config).Where(w => w.Data <= DateTime.Now).Count();
+            var totalDias = this.FiltrarDiasDeTrabalho(mesTrabalho.Dias, config).Where(w => w.Data <= DateTime.Now).Count();
             var minutosPorDia = Math.Round((config.HoraFim - config.HoraInicio).TotalMinutes);
 
             //Remove a hora de almoço e também 1 hora de distração.
@@ -123,12 +125,7 @@ namespace ControlePontos.Servicos
             return new TimeSpan(0, Convert.ToInt32(minutosPorDia - descontos) * totalDias, 0);
         }
 
-        private Dictionary<DateTime, TimeSpan?> CoeficienteDiario(ConfiguracaoApp config, MesTrabalho mes)
-        {
-            return Validate(mes.Dias, config).ToDictionary(w => w.Data, w => w.Coeficiente(config.HoraInicio, config.HoraFim));
-        }
-
-        private IEnumerable<DiaTrabalho> Validate(IEnumerable<DiaTrabalho> dias, ConfiguracaoApp config)
+        public IEnumerable<DiaTrabalho> FiltrarDiasDeTrabalho(IEnumerable<DiaTrabalho> dias, ConfiguracaoApp config)
         {
             return from dia in dias
                    where !dia.Falta &&
@@ -136,6 +133,11 @@ namespace ControlePontos.Servicos
                          !config.Ferias.Any(w => w.Date == dia.Data.Date) &&
                          config.DiasTrabalho.Contains(dia.Data.DayOfWeek)
                    select dia;
+        }
+
+        private Dictionary<DateTime, TimeSpan?> CoeficienteDiario(ConfiguracaoApp config, MesTrabalho mes)
+        {
+            return FiltrarDiasDeTrabalho(mes.Dias, config).ToDictionary(w => w.Data, w => w.Coeficiente(config.HoraInicio, config.HoraFim));
         }
 
         private TimeSpan? MediaTimeSpan(IEnumerable<TimeSpan?> times)
@@ -148,7 +150,7 @@ namespace ControlePontos.Servicos
 
         private IEnumerable<decimal> ValoresAlmoco(ConfiguracaoApp config, IEnumerable<DiaTrabalho> dias)
         {
-            return Validate(dias, config).Where(w => w.ValorAlmoco.HasValue).Select(w => w.ValorAlmoco.Value);
+            return FiltrarDiasDeTrabalho(dias, config).Where(w => w.ValorAlmoco.HasValue).Select(w => w.ValorAlmoco.Value);
         }
     }
 }

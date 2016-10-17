@@ -2,6 +2,7 @@
 using ControlePontos.Forms.Integracoes;
 using ControlePontos.Model;
 using ControlePontos.Model.Configuracao;
+using ControlePontos.Model.Integracoes;
 using ControlePontos.Native;
 using ControlePontos.Servicos;
 using System;
@@ -10,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ControlePontos.Forms
@@ -26,17 +28,19 @@ namespace ControlePontos.Forms
         private readonly IControlRenderer controlRenderer;
         private readonly IParserServico parserServico;
         private readonly IAppInfoServico appInfoServico;
+        private readonly ISodexoServico sodexoServico;
+        private readonly ProgressoCarregamento progressoCarregamento;
 
         private MesTrabalho mesTrabalho;
         private ConfiguracaoApp config;
         private int ano, mes;
 
-        public Dashboard(IFormServico formOpener, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico)
+        public Dashboard(IFormServico formServico, IConfiguracaoServico configuracaoServico, IMesTrabalhoServico mesTrabalhoServico, IRelatorioServico relatorioServico, IExportacaoServico exportacaoServico, IBackupServico backupServico, ICalculoServico calculoServico, IControlRenderer controlRenderer, IParserServico parserServico, IAppInfoServico appInfoServico, ISodexoServico sodexoServico, ProgressoCarregamento progressoCarregamento)
         {
             this.InitializeComponent();
 
             this.configuracaoServico = configuracaoServico;
-            this.formServico = formOpener;
+            this.formServico = formServico;
             this.mesTrabalhoServico = mesTrabalhoServico;
             this.relatorioServico = relatorioServico;
             this.exportacaoServico = exportacaoServico;
@@ -45,6 +49,8 @@ namespace ControlePontos.Forms
             this.controlRenderer = controlRenderer;
             this.parserServico = parserServico;
             this.appInfoServico = appInfoServico;
+            this.sodexoServico = sodexoServico;
+            this.progressoCarregamento = progressoCarregamento;
         }
 
         private void InitDashboard(int ano, int mes, ConfiguracaoApp config = null)
@@ -148,6 +154,20 @@ namespace ControlePontos.Forms
                 .Where(w => w.Text == "separator")
                 .ToList()
                 .ForEach(w => w.Text = string.Empty);
+        }
+
+        private void ImportarSaldoSodexo(SodexoHistorioUsoModel historico)
+        {
+            var dias = this.calculoServico.FiltrarDiasDeTrabalho(this.GridDias.ObterDias(), this.config);
+
+            foreach (var diaTrabalho in dias)
+            {
+                var transacoesDia = historico.Transacoes.Where(w => w.Tipo == SodexoTipoTransacao.Débito && w.Data.Date == diaTrabalho.Data.Date);
+                var totalDia = transacoesDia.Sum(s => s.Valor);
+
+                if (!(totalDia == 0 && diaTrabalho.Data.Date >= DateTime.Now.Date))
+                    this.GridDias.DefinirValorAlmoco(diaTrabalho.Data, totalDia);
+            }
         }
 
         #region Eventos
@@ -361,13 +381,55 @@ namespace ControlePontos.Forms
 
         private void Menu_Integracoes_TeamService_Click(object sender, EventArgs e)
         {
-            this.formServico.AbrirDialogo<Integracoes.TeamServices>();
+            this.formServico.AbrirDialogo<TeamServices>();
         }
 
-        private void Menu_Integracoes_Sodexo_Click(object sender, EventArgs e)
+        #region Sodexo
+
+        private void Menu_Integracoes_Sodexo_Saldo_Click(object sender, EventArgs e)
         {
             this.formServico.AbrirDialogo<Sodexo>();
         }
+
+        private void Menu_Integracoes_Sodexo_ImportarSaldo_Click(object sender, EventArgs e)
+        {
+            var cartao = this.config.Sodexo?.NumeroCartao;
+            var cpf = this.config.Sodexo?.NumeroCpf;
+
+            if (!cartao.IsNullOrEmpty() && !cpf.IsNullOrEmpty())
+            {
+                var tokenSource = new CancellationTokenSource();
+
+                this.progressoCarregamento.Titulo = "Carregando...";
+                this.progressoCarregamento.Mensagem = "Carregando dados do sodexo...";
+                this.progressoCarregamento.TipoBarraCarregamento = ProgressBarStyle.Marquee;
+                this.progressoCarregamento.OnCancel(() =>
+                {
+                    tokenSource.Cancel();
+                    this.progressoCarregamento.Close();
+                });
+
+                this.sodexoServico.ConsultarSaldoAsync(cartao, cpf, tokenSource.Token).Continue(historio =>
+                {
+                    this.ImportarSaldoSodexo(historio);
+                    this.progressoCarregamento.Close();
+                }, ex =>
+                {
+                    if (!tokenSource.IsCancellationRequested)
+                    {
+                        MessageBox.Show("Ocorreu um erro carregar os dados do servidor do sodexo.\nErro: " + ex.Message, "Sodexo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.progressoCarregamento.Close();
+                    }
+                });
+            }
+            else
+            {
+                if (MessageBox.Show("As configurações do sodexo não foram informadas.\nDeseja configurar agora?", "Configurações", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    this.formServico.AbrirDialogo<Configuracao>();
+            }
+        }
+
+        #endregion
 
         #endregion
 

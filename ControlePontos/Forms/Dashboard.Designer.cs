@@ -47,6 +47,8 @@
             this.Menu_Integracoes = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Integracoes_TeamService = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Integracoes_Sodexo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Integracoes_Sodexo_Saldo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Integracoes_Sodexo_ImportarSaldo = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Changelog = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Ajuda_Configuracoes = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,16 +189,32 @@
             // Menu_Integracoes_TeamService
             // 
             this.Menu_Integracoes_TeamService.Name = "Menu_Integracoes_TeamService";
-            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(143, 22);
+            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(152, 22);
             this.Menu_Integracoes_TeamService.Text = "Team Service";
             this.Menu_Integracoes_TeamService.Click += new System.EventHandler(this.Menu_Integracoes_TeamService_Click);
             // 
             // Menu_Integracoes_Sodexo
             // 
+            this.Menu_Integracoes_Sodexo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Menu_Integracoes_Sodexo_Saldo,
+            this.Menu_Integracoes_Sodexo_ImportarSaldo});
             this.Menu_Integracoes_Sodexo.Name = "Menu_Integracoes_Sodexo";
-            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(143, 22);
+            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(152, 22);
             this.Menu_Integracoes_Sodexo.Text = "Sodexo";
-            this.Menu_Integracoes_Sodexo.Click += new System.EventHandler(this.Menu_Integracoes_Sodexo_Click);
+            // 
+            // Menu_Integracoes_Sodexo_Saldo
+            // 
+            this.Menu_Integracoes_Sodexo_Saldo.Name = "Menu_Integracoes_Sodexo_Saldo";
+            this.Menu_Integracoes_Sodexo_Saldo.Size = new System.Drawing.Size(155, 22);
+            this.Menu_Integracoes_Sodexo_Saldo.Text = "Histório de Uso";
+            this.Menu_Integracoes_Sodexo_Saldo.Click += new System.EventHandler(this.Menu_Integracoes_Sodexo_Saldo_Click);
+            // 
+            // Menu_Integracoes_Sodexo_ImportarSaldo
+            // 
+            this.Menu_Integracoes_Sodexo_ImportarSaldo.Name = "Menu_Integracoes_Sodexo_ImportarSaldo";
+            this.Menu_Integracoes_Sodexo_ImportarSaldo.Size = new System.Drawing.Size(155, 22);
+            this.Menu_Integracoes_Sodexo_ImportarSaldo.Text = "Importar Saldo";
+            this.Menu_Integracoes_Sodexo_ImportarSaldo.Click += new System.EventHandler(this.Menu_Integracoes_Sodexo_ImportarSaldo_Click);
             // 
             // Menu_Ajuda
             // 
@@ -928,5 +946,7 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes;
         private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes_TeamService;
         private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes_Sodexo;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes_Sodexo_Saldo;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Integracoes_Sodexo_ImportarSaldo;
     }
 }
