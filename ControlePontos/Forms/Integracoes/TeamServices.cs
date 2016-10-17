@@ -29,19 +29,21 @@ namespace ControlePontos.Forms.Integracoes
         private readonly ProgressoCarregamento progressoForm;
         private readonly CancellationTokenSource tokenSource;
         private readonly IConfiguracaoServico configuracaoServico;
+        private readonly IFormServico formServico;
 
         private Uri enderecoTeamServices;
         private int? horasAntigas;
         private int[] iteracoesIDs;
         private TfsTeamProjectCollection project;
 
-        public TeamServices(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, ProgressoCarregamento progressoForm)
+        public TeamServices(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, IFormServico formServico, ProgressoCarregamento progressoForm)
         {
             this.InitializeComponent();
 
             this.teamServices = tfs;
             this.configuracaoServico = configuracaoServico;
             this.progressoForm = progressoForm;
+            this.formServico = formServico;
             this.tokenSource = new CancellationTokenSource();
         }
 
@@ -80,18 +82,31 @@ namespace ControlePontos.Forms.Integracoes
 
         #region Team Services
 
-        private void AutenticarUsuario()
+        private bool AutenticarUsuario()
         {
-            this.progressoForm.Mensagem = "Autenticando usuário...";
-            this.progressoForm.PassoAtual++;
-
-            this.teamServices.AutenticarUsuarioAsync(this.enderecoTeamServices, this.tokenSource.Token).Continue(project =>
+            if (this.enderecoTeamServices != null)
             {
+                this.progressoForm.Mensagem = "Autenticando usuário...";
                 this.progressoForm.PassoAtual++;
 
-                this.project = project;
-                this.CarregarIterationIDs();
-            }, ErroTeamService);
+                this.teamServices.AutenticarUsuarioAsync(this.enderecoTeamServices, this.tokenSource.Token).Continue(project =>
+                {
+                    this.progressoForm.PassoAtual++;
+
+                    this.project = project;
+                    this.CarregarIterationIDs();
+                }, ErroTeamService);
+
+                return true;
+            }
+            else
+            {
+                if (MessageBox.Show("As configurações do tfs/team services não foram informadas.\nDeseja configurar agora?", "Configurações", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    this.formServico.AbrirDialogo<Configuracao>();
+
+                this.Close();
+                return false;
+            }
         }
 
         private void CarregarIterationIDs()
@@ -150,8 +165,8 @@ namespace ControlePontos.Forms.Integracoes
                 this.Close();
             });
 
-            this.progressoForm.ShowDialogAsync(this);
-            this.AutenticarUsuario();
+            if (this.AutenticarUsuario())
+                this.progressoForm.ShowDialogAsync(this);
         }
 
         private void Grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
