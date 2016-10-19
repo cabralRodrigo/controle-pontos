@@ -1,0 +1,148 @@
+﻿19/10/2016 1.12.1:
+	* Renomeado projeto da interface do projeto para futuras modificações.
+
+17/10/2016 1.12.0:
+	! Corrigido falta do ícone do executável do aplicativo.
+	+ Configurada aplicação para ler dependências da pasta 'dll' dentro da pasta da aplicação.
+	* Limpando app.config.
+	* Removendo dependência do serviço de configuração do serviço de integração com o team services.
+	* Adicionando verificação na tela de team services para verificar se a configuração do team services existe.
+	+ Adicionando funcionalidade de importar o histórico de uso do sodexo.
+
+16/10/2016 1.11.0:
+	+ Adicionado botão para marcar o horário atual no dia atual, para facilitar a marcação dos horários.
+	+ Adicionado integração com o sodexo.
+	! Corrigido bug ao ocorrer um erro no processo de carregamento das informações do team services quando o carregamento já havia sido cancelado.
+	@ Criado menu de integrações para acomodar a integração com o team service e futuras integrações.
+	@ Alterada tela de configurações para agrupar configurações referentes a integrações com outros sistemas.
+	* Reorganizando as classes de configuração na pasta model.
+	* Reorganizando arquivo de resources.
+	! Corrigido crash ao reordenar o grid da tela de sodexo.
+
+14/10/2016 1.10.0:
+	+ Adicionado validação dos horários na tela principal.
+
+13/10/2016 1.9.0:
+	* Reorganizando os métodos de extensão em classes separadas.
+	* Movendo a classe form opener para o formato de serviço, para padronizar as classes no projeto.
+	* Padronizando uso do método IsNullOrEmpty da classe string, para usar o método de extensão.
+	! Corrigido bug que fazia com que a treeview da tela de changelog aparecesse no último item quando carregada.
+	@ Alterado a ordem padrão dos changelogs dentro de uma versão, para um ordem padrão e alfabética.
+	! Corrigido bug no método de comparação de versões.
+	+ Adicionado tela 'Sobre' do Controle de Pontos;
+	* Criado pasta para arquivos de inicialização com o bootstrapper.cs e o app.cs.
+
+11/10/2016 1.8.0:
+	* Centralizado serviço para obter informações sobre o app (nome, versão, changelog).
+	* Centralizado código de configuração básica para forms.
+	* Centralizado códigos das colunas da tela de informações do team services.
+	+ Adicionado tipo de mudança no changelog.
+	+ Adicionada tela de visualização changelog.
+	+ Adicionada coluna do projeto do work item na tela do team services.
+	@ Reordenado o menu da tela principial.
+	! Removido bug que ocorria ao tentar ir para um work item no browser pela tela do team services.
+
+07/10/2016 1.7.8:
+	! Corrigido bug ao salvar um arquivo de mes de trabalho com mes e ano 0.
+
+06/10/2016 1.7.7:
+	! Corrigido bug ao ordernar o grid de horários pela coluna de dia da semana.
+
+06/10/2016 1.7.6:
+	! Corrigido crash ao tentar ordenar o grid de horários pela coluna de falta.
+
+03/10/2016 1.7.5:
+	! Corrigido bug ao gerar relatórios com charts.
+
+22/09/2016 1.7.4:
+	* Removido código desnecessário na nova versão do C# (6.0).
+
+22/09/2016 1.7.3:
+	* Adicionado checagem para evitar que cores sejam configuradas com transparência.
+
+22/09/2016 1.7.2:
+	+ Criado borda na tela de configuração de cores e definido valores padrões para as cores.
+
+22/09/2016 1.7.1:
+	@ Alterado o diretório de dados da aplicação.
+
+20/09/2016 1.7.0:
+	+ Adicionado integração básica com o TFS/Team Services.
+
+19/09/2016 1.6.3:
+	* Formatação geral de código.
+
+10/09/2016 1.6.2:
+	+ Adicionada estatistica sobre a quantidade de horas total que o tfs do cliente deve ter.
+
+02/09/2016 1.6.1:
+	! Corrigido bug nos textboxs do dashboard, onde eles não estavam atualizando os dados e a tela.
+
+30/08/2016 1.6.0:
+	+ Adicionado opção de customizar as cores da tabela do dashboard.
+
+29/08/2016 1.5.9:
+	@ Ajustado tamanho das colunas na dashboard.
+
+29/08/2016 1.5.8:
+	* Separado lógica da injeção de dependência.
+
+29/08/2016 1.5.7:
+	* Adicionado código de segurança para quando o arquivo de configuração não existir.
+
+25/08/2016 1.5.6:
+	* Reimplementado grid view dos dias para ser mais performatico.
+	+ Adicionada instrução para lançar exceções não tratadas.
+
+19/08/2016 1.5.5:
+	* Implementado serviço de calculo de coeficientes via serviço.
+
+19/08/2016 1.5.4:
+	* Adicionado implementação de serviços na opção de importar coeficiente mensal.
+
+19/08/2016 1.5.3:
+	@ Remodelado layout da dashboard.
+
+19/08/2016 1.5.2:
+	* Centralizado processamento de exportação e backup de dados.
+
+18/08/2016 1.5.1:
+	* Transferido a responsábilidade de criar e manipular os meses de trabalho do dashboard para um serviço apropriado.
+
+18/08/2016 1.5.0:
+	+ Adicionado atalhos na tela de configuração: Esc para sair e Enter para salvar e fechar.
+
+18/08/2016 1.4.1:
+	! Corrigido erro no calculo do coeficiente diário de trabalho.
+
+18/08/2016 1.4.0:
+	+ Adicionado tela de configuração de dias de trabalho e horário da jornada de trabalho.
+
+17/08/2016 1.3.0:
+	+ Adicionado tela de configuração de férias.
+
+17/08/2016 1.2.5:
+	* Centralizado classe e arquivos de configuração.
+	* Adicionado injetor de dependência no projeto.
+
+17/08/2016 1.2.4:
+	! Corrigido nome do arquivo de configuração de backup no arquivo zip de backup.
+
+16/08/2016 1.2.3:
+	! Corrigido bug de redimensionamento do grid do dashboard.
+
+16/08/2016 1.2.2:
+	+ Adicionada opção de realizar um backup manualmente.
+
+16/08/2016 1.2.1:
+	! Corrigido bug onde os feriados não apareciam na tela de configuração ao ser carregada pela primeira vez.
+	! Corrigido bug que fazia com que os backups não incluisem os arquivos de configuração da aplicação.
+
+16/08/2016 1.2.0: 
+	+ Adicionada tela de configuração de feriados.
+
+16/08/2016 1.1.0:
+	+ Adicionada tela de configuração de diretórios de backup.
+
+16/08/2016 1.0.0: 
+	+ Versão Inicial
