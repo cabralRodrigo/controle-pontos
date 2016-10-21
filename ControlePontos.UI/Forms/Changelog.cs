@@ -1,5 +1,6 @@
 ﻿using ControlePontos.Dominio.Model;
 using ControlePontos.Dominio.Servico;
+using ControlePontos.Misc;
 using ControlePontos.Util.Extensions;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ namespace ControlePontos.Forms
 
         private void Changelog_Load(object sender, EventArgs e)
         {
-            var changelog = this.appInfoServico.CarregarChangelog();
+            var changelog = this.appInfoServico.CarregarChangelog(Resources.Changelog());
 
             this.CarregarLegenda();
             this.CarregarEstatisticas(changelog);

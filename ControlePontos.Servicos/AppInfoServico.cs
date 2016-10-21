@@ -3,19 +3,16 @@ using ControlePontos.Dominio.Servico;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace ControlePontos.Servicos
 {
     public class AppInfoServico : IAppInfoServico
     {
-        public IEnumerable<ChangelogInfo> CarregarChangelog()
+        public IEnumerable<ChangelogInfo> CarregarChangelog(Stream streamChangelog)
         {
             var changelog = new List<ChangelogInfo>();
 
-            //TODO: Parar de ler o resource do assembly.
-            using (var stream = Assembly.GetEntryAssembly().GetManifestResourceStream("ControlePontos.changelog.txt"))
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(streamChangelog))
             {
                 var atual = new ChangelogInfo { Mudancas = new List<MudancaInfo>() };
                 var linha = reader.ReadLine();

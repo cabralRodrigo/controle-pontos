@@ -270,6 +270,7 @@
     <Compile Include="Forms\Integracoes\Sodexo.Designer.cs">
       <DependentUpon>Sodexo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\Resources.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -403,6 +404,9 @@
     <None Include="Resources\util.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\changelog.txt">
+      <Link>changelog.txt</Link>
+    </EmbeddedResource>
     <Content Include="Assets\icon.ico" />
     <Content Include="Assets\add.png" />
     <Content Include="Assets\delete.png" />
