@@ -74,8 +74,7 @@ namespace ControlePontos.Servicos
 
         public string ObterNomeApp()
         {
-            return null;
-            //TODO: return Application.ProductName;
+            return FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileDescription;
         }
 
         public Versao ObterVersaoAtual()
