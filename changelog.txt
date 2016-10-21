@@ -1,4 +1,4 @@
-19/10/2016 1.12.1:
+21/10/2016 1.12.1:
 	* Renomeado projeto da interface do projeto para futuras modificações.
 	* Separada as camadas da aplicação em projetos diferentes.
 
