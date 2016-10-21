@@ -5,6 +5,20 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePontos.UI", "ControlePontos.UI\ControlePontos.UI.csproj", "{A2B013DF-BEE5-4D98-9AC5-F6B8A95C04F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePontos.Servicos", "ControlePontos.Servicos\ControlePontos.Servicos.csproj", "{DA8B0BC2-2AC4-4449-8E60-530A2F3BB567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePontos.Dominio", "ControlePontos.Dominio\ControlePontos.Dominio.csproj", "{9D01C55E-0980-4D65-B8D4-F5BD1927E6B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePontos.Util", "ControlePontos.Util\ControlePontos.Util.csproj", "{2DA62827-58DF-4995-8085-EC4E6DE0140A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{BB12D8A8-17B4-4DE1-A0BC-3755E82699D1}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		changelog.txt = changelog.txt
+		release.ps1 = release.ps1
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +29,18 @@ Global
 		{A2B013DF-BEE5-4D98-9AC5-F6B8A95C04F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2B013DF-BEE5-4D98-9AC5-F6B8A95C04F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2B013DF-BEE5-4D98-9AC5-F6B8A95C04F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8B0BC2-2AC4-4449-8E60-530A2F3BB567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8B0BC2-2AC4-4449-8E60-530A2F3BB567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8B0BC2-2AC4-4449-8E60-530A2F3BB567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8B0BC2-2AC4-4449-8E60-530A2F3BB567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D01C55E-0980-4D65-B8D4-F5BD1927E6B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D01C55E-0980-4D65-B8D4-F5BD1927E6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D01C55E-0980-4D65-B8D4-F5BD1927E6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D01C55E-0980-4D65-B8D4-F5BD1927E6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA62827-58DF-4995-8085-EC4E6DE0140A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA62827-58DF-4995-8085-EC4E6DE0140A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA62827-58DF-4995-8085-EC4E6DE0140A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA62827-58DF-4995-8085-EC4E6DE0140A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

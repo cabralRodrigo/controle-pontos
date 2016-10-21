@@ -1,8 +1,9 @@
-﻿using ControlePontos.Extensions;
-using ControlePontos.Misc;
-using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
-using ControlePontos.Servicos;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
+using ControlePontos.Dominio.Servico;
+using ControlePontos.Extensions;
+using ControlePontos.Util.Extensions;
+using ControlePontos.Util.Misc;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -34,7 +35,7 @@ namespace ControlePontos.Forms
 
             public Resultado Salvar(Configuracao form, ConfiguracaoApp config)
             {
-                config.Backup = new Model.Configuracao.ConfiguracaoBackup(form.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
+                config.Backup = new Dominio.Model.Configuracao.ConfiguracaoBackup(form.Backup_ListBoxDiretorios.Items.Cast<string>().ToArray());
 
                 return Resultado.Sucesso();
             }

@@ -1,9 +1,9 @@
-﻿using ControlePontos.Extensions;
-using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
 using ControlePontos.Report.Reports.Template.Html;
 using ControlePontos.Report.Reports.Template.Html.Misc;
 using ControlePontos.Report.Reports.Template.Html.Section.Chart;
+using ControlePontos.Util.Extensions;
 using System;
 using System.Globalization;
 using System.IO;

@@ -1,6 +1,6 @@
-﻿using ControlePontos.Extensions;
-using ControlePontos.Model;
-using ControlePontos.Servicos;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Servico;
+using ControlePontos.Util.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

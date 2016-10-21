@@ -1,8 +1,8 @@
-﻿using ControlePontos.Extensions;
-using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
+using ControlePontos.Dominio.Servico;
 using ControlePontos.Native;
-using ControlePontos.Servicos;
+using ControlePontos.Util.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
