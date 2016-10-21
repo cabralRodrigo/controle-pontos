@@ -1,4 +1,5 @@
 ﻿using ControlePontos.Control;
+using ControlePontos.Dominio.Servico;
 using ControlePontos.Extensions;
 using ControlePontos.Forms;
 using ControlePontos.Forms.Integracoes;
@@ -61,7 +62,7 @@ namespace ControlePontos.Start
 
         private void RegistrarServicosExportaveis()
         {
-            this.container.RegisterSingletonCollection<IExportar>(new Dictionary<Type, Type> {
+            this.container.RegisterSingletonCollection<IExportar>(typeof(MesTrabalhoServico).Assembly, new Dictionary<Type, Type> {
                 {typeof(IMesTrabalhoServico), typeof(MesTrabalhoServico)},
                 {typeof(IConfiguracaoServico), typeof(ConfiguracaoServico)}
             });

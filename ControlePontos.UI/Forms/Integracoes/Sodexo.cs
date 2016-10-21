@@ -1,6 +1,8 @@
-﻿using ControlePontos.Extensions;
-using ControlePontos.Model.Integracoes;
+﻿using ControlePontos.Dominio.Model.Integracoes;
+using ControlePontos.Dominio.Servico;
+using ControlePontos.Extensions;
 using ControlePontos.Servicos;
+using ControlePontos.Util.Extensions;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -46,9 +48,9 @@ namespace ControlePontos.Forms.Integracoes
 
             if (!cartao.IsNullOrEmpty() && !cpf.IsNullOrEmpty())
             {
-                this.sodexoServico.ConsultarSaldoAsync(cartao, cpf, this.tokenSource.Token).Continue(historio =>
+                this.sodexoServico.ConsultarSaldoAsync(cartao, cpf, this.tokenSource.Token).Continue(historico =>
                 {
-                    this.AtualizarTela(historio);
+                    this.AtualizarTela(historico);
                     this.progressoForm.Close();
                 }, ex =>
                 {

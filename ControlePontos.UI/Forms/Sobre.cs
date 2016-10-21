@@ -1,8 +1,7 @@
-﻿using ControlePontos.Servicos;
-using ControlePontos.Extensions;
-using System.Linq;
-using System.Windows.Forms;
+﻿using ControlePontos.Dominio.Servico;
+using ControlePontos.Util.Extensions;
 using System;
+using System.Linq;
 
 namespace ControlePontos.Forms
 {

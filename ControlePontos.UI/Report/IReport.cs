@@ -1,11 +1,10 @@
-﻿using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
 
 namespace ControlePontos.Report
 {
     internal interface IReport
     {
-        //TODO: Adicionar a função de escolher a saida do relatório: html, csv, pdf, markdown...
         string Name { get; }
 
         IReportExecutionResult Execute(ConfiguracaoApp config, int ano, int mes, MesTrabalho mesTrabalho);

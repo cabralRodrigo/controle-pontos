@@ -1,5 +1,7 @@
-﻿using ControlePontos.Extensions;
+﻿using ControlePontos.Dominio.Servico;
+using ControlePontos.Extensions;
 using ControlePontos.Servicos;
+using ControlePontos.Util.Extensions;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
@@ -9,7 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using static ControlePontos.Misc.ColunasTeamServices;
+using static ControlePontos.Util.Misc.ColunasTeamServices;
 
 namespace ControlePontos.Forms.Integracoes
 {

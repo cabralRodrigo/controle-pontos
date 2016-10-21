@@ -1,6 +1,6 @@
-﻿using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
-using ControlePontos.Servicos;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
+using ControlePontos.Dominio.Servico;
 using System;
 using System.Linq;
 

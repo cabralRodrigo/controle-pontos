@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ControlePontos.Servicos
 {
+    //TODO: Separar o serviço de relatório da camada de UI.
     internal interface IRelatorioServico
     {
         IEnumerable<IReport> ListarRelatorios();

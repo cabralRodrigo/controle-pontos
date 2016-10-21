@@ -1,5 +1,5 @@
-﻿using ControlePontos.Model;
-using ControlePontos.Model.Configuracao;
+﻿using ControlePontos.Dominio.Model;
+using ControlePontos.Dominio.Model.Configuracao;
 
 namespace ControlePontos.Control
 {

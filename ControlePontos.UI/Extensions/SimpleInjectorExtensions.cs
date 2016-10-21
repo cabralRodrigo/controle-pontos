@@ -3,6 +3,7 @@ using SimpleInjector.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace ControlePontos.Extensions
 {
@@ -20,13 +21,14 @@ namespace ControlePontos.Extensions
             }
         }
 
-        public static void RegisterSingletonCollection<T>(this Container container, Dictionary<Type, Type> tipos) where T : class
+        public static void RegisterSingletonCollection<T>(this Container container, Assembly assembly, Dictionary<Type, Type> tipos) where T : class
         {
-            var interfaceTipos = container.GetTypesToRegister(typeof(T), new[] { typeof(T).Assembly });
+            var interfaceTipos = container.GetTypesToRegister(typeof(T), new[] { assembly });
 
             var interfaceRegistros = (
                 from tipo in interfaceTipos
-                select Lifestyle.Singleton.CreateRegistration(tipo, container)).ToList();
+                select Lifestyle.Singleton.CreateRegistration(tipo, container)
+            ).ToList();
 
             container.RegisterCollection<T>(interfaceRegistros);
 
