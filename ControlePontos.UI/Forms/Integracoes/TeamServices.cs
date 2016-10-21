@@ -1,9 +1,8 @@
-﻿using ControlePontos.Dominio.Servico;
+﻿using ControlePontos.Dominio.Model.Integracoes;
+using ControlePontos.Dominio.Servico;
 using ControlePontos.Extensions;
 using ControlePontos.Servicos;
 using ControlePontos.Util.Extensions;
-using Microsoft.TeamFoundation.Client;
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +10,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using static ControlePontos.Util.Misc.ColunasTeamServices;
 
 namespace ControlePontos.Forms.Integracoes
 {
@@ -30,13 +28,12 @@ namespace ControlePontos.Forms.Integracoes
         private readonly ITeamServiceServico teamServices;
         private readonly ProgressoCarregamento progressoForm;
         private readonly CancellationTokenSource tokenSource;
-        private readonly IConfiguracaoServico configuracaoServico;
         private readonly IFormServico formServico;
 
-        private Uri enderecoTeamServices;
         private int? horasAntigas;
         private int[] iteracoesIDs;
-        private TfsTeamProjectCollection project;
+        private Uri enderecoTeamServices;
+        private readonly IConfiguracaoServico configuracaoServico;
 
         public TeamServices(ITeamServiceServico tfs, IConfiguracaoServico configuracaoServico, IFormServico formServico, ProgressoCarregamento progressoForm)
         {
@@ -49,19 +46,19 @@ namespace ControlePontos.Forms.Integracoes
             this.tokenSource = new CancellationTokenSource();
         }
 
-        private void CarregarGrid(IEnumerable<WorkItem> workItems)
+        private void CarregarGrid(IEnumerable<TeamServicesWorkItem> workItems)
         {
             this.Grid.Rows.Clear();
 
             foreach (var workItem in workItems)
                 this.Grid.Rows.Add(new object[] {
-                        workItem.Id,
-                        workItem.Fields[TeamProject]?.Value,
-                        workItem.Fields[CreatedDate]?.Value,
-                        workItem.Title,
-                        workItem.State,
-                        workItem.Fields[CompletedWork]?.Value
-                    });
+                    workItem.ID,
+                    workItem.Projeto,
+                    workItem.DataCriacao,
+                    workItem.Titulo,
+                    workItem.Estado,
+                    workItem.HorasCompletadas
+                });
 
             this.AtualizarBarraStatus();
         }
@@ -84,23 +81,22 @@ namespace ControlePontos.Forms.Integracoes
 
         #region Team Services
 
-        private bool AutenticarUsuario()
+        private bool CarregarIterationIDs()
         {
             if (this.enderecoTeamServices != null)
             {
-                this.progressoForm.Mensagem = "Autenticando usuário...";
-                this.progressoForm.PassoAtual++;
-
-                this.teamServices.AutenticarUsuarioAsync(this.enderecoTeamServices, this.tokenSource.Token).Continue(project =>
+                this.progressoForm.Mensagem = "Carregando iterações atuais...";
+                this.teamServices.ListarIteracoesAtuaisAsync(this.tokenSource.Token).Continue(ids =>
                 {
                     this.progressoForm.PassoAtual++;
 
-                    this.project = project;
-                    this.CarregarIterationIDs();
+                    this.iteracoesIDs = ids;
+                    this.CarregarWorkItems();
                 }, ErroTeamService);
 
                 return true;
             }
+
             else
             {
                 if (MessageBox.Show("As configurações do tfs/team services não foram informadas.\nDeseja configurar agora?", "Configurações", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -111,27 +107,15 @@ namespace ControlePontos.Forms.Integracoes
             }
         }
 
-        private void CarregarIterationIDs()
-        {
-            this.progressoForm.Mensagem = "Carregando iterações atuais...";
-            this.teamServices.ListarIteracoesAtuaisAsync(this.project, this.tokenSource.Token).Continue(ids =>
-            {
-                this.progressoForm.PassoAtual++;
-
-                this.iteracoesIDs = ids;
-                this.CarregarWorkItems();
-            }, ErroTeamService);
-        }
-
         private void CarregarWorkItems()
         {
             this.progressoForm.Mensagem = "Carregando work items...";
 
-            this.teamServices.ListarWorkItemPorIteracaoAsync(this.project, iteracoesIDs, this.tokenSource.Token).Continue(items =>
-            {
-                this.CarregarGrid(items);
-                this.progressoForm.Close();
-            }, ErroTeamService);
+            this.teamServices.ListarWorkItemPorIteracaoAsync(iteracoesIDs, this.tokenSource.Token).Continue(items =>
+           {
+               this.CarregarGrid(items);
+               this.progressoForm.Close();
+           }, ErroTeamService);
         }
 
         private void ErroTeamService(Exception ex)
@@ -167,7 +151,7 @@ namespace ControlePontos.Forms.Integracoes
                 this.Close();
             });
 
-            if (this.AutenticarUsuario())
+            if (this.CarregarIterationIDs())
                 this.progressoForm.ShowDialogAsync(this);
         }
 
@@ -223,7 +207,7 @@ namespace ControlePontos.Forms.Integracoes
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly = true;
                         this.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Gray;
 
-                        this.teamServices.AtualizarWorkItemCompletedHoursAsync(this.project, id, horasString.IsNullOrEmpty() ? null : (int?)horas).Continue(() =>
+                        this.teamServices.AtualizarWorkItemCompletedHoursAsync(id, horasString.IsNullOrEmpty() ? null : (int?)horas).Continue(() =>
                         {
                             this.AtualizarBarraStatus();
 
