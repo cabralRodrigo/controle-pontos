@@ -1,11 +1,12 @@
 ﻿using ControlePontos.Dominio.Servico;
+using ControlePontos.Misc;
 using ControlePontos.Util.Extensions;
 using System;
 using System.Linq;
 
 namespace ControlePontos.Forms
 {
-    partial class Sobre : BaseForm
+    internal partial class Sobre : BaseForm
     {
         private readonly IAppInfoServico appInfoServico;
 
@@ -17,7 +18,7 @@ namespace ControlePontos.Forms
 
         private void Sobre_Load(object sender, EventArgs e)
         {
-            var log = this.appInfoServico.CarregarChangelog().OrderBy(w => w.Versao).Last();
+            var log = this.appInfoServico.CarregarChangelog(Resources.Changelog()).OrderBy(w => w.Versao).Last();
 
             this.labelProductName.Text = this.appInfoServico.ObterNomeApp();
             this.labelVersion.Text = $"Versão {log.Versao}";
