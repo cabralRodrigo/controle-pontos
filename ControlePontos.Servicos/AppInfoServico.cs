@@ -2,7 +2,9 @@
 using ControlePontos.Dominio.Servico;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace ControlePontos.Servicos
 {
@@ -78,7 +80,7 @@ namespace ControlePontos.Servicos
 
         public Versao ObterVersaoAtual()
         {
-            return new Versao("1.1.0"/*TODO: Application.ProductVersion*/);
+            return new Versao(FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileVersion);
         }
     }
 }

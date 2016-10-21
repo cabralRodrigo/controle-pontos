@@ -18,10 +18,11 @@ namespace ControlePontos.Forms
 
         private void Sobre_Load(object sender, EventArgs e)
         {
-            var log = this.appInfoServico.CarregarChangelog(Resources.Changelog()).OrderBy(w => w.Versao).Last();
+            var versao = this.appInfoServico.ObterVersaoAtual();
+            var log = this.appInfoServico.CarregarChangelog(Resources.Changelog()).OrderBy(w => w.Versao).FirstOrDefault(w => w.Versao == versao);
 
             this.labelProductName.Text = this.appInfoServico.ObterNomeApp();
-            this.labelVersion.Text = $"Versão {log.Versao}";
+            this.labelVersion.Text = $"Versão {versao}";
 
             var mudancas = log.Mudancas.Select(s => $"{s.Tipo.ObterDescricao()}: {s.Descricao}").ToArray();
             var descricao = string.Join(Environment.NewLine + Environment.NewLine, mudancas);
