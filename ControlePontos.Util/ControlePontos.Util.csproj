@@ -50,7 +50,6 @@
     <Compile Include="Extensions\DotNetExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Misc\CheckboxListItem.cs" />
-    <Compile Include="Misc\ColunasTeamServices.cs" />
     <Compile Include="Misc\DataBrasilJsonConverter.cs" />
     <Compile Include="Misc\RealJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
