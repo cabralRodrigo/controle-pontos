@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCompany("Fabrikam Technologies")]
+[assembly: AssemblyCompany("Rodrigo Cabral")]
 [assembly: AssemblyProduct("Controle de Pontos")]
 [assembly: AssemblyCopyright("Copyright © Rodrigo Cabral 2016")]
 
@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("1.12.0")]
+[assembly: AssemblyVersion("1.13.0")]

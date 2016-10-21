@@ -1,44 +1,50 @@
+21/10/2016 1.13.0:
+	! Corrigido erro ao abrir a tela de changelog e sobre.
+	! Corrigido erro ao obter vers√£o atual do aplicativo.
+	! Corrigido erro ao obter nome do aplicativo.
+	* Removendo depend√™ncias desnecess√°rias dos pacotes do nuget das camadas de domn√≠nio e ui.
+
 21/10/2016 1.12.1:
-	* Renomeado projeto da interface do projeto para futuras modificaÁıes.
-	* Separada as camadas da aplicaÁ„o em projetos diferentes.
+	* Renomeado projeto da interface do projeto para futuras modifica√ß√µes.
+	* Separada as camadas da aplica√ß√£o em projetos diferentes.
 
 17/10/2016 1.12.0:
-	! Corrigido falta do Ìcone do execut·vel do aplicativo.
-	+ Configurada aplicaÁ„o para ler dependÍncias da pasta 'dll' dentro da pasta da aplicaÁ„o.
+	! Corrigido falta do √≠cone do execut√°vel do aplicativo.
+	+ Configurada aplica√ß√£o para ler depend√™ncias da pasta 'dll' dentro da pasta da aplica√ß√£o.
 	* Limpando app.config.
-	* Removendo dependÍncia do serviÁo de configuraÁ„o do serviÁo de integraÁ„o com o team services.
-	* Adicionando verificaÁ„o na tela de team services para verificar se a configuraÁ„o do team services existe.
-	+ Adicionando funcionalidade de importar o histÛrico de uso do sodexo.
+	* Removendo depend√™ncia do servi√ßo de configura√ß√£o do servi√ßo de integra√ß√£o com o team services.
+	* Adicionando verifica√ß√£o na tela de team services para verificar se a configura√ß√£o do team services existe.
+	+ Adicionando funcionalidade de importar o hist√≥rico de uso do sodexo.
 
 16/10/2016 1.11.0:
-	+ Adicionado bot„o para marcar o hor·rio atual no dia atual, para facilitar a marcaÁ„o dos hor·rios.
-	+ Adicionado integraÁ„o com o sodexo.
-	! Corrigido bug ao ocorrer um erro no processo de carregamento das informaÁıes do team services quando o carregamento j· havia sido cancelado.
-	@ Criado menu de integraÁıes para acomodar a integraÁ„o com o team service e futuras integraÁıes.
-	@ Alterada tela de configuraÁıes para agrupar configuraÁıes referentes a integraÁıes com outros sistemas.
-	* Reorganizando as classes de configuraÁ„o na pasta model.
+	+ Adicionado bot√£o para marcar o hor√°rio atual no dia atual, para facilitar a marca√ß√£o dos hor√°rios.
+	+ Adicionado integra√ß√£o com o sodexo.
+	! Corrigido bug ao ocorrer um erro no processo de carregamento das informa√ß√µes do team services quando o carregamento j√° havia sido cancelado.
+	@ Criado menu de integra√ß√µes para acomodar a integra√ß√£o com o team service e futuras integra√ß√µes.
+	@ Alterada tela de configura√ß√µes para agrupar configura√ß√µes referentes a integra√ß√µes com outros sistemas.
+	* Reorganizando as classes de configura√ß√£o na pasta model.
 	* Reorganizando arquivo de resources.
 	! Corrigido crash ao reordenar o grid da tela de sodexo.
 
 14/10/2016 1.10.0:
-	+ Adicionado validaÁ„o dos hor·rios na tela principal.
+	+ Adicionado valida√ß√£o dos hor√°rios na tela principal.
 
 13/10/2016 1.9.0:
-	* Reorganizando os mÈtodos de extens„o em classes separadas.
-	* Movendo a classe form opener para o formato de serviÁo, para padronizar as classes no projeto.
-	* Padronizando uso do mÈtodo IsNullOrEmpty da classe string, para usar o mÈtodo de extens„o.
-	! Corrigido bug que fazia com que a treeview da tela de changelog aparecesse no ˙ltimo item quando carregada.
-	@ Alterado a ordem padr„o dos changelogs dentro de uma vers„o, para um ordem padr„o e alfabÈtica.
-	! Corrigido bug no mÈtodo de comparaÁ„o de versıes.
+	* Reorganizando os m√©todos de extens√£o em classes separadas.
+	* Movendo a classe form opener para o formato de servi√ßo, para padronizar as classes no projeto.
+	* Padronizando uso do m√©todo IsNullOrEmpty da classe string, para usar o m√©todo de extens√£o.
+	! Corrigido bug que fazia com que a treeview da tela de changelog aparecesse no √∫ltimo item quando carregada.
+	@ Alterado a ordem padr√£o dos changelogs dentro de uma vers√£o, para um ordem padr√£o e alfab√©tica.
+	! Corrigido bug no m√©todo de compara√ß√£o de vers√µes.
 	+ Adicionado tela 'Sobre' do Controle de Pontos;
-	* Criado pasta para arquivos de inicializaÁ„o com o bootstrapper.cs e o app.cs.
+	* Criado pasta para arquivos de inicializa√ß√£o com o bootstrapper.cs e o app.cs.
 
 11/10/2016 1.8.0:
-	* Centralizado serviÁo para obter informaÁıes sobre o app (nome, vers„o, changelog).
-	* Centralizado cÛdigo de configuraÁ„o b·sica para forms.
-	* Centralizado cÛdigos das colunas da tela de informaÁıes do team services.
-	+ Adicionado tipo de mudanÁa no changelog.
-	+ Adicionada tela de visualizaÁ„o changelog.
+	* Centralizado servi√ßo para obter informa√ß√µes sobre o app (nome, vers√£o, changelog).
+	* Centralizado c√≥digo de configura√ß√£o b√°sica para forms.
+	* Centralizado c√≥digos das colunas da tela de informa√ß√µes do team services.
+	+ Adicionado tipo de mudan√ßa no changelog.
+	+ Adicionada tela de visualiza√ß√£o changelog.
 	+ Adicionada coluna do projeto do work item na tela do team services.
 	@ Reordenado o menu da tela principial.
 	! Removido bug que ocorria ao tentar ir para um work item no browser pela tela do team services.
@@ -47,103 +53,103 @@
 	! Corrigido bug ao salvar um arquivo de mes de trabalho com mes e ano 0.
 
 06/10/2016 1.7.7:
-	! Corrigido bug ao ordernar o grid de hor·rios pela coluna de dia da semana.
+	! Corrigido bug ao ordernar o grid de hor√°rios pela coluna de dia da semana.
 
 06/10/2016 1.7.6:
-	! Corrigido crash ao tentar ordenar o grid de hor·rios pela coluna de falta.
+	! Corrigido crash ao tentar ordenar o grid de hor√°rios pela coluna de falta.
 
 03/10/2016 1.7.5:
-	! Corrigido bug ao gerar relatÛrios com charts.
+	! Corrigido bug ao gerar relat√≥rios com charts.
 
 22/09/2016 1.7.4:
-	* Removido cÛdigo desnecess·rio na nova vers„o do C# (6.0).
+	* Removido c√≥digo desnecess√°rio na nova vers√£o do C# (6.0).
 
 22/09/2016 1.7.3:
-	* Adicionado checagem para evitar que cores sejam configuradas com transparÍncia.
+	* Adicionado checagem para evitar que cores sejam configuradas com transpar√™ncia.
 
 22/09/2016 1.7.2:
-	+ Criado borda na tela de configuraÁ„o de cores e definido valores padrıes para as cores.
+	+ Criado borda na tela de configura√ß√£o de cores e definido valores padr√µes para as cores.
 
 22/09/2016 1.7.1:
-	@ Alterado o diretÛrio de dados da aplicaÁ„o.
+	@ Alterado o diret√≥rio de dados da aplica√ß√£o.
 
 20/09/2016 1.7.0:
-	+ Adicionado integraÁ„o b·sica com o TFS/Team Services.
+	+ Adicionado integra√ß√£o b√°sica com o TFS/Team Services.
 
 19/09/2016 1.6.3:
-	* FormataÁ„o geral de cÛdigo.
+	* Formata√ß√£o geral de c√≥digo.
 
 10/09/2016 1.6.2:
 	+ Adicionada estatistica sobre a quantidade de horas total que o tfs do cliente deve ter.
 
 02/09/2016 1.6.1:
-	! Corrigido bug nos textboxs do dashboard, onde eles n„o estavam atualizando os dados e a tela.
+	! Corrigido bug nos textboxs do dashboard, onde eles n√£o estavam atualizando os dados e a tela.
 
 30/08/2016 1.6.0:
-	+ Adicionado opÁ„o de customizar as cores da tabela do dashboard.
+	+ Adicionado op√ß√£o de customizar as cores da tabela do dashboard.
 
 29/08/2016 1.5.9:
 	@ Ajustado tamanho das colunas na dashboard.
 
 29/08/2016 1.5.8:
-	* Separado lÛgica da injeÁ„o de dependÍncia.
+	* Separado l√≥gica da inje√ß√£o de depend√™ncia.
 
 29/08/2016 1.5.7:
-	* Adicionado cÛdigo de seguranÁa para quando o arquivo de configuraÁ„o n„o existir.
+	* Adicionado c√≥digo de seguran√ßa para quando o arquivo de configura√ß√£o n√£o existir.
 
 25/08/2016 1.5.6:
 	* Reimplementado grid view dos dias para ser mais performatico.
-	+ Adicionada instruÁ„o para lanÁar exceÁıes n„o tratadas.
+	+ Adicionada instru√ß√£o para lan√ßar exce√ß√µes n√£o tratadas.
 
 19/08/2016 1.5.5:
-	* Implementado serviÁo de calculo de coeficientes via serviÁo.
+	* Implementado servi√ßo de calculo de coeficientes via servi√ßo.
 
 19/08/2016 1.5.4:
-	* Adicionado implementaÁ„o de serviÁos na opÁ„o de importar coeficiente mensal.
+	* Adicionado implementa√ß√£o de servi√ßos na op√ß√£o de importar coeficiente mensal.
 
 19/08/2016 1.5.3:
 	@ Remodelado layout da dashboard.
 
 19/08/2016 1.5.2:
-	* Centralizado processamento de exportaÁ„o e backup de dados.
+	* Centralizado processamento de exporta√ß√£o e backup de dados.
 
 18/08/2016 1.5.1:
-	* Transferido a respons·bilidade de criar e manipular os meses de trabalho do dashboard para um serviÁo apropriado.
+	* Transferido a respons√°bilidade de criar e manipular os meses de trabalho do dashboard para um servi√ßo apropriado.
 
 18/08/2016 1.5.0:
-	+ Adicionado atalhos na tela de configuraÁ„o: Esc para sair e Enter para salvar e fechar.
+	+ Adicionado atalhos na tela de configura√ß√£o: Esc para sair e Enter para salvar e fechar.
 
 18/08/2016 1.4.1:
-	! Corrigido erro no calculo do coeficiente di·rio de trabalho.
+	! Corrigido erro no calculo do coeficiente di√°rio de trabalho.
 
 18/08/2016 1.4.0:
-	+ Adicionado tela de configuraÁ„o de dias de trabalho e hor·rio da jornada de trabalho.
+	+ Adicionado tela de configura√ß√£o de dias de trabalho e hor√°rio da jornada de trabalho.
 
 17/08/2016 1.3.0:
-	+ Adicionado tela de configuraÁ„o de fÈrias.
+	+ Adicionado tela de configura√ß√£o de f√©rias.
 
 17/08/2016 1.2.5:
-	* Centralizado classe e arquivos de configuraÁ„o.
-	* Adicionado injetor de dependÍncia no projeto.
+	* Centralizado classe e arquivos de configura√ß√£o.
+	* Adicionado injetor de depend√™ncia no projeto.
 
 17/08/2016 1.2.4:
-	! Corrigido nome do arquivo de configuraÁ„o de backup no arquivo zip de backup.
+	! Corrigido nome do arquivo de configura√ß√£o de backup no arquivo zip de backup.
 
 16/08/2016 1.2.3:
 	! Corrigido bug de redimensionamento do grid do dashboard.
 
 16/08/2016 1.2.2:
-	+ Adicionada opÁ„o de realizar um backup manualmente.
+	+ Adicionada op√ß√£o de realizar um backup manualmente.
 
 16/08/2016 1.2.1:
-	! Corrigido bug onde os feriados n„o apareciam na tela de configuraÁ„o ao ser carregada pela primeira vez.
-	! Corrigido bug que fazia com que os backups n„o incluisem os arquivos de configuraÁ„o da aplicaÁ„o.
+	! Corrigido bug onde os feriados n√£o apareciam na tela de configura√ß√£o ao ser carregada pela primeira vez.
+	! Corrigido bug que fazia com que os backups n√£o incluisem os arquivos de configura√ß√£o da aplica√ß√£o.
 
 16/08/2016 1.2.0: 
-	+ Adicionada tela de configuraÁ„o de feriados.
+	+ Adicionada tela de configura√ß√£o de feriados.
 
 16/08/2016 1.1.0:
-	+ Adicionada tela de configuraÁ„o de diretÛrios de backup.
+	+ Adicionada tela de configura√ß√£o de diret√≥rios de backup.
 
 16/08/2016 1.0.0: 
-	+ Vers„o Inicial
+	+ Vers√£o Inicial
