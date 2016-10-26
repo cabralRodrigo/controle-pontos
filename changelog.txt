@@ -1,3 +1,8 @@
+26/10/2016 1.14.0:
+	+ Adicionado build e release automáticos via AppVeyor.
+	+ Adicionado número de build no código da versão do aplicativo.
+	! Corrigido erro na tela 'Sobre' quando não era achado o changelog da versão do assembly.
+
 21/10/2016 1.13.0:
 	! Corrigido erro ao abrir a tela de changelog e sobre.
 	! Corrigido erro ao obter versão atual do aplicativo.
