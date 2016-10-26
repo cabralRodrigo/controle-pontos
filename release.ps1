@@ -1,1 +1,0 @@
-Invoke-Expression '.\build.ps1 -ZipRelease' 

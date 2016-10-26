@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlePontos.Util", "Cont
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{BB12D8A8-17B4-4DE1-A0BC-3755E82699D1}"
 	ProjectSection(SolutionItems) = preProject
-		build.ps1 = build.ps1
+		appveyor.yml = appveyor.yml
+		build-zip-release.ps1 = build-zip-release.ps1
+		changelog.ps1 = changelog.ps1
 		changelog.txt = changelog.txt
-		release.ps1 = release.ps1
+		install.ps1 = install.ps1
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject

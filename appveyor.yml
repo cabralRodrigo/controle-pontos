@@ -1,0 +1,40 @@
+version: '{build}'
+branches:
+  only:
+  - master
+skip_non_tags: true
+configuration: Release
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\SharedAssemblyInfo.*'
+  assembly_version: $(versao).{build}
+  assembly_file_version: $(versao).{build}
+  assembly_informational_version: $(versao).{build}
+environment:
+  versao: 9.9.9
+  changelog: changelog
+install:
+- ps: .\install.ps1
+cache: packages
+before_build:
+- cmd: nuget restore
+build:
+  project: ControlePontos.sln
+  verbosity: minimal
+before_deploy:
+- ps: .\build-zip-release.ps1
+deploy:
+- provider: GitHub
+  tag: $(versao)
+  release: $(versao)
+  description: $(changelog)
+  auth_token:
+    secure: jLx+IzvGTDLPbIMZPevL+jPfi6nwvPOBssWulkMHZoQrgelzi6ArkIBmrgkpm429
+  artifact: controle-pontos-release.zip
+  draft: true
+  force_update: true
+  on:
+    branch: master
+on_success:
+- ps: .\build-zip-release.ps1
