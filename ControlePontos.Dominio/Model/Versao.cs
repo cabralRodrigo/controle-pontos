@@ -8,12 +8,14 @@ namespace ControlePontos.Dominio.Model
         public int VersaoMaior { get; private set; }
         public int VersaoFuncionalidade { get; private set; }
         public int VersaoBugs { get; private set; }
+        public int VersaoBuild { get; private set; }
 
-        public Versao(int maior, int funcionalidade, int bugs)
+        public Versao(int maior, int funcionalidade, int bugs, int build = 0)
         {
             this.VersaoMaior = maior;
             this.VersaoFuncionalidade = funcionalidade;
             this.VersaoBugs = bugs;
+            this.VersaoBuild = build;
         }
 
         public Versao(string versao) : this()
@@ -23,8 +25,8 @@ namespace ControlePontos.Dominio.Model
 
         public static bool operator >(Versao a, Versao b)
         {
-            var versaoA = $"{a.VersaoMaior}{a.VersaoFuncionalidade}{a.VersaoBugs}";
-            var versaoB = $"{b.VersaoMaior}{b.VersaoFuncionalidade}{b.VersaoBugs}";
+            var versaoA = $"{a.VersaoMaior}{a.VersaoFuncionalidade}{a.VersaoBugs}{a.VersaoBuild}";
+            var versaoB = $"{b.VersaoMaior}{b.VersaoFuncionalidade}{b.VersaoBugs}{b.VersaoBuild}";
 
             return int.Parse(versaoA) > int.Parse(versaoB);
         }
@@ -59,19 +61,22 @@ namespace ControlePontos.Dominio.Model
             var versao = obj as Versao?;
 
             if (versao.HasValue)
-                return this.VersaoMaior == versao?.VersaoMaior && this.VersaoFuncionalidade == versao?.VersaoFuncionalidade && this.VersaoBugs == versao?.VersaoBugs;
+                return this.VersaoMaior == versao?.VersaoMaior && this.VersaoFuncionalidade == versao?.VersaoFuncionalidade && this.VersaoBugs == versao?.VersaoBugs && this.VersaoBuild == versao?.VersaoBuild;
             else
                 return false;
         }
 
         public override int GetHashCode()
         {
-            return this.VersaoMaior.GetHashCode() ^ this.VersaoFuncionalidade.GetHashCode() ^ this.VersaoBugs.GetHashCode();
+            return this.VersaoMaior.GetHashCode() ^ this.VersaoFuncionalidade.GetHashCode() ^ this.VersaoBugs.GetHashCode() ^ this.VersaoBuild.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{this.VersaoMaior}.{this.VersaoFuncionalidade}.{this.VersaoBugs}";
+            if (this.VersaoBuild != 0)
+                return $"{this.VersaoMaior}.{this.VersaoFuncionalidade}.{this.VersaoBugs}.{this.VersaoBuild}";
+            else
+                return $"{this.VersaoMaior}.{this.VersaoFuncionalidade}.{this.VersaoBugs}";
         }
 
         private void Parse(string versao)
@@ -95,9 +100,17 @@ namespace ControlePontos.Dominio.Model
             if (!int.TryParse(partes[2], out bugs))
                 throw new ArgumentOutOfRangeException(nameof(versao));
 
+            int build = 0;
+            if (partes.Length >= 4)
+            {
+                if (!int.TryParse(partes[3], out build))
+                    throw new ArgumentOutOfRangeException(nameof(versao));
+            }
+
             this.VersaoMaior = maior;
             this.VersaoFuncionalidade = funcionalidade;
             this.VersaoBugs = bugs;
+            this.VersaoBuild = build;
         }
 
         public int CompareTo(Versao other)
