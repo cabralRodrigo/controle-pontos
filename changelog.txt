@@ -1,5 +1,7 @@
 16/11/0016 1.15.0:
 	+ Adicionada atualização automática do offset do coeficiente mensal ao atualizar uma falta.
+	! Corrigido erro de português na tela do Dashboard.
+	* Removido warnings no projeto.
 
 26/10/2016 1.14.0:
 	+ Adicionado build e release automáticos via AppVeyor.
