@@ -182,6 +182,7 @@ namespace ControlePontos.Forms
         {
             this.Timer.Enabled = true;
             this.GridDias.ValoresAtualizados += this.AtualizarTela;
+            this.GridDias.OffsetAlterado += GridDias_OffsetAlterado;
             this.configuracaoServico.ConfiguracaoMudou += novaConfiguracao => this.InitDashboard(this.ano, this.mes, novaConfiguracao);
 
             this.InitDashboard(DateTime.Now.Year, DateTime.Now.Month);
@@ -192,6 +193,15 @@ namespace ControlePontos.Forms
             this.CarregarMenuRelatorios();
             this.RealizarBackupDiario();
             this.PrepararSeparadores();
+        }
+
+        private void GridDias_OffsetAlterado(int diff)
+        {
+            if (MessageBox.Show("Deseja atualizar o offset mensal do coeficiente?", "Atualizar Offset de Tempo do Mês", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.TextBoxOffset.Text = (this.mesTrabalho.CoficienteOffset + diff).ToString();
+                this.TextBoxOffset_Leave(this, EventArgs.Empty);
+            }
         }
 
         private void TextBoxOffset_Leave(object sender, EventArgs e)

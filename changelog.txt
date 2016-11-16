@@ -1,3 +1,6 @@
+16/11/0016 1.15.0:
+	+ Adicionada atualização automática do offset do coeficiente mensal ao atualizar uma falta.
+
 26/10/2016 1.14.0:
 	+ Adicionado build e release automáticos via AppVeyor.
 	+ Adicionado número de build no código da versão do aplicativo.

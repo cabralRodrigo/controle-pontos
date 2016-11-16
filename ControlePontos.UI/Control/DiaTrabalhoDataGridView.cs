@@ -39,6 +39,7 @@ namespace ControlePontos.Control
         private TimeSpan? ultimoHorarioEditado;
 
         public event Action ValoresAtualizados;
+        public event Action<int> OffsetAlterado;
 
         public DiaTrabalhoDataGridView()
         {
@@ -423,11 +424,18 @@ namespace ControlePontos.Control
         private void AtualizarFalta(int rowIndex)
         {
             var valor = (bool)this.Rows[rowIndex].Cells[Colunas.FALTA].Value;
+            var valorAtualizado = this[rowIndex].Falta != valor;
             this[rowIndex].Falta = valor;
 
             this.AtualizarCelulasLinhas(rowIndex);
-            if (this.ValoresAtualizados != null)
-                this.ValoresAtualizados();
+
+            if (valorAtualizado)
+                if (valor)
+                    this.OffsetAlterado?.Invoke((this.CalculoServico.TotalHorasPorDia(this.config) * -1) * 60);
+                else
+                    this.OffsetAlterado?.Invoke(this.CalculoServico.TotalHorasPorDia(this.config) * 60);
+
+            this.ValoresAtualizados?.Invoke();
         }
 
         private void AtualizarCelulasLinhas(int rowIndex)

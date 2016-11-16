@@ -89,12 +89,9 @@ namespace ControlePontos.Servicos
         public TimeSpan TotalHorasTfs(ConfiguracaoApp config, MesTrabalho mesTrabalho)
         {
             var totalDias = this.FiltrarDiasDeTrabalho(mesTrabalho.Dias, config).Where(w => w.Data <= DateTime.Now).Count();
-            var minutosPorDia = Math.Round((config.HoraFim - config.HoraInicio).TotalMinutes);
-
-            //Remove a hora de almoço e também 1 hora de distração.
-            var descontos = ((ConfiguracaoApp.HORAS_ALMOCO + 1) * 60);
-
-            return new TimeSpan(0, Convert.ToInt32(minutosPorDia - descontos) * totalDias, 0);
+            var horasPorDia = this.TotalHorasPorDia(config) - 1;
+            
+            return new TimeSpan(totalDias * horasPorDia, 0, 0);
         }
 
         public IEnumerable<DiaTrabalho> FiltrarDiasDeTrabalho(IEnumerable<DiaTrabalho> dias, ConfiguracaoApp config)
@@ -105,6 +102,15 @@ namespace ControlePontos.Servicos
                          !config.Ferias.Any(w => w.Date == dia.Data.Date) &&
                          config.DiasTrabalho.Contains(dia.Data.DayOfWeek)
                    select dia;
+        }
+
+        public int TotalHorasPorDia(ConfiguracaoApp config)
+        {
+            var minutosPorDia = (config.HoraFim - config.HoraInicio).TotalMinutes;
+
+            var descontos = ConfiguracaoApp.HORAS_ALMOCO * 60;
+
+            return Convert.ToInt32((minutosPorDia - descontos) / 60);
         }
 
         private Dictionary<DateTime, TimeSpan?> CoeficienteDiario(ConfiguracaoApp config, MesTrabalho mes)

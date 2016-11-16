@@ -31,6 +31,8 @@ namespace ControlePontos.Dominio.Servico
 
         TimeSpan TotalHorasTfs(ConfiguracaoApp config, MesTrabalho mesTrabalho);
 
+        int TotalHorasPorDia(ConfiguracaoApp config);
+
         IEnumerable<DiaTrabalho> FiltrarDiasDeTrabalho(IEnumerable<DiaTrabalho> dias, ConfiguracaoApp config);
     }
 }
