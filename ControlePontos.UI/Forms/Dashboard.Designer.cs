@@ -189,7 +189,7 @@
             // Menu_Integracoes_TeamService
             // 
             this.Menu_Integracoes_TeamService.Name = "Menu_Integracoes_TeamService";
-            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Integracoes_TeamService.Size = new System.Drawing.Size(144, 22);
             this.Menu_Integracoes_TeamService.Text = "Team Service";
             this.Menu_Integracoes_TeamService.Click += new System.EventHandler(this.Menu_Integracoes_TeamService_Click);
             // 
@@ -199,7 +199,7 @@
             this.Menu_Integracoes_Sodexo_Saldo,
             this.Menu_Integracoes_Sodexo_ImportarSaldo});
             this.Menu_Integracoes_Sodexo.Name = "Menu_Integracoes_Sodexo";
-            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Integracoes_Sodexo.Size = new System.Drawing.Size(144, 22);
             this.Menu_Integracoes_Sodexo.Text = "Sodexo";
             // 
             // Menu_Integracoes_Sodexo_Saldo
@@ -473,7 +473,7 @@
             this.LabelOffsetCoeficiente.Name = "LabelOffsetCoeficiente";
             this.LabelOffsetCoeficiente.Size = new System.Drawing.Size(116, 13);
             this.LabelOffsetCoeficiente.TabIndex = 41;
-            this.LabelOffsetCoeficiente.Text = "Offset Coeficiênte (min)";
+            this.LabelOffsetCoeficiente.Text = "Offset Coeficiente (min)";
             // 
             // TextBoxOffset
             // 
