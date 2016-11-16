@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.TableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.GroupBox_Estatisticas = new System.Windows.Forms.GroupBox();
             this.GroupBox_Estatisticas_Layout = new System.Windows.Forms.FlowLayoutPanel();
             this.GroupBox_Legenda = new System.Windows.Forms.GroupBox();
             this.GroupBox_Legenda_Layout = new System.Windows.Forms.FlowLayoutPanel();
             this.TreeView_Changelog = new System.Windows.Forms.TreeView();
-            this.Layout.SuspendLayout();
+            this.TableLayout.SuspendLayout();
             this.GroupBox_Estatisticas.SuspendLayout();
             this.GroupBox_Legenda.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Layout
+            // TableLayout
             // 
-            this.Layout.ColumnCount = 2;
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.Layout.Controls.Add(this.GroupBox_Estatisticas, 1, 0);
-            this.Layout.Controls.Add(this.GroupBox_Legenda, 1, 1);
-            this.Layout.Controls.Add(this.TreeView_Changelog, 0, 0);
-            this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Layout.Location = new System.Drawing.Point(0, 0);
-            this.Layout.Name = "Layout";
-            this.Layout.RowCount = 2;
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.Layout.Size = new System.Drawing.Size(1021, 743);
-            this.Layout.TabIndex = 0;
+            this.TableLayout.ColumnCount = 2;
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableLayout.Controls.Add(this.GroupBox_Estatisticas, 1, 0);
+            this.TableLayout.Controls.Add(this.GroupBox_Legenda, 1, 1);
+            this.TableLayout.Controls.Add(this.TreeView_Changelog, 0, 0);
+            this.TableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayout.Location = new System.Drawing.Point(0, 0);
+            this.TableLayout.Name = "TableLayout";
+            this.TableLayout.RowCount = 2;
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableLayout.Size = new System.Drawing.Size(1021, 743);
+            this.TableLayout.TabIndex = 0;
             // 
             // GroupBox_Estatisticas
             // 
@@ -104,12 +104,12 @@
             this.GroupBox_Legenda_Layout.Size = new System.Drawing.Size(0, 0);
             this.GroupBox_Legenda_Layout.TabIndex = 0;
             // 
-            // treeView1
+            // TreeView_Changelog
             // 
             this.TreeView_Changelog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreeView_Changelog.Location = new System.Drawing.Point(3, 3);
-            this.TreeView_Changelog.Name = "treeView1";
-            this.Layout.SetRowSpan(this.TreeView_Changelog, 2);
+            this.TreeView_Changelog.Name = "TreeView_Changelog";
+            this.TableLayout.SetRowSpan(this.TreeView_Changelog, 2);
             this.TreeView_Changelog.Size = new System.Drawing.Size(1003, 737);
             this.TreeView_Changelog.TabIndex = 3;
             // 
@@ -118,12 +118,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 743);
-            this.Controls.Add(this.Layout);
+            this.Controls.Add(this.TableLayout);
             this.Name = "Changelog";
             this.Text = "Changelog";
             this.Load += new System.EventHandler(this.Changelog_Load);
-            this.Layout.ResumeLayout(false);
-            this.Layout.PerformLayout();
+            this.TableLayout.ResumeLayout(false);
+            this.TableLayout.PerformLayout();
             this.GroupBox_Estatisticas.ResumeLayout(false);
             this.GroupBox_Estatisticas.PerformLayout();
             this.GroupBox_Legenda.ResumeLayout(false);
@@ -134,7 +134,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel Layout;
+        private System.Windows.Forms.TableLayoutPanel TableLayout;
         private System.Windows.Forms.GroupBox GroupBox_Estatisticas;
         private System.Windows.Forms.GroupBox GroupBox_Legenda;
         private System.Windows.Forms.TreeView TreeView_Changelog;

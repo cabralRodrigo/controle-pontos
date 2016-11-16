@@ -37,7 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.MenuDashboard = new System.Windows.Forms.MenuStrip();
             this.Menu_Relatorio = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Dados_Exportar = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +82,7 @@
             this.LabelValorSodexo = new System.Windows.Forms.Label();
             this.TextBoxSodexo = new System.Windows.Forms.TextBox();
             this.ButtonMesAno = new System.Windows.Forms.Button();
-            this.Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.TableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.ButtonMarcarHorario = new System.Windows.Forms.Button();
             this.LayoutFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.LabelSeparador10 = new System.Windows.Forms.Label();
@@ -112,25 +112,25 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Menu.SuspendLayout();
+            this.MenuDashboard.SuspendLayout();
             this.Status.SuspendLayout();
-            this.Layout.SuspendLayout();
+            this.TableLayout.SuspendLayout();
             this.LayoutFlow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDias)).BeginInit();
             this.SuspendLayout();
             // 
-            // Menu
+            // MenuDashboard
             // 
-            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuDashboard.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Relatorio,
             this.Menu_Dados,
             this.Menu_Integracoes,
             this.Menu_Ajuda});
-            this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(1347, 24);
-            this.Menu.TabIndex = 15;
-            this.Menu.Text = "menuStrip1";
+            this.MenuDashboard.Location = new System.Drawing.Point(0, 0);
+            this.MenuDashboard.Name = "MenuDashboard";
+            this.MenuDashboard.Size = new System.Drawing.Size(1347, 24);
+            this.MenuDashboard.TabIndex = 15;
+            this.MenuDashboard.Text = "menuStrip1";
             // 
             // Menu_Relatorio
             // 
@@ -517,24 +517,24 @@
             this.ButtonMesAno.UseVisualStyleBackColor = true;
             this.ButtonMesAno.Click += new System.EventHandler(this.ButtonMesAno_Click);
             // 
-            // Layout
+            // TableLayout
             // 
-            this.Layout.ColumnCount = 2;
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
-            this.Layout.Controls.Add(this.ButtonMarcarHorario, 1, 1);
-            this.Layout.Controls.Add(this.LayoutFlow, 1, 0);
-            this.Layout.Controls.Add(this.GridDias, 0, 0);
-            this.Layout.Controls.Add(this.ButtonMesAno, 1, 2);
-            this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Layout.Location = new System.Drawing.Point(0, 24);
-            this.Layout.Name = "Layout";
-            this.Layout.RowCount = 3;
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.Layout.Size = new System.Drawing.Size(1347, 687);
-            this.Layout.TabIndex = 46;
+            this.TableLayout.ColumnCount = 2;
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
+            this.TableLayout.Controls.Add(this.ButtonMarcarHorario, 1, 1);
+            this.TableLayout.Controls.Add(this.LayoutFlow, 1, 0);
+            this.TableLayout.Controls.Add(this.GridDias, 0, 0);
+            this.TableLayout.Controls.Add(this.ButtonMesAno, 1, 2);
+            this.TableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayout.Location = new System.Drawing.Point(0, 24);
+            this.TableLayout.Name = "TableLayout";
+            this.TableLayout.RowCount = 3;
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.TableLayout.Size = new System.Drawing.Size(1347, 687);
+            this.TableLayout.TabIndex = 46;
             // 
             // ButtonMarcarHorario
             // 
@@ -740,7 +740,7 @@
             this.GridDias.Name = "GridDias";
             this.GridDias.ParserServico = null;
             this.GridDias.RowHeadersVisible = false;
-            this.Layout.SetRowSpan(this.GridDias, 3);
+            this.TableLayout.SetRowSpan(this.GridDias, 3);
             this.GridDias.Size = new System.Drawing.Size(1190, 681);
             this.GridDias.TabIndex = 47;
             // 
@@ -848,21 +848,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1347, 733);
-            this.Controls.Add(this.Layout);
+            this.Controls.Add(this.TableLayout);
             this.Controls.Add(this.Status);
-            this.Controls.Add(this.Menu);
+            this.Controls.Add(this.MenuDashboard);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.Menu;
+            this.MainMenuStrip = this.MenuDashboard;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controle de Pontos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dashboard_FormClosing);
             this.Load += new System.EventHandler(this.Dashboard_Load);
-            this.Menu.ResumeLayout(false);
-            this.Menu.PerformLayout();
+            this.MenuDashboard.ResumeLayout(false);
+            this.MenuDashboard.PerformLayout();
             this.Status.ResumeLayout(false);
             this.Status.PerformLayout();
-            this.Layout.ResumeLayout(false);
+            this.TableLayout.ResumeLayout(false);
             this.LayoutFlow.ResumeLayout(false);
             this.LayoutFlow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridDias)).EndInit();
@@ -911,9 +911,9 @@
         private System.Windows.Forms.Label LabelTotalHorasTfsDisplay;
         private System.Windows.Forms.Label LabelTotalHorasTfs;
         private System.Windows.Forms.Label LabelSeparador11;
-        private System.Windows.Forms.MenuStrip Menu;
+        private System.Windows.Forms.MenuStrip MenuDashboard;
         private System.Windows.Forms.StatusStrip Status;
-        private System.Windows.Forms.TableLayoutPanel Layout;
+        private System.Windows.Forms.TableLayoutPanel TableLayout;
         private System.Windows.Forms.TextBox TextBoxOffset;
         private System.Windows.Forms.TextBox TextBoxSodexo;
         private System.Windows.Forms.Timer Timer;

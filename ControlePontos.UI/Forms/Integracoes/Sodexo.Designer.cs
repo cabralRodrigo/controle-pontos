@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Layout = new System.Windows.Forms.TableLayoutPanel();
+            this.TableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.GridSodexo = new System.Windows.Forms.DataGridView();
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,26 +59,26 @@
             this.Separador8 = new System.Windows.Forms.Label();
             this.SaldoLabelDisplay = new System.Windows.Forms.Label();
             this.SaldoLabel = new System.Windows.Forms.Label();
-            this.Layout.SuspendLayout();
+            this.TableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridSodexo)).BeginInit();
             this.LayoutInformacoes.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Layout
+            // TableLayout
             // 
-            this.Layout.ColumnCount = 2;
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.25703F));
-            this.Layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.74296F));
-            this.Layout.Controls.Add(this.GridSodexo, 0, 0);
-            this.Layout.Controls.Add(this.LayoutInformacoes, 1, 0);
-            this.Layout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Layout.Location = new System.Drawing.Point(0, 0);
-            this.Layout.Name = "Layout";
-            this.Layout.RowCount = 1;
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.Layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.Layout.Size = new System.Drawing.Size(817, 488);
-            this.Layout.TabIndex = 0;
+            this.TableLayout.ColumnCount = 2;
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.25703F));
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.74296F));
+            this.TableLayout.Controls.Add(this.GridSodexo, 0, 0);
+            this.TableLayout.Controls.Add(this.LayoutInformacoes, 1, 0);
+            this.TableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayout.Location = new System.Drawing.Point(0, 0);
+            this.TableLayout.Name = "TableLayout";
+            this.TableLayout.RowCount = 1;
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TableLayout.Size = new System.Drawing.Size(817, 488);
+            this.TableLayout.TabIndex = 0;
             // 
             // GridSodexo
             // 
@@ -391,11 +391,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 488);
-            this.Controls.Add(this.Layout);
+            this.Controls.Add(this.TableLayout);
             this.Name = "Sodexo";
             this.Text = "Sodexo";
             this.Load += new System.EventHandler(this.Sodexo_Load);
-            this.Layout.ResumeLayout(false);
+            this.TableLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridSodexo)).EndInit();
             this.LayoutInformacoes.ResumeLayout(false);
             this.LayoutInformacoes.PerformLayout();
@@ -405,7 +405,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel Layout;
+        private System.Windows.Forms.TableLayoutPanel TableLayout;
         private System.Windows.Forms.DataGridView GridSodexo;
         private System.Windows.Forms.FlowLayoutPanel LayoutInformacoes;
         private System.Windows.Forms.Label NomeLabelDisplay;
